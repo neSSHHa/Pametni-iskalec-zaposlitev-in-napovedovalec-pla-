@@ -7,4 +7,10 @@ import java.util.List;
 
 public interface JobRepository extends JpaRepository<Job, String> {
     List<Job> findByJobNameContainingIgnoreCaseOrCompanyNameContainingIgnoreCase(String jobName, String companyName);
+    
+        List<Job> findByLocation_Id(String locationId);
+
+    List<Job> findByExperienceLevel_Id(String experienceLevelId);
+
+    List<Job> findByLocation_CityContainingIgnoreCase(String city);
 }
