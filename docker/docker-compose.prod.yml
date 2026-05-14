@@ -1,0 +1,11 @@
+services:
+  mysql:
+    restart: always
+
+  backend:
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+
+  frontend:
+    restart: always
