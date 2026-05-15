@@ -8,6 +8,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import si.um.feri.smartjobs.experienceLevel.entity.ExperienceLevel;
 import si.um.feri.smartjobs.location.entity.Location;
+import si.um.feri.smartjobs.educationLevel.entity.EducationLevel;
+
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -47,6 +49,10 @@ public class Job {
     @JoinColumn(name = "LocationId")
     private Location location;
 
+    @ManyToOne
+    @JoinColumn(name = "EducationLevelID")
+    private EducationLevel educationLevel;
+
     public Job() {
     }
 
@@ -55,7 +61,7 @@ public class Job {
                BigDecimal predictedMinSalary, String sourceWebsite,
                LocalDate datePosted, LocalDate createdAt, LocalDate updatedAt,
                BigDecimal minSalary, BigDecimal maxSalary,
-               ExperienceLevel experienceLevel, Location location) {
+               ExperienceLevel experienceLevel, Location location,EducationLevel educationLevel) {
         this.id = id;
         this.companyName = companyName;
         this.jobName = jobName;
@@ -71,6 +77,7 @@ public class Job {
         this.maxSalary = maxSalary;
         this.experienceLevel = experienceLevel;
         this.location = location;
+        this.educationLevel = educationLevel;
     }
 
     public String getId() { return id; }
@@ -88,4 +95,6 @@ public class Job {
     public BigDecimal getMaxSalary() { return maxSalary; }
     public ExperienceLevel getExperienceLevel() { return experienceLevel; }
     public Location getLocation() { return location; }
-}
+    public EducationLevel getEducationLevel() {return educationLevel;}
+    public void setEducationLevel(EducationLevel educationLevel) {this.educationLevel = educationLevel;}
+    }
