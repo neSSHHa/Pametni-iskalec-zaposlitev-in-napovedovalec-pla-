@@ -12,6 +12,7 @@ public record JobDto(
         String location,
         String workMode,
         String experienceLevel,
+        String educationLevel,
         BigDecimal salaryMin,
         BigDecimal salaryMax,
         LocalDate postedDate,

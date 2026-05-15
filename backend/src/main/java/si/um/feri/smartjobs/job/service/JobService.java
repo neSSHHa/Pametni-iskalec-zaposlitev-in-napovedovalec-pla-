@@ -7,28 +7,35 @@ import si.um.feri.smartjobs.job.entity.Job;
 import si.um.feri.smartjobs.job.repository.JobRepository;
 import si.um.feri.smartjobs.jobSkill.repository.JobSkillRepository;
 import si.um.feri.smartjobs.location.entity.Location;
+import si.um.feri.smartjobs.skillRelation.entity.SkillRelation;
+import si.um.feri.smartjobs.skillRelation.repository.SkillRelationRepository;
 import si.um.feri.smartjobs.workTypeJob.repository.WorkTypeJobRepository;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class JobService {
     private static final double EXPERIENCE_TOLERANCE = 0.75;
+    private static final double DIRECT_SKILL_MATCH = 1.0;
 
     private final JobRepository jobRepository;
     private final JobSkillRepository jobSkillRepository;
+    private final SkillRelationRepository skillRelationRepository;
     private final WorkTypeJobRepository workTypeJobRepository;
 
     public JobService(
             JobRepository jobRepository,
             JobSkillRepository jobSkillRepository,
+            SkillRelationRepository skillRelationRepository,
             WorkTypeJobRepository workTypeJobRepository
     ) {
         this.jobRepository = jobRepository;
         this.jobSkillRepository = jobSkillRepository;
+        this.skillRelationRepository = skillRelationRepository;
         this.workTypeJobRepository = workTypeJobRepository;
     }
 
@@ -88,6 +95,7 @@ public class JobService {
                 formatLocation(location),
                 workMode,
                 job.getExperienceLevel() == null ? "Unknown" : job.getExperienceLevel().getName(),
+                job.getEducationLevel() == null ? "Unknown" : job.getEducationLevel().getName(),
                 job.getMinSalary(),
                 job.getMaxSalary(),
                 job.getDatePosted(),
@@ -109,6 +117,11 @@ public class JobService {
             score.addText(job.getSourceWebsite(), jobCriteria.sourceWebsite());
             score.addText(job.getExperienceLevel() == null ? null : job.getExperienceLevel().getName(),
                     jobCriteria.experienceLevelName());
+            score.addStrictTextOrId(
+                    job.getEducationLevel() == null ? null : job.getEducationLevel().getId(),
+                    job.getEducationLevel() == null ? null : job.getEducationLevel().getName(),
+                    jobCriteria.educationLevel()
+            );
             score.addExact(job.getDatePosted(), jobCriteria.datePosted());
             score.addSalaryRange(job.getMinSalary(), job.getMaxSalary(), jobCriteria.minSalary(), jobCriteria.maxSalary());
             score.addSalaryRange(job.getPredictedMinSalary(), job.getPredictedMaxSalary(),
@@ -137,7 +150,7 @@ public class JobService {
             return;
         }
 
-        List<String> jobSkills = jobSkillRepository.findByJob_Id(job.getId()).stream()
+        List<String> jobSkillValues = jobSkillRepository.findByJob_Id(job.getId()).stream()
                 .flatMap(jobSkill -> List.of(jobSkill.getSkill().getId(), jobSkill.getSkill().getName()).stream())
                 .map(this::normalize)
                 .toList();
@@ -145,7 +158,47 @@ public class JobService {
         requestedSkills.stream()
                 .filter(this::hasText)
                 .map(this::normalize)
-                .forEach(requestedSkill -> score.add(jobSkills.contains(requestedSkill)));
+                .forEach(requestedSkill -> score.add(skillMatchWeight(requestedSkill, jobSkillValues)));
+    }
+
+    private double skillMatchWeight(String requestedSkill, List<String> jobSkillValues) {
+        if (jobSkillValues.contains(requestedSkill)) {
+            return DIRECT_SKILL_MATCH;
+        }
+
+        return skillRelationRepository.findAll().stream()
+                .mapToDouble(relation -> relationMatchWeight(requestedSkill, jobSkillValues, relation))
+                .max()
+                .orElse(0.0);
+    }
+
+    private double relationMatchWeight(String requestedSkill, List<String> jobSkillValues, SkillRelation relation) {
+        String sourceId = normalize(relation.getSourceSkill().getId());
+        String sourceName = normalize(relation.getSourceSkill().getName());
+        String targetId = normalize(relation.getTargetSkill().getId());
+        String targetName = normalize(relation.getTargetSkill().getName());
+
+        boolean requestedIsSource = requestedSkill.equals(sourceId) || requestedSkill.equals(sourceName);
+        boolean requestedIsTarget = requestedSkill.equals(targetId) || requestedSkill.equals(targetName);
+        boolean jobHasSource = jobSkillValues.contains(sourceId) || jobSkillValues.contains(sourceName);
+        boolean jobHasTarget = jobSkillValues.contains(targetId) || jobSkillValues.contains(targetName);
+
+        if ((requestedIsSource && jobHasTarget) || (requestedIsTarget && jobHasSource)) {
+            return relationWeight(relation.getRelationshipType());
+        }
+
+        return 0.0;
+    }
+
+    private double relationWeight(String relationshipType) {
+        return switch (relationshipType.toUpperCase(Locale.ROOT)) {
+            case "FRAMEWORK_OF", "IMPLEMENTATION_OF" -> 0.8;
+            case "SPECIALIZATION_OF" -> 0.7;
+            case "PART_OF", "TOOL_FOR", "USED_WITH" -> 0.6;
+            case "REQUIRES" -> 0.5;
+            case "RELATED_TO", "SUPPORTS", "DATABASE_TECHNOLOGY" -> 0.4;
+            default -> 0.4;
+        };
     }
 
     private void addWorkTypeScore(MatchScore score, Job job, List<String> requestedWorkTypes) {
@@ -173,6 +226,7 @@ public class JobService {
                 || hasText(criteria.description())
                 || hasText(criteria.sourceWebsite())
                 || hasText(criteria.experienceLevelName())
+                || hasText(criteria.educationLevel())
                 || criteria.requiredExperience() != null
                 || criteria.predictedMinSalary() != null
                 || criteria.predictedMaxSalary() != null
@@ -238,14 +292,16 @@ public class JobService {
     }
 
     private class MatchScore {
-        private int matchedFields;
+        private double matchedFields;
         private int comparedFields;
 
         void add(boolean matched) {
+            add(matched ? 1.0 : 0.0);
+        }
+
+        void add(double weight) {
             comparedFields++;
-            if (matched) {
-                matchedFields++;
-            }
+            matchedFields += Math.max(0.0, Math.min(1.0, weight));
         }
 
         void addText(String actual, String expected) {
@@ -253,6 +309,16 @@ public class JobService {
                 return;
             }
             add(normalize(actual).contains(normalize(expected)));
+        }
+
+        void addStrictTextOrId(String actualId, String actualName, String expected) {
+            if (!hasText(expected) || (!hasText(actualId) && !hasText(actualName))) {
+                return;
+            }
+
+            String normalizedExpected = normalize(expected);
+            add((hasText(actualId) && normalize(actualId).equals(normalizedExpected))
+                    || (hasText(actualName) && normalize(actualName).equals(normalizedExpected)));
         }
 
         void addExact(Object actual, Object expected) {
@@ -287,7 +353,7 @@ public class JobService {
             add(userMonths >= Math.ceil(requiredMonths * EXPERIENCE_TOLERANCE));
         }
 
-        int matchedFields() {
+        double matchedFields() {
             return matchedFields;
         }
 
