@@ -4,7 +4,7 @@ export async function uploadCv(file) {
   const formData = new FormData();
   formData.append("file", file);
 
-  const response = await apiClient.post("/cv/upload", formData, {
+  const response = await apiClient.post("/cv/jobs/filter", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
   return response.data;

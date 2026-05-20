@@ -64,6 +64,10 @@ public class SkillSeed {
                 new Skill("skill-react", "React", framework),
                 new Skill("skill-angular", "Angular", framework),
                 new Skill("skill-vue", "Vue", framework),
+                new Skill("skill-dotnet", ".NET", framework),
+                new Skill("skill-asp-net-core", "ASP.NET Core", framework),
+                new Skill("skill-entity-framework", "Entity Framework", framework),
+                new Skill("skill-blazor", "Blazor", framework),
 
                 // DATABASES
                 new Skill("skill-sql", "SQL", database),
@@ -75,6 +79,7 @@ public class SkillSeed {
                 new Skill("skill-docker", "Docker", devops),
                 new Skill("skill-kubernetes", "Kubernetes", devops),
                 new Skill("skill-ci-cd", "CI/CD", devops),
+                new Skill("skill-azure", "Azure", devops),
 
                 // TOOLS
                 new Skill("skill-git", "Git", softwareTool),

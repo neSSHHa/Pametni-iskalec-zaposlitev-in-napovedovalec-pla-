@@ -89,6 +89,31 @@ public class JobSkillSeed {
         add(items, "job-049", "skill-teaching", "skill-classroom-management", "skill-communication", "skill-teamwork");
 
         add(items, "job-050", "skill-slovenian", "skill-english", "skill-communication", "skill-customer-service");
+        add(items, "job-051", "skill-csharp", "skill-asp-net-core", "skill-dotnet", "skill-sql", "skill-git", "skill-entity-framework");
+        add(items, "job-052", "skill-csharp", "skill-dotnet", "skill-asp-net-core", "skill-entity-framework", "skill-sql", "skill-git");
+        add(items, "job-053", "skill-csharp", "skill-dotnet", "skill-asp-net-core", "skill-azure", "skill-ci-cd");
+        add(items, "job-054", "skill-csharp", "skill-dotnet", "skill-entity-framework", "skill-postgresql", "skill-problem-solving");
+        add(items, "job-055", "skill-csharp", "skill-asp-net-core", "skill-dotnet", "skill-azure", "skill-docker");
+        add(items, "job-056", "skill-csharp", "skill-dotnet", "skill-sql", "skill-docker", "skill-ci-cd");
+        add(items, "job-057", "skill-csharp", "skill-dotnet", "skill-sql", "skill-git", "skill-asp-net-core");
+        add(items, "job-058", "skill-csharp", "skill-asp-net-core", "skill-blazor", "skill-javascript", "skill-sql");
+        add(items, "job-059", "skill-csharp", "skill-dotnet", "skill-entity-framework", "skill-sql", "skill-communication");
+        add(items, "job-060", "skill-csharp", "skill-dotnet", "skill-asp-net-core", "skill-azure", "skill-docker", "skill-ci-cd");
+        add(items, "job-061", "skill-csharp", "skill-dotnet", "skill-sql", "skill-problem-solving");
+        add(items, "job-062", "skill-csharp", "skill-asp-net-core", "skill-javascript", "skill-sql", "skill-git");
+        add(items, "job-063", "skill-csharp", "skill-dotnet", "skill-sql", "skill-ms-office");
+        add(items, "job-064", "skill-csharp", "skill-dotnet", "skill-sql", "skill-machine-operation");
+        add(items, "job-065", "skill-csharp", "skill-asp-net-core", "skill-sql", "skill-healthcare");
+        add(items, "job-066", "skill-csharp", "skill-blazor", "skill-dotnet", "skill-sql", "skill-azure");
+        add(items, "job-067", "skill-csharp", "skill-asp-net-core", "skill-postgresql", "skill-docker", "skill-git");
+        add(items, "job-068", "skill-csharp", "skill-dotnet", "skill-sql", "skill-customer-service");
+        add(items, "job-069", "skill-csharp", "skill-asp-net-core", "skill-sql", "skill-azure", "skill-git");
+        add(items, "job-070", "skill-csharp", "skill-dotnet", "skill-asp-net-core", "skill-azure", "skill-docker", "skill-communication");
+        add(items, "job-071", "skill-csharp", "skill-dotnet", "skill-ci-cd", "skill-sql", "skill-teamwork");
+        add(items, "job-072", "skill-csharp", "skill-dotnet", "skill-sql", "skill-postgresql", "skill-problem-solving");
+        add(items, "job-073", "skill-csharp", "skill-asp-net-core", "skill-react", "skill-javascript", "skill-sql", "skill-git");
+        add(items, "job-074", "skill-csharp", "skill-asp-net-core", "skill-azure", "skill-kubernetes", "skill-ci-cd");
+        add(items, "job-075", "skill-csharp", "skill-dotnet", "skill-sql", "skill-git", "skill-communication");
 
         jobSkillRepository.saveAll(items);
     }

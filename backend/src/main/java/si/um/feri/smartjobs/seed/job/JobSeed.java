@@ -125,7 +125,32 @@ public class JobSeed {
         job("job-048", "Osnovna šola Ljubljana", "Učitelj razrednega pouka", "Teaching, classroom management, communication, teamwork in delo z otroki.", 12, null, null, mid, ljubljana, bachelor),
         job("job-049", "Univerza v Ljubljani", "Visokošolski učitelj", "Teaching, communication, research, project work and classroom management.", 60, null, null, senior, ljubljana, phd),
 
-        job("job-050", "TELUS Digital", "Solutions Consultant s slovenščino in angleščino", "Delo s strankami, Slovenian, English, communication, customer service in plačana relokacija v Sofijo.", 12, null, null, mid, sofia, secondaryGeneral)
+        job("job-050", "TELUS Digital", "Solutions Consultant s slovenščino in angleščino", "Delo s strankami, Slovenian, English, communication, customer service in plačana relokacija v Sofijo.", 12, null, null, mid, sofia, secondaryGeneral),
+        job("job-051", "Datalab SI", "Junior ASP.NET Developer", "Razvoj poslovnih aplikacij z C#, ASP.NET Core, SQL Server, Git in osnovami Entity Framework.", 12, "1700", "2600", junior, ljubljana, bachelor),
+        job("job-052", "Inova IT", "ASP.NET Core Backend Developer", "Backend razvoj REST API storitev z C#, .NET, ASP.NET Core, Entity Framework in SQL.", 24, "2600", "4300", mid, ljubljana, bachelor),
+        job("job-053", "CloudSoft", ".NET Developer", "Razvoj spletnih aplikacij v .NET okolju, delo z ASP.NET Core, SQL Server, Azure in CI/CD.", 36, "2800", "4600", mid, maribor, bachelor),
+        job("job-054", "FinTech Labs", "C# Software Engineer", "Razvoj financnih modulov z C#, .NET, Entity Framework, PostgreSQL in unit testi.", 36, "3000", "5200", mid, ljubljana, bachelor),
+        job("job-055", "Adacta", "Senior .NET Engineer", "Senior razvoj enterprise resitev z ASP.NET Core, C#, Azure, Docker in mikroservisi.", 60, "4200", "7000", senior, ljubljana, bachelor),
+        job("job-056", "Bitstamp", ".NET Backend Engineer", "Backend sistemi z C#, .NET, SQL, Docker, CI/CD in visoko obremenjenimi API storitvami.", 48, "3800", "6500", senior, ljubljana, bachelor),
+        job("job-057", "Maribor Digital", "Junior C# Developer", "Vstopna pozicija za C# in .NET razvoj, SQL, Git, debugging in ucenje ASP.NET Core.", 6, "1400", "2200", junior, maribor, bachelor),
+        job("job-058", "Koper Apps", "Full Stack .NET Developer", "Full stack razvoj z ASP.NET Core, Blazor, JavaScript, SQL Server in Git.", 36, "2500", "4200", mid, koper, bachelor),
+        job("job-059", "Celje Software", "ASP.NET MVC Developer", "Vzdrzevanje in razvoj MVC aplikacij, C#, .NET, Entity Framework, SQL in komunikacija z uporabniki.", 24, "2200", "3600", mid, celje, bachelor),
+        job("job-060", "AzureWay", "Cloud .NET Developer", "Razvoj cloud-native aplikacij z .NET, ASP.NET Core, Azure, Docker in CI/CD pipeline-i.", 48, "3500", "6000", senior, ljubljana, bachelor),
+        job("job-061", "Bankart", "Backend C# Developer", "Razvoj zanesljivih backend servisov z C#, .NET, SQL Server, REST API in varnostnimi standardi.", 36, "3000", "5000", mid, ljubljana, bachelor),
+        job("job-062", "Nova Gorica Tech", ".NET Web Developer", "Razvoj web resitev z ASP.NET Core, JavaScript, SQL, Git in osnovami UI integracij.", 24, "2100", "3400", mid, novaGorica, bachelor),
+        job("job-063", "Kranj Systems", "C# Desktop and Web Developer", "Razvoj internih orodij z C#, .NET, SQL Server, ASP.NET Core in MS Office integracijami.", 24, "2000", "3300", mid, kranj, higherVocational),
+        job("job-064", "Smart Factory SI", ".NET Developer za proizvodne sisteme", "Razvoj proizvodnih aplikacij z C#, .NET, SQL, REST API in integracijami s stroji.", 36, "2400", "3900", mid, novoMesto, bachelor),
+        job("job-065", "HealthSoft", "ASP.NET Developer za zdravstvene aplikacije", "Razvoj zdravstvenih informacijskih sistemov z ASP.NET Core, C#, SQL in varnim ravnanjem s podatki.", 36, "2600", "4400", mid, ljubljana, bachelor),
+        job("job-066", "EduCloud", "Blazor Developer", "Razvoj izobrazevalne platforme z Blazor, .NET, C#, SQL in Azure storitvami.", 24, "2300", "3800", mid, maribor, bachelor),
+        job("job-067", "LogiCode", ".NET API Developer", "Izdelava API integracij za logistiko z ASP.NET Core, C#, PostgreSQL, Docker in Git.", 24, "2400", "4000", mid, celje, bachelor),
+        job("job-068", "RetailTech", "C# Developer za retail sisteme", "Razvoj POS in retail resitev z C#, .NET, SQL Server, REST API in customer service domeno.", 24, "2100", "3500", mid, ljubljana, higherVocational),
+        job("job-069", "Sofia Software Hub", "Remote .NET Developer", "Remote razvoj poslovnih aplikacij z C#, ASP.NET Core, SQL, Azure in Git za mednarodne stranke.", 36, "2800", "4800", mid, sofia, bachelor),
+        job("job-070", "Tech Mentor", "Lead .NET Developer", "Vodenje .NET ekipe, arhitektura ASP.NET Core sistemov, Azure, Docker, code review in mentorstvo.", 84, "5200", "8200", lead, ljubljana, master),
+        job("job-071", "QA Solutions", "Test Automation Engineer C#", "Avtomatizacija testov z C#, .NET, CI/CD, SQL in sodelovanje z razvojno ekipo.", 24, "2200", "3700", mid, ljubljana, bachelor),
+        job("job-072", "DataBridge", ".NET Integration Developer", "Integracije med sistemi z C#, .NET, REST API, SQL Server, PostgreSQL in messaging pristopi.", 48, "3300", "5600", senior, ljubljana, bachelor),
+        job("job-073", "StartApp Studio", "Junior Full Stack Developer .NET React", "Junior full stack razvoj z C#, ASP.NET Core, React, JavaScript, SQL in Git.", 12, "1600", "2600", junior, koper, bachelor),
+        job("job-074", "EnterpriseSoft", "Senior ASP.NET Core Architect", "Arhitektura enterprise aplikacij z ASP.NET Core, C#, Azure, Kubernetes, CI/CD in varnostjo.", 96, "6000", "9000", lead, ljubljana, master),
+        job("job-075", "Mura Digital", ".NET Support Developer", "Vzdrzevanje .NET aplikacij, odpravljanje napak, SQL poizvedbe, Git in komunikacija z uporabniki.", 12, "1600", "2500", junior, murskaSobota, higherVocational)
      ));
     }
 

@@ -90,6 +90,32 @@ public class WorkTypeJobSeed {
 
         add(items, "job-050", "wt-onsite", "wt-full-time");
 
+        add(items, "job-051", "wt-hybrid", "wt-full-time");
+        add(items, "job-052", "wt-hybrid", "wt-full-time");
+        add(items, "job-053", "wt-hybrid", "wt-full-time");
+        add(items, "job-054", "wt-hybrid", "wt-full-time");
+        add(items, "job-055", "wt-hybrid", "wt-full-time");
+        add(items, "job-056", "wt-remote", "wt-full-time");
+        add(items, "job-057", "wt-hybrid", "wt-full-time");
+        add(items, "job-058", "wt-hybrid", "wt-full-time");
+        add(items, "job-059", "wt-hybrid", "wt-full-time");
+        add(items, "job-060", "wt-remote", "wt-full-time");
+        add(items, "job-061", "wt-hybrid", "wt-full-time");
+        add(items, "job-062", "wt-hybrid", "wt-full-time");
+        add(items, "job-063", "wt-onsite", "wt-full-time");
+        add(items, "job-064", "wt-onsite", "wt-full-time");
+        add(items, "job-065", "wt-hybrid", "wt-full-time");
+        add(items, "job-066", "wt-remote", "wt-full-time");
+        add(items, "job-067", "wt-hybrid", "wt-full-time");
+        add(items, "job-068", "wt-onsite", "wt-full-time");
+        add(items, "job-069", "wt-remote", "wt-full-time");
+        add(items, "job-070", "wt-hybrid", "wt-full-time");
+        add(items, "job-071", "wt-hybrid", "wt-full-time");
+        add(items, "job-072", "wt-hybrid", "wt-full-time");
+        add(items, "job-073", "wt-hybrid", "wt-full-time");
+        add(items, "job-074", "wt-hybrid", "wt-full-time");
+        add(items, "job-075", "wt-hybrid", "wt-full-time");
+
         repository.saveAll(items);
     }
 

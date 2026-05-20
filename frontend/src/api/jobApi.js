@@ -14,3 +14,8 @@ export async function searchJobsByText(query) {
   const response = await apiClient.post("/jobs/text-search", { query });
   return response.data;
 }
+
+export async function searchJobsByPrompt(text) {
+  const response = await apiClient.post("/ai/jobs/filter", { text });
+  return response.data;
+}
