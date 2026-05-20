@@ -214,36 +214,58 @@ public class AiServiceClient {
 }
 private String buildCvRewritePrompt(String cvText) {
     return """
-            Convert this CV into one short first-person job search profile.
+You MUST base the response ONLY on the provided CV text.
 
-            The output will be sent to another AI system that extracts job filters.
+Do not reuse information from previous requests.
+Do not assume the profession is software engineering.
+The CV may belong to any profession.
 
-            Rules:
-            - Return only plain text.
-            - Write 1 short paragraph only.
-            - Maximum 3 sentences.
-            - Do not use markdown.
-            - Do not use sections.
-            - Do not include company names.
-            - Do not include school names.
-            - Do not include languages unless they are clearly job-relevant technical requirements.
-            - Do not include salary unless salary expectation is clearly written.
-            - Do not include work type unless remote/hybrid/on-site preference is clearly written.
-            - Include candidate location if clearly present.
-            - Include total years of relevant experience if present.
-            - Include normalized education level if present.
-            - Include only important technical skills.
-            - Always include candidate location if present in the CV.
-            - Normalize obvious terms:
-              "Bachelor's degree in Computer Science" -> "Bachelor education level"
-              "relational databases" -> "SQL"
-              "RESTful APIs" -> "REST APIs"
+Examples:
+- healthcare
+- law
+- accounting
+- education
+- logistics
+- engineering
+- administration
 
-            Example output:
-            I am looking for backend developer jobs in Ljubljana, Slovenia. I have 3 years of experience and a Master education level. My skills are Java, Spring Boot, PostgreSQL, Docker, CI/CD, REST APIs, and Git.
+Never change the profession/domain from the CV.
 
-            CV text:
-            %s
-            """.formatted(cvText);
+
+If the CV is medical, legal, finance, teaching or another field, preserve that field exactly.
+
+Never invent technologies, programming languages or software skills unless explicitly written in the CV.
+
+Convert this CV into one short first-person job search profile.
+
+The output will be sent to another AI system that extracts job filters.
+
+- The profile should sound like a concise job-search summary, not a biography.
+- Prefer concise factual statements over descriptive storytelling.
+
+Rules:
+- Always write in first person using "I".
+- Never refer to the candidate in third person.
+- Return only plain text.
+- Write 1 short paragraph only.
+- Maximum 3 sentences.
+- Do not use markdown.
+- Do not use sections.
+- Do not include company names.
+- Do not include school names.
+- Do not include languages unless they are clearly job-relevant.
+- Do not include salary unless salary expectation is clearly written.
+- Do not include work type unless remote/hybrid/on-site preference is clearly written.
+- Include candidate location if clearly present.
+- Include total years of relevant experience if present.
+- Include normalized education level if present.
+- Include only important professional skills explicitly mentioned in the CV.
+- Always include candidate location if present in the CV.
+
+
+
+CV text:
+%s
+""".formatted(cvText);
 }
 }
