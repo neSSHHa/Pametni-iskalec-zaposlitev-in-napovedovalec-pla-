@@ -95,6 +95,12 @@ public class AiServiceClient {
                 - maxSalary means the user's maximum acceptable salary.
                 - The output JSON must have exactly this structure:
 
+- requiredExperience MUST be an integer number only.
+- Never return text like "3 years" or "2+ years".
+- Correct example:
+  "requiredExperience": 3
+- Incorrect example:
+  "requiredExperience": "3 years"
                 {
                   "job": {
                     "companyname": null,
@@ -183,4 +189,61 @@ public class AiServiceClient {
             OllamaMessage message
     ) {
     }
+    public String rewriteCvToProfileText(String cvText) {
+    String prompt = buildCvRewritePrompt(cvText);
+
+    OllamaChatRequest request = new OllamaChatRequest(
+            aiProperties.model(),
+            List.of(new OllamaMessage("user", prompt)),
+            false,
+            null,
+            Map.of("temperature", 0)
+    );
+
+    OllamaChatResponse response = restTemplate.postForObject(
+            aiProperties.ollamaUrl() + "/api/chat",
+            request,
+            OllamaChatResponse.class
+    );
+
+    if (response == null || response.message() == null || response.message().content() == null) {
+        throw new IllegalStateException("Ollama did not return a valid CV rewrite response.");
+    }
+
+    return response.message().content().trim();
+}
+private String buildCvRewritePrompt(String cvText) {
+    return """
+            Convert this CV into one short first-person job search profile.
+
+            The output will be sent to another AI system that extracts job filters.
+
+            Rules:
+            - Return only plain text.
+            - Write 1 short paragraph only.
+            - Maximum 3 sentences.
+            - Do not use markdown.
+            - Do not use sections.
+            - Do not include company names.
+            - Do not include school names.
+            - Do not include languages unless they are clearly job-relevant technical requirements.
+            - Do not include salary unless salary expectation is clearly written.
+            - Do not include work type unless remote/hybrid/on-site preference is clearly written.
+            - Include candidate location if clearly present.
+            - Include total years of relevant experience if present.
+            - Include normalized education level if present.
+            - Include only important technical skills.
+            - Always include candidate location if present in the CV.
+            - Normalize obvious terms:
+              "Bachelor's degree in Computer Science" -> "Bachelor education level"
+              "relational databases" -> "SQL"
+              "RESTful APIs" -> "REST APIs"
+
+            Example output:
+            I am looking for backend developer jobs in Ljubljana, Slovenia. I have 3 years of experience and a Master education level. My skills are Java, Spring Boot, PostgreSQL, Docker, CI/CD, REST APIs, and Git.
+
+            CV text:
+            %s
+            """.formatted(cvText);
+}
 }

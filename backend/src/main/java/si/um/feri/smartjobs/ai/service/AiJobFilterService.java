@@ -70,4 +70,7 @@ public class AiJobFilterService {
                 aiResponse.skills()
         );
     }
+    public String rewriteCvToProfileText(String cvText) {
+    return aiServiceClient.rewriteCvToProfileText(cvText);
+}
 }
