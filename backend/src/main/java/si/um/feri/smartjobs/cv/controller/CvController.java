@@ -10,8 +10,6 @@ import si.um.feri.smartjobs.cv.dto.CvTextExtractionResponse;
 import si.um.feri.smartjobs.cv.service.CvJobMatchingService;
 import si.um.feri.smartjobs.cv.service.CvTextExtractionService;
 import si.um.feri.smartjobs.ai.dto.AiJobFilterDebugResponse;
-import si.um.feri.smartjobs.job.dto.JobDto;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/cv")
@@ -39,10 +37,10 @@ public class CvController {
         );
     }
 
-@PostMapping("/jobs/filter")
-public CvJobMatchResponse filterJobsFromCv(@RequestPart("file") MultipartFile file) {
-    return cvJobMatchingService.matchJobs(file);
-}
+    @PostMapping("/jobs/filter")
+    public CvJobMatchResponse filterJobsFromCv(@RequestPart("file") MultipartFile file) {
+        return cvJobMatchingService.matchJobs(file);
+    }
 
 //za direktno response samo na suitable jobs zameni toa pogore so ova
 //@PostMapping("/jobs/filter")
@@ -51,14 +49,14 @@ public CvJobMatchResponse filterJobsFromCv(@RequestPart("file") MultipartFile fi
 //}
 
     @PostMapping("/extract-filter")
-public AiJobFilterDebugResponse extractFilterFromCv(@RequestPart("file") MultipartFile file) {
-    return cvJobMatchingService.extractFilterDebug(file);
-}
+    public AiJobFilterDebugResponse extractFilterFromCv(@RequestPart("file") MultipartFile file) {
+        return cvJobMatchingService.extractFilterDebug(file);
+    }
 
 //ova e za testing na cv to query like language
-@PostMapping("/rewrite-profile")
-public String rewriteCvToProfileText(@RequestPart("file") MultipartFile file) {
-    String extractedText = cvTextExtractionService.extractText(file);
-    return cvJobMatchingService.rewriteCvToProfileText(extractedText);
-}
+    @PostMapping("/rewrite-profile")
+    public String rewriteCvToProfileText(@RequestPart("file") MultipartFile file) {
+        String extractedText = cvTextExtractionService.extractText(file);
+        return cvJobMatchingService.rewriteCvToProfileText(extractedText);
+    }
 }

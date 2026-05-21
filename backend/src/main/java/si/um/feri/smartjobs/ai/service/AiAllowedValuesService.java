@@ -2,6 +2,8 @@ package si.um.feri.smartjobs.ai.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,8 @@ refresh() bere iz baze in shrani v liste.
 
 @Service
 public class AiAllowedValuesService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AiAllowedValuesService.class);
 
     private final SkillRepository skillRepository;
     private final EducationLevelRepository educationLevelRepository;
@@ -68,6 +72,13 @@ public class AiAllowedValuesService {
                 .map(WorkType::getName)
                 .sorted()
                 .toList();
+
+        LOGGER.info(
+                "AI allowed values refreshed. Skills: {}, education levels: {}, work types: {}.",
+                allowedSkills.size(),
+                allowedEducationLevels.size(),
+                allowedWorkTypes.size()
+        );
     }
 
     public List<String> getAllowedSkills() {

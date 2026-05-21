@@ -26,10 +26,16 @@ export default function MotionJobsPanel({ mode, score, jobs = [], loading = fals
       </div>
       {loading ? <p className="motion-status">Cakam odgovor API-ja...</p> : null}
       {error ? <p className="motion-error">{error}</p> : null}
+      {remainingJobs ? (
+        <LoadMoreButton remainingJobs={remainingJobs} onClick={() => setVisibleCount((count) => count + PAGE_SIZE)} />
+      ) : null}
 
       <div className="job-stream">
         {!loading && !displayJobs.length ? (
           <p className="motion-status">Ni oglasov za trenutni izbor.</p>
+        ) : null}
+        {!loading && displayJobs.length ? (
+          <p className="motion-status">Prikazujem {visibleJobs.length} od {displayJobs.length} rezultatov.</p>
         ) : null}
         {visibleJobs.map((job, index) => (
           <article
@@ -60,13 +66,19 @@ export default function MotionJobsPanel({ mode, score, jobs = [], loading = fals
         ))}
       </div>
       {remainingJobs ? (
-        <button className="job-load-more" type="button" onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}>
-          Load more
-          <span>{remainingJobs} skritih oglasov</span>
-        </button>
+        <LoadMoreButton remainingJobs={remainingJobs} onClick={() => setVisibleCount((count) => count + PAGE_SIZE)} />
       ) : null}
       {selectedJob ? <JobDetailsPage job={selectedJob} onClose={() => setSelectedJob(null)} /> : null}
     </section>
+  );
+}
+
+function LoadMoreButton({ remainingJobs, onClick }) {
+  return (
+    <button className="job-load-more" type="button" onClick={onClick}>
+      Load more
+      <span>{remainingJobs} skritih oglasov</span>
+    </button>
   );
 }
 

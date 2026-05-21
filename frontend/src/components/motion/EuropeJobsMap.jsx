@@ -5,6 +5,17 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import am5geodata_worldLow from "@amcharts/amcharts5-geodata/worldLow";
 import { europeCountryIds } from "../../data/motionJobs.js";
 
+const countryAliases = {
+  GB: ["GB", "UK"],
+  UK: ["GB", "UK"],
+};
+
+function countryMatches(cityCountry, countryCode) {
+  if (!countryCode) return true;
+  const aliases = countryAliases[countryCode] || [countryCode];
+  return aliases.includes(cityCountry);
+}
+
 export default function EuropeJobsMap({ countries, cities }) {
   const chartRef = useRef(null);
   const apiRef = useRef(null);
@@ -103,6 +114,7 @@ export default function EuropeJobsMap({ countries, cities }) {
 
       container.events.on("click", () => {
         chart.zoomToGeoPoint({ latitude: context.lat, longitude: context.lng }, 6, true, 720);
+        window.setTimeout(() => showCities(context.code), 220);
       });
 
       return am5.Bullet.new(root, { sprite: container });
@@ -153,8 +165,14 @@ export default function EuropeJobsMap({ countries, cities }) {
     cityPoints.hide(0);
 
     let cityMode = false;
+    let activeCountryCode = null;
     const showCities = (countryCode) => {
-      cityPoints.data.setAll(countryCode ? cities.filter((city) => city.country === countryCode) : cities);
+      activeCountryCode = countryCode || activeCountryCode;
+      const visibleCities = activeCountryCode
+        ? cities.filter((city) => countryMatches(city.country, activeCountryCode))
+        : cities;
+
+      cityPoints.data.setAll(visibleCities);
       cityPoints.show(240);
       countryPoints.hide(220);
       cityMode = true;
@@ -163,6 +181,7 @@ export default function EuropeJobsMap({ countries, cities }) {
     const showCountries = () => {
       countryPoints.show(240);
       cityPoints.hide(220);
+      activeCountryCode = null;
       cityMode = false;
     };
 

@@ -25,6 +25,18 @@ const countryCodes = {
   srbija: "RS",
   italy: "IT",
   italija: "IT",
+  poland: "PL",
+  czechia: "CZ",
+  "czech republic": "CZ",
+  slovakia: "SK",
+  hungary: "HU",
+  romania: "RO",
+  denmark: "DK",
+  norway: "NO",
+  finland: "FI",
+  ireland: "IE",
+  portugal: "PT",
+  estonia: "EE",
   france: "FR",
   francija: "FR",
   netherlands: "NL",
@@ -34,6 +46,33 @@ const countryCodes = {
   "united kingdom": "GB",
   bulgaria: "BG",
   bolgarija: "BG",
+};
+
+const countryCenters = {
+  SI: { lat: 46.1512, lng: 14.9955 },
+  AT: { lat: 47.5162, lng: 14.5501 },
+  DE: { lat: 51.1657, lng: 10.4515 },
+  HR: { lat: 45.1, lng: 15.2 },
+  IT: { lat: 41.8719, lng: 12.5674 },
+  NL: { lat: 52.1326, lng: 5.2913 },
+  CH: { lat: 46.8182, lng: 8.2275 },
+  FR: { lat: 46.2276, lng: 2.2137 },
+  ES: { lat: 40.4637, lng: -3.7492 },
+  PL: { lat: 51.9194, lng: 19.1451 },
+  CZ: { lat: 49.8175, lng: 15.473 },
+  SK: { lat: 48.669, lng: 19.699 },
+  HU: { lat: 47.1625, lng: 19.5033 },
+  RO: { lat: 45.9432, lng: 24.9668 },
+  BG: { lat: 42.7339, lng: 25.4858 },
+  SE: { lat: 60.1282, lng: 18.6435 },
+  DK: { lat: 56.2639, lng: 9.5018 },
+  NO: { lat: 60.472, lng: 8.4689 },
+  FI: { lat: 61.9241, lng: 25.7482 },
+  IE: { lat: 53.4129, lng: -8.2439 },
+  GB: { lat: 55.3781, lng: -3.436 },
+  PT: { lat: 39.3999, lng: -8.2245 },
+  EE: { lat: 58.5953, lng: 25.0136 },
+  RS: { lat: 44.0165, lng: 21.0059 },
 };
 
 const locationCoordinates = {
@@ -51,6 +90,17 @@ function countryCode(value, fallback) {
   return countryCodes[normalized] || String(fallback || value || "EU").toUpperCase().slice(0, 2);
 }
 
+function numberOrNull(value) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
+}
+
+function averageCoordinate(items, key) {
+  const values = items.map((item) => numberOrNull(item[key])).filter((value) => value !== null);
+  if (!values.length) return null;
+  return values.reduce((sum, value) => sum + value, 0) / values.length;
+}
+
 function formatSalary(job) {
   if (!job?.salaryMin && !job?.salaryMax) return "Salary n/a";
   const min = job.salaryMin ? `${Number(job.salaryMin).toLocaleString("sl-SI")} EUR` : "";
@@ -60,9 +110,11 @@ function formatSalary(job) {
 
 function mapJob(job, index) {
   const parts = String(job.location || "").split(",").map((part) => part.trim()).filter(Boolean);
-  const city = parts[0] || "Unknown";
-  const region = parts.length > 2 ? parts[1] : "";
-  const country = parts.at(-1) || "";
+  const city = job.city || parts[0] || "Unknown";
+  const region = job.region || (parts.length > 2 ? parts[1] : "");
+  const country = job.country || parts.at(-1) || "";
+  const latitude = numberOrNull(job.latitude);
+  const longitude = numberOrNull(job.longitude);
 
   return {
     id: job.id || `${job.title}-${index}`,
@@ -72,6 +124,8 @@ function mapJob(job, index) {
     region,
     country,
     countryCode: countryCode(country, region || "EU"),
+    latitude,
+    longitude,
     salary: formatSalary(job),
     sourceUrl: job.sourceUrl || "",
     description: job.description || "",
@@ -137,18 +191,20 @@ function buildFilteredAnalytics(filteredJobs) {
       city: item.label,
       region: sample?.region || null,
       country: sample?.country || null,
-      latitude: coords.lat ?? null,
-      longitude: coords.lng ?? null,
+      latitude: sample?.latitude ?? coords.lat ?? null,
+      longitude: sample?.longitude ?? coords.lng ?? null,
     };
   });
   const countryStats = countItems(filteredJobs, (job) => job.country).map((item) => {
-    const sample = filteredJobs.find((job) => job.country === item.label);
-    const sampleCity = sample ? locationCoordinates[sample.city.toLowerCase()] : null;
+    const countryJobs = filteredJobs.filter((job) => job.country === item.label);
+    const sample = countryJobs[0];
+    const code = countryCode(item.label, sample?.countryCode);
+    const center = countryCenters[code];
     return {
       ...item,
       country: item.label,
-      latitude: sampleCity?.lat ?? null,
-      longitude: sampleCity?.lng ?? null,
+      latitude: averageCoordinate(countryJobs, "latitude") ?? center?.lat ?? null,
+      longitude: averageCoordinate(countryJobs, "longitude") ?? center?.lng ?? null,
     };
   });
   const remoteJobs = filteredJobs.filter((job) => job.mode.toLowerCase().includes("remote")).length;
@@ -259,25 +315,36 @@ function mapLocations(analytics) {
   const countryStats = analytics?.countryStats?.length ? analytics.countryStats : [];
   const colors = ["#69f5ff", "#70d6ff", "#ff6fb7", "#ffd166", "#8ef0a7", "#a78bfa"];
 
-  const countries = countryStats.slice(0, 8).map((country, index) => ({
-    code: countryCode(country.country || country.label, `C${index}`),
-    mapId: countryCode(country.country || country.label, `C${index}`),
-    name: country.label,
-    jobs: country.count,
-    lat: Number(country.latitude ?? 46 + index),
-    lng: Number(country.longitude ?? 14 + index),
-    color: colors[index % colors.length],
-  }));
+  const countries = countryStats.slice(0, 8).map((country, index) => {
+    const code = countryCode(country.country || country.label, `C${index}`);
+    const center = countryCenters[code] || { lat: 46 + index, lng: 14 + index };
 
-  const cities = cityStats.slice(0, 12).map((city, index) => ({
-    name: city.city || city.label,
-    jobs: city.count,
-    country: countryCode(city.country, city.region || "EU"),
-    countryName: city.country || city.region || "Europe",
-    lat: Number(city.latitude ?? 46 + index / 3),
-    lng: Number(city.longitude ?? 14 + index / 3),
-    color: colors[index % colors.length],
-  }));
+    return {
+      code,
+      mapId: code,
+      name: country.label,
+      jobs: country.count,
+      lat: numberOrNull(country.latitude) ?? center.lat,
+      lng: numberOrNull(country.longitude) ?? center.lng,
+      color: colors[index % colors.length],
+    };
+  });
+
+  const cities = cityStats.map((city, index) => {
+    const code = countryCode(city.country, city.region || "EU");
+    const cityCoords = locationCoordinates[String(city.city || city.label).toLowerCase()];
+    const countryCenter = countryCenters[code] || { lat: 46 + index / 3, lng: 14 + index / 3 };
+
+    return {
+      name: city.city || city.label,
+      jobs: city.count,
+      country: code,
+      countryName: city.country || city.region || "Europe",
+      lat: numberOrNull(city.latitude) ?? cityCoords?.lat ?? countryCenter.lat,
+      lng: numberOrNull(city.longitude) ?? cityCoords?.lng ?? countryCenter.lng,
+      color: colors[index % colors.length],
+    };
+  });
 
   return {
     countries,
@@ -316,7 +383,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
     async function loadInitialData() {
       try {
         setStatus("Nalaganje podatkov iz backend API-ja...");
-        const [jobsData, analyticsData] = await Promise.all([getJobs(), getAnalyticsDashboard(10)]);
+        const [jobsData, analyticsData] = await Promise.all([getJobs(), getAnalyticsDashboard(50)]);
         if (cancelled) return;
         setJobs(listFromApiResponse(jobsData).map(mapJob));
         setAnalytics({ ...analyticsData, isFiltered: false });

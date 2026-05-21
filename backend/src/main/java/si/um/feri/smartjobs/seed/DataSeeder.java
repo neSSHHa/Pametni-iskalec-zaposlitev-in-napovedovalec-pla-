@@ -3,6 +3,7 @@ package si.um.feri.smartjobs.seed;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import si.um.feri.smartjobs.ai.service.AiAllowedValuesService;
 import si.um.feri.smartjobs.seed.educationLevel.EducationLevelSeed;
 import si.um.feri.smartjobs.seed.experienceLevel.ExperienceLevelSeed;
 import si.um.feri.smartjobs.seed.workType.WorkTypeSeed;
@@ -15,6 +16,7 @@ import si.um.feri.smartjobs.seed.jobSkill.JobSkillSeed;
 import si.um.feri.smartjobs.seed.workTypeJob.WorkTypeJobSeed;
 import si.um.feri.smartjobs.seed.user.UserSeed;
 import si.um.feri.smartjobs.seed.userSkill.UserSkillSeed;
+import si.um.feri.smartjobs.seed.synthetic.SyntheticJobSeed;
 
 @Component
 public class DataSeeder implements CommandLineRunner {
@@ -31,6 +33,8 @@ public class DataSeeder implements CommandLineRunner {
     private final WorkTypeJobSeed workTypeJobSeed;
     private final UserSeed userSeed;
     private final UserSkillSeed userSkillSeed;
+    private final SyntheticJobSeed sjs;
+    private final AiAllowedValuesService aiAllowedValuesService;
 
     public DataSeeder(
             EducationLevelSeed educationLevelSeed,
@@ -44,8 +48,9 @@ public class DataSeeder implements CommandLineRunner {
             JobSkillSeed jobSkillSeed,
             WorkTypeJobSeed workTypeJobSeed,
             UserSeed userSeed,
-            UserSkillSeed userSkillSeed
-    ) {
+            UserSkillSeed userSkillSeed,
+            SyntheticJobSeed sjs,
+            AiAllowedValuesService aiAllowedValuesService) {
         this.educationLevelSeed = educationLevelSeed;
         this.experienceLevelSeed = experienceLevelSeed;
         this.workTypeSeed = workTypeSeed;
@@ -58,6 +63,8 @@ public class DataSeeder implements CommandLineRunner {
         this.workTypeJobSeed = workTypeJobSeed;
         this.userSeed = userSeed;
         this.userSkillSeed = userSkillSeed;
+        this.sjs = sjs;
+        this.aiAllowedValuesService = aiAllowedValuesService;
     }
 
     @Override
@@ -71,6 +78,8 @@ public class DataSeeder implements CommandLineRunner {
 
         skillSeed.seed();
         skillRelationSeed.seed();
+        sjs.seedReferenceData();
+        aiAllowedValuesService.refresh();
 
         jobSeed.seed();
 
@@ -79,5 +88,6 @@ public class DataSeeder implements CommandLineRunner {
         jobSkillSeed.seed();
         workTypeJobSeed.seed();
         userSkillSeed.seed();
+        sjs.seed();
     }
 }
