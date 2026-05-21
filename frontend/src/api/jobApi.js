@@ -1,7 +1,7 @@
 import apiClient from "./apiClient";
 
-export async function getJobs(filters = {}) {
-  const response = await apiClient.get("/jobs", { params: filters });
+export async function getJobs(params = {}) {
+  const response = await apiClient.get("/jobs", { params });
   return response.data;
 }
 
@@ -15,7 +15,7 @@ export async function searchJobsByText(query) {
   return response.data;
 }
 
-export async function searchJobsByPrompt(text) {
-  const response = await apiClient.post("/ai/jobs/filter", { text });
+export async function searchJobsByPrompt(text, mode = "fast") {
+  const response = await apiClient.post("/ai/jobs/filter", { text, mode });
   return response.data;
 }

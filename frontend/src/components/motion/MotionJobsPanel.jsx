@@ -3,12 +3,33 @@ import { useEffect, useState } from "react";
 const accentColors = ["#69f5ff", "#ff6fb7", "#ffd166", "#8ef0a7", "#a78bfa"];
 const PAGE_SIZE = 5;
 
-export default function MotionJobsPanel({ mode, score, jobs = [], loading = false, error = "" }) {
+export default function MotionJobsPanel({
+  mode,
+  score,
+  jobs = [],
+  totalCount,
+  filterRequest,
+  hasMore = false,
+  loading = false,
+  error = "",
+  onLoadMore,
+}) {
   const displayJobs = jobs;
+  const resultCount = totalCount ?? displayJobs.length;
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [selectedJob, setSelectedJob] = useState(null);
   const visibleJobs = displayJobs.slice(0, visibleCount);
-  const remainingJobs = Math.max(displayJobs.length - visibleCount, 0);
+  const hiddenLoadedJobs = Math.max(displayJobs.length - visibleCount, 0);
+  const remainingJobs = Math.max(resultCount - visibleJobs.length, 0);
+
+  const handleLoadMore = () => {
+    if (hiddenLoadedJobs > 0) {
+      setVisibleCount((count) => count + PAGE_SIZE);
+      return;
+    }
+    onLoadMore?.();
+    setVisibleCount((count) => count + PAGE_SIZE);
+  };
 
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
@@ -20,14 +41,15 @@ export default function MotionJobsPanel({ mode, score, jobs = [], loading = fals
       <div className="panel-head">
         <div>
           <span>{mode === "cv" ? "CV-ranked roles" : mode === "search" ? "Prompt-ranked roles" : "Vsi oglasi"}</span>
-          <h2>{displayJobs.length} {mode === "idle" ? "aktivnih oglasov" : "ujemajocih vlog"}</h2>
+          <h2>{resultCount} {mode === "idle" ? "aktivnih oglasov" : "ujemajocih vlog"}</h2>
         </div>
         <b>{score}%</b>
       </div>
       {loading ? <p className="motion-status">Cakam odgovor API-ja...</p> : null}
       {error ? <p className="motion-error">{error}</p> : null}
-      {remainingJobs ? (
-        <LoadMoreButton remainingJobs={remainingJobs} onClick={() => setVisibleCount((count) => count + PAGE_SIZE)} />
+      <FilterChips filterRequest={filterRequest} />
+      {hiddenLoadedJobs || hasMore ? (
+        <LoadMoreButton remainingJobs={remainingJobs} hasMore={hasMore && !hiddenLoadedJobs} onClick={handleLoadMore} />
       ) : null}
 
       <div className="job-stream">
@@ -35,7 +57,7 @@ export default function MotionJobsPanel({ mode, score, jobs = [], loading = fals
           <p className="motion-status">Ni oglasov za trenutni izbor.</p>
         ) : null}
         {!loading && displayJobs.length ? (
-          <p className="motion-status">Prikazujem {visibleJobs.length} od {displayJobs.length} rezultatov.</p>
+          <p className="motion-status">Prikazujem {visibleJobs.length} od {resultCount} rezultatov.</p>
         ) : null}
         {visibleJobs.map((job, index) => (
           <article
@@ -65,19 +87,65 @@ export default function MotionJobsPanel({ mode, score, jobs = [], loading = fals
           </article>
         ))}
       </div>
-      {remainingJobs ? (
-        <LoadMoreButton remainingJobs={remainingJobs} onClick={() => setVisibleCount((count) => count + PAGE_SIZE)} />
+      {hiddenLoadedJobs || hasMore ? (
+        <LoadMoreButton remainingJobs={remainingJobs} hasMore={hasMore && !hiddenLoadedJobs} onClick={handleLoadMore} />
       ) : null}
       {selectedJob ? <JobDetailsPage job={selectedJob} onClose={() => setSelectedJob(null)} /> : null}
     </section>
   );
 }
 
-function LoadMoreButton({ remainingJobs, onClick }) {
+function FilterChips({ filterRequest }) {
+  const chips = filterChips(filterRequest);
+  if (!chips.length) return null;
+
+  return (
+    <div className="filter-chip-strip" aria-label="Active filters">
+      {chips.map((chip) => (
+        <span key={`${chip.label}-${chip.value}`}>
+          <b>{chip.label}</b>
+          {chip.value}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function filterChips(filterRequest) {
+  if (!filterRequest) return [];
+
+  const job = filterRequest.job || {};
+  const location = filterRequest.location || {};
+  const chips = [];
+
+  addChip(chips, "Role", job.jobname);
+  addChip(chips, "City", location.city);
+  addChip(chips, "Country", location.country);
+  addChip(chips, "Region", location.region);
+  addChip(chips, "Level", job.experienceLevelName);
+  addChip(chips, "Education", job.educationLevel);
+  addChip(chips, "Experience", job.requiredExperience ? `${job.requiredExperience}y` : "");
+  addListChips(chips, "Work", filterRequest.workTypes);
+  addListChips(chips, "Skill", filterRequest.skills);
+
+  return chips;
+}
+
+function addChip(chips, label, value) {
+  if (value === null || value === undefined || value === "") return;
+  chips.push({ label, value: String(value) });
+}
+
+function addListChips(chips, label, values) {
+  if (!Array.isArray(values)) return;
+  values.filter(Boolean).forEach((value) => addChip(chips, label, value));
+}
+
+function LoadMoreButton({ remainingJobs, hasMore, onClick }) {
   return (
     <button className="job-load-more" type="button" onClick={onClick}>
       Load more
-      <span>{remainingJobs} skritih oglasov</span>
+      <span>{hasMore ? "nalozi naslednjo stran" : `${remainingJobs} skritih oglasov`}</span>
     </button>
   );
 }

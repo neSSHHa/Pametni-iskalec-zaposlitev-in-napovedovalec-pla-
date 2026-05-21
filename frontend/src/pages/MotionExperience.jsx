@@ -12,6 +12,7 @@ import MotionSignals from "../components/motion/MotionSignals.jsx";
 import MotionStats from "../components/motion/MotionStats.jsx";
 
 const fallbackQuery = "";
+const JOB_PAGE_SIZE = 50;
 const countryCodes = {
   slovenia: "SI",
   slovenija: "SI",
@@ -181,8 +182,8 @@ function classifyRole(title = "") {
   return "Druge vloge";
 }
 
-function buildFilteredAnalytics(filteredJobs) {
-  const totalJobs = filteredJobs.length;
+function buildFilteredAnalytics(filteredJobs, meta = {}) {
+  const totalJobs = meta.totalCount ?? filteredJobs.length;
   const cityStats = countItems(filteredJobs, (job) => job.city).map((item) => {
     const sample = filteredJobs.find((job) => job.city === item.label);
     const coords = locationCoordinates[item.label.toLowerCase()] || {};
@@ -209,9 +210,9 @@ function buildFilteredAnalytics(filteredJobs) {
   });
   const remoteJobs = filteredJobs.filter((job) => job.mode.toLowerCase().includes("remote")).length;
   const hybridJobs = filteredJobs.filter((job) => job.mode.toLowerCase().includes("hybrid")).length;
-  const averageMatch = totalJobs
-    ? Math.round(filteredJobs.reduce((sum, job) => sum + Number(job.match || 0), 0) / totalJobs)
-    : 0;
+  const averageMatch = meta.averageMatch ?? (filteredJobs.length
+    ? Math.round(filteredJobs.reduce((sum, job) => sum + Number(job.match || 0), 0) / filteredJobs.length)
+    : 0);
 
   return {
     isFiltered: true,
@@ -359,19 +360,29 @@ function listFromApiResponse(data) {
   return [];
 }
 
+function totalFromApiResponse(data, fallback) {
+  return Number.isFinite(Number(data?.totalCount)) ? Number(data.totalCount) : fallback;
+}
+
 export default function MotionExperience({ initialMode = "idle", resultPage = false }) {
   const [mode, setMode] = useState(initialMode);
   const [query, setQuery] = useState(fallbackQuery);
   const [cvName, setCvName] = useState("");
+  const [processingMode, setProcessingMode] = useState("fast");
   const [jobs, setJobs] = useState([]);
+  const [jobsTotalCount, setJobsTotalCount] = useState(0);
+  const [jobsPage, setJobsPage] = useState(0);
+  const [jobsHasMore, setJobsHasMore] = useState(false);
+  const [activeFilter, setActiveFilter] = useState(null);
   const [analytics, setAnalytics] = useState(null);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
 
   const activeMode = resultPage && initialMode !== "idle" ? initialMode : mode;
-  const score = jobs.length ? Math.round(jobs.reduce((sum, job) => sum + job.match, 0) / jobs.length) : 0;
-  const signals = useMemo(() => mapAnalyticsToSignals(analytics, jobs.length), [analytics, jobs.length]);
+  const score = analytics?.summary?.averageMatch
+    ?? (jobs.length ? Math.round(jobs.reduce((sum, job) => sum + job.match, 0) / jobs.length) : 0);
+  const signals = useMemo(() => mapAnalyticsToSignals(analytics, jobsTotalCount || jobs.length), [analytics, jobs.length, jobsTotalCount]);
   const statCards = useMemo(() => mapAnalyticsToStats(analytics), [analytics]);
   const roleMix = useMemo(() => mapRoleMix(analytics), [analytics]);
   const { countries, cities } = useMemo(() => mapLocations(analytics), [analytics]);
@@ -383,9 +394,14 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
     async function loadInitialData() {
       try {
         setStatus("Nalaganje podatkov iz backend API-ja...");
-        const [jobsData, analyticsData] = await Promise.all([getJobs(), getAnalyticsDashboard(50)]);
+        const [jobsData, analyticsData] = await Promise.all([getJobs({ page: 0, size: JOB_PAGE_SIZE }), getAnalyticsDashboard(50)]);
         if (cancelled) return;
-        setJobs(listFromApiResponse(jobsData).map(mapJob));
+        const mappedJobs = listFromApiResponse(jobsData).map(mapJob);
+        setJobs(mappedJobs);
+        setJobsTotalCount(totalFromApiResponse(jobsData, mappedJobs.length));
+        setJobsPage(jobsData?.page ?? 0);
+        setJobsHasMore(Boolean(jobsData?.hasMore));
+        setActiveFilter(null);
         setAnalytics({ ...analyticsData, isFiltered: false });
         setStatus("");
       } catch (err) {
@@ -401,6 +417,27 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
     };
   }, []);
 
+  const loadMoreJobs = async () => {
+    if (activeMode !== "idle" || loading || !jobsHasMore) return;
+    setLoading(true);
+    setStatus("Nalaganje naslednjih oglasov...");
+
+    try {
+      const nextPage = jobsPage + 1;
+      const data = await getJobs({ page: nextPage, size: JOB_PAGE_SIZE });
+      const mappedJobs = listFromApiResponse(data).map(mapJob);
+      setJobs((currentJobs) => [...currentJobs, ...mappedJobs]);
+      setJobsTotalCount(totalFromApiResponse(data, jobsTotalCount));
+      setJobsPage(data?.page ?? nextPage);
+      setJobsHasMore(Boolean(data?.hasMore));
+    } catch (err) {
+      setError("Naslednja stran oglasov trenutno ni dosegljiva.");
+    } finally {
+      setLoading(false);
+      setStatus("");
+    }
+  };
+
   const submitPrompt = async (event) => {
     event.preventDefault();
     if (!query.trim()) {
@@ -410,13 +447,20 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
     setMode("search");
     setLoading(true);
     setError("");
-    setStatus("AI bere prompt in filtrira oglase...");
+    setStatus(processingMode === "thinking"
+      ? "AI bere prompt in filtrira oglase..."
+      : "Fast mode prepozna jasne kriterije in takoj rangira oglase...");
 
     try {
-      const data = await searchJobsByPrompt(query);
+      const data = await searchJobsByPrompt(query, processingMode);
       const mappedJobs = listFromApiResponse(data).map(mapJob);
       setJobs(mappedJobs);
-      setAnalytics(buildFilteredAnalytics(mappedJobs));
+      const totalCount = totalFromApiResponse(data, mappedJobs.length);
+      setJobsTotalCount(totalCount);
+      setJobsPage(data?.page ?? 0);
+      setJobsHasMore(false);
+      setActiveFilter(data?.filterRequest || null);
+      setAnalytics(buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch }));
       window.history.pushState({}, "", "/motion-prompt");
     } catch (err) {
       setError("Prompt API nije vratio rezultat. Proveri backend/AI servis.");
@@ -432,13 +476,20 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
     setMode("cv");
     setLoading(true);
     setError("");
-    setStatus("CV se cita i povezuje sa oglasima...");
+    setStatus(processingMode === "thinking"
+      ? "CV se cita, AI izvlaci profil i povezuje oglase..."
+      : "CV se cita, fast parser izvlaci vescine i rangira oglase...");
 
     try {
-      const data = await uploadCv(file);
+      const data = await uploadCv(file, processingMode);
       const mappedJobs = (data?.jobs || []).map(mapJob);
       setJobs(mappedJobs);
-      setAnalytics(buildFilteredAnalytics(mappedJobs));
+      const totalCount = totalFromApiResponse(data, mappedJobs.length);
+      setJobsTotalCount(totalCount);
+      setJobsPage(data?.page ?? 0);
+      setJobsHasMore(false);
+      setActiveFilter(data?.filterRequest || null);
+      setAnalytics(buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch }));
       window.history.pushState({}, "", "/motion-cv");
     } catch (err) {
       setError("CV API nije vratio rezultat. Proveri da li backend i AI servis rade.");
@@ -460,13 +511,25 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
         loading={loading}
         status={status}
         error={error}
+        processingMode={processingMode}
+        onProcessingModeChange={setProcessingMode}
         onQueryChange={setQuery}
         onPromptSubmit={submitPrompt}
         onCvUpload={handleCvUpload}
       />
       <MotionSignals signals={signals} />
       <section className="motion-grid">
-        <MotionJobsPanel mode={activeMode} score={score} jobs={jobs} loading={loading} error={error} />
+        <MotionJobsPanel
+          mode={activeMode}
+          score={score}
+          jobs={jobs}
+          totalCount={jobsTotalCount || jobs.length}
+          filterRequest={activeFilter}
+          hasMore={activeMode === "idle" && jobsHasMore}
+          loading={loading}
+          error={error}
+          onLoadMore={loadMoreJobs}
+        />
         <MotionScorePanel mode={activeMode} score={score} roleMix={roleMix} />
       </section>
       <MotionMapSection countries={countries} cities={cities} analytics={analytics} />

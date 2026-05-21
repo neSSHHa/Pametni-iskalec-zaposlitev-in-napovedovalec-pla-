@@ -9,5 +9,7 @@ public interface JobSkillRepository extends JpaRepository<JobSkill, String> {
 
     List<JobSkill> findByJob_Id(String jobId);
 
+    List<JobSkill> findByJob_IdIn(List<String> jobIds);
+
     List<JobSkill> findBySkill_Id(String skillId);
 }

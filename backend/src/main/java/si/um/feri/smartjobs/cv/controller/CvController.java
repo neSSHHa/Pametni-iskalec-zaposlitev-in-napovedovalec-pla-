@@ -2,6 +2,7 @@ package si.um.feri.smartjobs.cv.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,8 +39,11 @@ public class CvController {
     }
 
     @PostMapping("/jobs/filter")
-    public CvJobMatchResponse filterJobsFromCv(@RequestPart("file") MultipartFile file) {
-        return cvJobMatchingService.matchJobs(file);
+    public CvJobMatchResponse filterJobsFromCv(
+            @RequestPart("file") MultipartFile file,
+            @RequestParam(defaultValue = "fast") String mode
+    ) {
+        return cvJobMatchingService.matchJobs(file, mode);
     }
 
 //za direktno response samo na suitable jobs zameni toa pogore so ova

@@ -10,6 +10,11 @@ public record CvJobMatchResponse(
         String contentType,
         String extractedText,
         JobFilterRequest filterRequest,
-        List<JobDto> jobs
+        List<JobDto> jobs,
+        long totalCount,
+        int page,
+        int size,
+        boolean hasMore,
+        Integer averageMatch
 ) {
 }

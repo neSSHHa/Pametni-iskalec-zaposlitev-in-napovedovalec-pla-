@@ -4,12 +4,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import si.um.feri.smartjobs.cv.dto.CvJobMatchResponse;
 import si.um.feri.smartjobs.ai.service.AiJobFilterService;
-import si.um.feri.smartjobs.job.dto.JobDto;
 import si.um.feri.smartjobs.job.dto.JobFilterRequest;
+import si.um.feri.smartjobs.job.dto.JobSearchResponse;
 import si.um.feri.smartjobs.job.service.JobService;
 import si.um.feri.smartjobs.ai.dto.AiJobFilterDebugResponse;
-
-import java.util.List;
 
 @Service
 public class CvJobMatchingService {
@@ -31,26 +29,30 @@ public class CvJobMatchingService {
         this.jobService = jobService;
     }
 
-    public CvJobMatchResponse matchJobs(MultipartFile file) {
+    public CvJobMatchResponse matchJobs(MultipartFile file, String mode) {
         String extractedText = cvTextExtractionService.extractText(file);
 
-        JobFilterRequest filterRequest = cvProfileFilterService.buildFilter(extractedText);
-        List<JobDto> rankedJobs = jobService.filter(filterRequest);
-        List<JobDto> jobs = rankedJobs.stream()
-                .filter(job -> job.matchScore() >= 50)
-                .toList();
-
-        if (jobs.isEmpty()) {
-            jobs = rankedJobs.stream().limit(100).toList();
-        }
+        JobFilterRequest filterRequest = isThinking(mode)
+                ? aiJobFilterService.extractCvFilter(extractedText)
+                : cvProfileFilterService.buildFilter(extractedText);
+        JobSearchResponse rankedJobs = jobService.filterResponse(filterRequest);
 
         return new CvJobMatchResponse(
                 file.getOriginalFilename(),
                 file.getContentType(),
                 extractedText,
                 filterRequest,
-                jobs
+                rankedJobs.jobs(),
+                rankedJobs.totalCount(),
+                rankedJobs.page(),
+                rankedJobs.size(),
+                rankedJobs.hasMore(),
+                rankedJobs.averageMatch()
         );
+    }
+
+    private boolean isThinking(String mode) {
+        return "thinking".equalsIgnoreCase(mode);
     }
 
     public AiJobFilterDebugResponse extractFilterDebug(MultipartFile file) {

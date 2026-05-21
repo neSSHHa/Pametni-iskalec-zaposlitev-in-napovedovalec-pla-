@@ -1,6 +1,11 @@
 package si.um.feri.smartjobs.ai.service;
 
 import java.util.List;
+import java.text.Normalizer;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Locale;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +41,7 @@ public class AiAllowedValuesService {
     private List<String> allowedSkills = List.of();
     private List<String> allowedEducationLevels = List.of();
     private List<String> allowedWorkTypes = List.of();
+    private List<CachedSkill> cachedSkills = List.of();
 
     public AiAllowedValuesService(
             SkillRepository skillRepository,
@@ -62,6 +68,9 @@ public class AiAllowedValuesService {
                 .map(Skill::getName)
                 .sorted()
                 .toList();
+        cachedSkills = allowedSkills.stream()
+                .map(skill -> new CachedSkill(skill, normalize(skill), significantTokens(skill)))
+                .toList();
 
         allowedEducationLevels = educationLevelRepository.findAll().stream()
                 .map(EducationLevel::getName)
@@ -85,11 +94,78 @@ public class AiAllowedValuesService {
         return allowedSkills;
     }
 
+    public List<String> getRelevantAllowedSkills(String text) {
+        String normalizedText = normalize(text);
+        Set<String> terms = significantTokens(normalizedText);
+
+        List<String> matches = cachedSkills.stream()
+                .filter(skill -> isRelevantSkill(skill, normalizedText, terms))
+                .map(CachedSkill::name)
+                .limit(180)
+                .toList();
+
+        if (matches.size() >= 8 || allowedSkills.size() <= 220) {
+            return matches;
+        }
+
+        return allowedSkills.stream().limit(220).toList();
+    }
+
     public List<String> getAllowedEducationLevels() {
         return allowedEducationLevels;
     }
 
     public List<String> getAllowedWorkTypes() {
         return allowedWorkTypes;
+    }
+
+    private boolean isRelevantSkill(CachedSkill skill, String normalizedText, Set<String> terms) {
+        String normalizedSkill = skill.normalizedName();
+        if (!hasText(normalizedSkill)) {
+            return false;
+        }
+        if (normalizedText.contains(normalizedSkill)) {
+            return true;
+        }
+
+        Set<String> skillTokens = skill.tokens();
+        if (skillTokens.isEmpty()) {
+            return false;
+        }
+
+        long overlap = skillTokens.stream().filter(terms::contains).count();
+        return skillTokens.size() <= 2 ? overlap == skillTokens.size() : overlap >= 2;
+    }
+
+    private Set<String> significantTokens(String value) {
+        if (!hasText(value)) {
+            return Set.of();
+        }
+
+        return Arrays.stream(normalize(value).split(" "))
+                .filter(this::hasText)
+                .filter(token -> token.length() > 1)
+                .filter(token -> !Set.of("and", "or", "the", "with", "for", "job", "work", "role", "i", "am").contains(token))
+                .collect(LinkedHashSet::new, LinkedHashSet::add, LinkedHashSet::addAll);
+    }
+
+    private boolean hasText(String value) {
+        return value != null && !value.isBlank();
+    }
+
+    private String normalize(String value) {
+        if (value == null) {
+            return "";
+        }
+
+        return Normalizer.normalize(value, Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "")
+                .toLowerCase(Locale.ROOT)
+                .replaceAll("[^a-z0-9+#.]+", " ")
+                .replaceAll("\\s+", " ")
+                .trim();
+    }
+
+    private record CachedSkill(String name, String normalizedName, Set<String> tokens) {
     }
 }

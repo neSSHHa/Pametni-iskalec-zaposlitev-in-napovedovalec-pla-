@@ -3,23 +3,34 @@ package si.um.feri.smartjobs.job.service;
 import org.springframework.stereotype.Service;
 import si.um.feri.smartjobs.job.dto.JobDto;
 import si.um.feri.smartjobs.job.dto.JobFilterRequest;
+import si.um.feri.smartjobs.job.dto.JobSearchResponse;
 import si.um.feri.smartjobs.job.entity.Job;
 import si.um.feri.smartjobs.job.repository.JobRepository;
+import si.um.feri.smartjobs.jobSkill.entity.JobSkill;
 import si.um.feri.smartjobs.jobSkill.repository.JobSkillRepository;
 import si.um.feri.smartjobs.location.entity.Location;
 import si.um.feri.smartjobs.skillRelation.entity.SkillRelation;
 import si.um.feri.smartjobs.skillRelation.repository.SkillRelationRepository;
+import si.um.feri.smartjobs.workTypeJob.entity.WorkTypeJob;
 import si.um.feri.smartjobs.workTypeJob.repository.WorkTypeJobRepository;
 
 import java.math.BigDecimal;
 import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 @Service
 public class JobService {
@@ -31,6 +42,10 @@ public class JobService {
     private static final double WORK_TYPE_WEIGHT = 1.5;
     private static final double EXPERIENCE_WEIGHT = 1.5;
     private static final double EDUCATION_WEIGHT = 1.2;
+    public static final int DEFAULT_PAGE_SIZE = 50;
+    public static final int MAX_PAGE_SIZE = 200;
+    public static final int DEFAULT_MATCH_LIMIT = 200;
+    public static final int DEFAULT_MIN_MATCH_SCORE = 50;
     private static final Set<String> STOP_WORDS = Set.of(
             "a", "an", "and", "or", "the", "for", "with", "of", "to", "in", "on", "at", "as",
             "i", "am", "me", "my", "job", "jobs", "role", "roles", "position", "work",
@@ -75,9 +90,32 @@ public class JobService {
     }
 
     public List<JobDto> findAll() {
-        return jobRepository.findAll().stream()
-                .map(this::toDto)
+        List<Job> jobs = jobRepository.findAll();
+        BatchLookup lookup = buildLookup(jobs);
+        return jobs.stream()
+                .map(job -> toDto(job, lookup))
                 .toList();
+    }
+
+    public JobSearchResponse findAllPage(int page, int size) {
+        int safePage = Math.max(page, 0);
+        int safeSize = safeSize(size);
+        Page<Job> jobPage = jobRepository.findAll(PageRequest.of(safePage, safeSize));
+        List<Job> jobs = jobPage.getContent();
+        BatchLookup lookup = buildLookup(jobs);
+        List<JobDto> dtos = jobs.stream()
+                .map(job -> toDto(job, lookup))
+                .toList();
+
+        return new JobSearchResponse(
+                dtos,
+                jobPage.getTotalElements(),
+                safePage,
+                safeSize,
+                jobPage.hasNext(),
+                null,
+                null
+        );
     }
 
     public List<JobDto> search(String query) {
@@ -85,40 +123,74 @@ public class JobService {
             return findAll();
         }
 
-        return jobRepository
-                .findByJobNameContainingIgnoreCaseOrCompanyNameContainingIgnoreCase(query, query)
-                .stream()
-                .map(this::toDto)
+        List<Job> jobs = jobRepository.findByJobNameContainingIgnoreCaseOrCompanyNameContainingIgnoreCase(query, query);
+        BatchLookup lookup = buildLookup(jobs);
+        return jobs.stream()
+                .map(job -> toDto(job, lookup))
                 .toList();
     }
 
     public List<JobDto> filter(JobFilterRequest request) {
+        return filterResponse(request, 0, Integer.MAX_VALUE).jobs();
+    }
+
+    public JobSearchResponse filterResponse(JobFilterRequest request) {
+        return filterResponse(request, DEFAULT_MIN_MATCH_SCORE, DEFAULT_MATCH_LIMIT);
+    }
+
+    public JobSearchResponse filterResponse(JobFilterRequest request, int minScore, int limit) {
         if (request == null) {
-            return findAll();
+            return findAllPage(0, limit);
         }
 
         boolean hasCriteria = hasActiveCriteria(request);
         List<SkillRelation> skillRelations = isEmpty(request.skills()) ? List.of() : skillRelationRepository.findAll();
+        List<Job> jobs = jobRepository.findAll();
+        BatchLookup lookup = buildLookup(jobs);
 
-        return jobRepository.findAll().stream()
-                .map(job -> new ScoredJob(job, calculateMatchScore(job, request, skillRelations)))
+        List<ScoredJob> scoredJobs = jobs.stream()
+                .map(job -> new ScoredJob(job, calculateMatchScore(job, request, skillRelations, lookup)))
                 .filter(scoredJob -> !hasCriteria || scoredJob.score().comparedFields() == 0
                         || scoredJob.score().matchedFields() > 0)
+                .filter(scoredJob -> scoredJob.score().percentage() >= minScore)
                 .sorted(Comparator.comparingInt((ScoredJob scoredJob) -> scoredJob.score().percentage()).reversed())
-                .map(scoredJob -> toDto(scoredJob.job(), scoredJob.score().percentage()))
                 .toList();
+
+        int safeLimit = Math.max(1, limit);
+        List<JobDto> page = scoredJobs.stream()
+                .limit(safeLimit)
+                .map(scoredJob -> toDto(scoredJob.job(), scoredJob.score().percentage(), lookup))
+                .toList();
+
+        Integer averageMatch = scoredJobs.isEmpty()
+                ? null
+                : (int) Math.round(scoredJobs.stream().mapToInt(scoredJob -> scoredJob.score().percentage()).average().orElse(0.0));
+
+        return new JobSearchResponse(
+                page,
+                scoredJobs.size(),
+                0,
+                safeLimit,
+                scoredJobs.size() > safeLimit,
+                averageMatch,
+                request
+        );
     }
 
     private JobDto toDto(Job job) {
-        return toDto(job, 100);
+        return toDto(job, 100, buildLookup(List.of(job)));
     }
 
-    private JobDto toDto(Job job, int matchScore) {
-        List<String> skills = jobSkillRepository.findByJob_Id(job.getId()).stream()
+    private JobDto toDto(Job job, BatchLookup lookup) {
+        return toDto(job, 100, lookup);
+    }
+
+    private JobDto toDto(Job job, int matchScore, BatchLookup lookup) {
+        List<String> skills = lookup.skillsByJobId().getOrDefault(job.getId(), List.of()).stream()
                 .map(jobSkill -> jobSkill.getSkill().getName())
                 .toList();
 
-        String workMode = workTypeJobRepository.findByJob_Id(job.getId()).stream()
+        String workMode = lookup.workTypesByJobId().getOrDefault(job.getId(), List.of()).stream()
                 .map(workTypeJob -> workTypeJob.getWorkType().getName())
                 .reduce((first, second) -> first + ", " + second)
                 .orElse("Unknown");
@@ -149,7 +221,7 @@ public class JobService {
         );
     }
 
-    private MatchScore calculateMatchScore(Job job, JobFilterRequest request, List<SkillRelation> skillRelations) {
+    private MatchScore calculateMatchScore(Job job, JobFilterRequest request, List<SkillRelation> skillRelations, BatchLookup lookup) {
         MatchScore score = new MatchScore();
         JobFilterRequest.JobCriteria jobCriteria = request.job();
         JobFilterRequest.LocationCriteria locationCriteria = request.location();
@@ -174,7 +246,7 @@ public class JobService {
             score.addExperience(job.getRequiredExperience(), jobCriteria.requiredExperience(), EXPERIENCE_WEIGHT);
         }
 
-        if (locationCriteria != null && !isRemote(job)) {
+        if (locationCriteria != null && !isRemote(job, lookup)) {
             Location location = job.getLocation();
             score.addText(location == null ? null : location.getCityDistrict(), locationCriteria.cityDistrict(), LOCATION_WEIGHT);
             score.addText(location == null ? null : location.getCity(), locationCriteria.city(), LOCATION_WEIGHT);
@@ -184,18 +256,18 @@ public class JobService {
             score.addExact(location == null ? null : location.getLongitude(), locationCriteria.longitude());
         }
 
-        addSkillScore(score, job, request.skills(), skillRelations);
-        addWorkTypeScore(score, job, request.workTypes());
+        addSkillScore(score, job, request.skills(), skillRelations, lookup);
+        addWorkTypeScore(score, job, request.workTypes(), lookup);
 
         return score;
     }
 
-    private void addSkillScore(MatchScore score, Job job, List<String> requestedSkills, List<SkillRelation> skillRelations) {
+    private void addSkillScore(MatchScore score, Job job, List<String> requestedSkills, List<SkillRelation> skillRelations, BatchLookup lookup) {
         if (isEmpty(requestedSkills)) {
             return;
         }
 
-        List<String> jobSkillValues = jobSkillRepository.findByJob_Id(job.getId()).stream()
+        List<String> jobSkillValues = lookup.skillsByJobId().getOrDefault(job.getId(), List.of()).stream()
                 .flatMap(jobSkill -> List.of(jobSkill.getSkill().getId(), jobSkill.getSkill().getName()).stream())
                 .map(this::normalize)
                 .toList();
@@ -255,12 +327,12 @@ public class JobService {
         };
     }
 
-    private void addWorkTypeScore(MatchScore score, Job job, List<String> requestedWorkTypes) {
+    private void addWorkTypeScore(MatchScore score, Job job, List<String> requestedWorkTypes, BatchLookup lookup) {
         if (isEmpty(requestedWorkTypes)) {
             return;
         }
 
-        List<String> jobWorkTypes = jobWorkTypes(job);
+        List<String> jobWorkTypes = jobWorkTypes(job, lookup);
 
         List<Double> weights = requestedWorkTypes.stream()
                 .filter(this::hasText)
@@ -309,15 +381,39 @@ public class JobService {
                 || criteria.longitude() != null);
     }
 
-    private boolean isRemote(Job job) {
-        return jobWorkTypes(job).stream().anyMatch(workType -> workType.contains("remote"));
+    private boolean isRemote(Job job, BatchLookup lookup) {
+        return jobWorkTypes(job, lookup).stream().anyMatch(workType -> workType.contains("remote"));
     }
 
-    private List<String> jobWorkTypes(Job job) {
-        return workTypeJobRepository.findByJob_Id(job.getId()).stream()
+    private List<String> jobWorkTypes(Job job, BatchLookup lookup) {
+        return lookup.workTypesByJobId().getOrDefault(job.getId(), List.of()).stream()
                 .flatMap(workTypeJob -> List.of(workTypeJob.getWorkType().getId(), workTypeJob.getWorkType().getName()).stream())
                 .map(this::normalize)
                 .toList();
+    }
+
+    private BatchLookup buildLookup(List<Job> jobs) {
+        List<String> jobIds = jobs.stream().map(Job::getId).toList();
+        if (jobIds.isEmpty()) {
+            return new BatchLookup(Map.of(), Map.of());
+        }
+
+        Map<String, List<JobSkill>> skillsByJobId = jobSkillRepository.findByJob_IdIn(jobIds).stream()
+                .filter(jobSkill -> jobSkill.getJob() != null)
+                .collect(Collectors.groupingBy(jobSkill -> jobSkill.getJob().getId()));
+
+        Map<String, List<WorkTypeJob>> workTypesByJobId = workTypeJobRepository.findByJob_IdIn(jobIds).stream()
+                .filter(workTypeJob -> workTypeJob.getJob() != null)
+                .collect(Collectors.groupingBy(workTypeJob -> workTypeJob.getJob().getId()));
+
+        return new BatchLookup(skillsByJobId, workTypesByJobId);
+    }
+
+    private int safeSize(int size) {
+        if (size <= 0) {
+            return DEFAULT_PAGE_SIZE;
+        }
+        return Math.min(size, MAX_PAGE_SIZE);
     }
 
     private boolean isEmpty(List<String> values) {
@@ -436,6 +532,12 @@ public class JobService {
     }
 
     private record ScoredJob(Job job, MatchScore score) {
+    }
+
+    private record BatchLookup(
+            Map<String, List<JobSkill>> skillsByJobId,
+            Map<String, List<WorkTypeJob>> workTypesByJobId
+    ) {
     }
 
     private class MatchScore {

@@ -113,12 +113,13 @@ public class AiJobFilterService {
     }
 
     private AiJobFilterExtractionResponse extractFromAi(String text) {
-        return aiServiceClient.extractJobFilter(
+        AiJobFilterExtractionResponse aiResponse = aiServiceClient.extractJobFilter(
                 text,
-                allowedValuesService.getAllowedSkills(),
+                allowedValuesService.getRelevantAllowedSkills(text),
                 allowedValuesService.getAllowedEducationLevels(),
                 allowedValuesService.getAllowedWorkTypes()
         );
+        return normalizeSearchResponse(aiResponse, text);
     }
 
     private AiJobFilterExtractionResponse extractCvFromAi(String cvText) {
@@ -130,6 +131,65 @@ public class AiJobFilterService {
         );
 
         return normalizeCvResponse(aiResponse, cvText);
+    }
+
+    private AiJobFilterExtractionResponse normalizeSearchResponse(AiJobFilterExtractionResponse aiResponse, String text) {
+        String normalizedText = normalize(text);
+        Map<String, String> allowedSkills = allowedByName(allowedValuesService.getAllowedSkills());
+        Map<String, String> allowedWorkTypes = allowedByName(allowedValuesService.getAllowedWorkTypes());
+        Map<String, String> allowedEducationLevels = allowedByName(allowedValuesService.getAllowedEducationLevels());
+
+        LinkedHashSet<String> skills = new LinkedHashSet<>();
+        for (String skill : safeList(aiResponse.skills())) {
+            String canonical = allowedSkills.get(normalize(skill));
+            if (canonical != null && hasEvidence(canonical, normalizedText)) {
+                skills.add(canonical);
+            }
+        }
+        addEvidenceBasedSkills(skills, allowedSkills, normalizedText);
+
+        LinkedHashSet<String> workTypes = new LinkedHashSet<>();
+        for (String workType : safeList(aiResponse.workTypes())) {
+            String canonical = allowedWorkTypes.get(normalize(workType));
+            if (canonical != null && hasWorkTypeEvidence(canonical, normalizedText)) {
+                workTypes.add(canonical);
+            }
+        }
+
+        AiJobFilterExtractionResponse.JobData job = aiResponse.job();
+        String educationLevel = job == null ? null : job.educationLevel();
+        String canonicalEducation = allowedEducationLevels.get(normalize(educationLevel));
+        if (canonicalEducation == null || !normalizedText.contains(normalize(canonicalEducation))) {
+            canonicalEducation = null;
+        }
+
+        Integer requiredExperience = job == null ? null : job.requiredExperience();
+        if (!hasExperienceEvidence(normalizedText)) {
+            requiredExperience = null;
+        }
+
+        AiJobFilterExtractionResponse.JobData normalizedJob = new AiJobFilterExtractionResponse.JobData(
+                null,
+                job == null ? null : job.jobname(),
+                null,
+                requiredExperience,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                job == null ? null : job.experienceLevelName(),
+                canonicalEducation
+        );
+
+        return new AiJobFilterExtractionResponse(
+                normalizedJob,
+                aiResponse.location(),
+                new ArrayList<>(workTypes),
+                new ArrayList<>(skills),
+                normalizeUnknownSkills(aiResponse.unknownSkills(), skills, allowedSkills, normalizedText)
+        );
     }
 
     private AiJobFilterExtractionResponse normalizeCvResponse(AiJobFilterExtractionResponse aiResponse, String cvText) {
@@ -240,6 +300,30 @@ public class AiJobFilterService {
         return CV_SKILL_ALIASES.getOrDefault(allowedSkill, List.of()).stream()
                 .map(this::normalize)
                 .anyMatch(normalizedCv::contains);
+    }
+
+    private boolean hasWorkTypeEvidence(String workType, String normalizedText) {
+        String normalizedWorkType = normalize(workType);
+        if (normalizedText.contains(normalizedWorkType)) {
+            return true;
+        }
+        return switch (normalizedWorkType) {
+            case "remote" -> normalizedText.contains("work from home")
+                    || normalizedText.contains("wfh")
+                    || normalizedText.contains("na daljavo")
+                    || normalizedText.contains("od kuce");
+            case "hybrid" -> normalizedText.contains("hibrid");
+            case "on site", "onsite", "on site work" -> normalizedText.contains("on site")
+                    || normalizedText.contains("on site")
+                    || normalizedText.contains("onsite")
+                    || normalizedText.contains("office");
+            default -> false;
+        };
+    }
+
+    private boolean hasExperienceEvidence(String normalizedText) {
+        return normalizedText.matches(".*\\b\\d+\\s*(year|years|yr|yrs|leto|leta|godina|godine)\\b.*")
+                || normalizedText.matches(".*\\b\\d+\\+?\\s*(y|yoe)\\b.*");
     }
 
     private List<String> normalizeUnknownSkills(

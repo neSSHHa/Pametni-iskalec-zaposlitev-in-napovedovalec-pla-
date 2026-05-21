@@ -9,5 +9,7 @@ public interface WorkTypeJobRepository extends JpaRepository<WorkTypeJob, String
 
     List<WorkTypeJob> findByJob_Id(String jobId);
 
+    List<WorkTypeJob> findByJob_IdIn(List<String> jobIds);
+
     List<WorkTypeJob> findByWorkType_Id(String workTypeId);
 }

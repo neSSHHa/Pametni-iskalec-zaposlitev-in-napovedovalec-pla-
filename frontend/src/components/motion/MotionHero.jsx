@@ -17,6 +17,11 @@ function MotionResultCard({ mode, score }) {
   );
 }
 
+const processingModes = [
+  ["fast", "Fast", "instant"],
+  ["thinking", "Thinking", "main AI"],
+];
+
 export default function MotionHero({
   mode,
   score,
@@ -26,6 +31,8 @@ export default function MotionHero({
   loading,
   status,
   error,
+  processingMode,
+  onProcessingModeChange,
   onQueryChange,
   onPromptSubmit,
   onCvUpload,
@@ -82,6 +89,19 @@ export default function MotionHero({
           />
           {status ? <p className="motion-status">{status}</p> : null}
           {error ? <p className="motion-error">{error}</p> : null}
+          <div className="motion-mode-switch" role="group" aria-label="Processing mode">
+            {processingModes.map(([value, label, detail]) => (
+              <button
+                key={value}
+                type="button"
+                className={processingMode === value ? "active" : ""}
+                onClick={() => onProcessingModeChange(value)}
+              >
+                <span>{label}</span>
+                <small>{detail}</small>
+              </button>
+            ))}
+          </div>
           <div className="motion-actions">
             <label className={`motion-upload ${cvName ? "ready" : ""}`}>
               <input
