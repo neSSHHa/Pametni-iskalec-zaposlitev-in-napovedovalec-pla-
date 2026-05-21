@@ -13,9 +13,14 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,27 +51,14 @@ public class AiServiceClient {
     ) {
         String prompt = buildPrompt(text, allowedSkills, allowedEducationLevels, allowedWorkTypes);
 
-        OllamaChatRequest request = new OllamaChatRequest(
+        OpenRouterChatRequest request = new OpenRouterChatRequest(
                 aiProperties.model(),
-                List.of(new OllamaMessage("user", prompt)),
-                false,
-                "json",
-                Map.of("temperature", 0)
+                List.of(new OpenRouterMessage("user", prompt)),
+                0,
+                Map.of("type", "json_object")
         );
 
-        // dejansko pokliče Ollama
-        OllamaChatResponse response = restTemplate.postForObject(
-                aiProperties.ollamaUrl() + "/api/chat",
-                request,
-                OllamaChatResponse.class
-        );
-
-        if (response == null || response.message() == null || response.message().content() == null) {
-            throw new IllegalStateException("Ollama did not return a valid response.");
-        }
-
-        //  vzame AI odgovor in ga spremeni v AiJobFilterExtractionResponse
-        return parseAiResponse(response.message().content());
+        return parseAiResponse(callOpenRouter(request, "job filter"));
     }
 
     public AiJobFilterExtractionResponse extractCvJobFilter(
@@ -77,25 +69,14 @@ public class AiServiceClient {
     ) {
         String prompt = buildCvFilterPrompt(cvText, allowedSkills, allowedEducationLevels, allowedWorkTypes);
 
-        OllamaChatRequest request = new OllamaChatRequest(
+        OpenRouterChatRequest request = new OpenRouterChatRequest(
                 aiProperties.model(),
-                List.of(new OllamaMessage("user", prompt)),
-                false,
-                "json",
-                Map.of("temperature", 0)
+                List.of(new OpenRouterMessage("user", prompt)),
+                0,
+                Map.of("type", "json_object")
         );
 
-        OllamaChatResponse response = restTemplate.postForObject(
-                aiProperties.ollamaUrl() + "/api/chat",
-                request,
-                OllamaChatResponse.class
-        );
-
-        if (response == null || response.message() == null || response.message().content() == null) {
-            throw new IllegalStateException("Ollama did not return a valid CV filter response.");
-        }
-
-        return parseAiResponse(response.message().content());
+        return parseAiResponse(callOpenRouter(request, "CV filter"));
     }
 
     private String buildPrompt(
@@ -421,50 +402,80 @@ public class AiServiceClient {
         return trimmed;
     }
 
-    private record OllamaChatRequest(
+    private String callOpenRouter(OpenRouterChatRequest request, String purpose) {
+        if (aiProperties.openrouterApiKey() == null || aiProperties.openrouterApiKey().isBlank()) {
+            throw new IllegalStateException("OPENROUTER_API_KEY environment variable is required for AI " + purpose + ".");
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(aiProperties.openrouterApiKey());
+
+        if (aiProperties.openrouterReferer() != null && !aiProperties.openrouterReferer().isBlank()) {
+            headers.set("HTTP-Referer", aiProperties.openrouterReferer());
+        }
+        if (aiProperties.openrouterTitle() != null && !aiProperties.openrouterTitle().isBlank()) {
+            headers.set("X-Title", aiProperties.openrouterTitle());
+        }
+
+        OpenRouterChatResponse response = restTemplate.postForObject(
+                aiProperties.openrouterUrl() + "/chat/completions",
+                new HttpEntity<>(request, headers),
+                OpenRouterChatResponse.class
+        );
+
+        if (response == null || response.choices() == null || response.choices().isEmpty()) {
+            throw new IllegalStateException("OpenRouter did not return a valid " + purpose + " response.");
+        }
+
+        OpenRouterMessage message = response.choices().get(0).message();
+        if (message == null || message.content() == null) {
+            throw new IllegalStateException("OpenRouter response did not contain content for " + purpose + ".");
+        }
+
+        return message.content();
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private record OpenRouterChatRequest(
             String model,
-            List<OllamaMessage> messages,
-            boolean stream,
-            String format,
-            Map<String, Object> options
+            List<OpenRouterMessage> messages,
+            double temperature,
+            @JsonProperty("response_format") Map<String, String> responseFormat
     ) {
     }
 
-    private record OllamaMessage(
+    private record OpenRouterMessage(
             String role,
             String content
     ) {
     }
 
-    private record OllamaChatResponse(
-            OllamaMessage message
+    private record OpenRouterChatResponse(
+            List<OpenRouterChoice> choices
     ) {
     }
-    public String rewriteCvToProfileText(String cvText) {
-    String prompt = buildCvRewritePrompt(cvText);
 
-    OllamaChatRequest request = new OllamaChatRequest(
-            aiProperties.model(),
-            List.of(new OllamaMessage("user", prompt)),
-            false,
-            null,
-            Map.of("temperature", 0)
-    );
-
-    OllamaChatResponse response = restTemplate.postForObject(
-            aiProperties.ollamaUrl() + "/api/chat",
-            request,
-            OllamaChatResponse.class
-    );
-
-    if (response == null || response.message() == null || response.message().content() == null) {
-        throw new IllegalStateException("Ollama did not return a valid CV rewrite response.");
+    private record OpenRouterChoice(
+            OpenRouterMessage message
+    ) {
     }
 
-    return response.message().content().trim();
-}
-private String buildCvRewritePrompt(String cvText) {
-    return """
+    public String rewriteCvToProfileText(String cvText) {
+        String prompt = buildCvRewritePrompt(cvText);
+
+        OpenRouterChatRequest request = new OpenRouterChatRequest(
+                aiProperties.model(),
+                List.of(new OpenRouterMessage("user", prompt)),
+                0,
+                null
+        );
+
+        return callOpenRouter(request, "CV rewrite").trim();
+    }
+
+    private String buildCvRewritePrompt(String cvText) {
+        return """
 You MUST base the response ONLY on the provided CV text.
 
 Do not reuse information from previous requests.
@@ -518,5 +529,5 @@ Rules:
 CV text:
 %s
 """.formatted(cvText);
-}
+    }
 }
