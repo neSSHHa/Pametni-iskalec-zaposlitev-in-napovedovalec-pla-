@@ -23,6 +23,7 @@ public record JobDto(
         LocalDate postedDate,
         String sourceUrl,
         int matchScore,
+        int confidenceScore,
         String matchLevel,
         List<String> skills
 ) {

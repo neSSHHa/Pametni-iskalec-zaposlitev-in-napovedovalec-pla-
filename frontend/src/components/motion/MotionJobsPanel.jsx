@@ -78,7 +78,11 @@ export default function MotionJobsPanel({
               <p>{job.city}, {job.country} - {job.mode} - {job.level}</p>
             </div>
             <aside>
-              <strong>{mode === "cv" ? job.match : Math.min(job.match + 1, 99)}%</strong>
+              <strong>{mode === "idle" ? Math.min(job.match + 1, 99) : job.match}%</strong>
+              <small>compatibility</small>
+              {job.confidence !== null && job.confidence !== undefined ? (
+                <small>{job.confidence}% confidence</small>
+              ) : null}
               <span>{job.salary}</span>
             </aside>
             <footer>
@@ -159,7 +163,10 @@ function JobDetailsPage({ job, onClose }) {
           <span>{job.company}</span>
           <h2>{job.title}</h2>
           <div className="job-details-meta">
-            <b>{job.match}% match</b>
+            <b>{job.match}% compatibility</b>
+            {job.confidence !== null && job.confidence !== undefined ? (
+              <b>{job.confidence}% confidence</b>
+            ) : null}
             <b>{job.city}, {job.country}</b>
             <b>{job.mode}</b>
             <b>{job.level}</b>

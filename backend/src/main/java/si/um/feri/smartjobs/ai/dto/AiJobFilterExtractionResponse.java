@@ -39,12 +39,15 @@ public record AiJobFilterExtractionResponse(
     }
 
     public record LocationData(
-            String cityDistrict,
-            String city,
-            String region,
-            String country,
-            BigDecimal latitude,
-            BigDecimal longitude
-    ) {
-    }
+        String cityDistrict,
+        String city,
+        List<String> cities,
+        String region,
+        List<String> regions,
+        String country,
+        List<String> countries,
+        BigDecimal latitude,
+        BigDecimal longitude
+) {
+}
 }

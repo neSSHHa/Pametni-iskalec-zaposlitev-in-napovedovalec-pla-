@@ -1,6 +1,21 @@
 package si.um.feri.smartjobs.job.service;
 
+import java.math.BigDecimal;
+import java.text.Normalizer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
 import si.um.feri.smartjobs.job.dto.JobDto;
 import si.um.feri.smartjobs.job.dto.JobFilterRequest;
 import si.um.feri.smartjobs.job.dto.JobSearchResponse;
@@ -14,44 +29,32 @@ import si.um.feri.smartjobs.skillRelation.repository.SkillRelationRepository;
 import si.um.feri.smartjobs.workTypeJob.entity.WorkTypeJob;
 import si.um.feri.smartjobs.workTypeJob.repository.WorkTypeJobRepository;
 
-import java.math.BigDecimal;
-import java.text.Normalizer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-
 @Service
 public class JobService {
     private static final double EXPERIENCE_TOLERANCE = 0.75;
     private static final double DIRECT_SKILL_MATCH = 1.0;
-    private static final double TITLE_WEIGHT = 3.0;
-    private static final double SKILL_WEIGHT = 4.0;
-    private static final double LOCATION_WEIGHT = 1.4;
-    private static final double WORK_TYPE_WEIGHT = 1.5;
-    private static final double EXPERIENCE_WEIGHT = 1.5;
-    private static final double EDUCATION_WEIGHT = 1.2;
+
+    // Skupaj 100 tock. Ce job nima podatka, se njegova teza ne steje v availablePoints.
+    private static final double SKILL_WEIGHT = 40.0;
+    private static final double TITLE_WEIGHT = 20.0;
+    private static final double EXPERIENCE_WEIGHT = 15.0;
+    private static final double LOCATION_WEIGHT = 10.0;
+    private static final double WORK_TYPE_WEIGHT = 7.0;
+    private static final double EDUCATION_WEIGHT = 5.0;
+    private static final double SALARY_WEIGHT = 3.0;
+
     public static final int DEFAULT_PAGE_SIZE = 50;
     public static final int MAX_PAGE_SIZE = 200;
     public static final int DEFAULT_MATCH_LIMIT = 200;
-    public static final int DEFAULT_MIN_MATCH_SCORE = 50;
+    public static final int DEFAULT_MIN_MATCH_SCORE = 30;
+
     private static final Set<String> STOP_WORDS = Set.of(
             "a", "an", "and", "or", "the", "for", "with", "of", "to", "in", "on", "at", "as",
             "i", "am", "me", "my", "job", "jobs", "role", "roles", "position", "work",
             "posao", "rad", "radim", "trazim", "zelim", "hoce", "hocu", "za", "sa", "u",
             "delovno", "mesto", "delo", "iscem", "sem"
     );
+
     private static final Map<String, List<String>> TERM_ALIASES = Map.ofEntries(
             Map.entry("frontend", List.of("front end", "front-end", "ui developer", "react", "angular", "vue", "javascript", "typescript")),
             Map.entry("front end", List.of("frontend", "front-end", "ui developer", "react", "angular", "vue", "javascript", "typescript")),
@@ -152,19 +155,27 @@ public class JobService {
                 .map(job -> new ScoredJob(job, calculateMatchScore(job, request, skillRelations, lookup)))
                 .filter(scoredJob -> !hasCriteria || scoredJob.score().comparedFields() == 0
                         || scoredJob.score().matchedFields() > 0)
-                .filter(scoredJob -> scoredJob.score().percentage() >= minScore)
-                .sorted(Comparator.comparingInt((ScoredJob scoredJob) -> scoredJob.score().percentage()).reversed())
+                .filter(scoredJob -> scoredJob.score().matchPercentage() >= minScore)
+                .sorted(Comparator.comparingInt((ScoredJob scoredJob) -> scoredJob.score().matchPercentage()).reversed())
                 .toList();
 
         int safeLimit = Math.max(1, limit);
         List<JobDto> page = scoredJobs.stream()
                 .limit(safeLimit)
-                .map(scoredJob -> toDto(scoredJob.job(), scoredJob.score().percentage(), lookup))
+                .map(scoredJob -> toDto(
+                        scoredJob.job(),
+                        scoredJob.score().matchPercentage(),
+                        scoredJob.score().confidencePercentage(),
+                        lookup
+                ))
                 .toList();
 
         Integer averageMatch = scoredJobs.isEmpty()
                 ? null
-                : (int) Math.round(scoredJobs.stream().mapToInt(scoredJob -> scoredJob.score().percentage()).average().orElse(0.0));
+                : (int) Math.round(scoredJobs.stream()
+                        .mapToInt(scoredJob -> scoredJob.score().matchPercentage())
+                        .average()
+                        .orElse(0.0));
 
         return new JobSearchResponse(
                 page,
@@ -178,14 +189,14 @@ public class JobService {
     }
 
     private JobDto toDto(Job job) {
-        return toDto(job, 100, buildLookup(List.of(job)));
+        return toDto(job, 100, 0, buildLookup(List.of(job)));
     }
 
     private JobDto toDto(Job job, BatchLookup lookup) {
-        return toDto(job, 100, lookup);
+        return toDto(job, 100, 0, lookup);
     }
 
-    private JobDto toDto(Job job, int matchScore, BatchLookup lookup) {
+    private JobDto toDto(Job job, int matchScore, int confidenceScore, BatchLookup lookup) {
         List<String> skills = lookup.skillsByJobId().getOrDefault(job.getId(), List.of()).stream()
                 .map(jobSkill -> jobSkill.getSkill().getName())
                 .toList();
@@ -216,6 +227,7 @@ public class JobService {
                 job.getDatePosted(),
                 job.getSourceWebsite(),
                 matchScore,
+                confidenceScore,
                 toleranceLevel(matchScore),
                 skills
         );
@@ -223,93 +235,169 @@ public class JobService {
 
     private MatchScore calculateMatchScore(Job job, JobFilterRequest request, List<SkillRelation> skillRelations, BatchLookup lookup) {
         MatchScore score = new MatchScore();
-        JobFilterRequest.JobCriteria jobCriteria = request.job();
-        JobFilterRequest.LocationCriteria locationCriteria = request.location();
+        JobFilterRequest.JobCriteria userCriteria = request.job();
+        JobFilterRequest.LocationCriteria userLocation = request.location();
 
-        if (jobCriteria != null) {
-            score.addText(job.getCompanyName(), jobCriteria.companyname());
-            score.addText(job.getJobName(), jobCriteria.jobname(), TITLE_WEIGHT);
-            score.addText(job.getDescription(), jobCriteria.description(), 0.7);
-            score.addText(job.getSourceWebsite(), jobCriteria.sourceWebsite());
-            score.addText(job.getExperienceLevel() == null ? null : job.getExperienceLevel().getName(),
-                    jobCriteria.experienceLevelName(), EXPERIENCE_WEIGHT);
-            score.addStrictTextOrId(
+        // Job je osnova. Ce job nima tega podatka, se kriterij ne racuna.
+        if (userCriteria != null) {
+            score.addJobTextRequirement(job.getJobName(), userCriteria.jobname(), TITLE_WEIGHT);
+            score.addJobExperienceRequirement(job.getRequiredExperience(), userCriteria.requiredExperience(), EXPERIENCE_WEIGHT);
+
+            score.addJobEducationRequirement(
                     job.getEducationLevel() == null ? null : job.getEducationLevel().getId(),
                     job.getEducationLevel() == null ? null : job.getEducationLevel().getName(),
-                    jobCriteria.educationLevel(),
+                    userCriteria.educationLevel(),
                     EDUCATION_WEIGHT
             );
-            score.addExact(job.getDatePosted(), jobCriteria.datePosted());
-            score.addSalaryRange(job.getMinSalary(), job.getMaxSalary(), jobCriteria.minSalary(), jobCriteria.maxSalary());
-            score.addSalaryRange(job.getPredictedMinSalary(), job.getPredictedMaxSalary(),
-                    jobCriteria.predictedMinSalary(), jobCriteria.predictedMaxSalary());
-            score.addExperience(job.getRequiredExperience(), jobCriteria.requiredExperience(), EXPERIENCE_WEIGHT);
-        }
 
-        if (locationCriteria != null && !isRemote(job, lookup)) {
-            Location location = job.getLocation();
-            score.addText(location == null ? null : location.getCityDistrict(), locationCriteria.cityDistrict(), LOCATION_WEIGHT);
-            score.addText(location == null ? null : location.getCity(), locationCriteria.city(), LOCATION_WEIGHT);
-            score.addText(location == null ? null : location.getRegion(), locationCriteria.region(), LOCATION_WEIGHT);
-            score.addText(location == null ? null : location.getCountry(), locationCriteria.country(), LOCATION_WEIGHT);
-            score.addExact(location == null ? null : location.getLatitude(), locationCriteria.latitude());
-            score.addExact(location == null ? null : location.getLongitude(), locationCriteria.longitude());
+            BigDecimal userMinSalary = firstNonNull(userCriteria.minSalary(), userCriteria.predictedMinSalary());
+            BigDecimal userMaxSalary = firstNonNull(userCriteria.maxSalary(), userCriteria.predictedMaxSalary());
+            BigDecimal jobMinSalary = firstNonNull(job.getMinSalary(), job.getPredictedMinSalary());
+            BigDecimal jobMaxSalary = firstNonNull(job.getMaxSalary(), job.getPredictedMaxSalary());
+            score.addJobSalaryRequirement(jobMinSalary, jobMaxSalary, userMinSalary, userMaxSalary, SALARY_WEIGHT);
+        } else {
+            score.addJobTextRequirement(job.getJobName(), null, TITLE_WEIGHT);
+            score.addJobExperienceRequirement(job.getRequiredExperience(), null, EXPERIENCE_WEIGHT);
+
+            score.addJobEducationRequirement(
+                    job.getEducationLevel() == null ? null : job.getEducationLevel().getId(),
+                    job.getEducationLevel() == null ? null : job.getEducationLevel().getName(),
+                    null,
+                    EDUCATION_WEIGHT
+            );
+
+            BigDecimal jobMinSalary = firstNonNull(job.getMinSalary(), job.getPredictedMinSalary());
+            BigDecimal jobMaxSalary = firstNonNull(job.getMaxSalary(), job.getPredictedMaxSalary());
+            score.addJobSalaryRequirement(jobMinSalary, jobMaxSalary, null, null, SALARY_WEIGHT);
         }
 
         addSkillScore(score, job, request.skills(), skillRelations, lookup);
         addWorkTypeScore(score, job, request.workTypes(), lookup);
 
+        if (!isRemote(job, lookup)) {
+            addLocationScore(score, job.getLocation(), userLocation);
+        }
+
         return score;
     }
 
-    private void addSkillScore(MatchScore score, Job job, List<String> requestedSkills, List<SkillRelation> skillRelations, BatchLookup lookup) {
-        if (isEmpty(requestedSkills)) {
+    private void addLocationScore(MatchScore score, Location jobLocation, JobFilterRequest.LocationCriteria userLocation) {
+        if (jobLocation == null) {
             return;
         }
 
-        List<String> jobSkillValues = lookup.skillsByJobId().getOrDefault(job.getId(), List.of()).stream()
-                .flatMap(jobSkill -> List.of(jobSkill.getSkill().getId(), jobSkill.getSkill().getName()).stream())
-                .map(this::normalize)
-                .toList();
+        List<Double> weights = new ArrayList<>();
 
-        List<Double> weights = requestedSkills.stream()
-                .filter(this::hasText)
-                .map(this::normalize)
-                .map(requestedSkill -> skillMatchWeight(requestedSkill, jobSkillValues, skillRelations))
-                .toList();
+        addJobTextWeight(weights, jobLocation.getCityDistrict(), userLocation == null ? null : userLocation.cityDistrict());
+        addJobAnyTextWeight(weights, jobLocation.getCity(), userLocation == null ? null : userLocation.city(), userLocation == null ? null : userLocation.cities());
+        addJobAnyTextWeight(weights, jobLocation.getRegion(), userLocation == null ? null : userLocation.region(), userLocation == null ? null : userLocation.regions());
+        addJobAnyTextWeight(weights, jobLocation.getCountry(), userLocation == null ? null : userLocation.country(), userLocation == null ? null : userLocation.countries());
+        addJobExactWeight(weights, jobLocation.getLatitude(), userLocation == null ? null : userLocation.latitude());
+        addJobExactWeight(weights, jobLocation.getLongitude(), userLocation == null ? null : userLocation.longitude());
 
         if (weights.isEmpty()) {
             return;
         }
 
         double average = weights.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
-        double best = weights.stream().mapToDouble(Double::doubleValue).max().orElse(0.0);
-        score.addWeighted(SKILL_WEIGHT, (average * 0.75) + (best * 0.25));
+        score.addWeighted(LOCATION_WEIGHT, average);
     }
 
-    private double skillMatchWeight(String requestedSkill, List<String> jobSkillValues, List<SkillRelation> relations) {
-        if (jobSkillValues.contains(requestedSkill)) {
+    private void addJobTextWeight(List<Double> weights, String jobValue, String userValue) {
+        if (!hasText(jobValue)) {
+            return;
+        }
+
+        weights.add(hasText(userValue) ? textMatchWeight(userValue, jobValue) : 0.0);
+    }
+
+    private void addJobAnyTextWeight(List<Double> weights, String jobValue, String singleUserValue, List<String> userValues) {
+        if (!hasText(jobValue)) {
+            return;
+        }
+
+        List<String> values = new ArrayList<>();
+
+        if (hasText(singleUserValue)) {
+            values.add(singleUserValue);
+        }
+
+        if (userValues != null) {
+            userValues.stream()
+                    .filter(this::hasText)
+                    .forEach(values::add);
+        }
+
+        if (values.isEmpty()) {
+            weights.add(0.0);
+            return;
+        }
+
+        double best = values.stream()
+                .mapToDouble(userValue -> textMatchWeight(userValue, jobValue))
+                .max()
+                .orElse(0.0);
+
+        weights.add(best);
+    }
+
+    private void addJobExactWeight(List<Double> weights, Object jobValue, Object userValue) {
+        if (jobValue == null) {
+            return;
+        }
+
+        weights.add(userValue != null && jobValue.equals(userValue) ? 1.0 : 0.0);
+    }
+
+    private void addSkillScore(MatchScore score, Job job, List<String> userSkills, List<SkillRelation> skillRelations, BatchLookup lookup) {
+        List<String> jobSkillValues = lookup.skillsByJobId().getOrDefault(job.getId(), List.of()).stream()
+                .flatMap(jobSkill -> List.of(jobSkill.getSkill().getId(), jobSkill.getSkill().getName()).stream())
+                .map(this::normalize)
+                .toList();
+
+        if (jobSkillValues.isEmpty()) {
+            return;
+        }
+
+        List<String> userSkillValues = userSkills == null
+                ? List.of()
+                : userSkills.stream()
+                        .filter(this::hasText)
+                        .map(this::normalize)
+                        .toList();
+
+        // Job skills so zahteve. Extra user skills ne znizajo rezultata.
+        List<Double> weights = jobSkillValues.stream()
+                .map(jobSkill -> skillMatchWeight(jobSkill, userSkillValues, skillRelations))
+                .toList();
+
+        double average = weights.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
+        score.addWeighted(SKILL_WEIGHT, average);
+    }
+
+    private double skillMatchWeight(String jobSkill, List<String> userSkillValues, List<SkillRelation> relations) {
+        if (userSkillValues.contains(jobSkill)) {
             return DIRECT_SKILL_MATCH;
         }
 
         return relations.stream()
-                .mapToDouble(relation -> relationMatchWeight(requestedSkill, jobSkillValues, relation))
+                .mapToDouble(relation -> relationMatchWeight(jobSkill, userSkillValues, relation))
                 .max()
                 .orElse(0.0);
     }
 
-    private double relationMatchWeight(String requestedSkill, List<String> jobSkillValues, SkillRelation relation) {
+    private double relationMatchWeight(String jobSkill, List<String> userSkillValues, SkillRelation relation) {
         String sourceId = normalize(relation.getSourceSkill().getId());
         String sourceName = normalize(relation.getSourceSkill().getName());
         String targetId = normalize(relation.getTargetSkill().getId());
         String targetName = normalize(relation.getTargetSkill().getName());
 
-        boolean requestedIsSource = requestedSkill.equals(sourceId) || requestedSkill.equals(sourceName);
-        boolean requestedIsTarget = requestedSkill.equals(targetId) || requestedSkill.equals(targetName);
-        boolean jobHasSource = jobSkillValues.contains(sourceId) || jobSkillValues.contains(sourceName);
-        boolean jobHasTarget = jobSkillValues.contains(targetId) || jobSkillValues.contains(targetName);
+        boolean jobIsSource = jobSkill.equals(sourceId) || jobSkill.equals(sourceName);
+        boolean jobIsTarget = jobSkill.equals(targetId) || jobSkill.equals(targetName);
+        boolean userHasSource = userSkillValues.contains(sourceId) || userSkillValues.contains(sourceName);
+        boolean userHasTarget = userSkillValues.contains(targetId) || userSkillValues.contains(targetName);
 
-        if ((requestedIsSource && jobHasTarget) || (requestedIsTarget && jobHasSource)) {
+        if ((jobIsSource && userHasTarget) || (jobIsTarget && userHasSource)) {
             return relationWeight(relation.getRelationshipType());
         }
 
@@ -327,27 +415,35 @@ public class JobService {
         };
     }
 
-    private void addWorkTypeScore(MatchScore score, Job job, List<String> requestedWorkTypes, BatchLookup lookup) {
-        if (isEmpty(requestedWorkTypes)) {
-            return;
-        }
-
+    private void addWorkTypeScore(MatchScore score, Job job, List<String> userWorkTypes, BatchLookup lookup) {
         List<String> jobWorkTypes = jobWorkTypes(job, lookup);
 
-        List<Double> weights = requestedWorkTypes.stream()
-                .filter(this::hasText)
-                .map(this::normalize)
-                .map(requestedWorkType -> jobWorkTypes.stream()
-                        .mapToDouble(jobWorkType -> textMatchWeight(jobWorkType, requestedWorkType))
-                        .max()
-                        .orElse(0.0))
-                .toList();
-
-        if (weights.isEmpty()) {
+        if (jobWorkTypes.isEmpty()) {
             return;
         }
 
-        score.addWeighted(WORK_TYPE_WEIGHT, weights.stream().mapToDouble(Double::doubleValue).max().orElse(0.0));
+        List<String> userValues = userWorkTypes == null
+                ? List.of()
+                : userWorkTypes.stream()
+                        .filter(this::hasText)
+                        .map(this::normalize)
+                        .toList();
+
+        if (userValues.isEmpty()) {
+            score.addWeighted(WORK_TYPE_WEIGHT, 0.0);
+            return;
+        }
+
+        // Ce job zahteva vec work type vrednosti, kandidat dobi povprecje po zahtevah joba.
+        double average = jobWorkTypes.stream()
+                .mapToDouble(jobWorkType -> userValues.stream()
+                        .mapToDouble(userWorkType -> textMatchWeight(userWorkType, jobWorkType))
+                        .max()
+                        .orElse(0.0))
+                .average()
+                .orElse(0.0);
+
+        score.addWeighted(WORK_TYPE_WEIGHT, average);
     }
 
     private boolean hasActiveCriteria(JobFilterRequest request) {
@@ -358,16 +454,12 @@ public class JobService {
     }
 
     private boolean hasActiveJobCriteria(JobFilterRequest.JobCriteria criteria) {
-        return criteria != null && (hasText(criteria.companyname())
-                || hasText(criteria.jobname())
-                || hasText(criteria.description())
-                || hasText(criteria.sourceWebsite())
+        return criteria != null && (hasText(criteria.jobname())
                 || hasText(criteria.experienceLevelName())
                 || hasText(criteria.educationLevel())
                 || criteria.requiredExperience() != null
                 || criteria.predictedMinSalary() != null
                 || criteria.predictedMaxSalary() != null
-                || criteria.datePosted() != null
                 || criteria.minSalary() != null
                 || criteria.maxSalary() != null);
     }
@@ -375,8 +467,11 @@ public class JobService {
     private boolean hasActiveLocationCriteria(JobFilterRequest.LocationCriteria criteria) {
         return criteria != null && (hasText(criteria.cityDistrict())
                 || hasText(criteria.city())
+                || !isEmpty(criteria.cities())
                 || hasText(criteria.region())
+                || !isEmpty(criteria.regions())
                 || hasText(criteria.country())
+                || !isEmpty(criteria.countries())
                 || criteria.latitude() != null
                 || criteria.longitude() != null);
     }
@@ -409,6 +504,10 @@ public class JobService {
         return new BatchLookup(skillsByJobId, workTypesByJobId);
     }
 
+    private BigDecimal firstNonNull(BigDecimal first, BigDecimal second) {
+        return first != null ? first : second;
+    }
+
     private int safeSize(int size) {
         if (size <= 0) {
             return DEFAULT_PAGE_SIZE;
@@ -434,11 +533,11 @@ public class JobService {
 
         return withoutDiacritics
                 .toLowerCase(Locale.ROOT)
-                .replace("č", "c")
-                .replace("ć", "c")
-                .replace("š", "s")
-                .replace("ž", "z")
-                .replace("đ", "dj")
+                .replace("Ãƒâ€žÃ‚Â", "c")
+                .replace("Ãƒâ€žÃ¢â‚¬Â¡", "c")
+                .replace("Ãƒâ€¦Ã‚Â¡", "s")
+                .replace("Ãƒâ€¦Ã‚Â¾", "z")
+                .replace("Ãƒâ€žÃ¢â‚¬Ëœ", "dj")
                 .replaceAll("[^a-z0-9+#.]+", " ")
                 .replaceAll("\\s+", " ")
                 .trim();
@@ -544,74 +643,66 @@ public class JobService {
         private double matchedFields;
         private double comparedFields;
 
-        void add(boolean matched) {
-            add(matched ? 1.0 : 0.0);
-        }
-
-        void add(double matchWeight) {
-            addWeighted(1.0, matchWeight);
-        }
-
         void addWeighted(double fieldWeight, double matchWeight) {
             comparedFields += fieldWeight;
             matchedFields += fieldWeight * Math.max(0.0, Math.min(1.0, matchWeight));
         }
 
-        void addText(String actual, String expected) {
-            addText(actual, expected, 1.0);
-        }
-
-        void addText(String actual, String expected, double fieldWeight) {
-            if (!hasText(expected) || !hasText(actual)) {
-                return;
-            }
-            addWeighted(fieldWeight, textMatchWeight(actual, expected));
-        }
-
-        void addStrictTextOrId(String actualId, String actualName, String expected) {
-            addStrictTextOrId(actualId, actualName, expected, 1.0);
-        }
-
-        void addStrictTextOrId(String actualId, String actualName, String expected, double fieldWeight) {
-            if (!hasText(expected) || (!hasText(actualId) && !hasText(actualName))) {
+        void addJobTextRequirement(String jobValue, String userValue, double fieldWeight) {
+            if (!hasText(jobValue)) {
                 return;
             }
 
-            String normalizedExpected = normalize(expected);
-            boolean idMatches = hasText(actualId) && normalize(actualId).equals(normalizedExpected);
-            double nameWeight = hasText(actualName) ? textMatchWeight(actualName, expected) : 0.0;
+            addWeighted(fieldWeight, hasText(userValue) ? textMatchWeight(userValue, jobValue) : 0.0);
+        }
+
+        void addJobEducationRequirement(String jobEducationId, String jobEducationName, String userEducation, double fieldWeight) {
+            if (!hasText(jobEducationId) && !hasText(jobEducationName)) {
+                return;
+            }
+
+            if (!hasText(userEducation)) {
+                addWeighted(fieldWeight, 0.0);
+                return;
+            }
+
+            String normalizedUserEducation = normalize(userEducation);
+            boolean idMatches = hasText(jobEducationId) && normalize(jobEducationId).equals(normalizedUserEducation);
+            double nameWeight = hasText(jobEducationName) ? textMatchWeight(userEducation, jobEducationName) : 0.0;
             addWeighted(fieldWeight, idMatches ? 1.0 : nameWeight);
         }
 
-        void addExact(Object actual, Object expected) {
-            if (expected == null || actual == null) {
+        void addJobSalaryRequirement(BigDecimal jobMin, BigDecimal jobMax, BigDecimal userMin, BigDecimal userMax, double fieldWeight) {
+            if (jobMin == null && jobMax == null) {
                 return;
             }
-            add(actual.equals(expected));
+
+            if (userMin == null && userMax == null) {
+                addWeighted(fieldWeight, 0.0);
+                return;
+            }
+
+            BigDecimal min = jobMin == null ? jobMax : jobMin;
+            BigDecimal max = jobMax == null ? jobMin : jobMax;
+
+            boolean minMatches = userMin == null || max.compareTo(userMin) >= 0;
+            boolean maxMatches = userMax == null || min.compareTo(userMax) <= 0;
+            addWeighted(fieldWeight, minMatches && maxMatches ? 1.0 : 0.0);
         }
 
-        void addSalaryRange(BigDecimal actualMin, BigDecimal actualMax, BigDecimal requestedMin, BigDecimal requestedMax) {
-            if (requestedMin == null && requestedMax == null) {
-                return;
-            }
-            if (actualMin == null && actualMax == null) {
+        void addJobExperienceRequirement(Integer jobRequiredExperience, Integer userExperience, double fieldWeight) {
+            if (jobRequiredExperience == null) {
                 return;
             }
 
-            BigDecimal min = actualMin == null ? actualMax : actualMin;
-            BigDecimal max = actualMax == null ? actualMin : actualMax;
-            boolean minMatches = requestedMin == null || max.compareTo(requestedMin) >= 0;
-            boolean maxMatches = requestedMax == null || min.compareTo(requestedMax) <= 0;
-            add(minMatches && maxMatches);
-        }
-
-        void addExperience(Integer requiredExperience, Integer userExperience, double fieldWeight) {
-            if (requiredExperience == null || userExperience == null) {
+            if (userExperience == null) {
+                addWeighted(fieldWeight, 0.0);
                 return;
             }
 
-            int requiredMonths = toMonths(requiredExperience);
+            int requiredMonths = toMonths(jobRequiredExperience);
             int userMonths = toMonths(userExperience);
+
             if (userMonths >= requiredMonths) {
                 addWeighted(fieldWeight, 1.0);
                 return;
@@ -633,11 +724,16 @@ public class JobService {
             return comparedFields;
         }
 
-        int percentage() {
+        int matchPercentage() {
             if (comparedFields == 0) {
                 return 100;
             }
+
             return (int) Math.round((matchedFields * 100.0) / comparedFields);
+        }
+
+        int confidencePercentage() {
+            return (int) Math.round(Math.max(0.0, Math.min(100.0, comparedFields)));
         }
 
         private int toMonths(Integer value) {

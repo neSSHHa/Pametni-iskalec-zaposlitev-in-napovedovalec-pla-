@@ -58,7 +58,12 @@ public class AiJobFilterService {
             Map.entry("Docker", List.of("docker")),
             Map.entry("Agile", List.of("agile")),
             Map.entry("Scrum", List.of("scrum")),
-            Map.entry("Unit Testing", List.of("unit tests", "unit testing", "xunit", "moq"))
+            Map.entry("Unit Testing", List.of("unit tests", "unit testing", "xunit", "moq")),
+            Map.entry("Patient Care", List.of("patient care", "care for patients", "patients")),
+            Map.entry("Nursing Care", List.of("nursing care", "nursing", "medicinska sestra", "zdravstvena nega")),
+            Map.entry("Intensive Care", List.of("intensive care", "icu", "intenzivna nega")),
+            Map.entry("Healthcare", List.of("healthcare", "health care", "zdravstvo")),
+            Map.entry("Diagnostics", List.of("diagnostics", "diagnostic", "diagnoza"))
     );
 
     private static final Map<String, LocationGuess> LOCATION_GUESSES = Map.ofEntries(
@@ -96,7 +101,6 @@ public class AiJobFilterService {
     public AiJobFilterDebugResponse extractDebug(String text) {
         AiJobFilterExtractionResponse aiResponse = extractFromAi(text);
         JobFilterRequest filterRequest = toJobFilterRequest(aiResponse);
-
         return new AiJobFilterDebugResponse(aiResponse, filterRequest);
     }
 
@@ -108,7 +112,6 @@ public class AiJobFilterService {
     public AiJobFilterDebugResponse extractCvDebug(String cvText) {
         AiJobFilterExtractionResponse aiResponse = extractCvFromAi(cvText);
         JobFilterRequest filterRequest = toJobFilterRequest(aiResponse);
-
         return new AiJobFilterDebugResponse(aiResponse, filterRequest);
     }
 
@@ -119,6 +122,7 @@ public class AiJobFilterService {
                 allowedValuesService.getAllowedEducationLevels(),
                 allowedValuesService.getAllowedWorkTypes()
         );
+
         return normalizeSearchResponse(aiResponse, text);
     }
 
@@ -185,7 +189,7 @@ public class AiJobFilterService {
 
         return new AiJobFilterExtractionResponse(
                 normalizedJob,
-                aiResponse.location(),
+                normalizeLocation(aiResponse.location(), normalizedText),
                 new ArrayList<>(workTypes),
                 new ArrayList<>(skills),
                 normalizeUnknownSkills(aiResponse.unknownSkills(), skills, allowedSkills, normalizedText)
@@ -222,12 +226,10 @@ public class AiJobFilterService {
             educationLevel = inferEducationLevel(normalizedCv);
         }
 
-        AiJobFilterExtractionResponse.LocationData location = normalizeLocation(aiResponse.location(), normalizedCv);
-
         AiJobFilterExtractionResponse.JobData normalizedJob = new AiJobFilterExtractionResponse.JobData(
                 null,
                 null,
-                job == null ? null : job.description(),
+                null,
                 requiredExperience,
                 null,
                 null,
@@ -241,7 +243,7 @@ public class AiJobFilterService {
 
         return new AiJobFilterExtractionResponse(
                 normalizedJob,
-                location,
+                normalizeLocation(aiResponse.location(), normalizedCv),
                 new ArrayList<>(workTypes),
                 new ArrayList<>(skills),
                 normalizeUnknownSkills(aiResponse.unknownSkills(), skills, allowedSkills, normalizedCv)
@@ -307,6 +309,7 @@ public class AiJobFilterService {
         if (normalizedText.contains(normalizedWorkType)) {
             return true;
         }
+
         return switch (normalizedWorkType) {
             case "remote" -> normalizedText.contains("work from home")
                     || normalizedText.contains("wfh")
@@ -314,7 +317,6 @@ public class AiJobFilterService {
                     || normalizedText.contains("od kuce");
             case "hybrid" -> normalizedText.contains("hibrid");
             case "on site", "onsite", "on site work" -> normalizedText.contains("on site")
-                    || normalizedText.contains("on site")
                     || normalizedText.contains("onsite")
                     || normalizedText.contains("office");
             default -> false;
@@ -345,31 +347,49 @@ public class AiJobFilterService {
 
     private AiJobFilterExtractionResponse.LocationData normalizeLocation(
             AiJobFilterExtractionResponse.LocationData aiLocation,
-            String normalizedCv
+            String normalizedText
     ) {
         String city = aiLocation == null ? null : aiLocation.city();
         String region = aiLocation == null ? null : aiLocation.region();
         String country = aiLocation == null ? null : aiLocation.country();
 
-        if (!hasText(city)) {
-            for (Map.Entry<String, LocationGuess> entry : LOCATION_GUESSES.entrySet()) {
-                if (normalizedCv.contains(entry.getKey())) {
-                    LocationGuess guess = entry.getValue();
-                    city = guess.city();
-                    region = guess.region();
-                    country = guess.country();
-                    break;
+        LinkedHashSet<String> cities = new LinkedHashSet<>(safeList(aiLocation == null ? null : aiLocation.cities()));
+        LinkedHashSet<String> regions = new LinkedHashSet<>(safeList(aiLocation == null ? null : aiLocation.regions()));
+        LinkedHashSet<String> countries = new LinkedHashSet<>(safeList(aiLocation == null ? null : aiLocation.countries()));
+
+        for (Map.Entry<String, LocationGuess> entry : LOCATION_GUESSES.entrySet()) {
+            if (normalizedText.contains(entry.getKey())) {
+                LocationGuess guess = entry.getValue();
+                cities.add(guess.city());
+                if (hasText(guess.region())) {
+                    regions.add(guess.region());
+                }
+                if (hasText(guess.country())) {
+                    countries.add(guess.country());
                 }
             }
         }
 
+        if (!hasText(city) && !cities.isEmpty()) {
+            city = cities.iterator().next();
+        }
+        if (!hasText(region) && !regions.isEmpty()) {
+            region = regions.iterator().next();
+        }
+        if (!hasText(country) && !countries.isEmpty()) {
+            country = countries.iterator().next();
+        }
+
         return new AiJobFilterExtractionResponse.LocationData(
-                null,
+                aiLocation == null ? null : aiLocation.cityDistrict(),
                 city,
+                new ArrayList<>(cities),
                 region,
+                new ArrayList<>(regions),
                 country,
-                null,
-                null
+                new ArrayList<>(countries),
+                aiLocation == null ? null : aiLocation.latitude(),
+                aiLocation == null ? null : aiLocation.longitude()
         );
     }
 
@@ -414,7 +434,7 @@ public class AiJobFilterService {
 
     private Map<String, String> allowedByName(List<String> values) {
         Map<String, String> result = new LinkedHashMap<>();
-        values.forEach(value -> result.put(normalize(value), value));
+        safeList(values).forEach(value -> result.put(normalize(value), value));
         return result;
     }
 
@@ -434,11 +454,11 @@ public class AiJobFilterService {
         return Normalizer.normalize(value, Normalizer.Form.NFD)
                 .replaceAll("\\p{M}", "")
                 .toLowerCase(Locale.ROOT)
-                .replace("Ä", "c")
-                .replace("Ä‡", "c")
-                .replace("Å¡", "s")
-                .replace("Å¾", "z")
-                .replace("Ä‘", "dj")
+                .replace("Ã„Â", "c")
+                .replace("Ã„â€¡", "c")
+                .replace("Ã…Â¡", "s")
+                .replace("Ã…Â¾", "z")
+                .replace("Ã„â€˜", "dj")
                 .replaceAll("[^a-z0-9+#.]+", " ")
                 .replaceAll("\\s+", " ")
                 .trim();
@@ -463,8 +483,11 @@ public class AiJobFilterService {
                 aiResponse.location() == null ? null : new JobFilterRequest.LocationCriteria(
                         aiResponse.location().cityDistrict(),
                         aiResponse.location().city(),
+                        aiResponse.location().cities(),
                         aiResponse.location().region(),
+                        aiResponse.location().regions(),
                         aiResponse.location().country(),
+                        aiResponse.location().countries(),
                         aiResponse.location().latitude(),
                         aiResponse.location().longitude()
                 ),

@@ -1,8 +1,7 @@
 /*
-pokliči lokalni AI model
-pošlji prompt + dovoljene vrednosti iz baze
+poklici AI model prek OpenRouter
+poslji prompt + dovoljene vrednosti iz baze
 vrni AiJobFilterExtractionResponse
-
 */
 
 package si.um.feri.smartjobs.ai.client;
@@ -79,6 +78,19 @@ public class AiServiceClient {
         return parseAiResponse(callOpenRouter(request, "CV filter"));
     }
 
+    public String rewriteCvToProfileText(String cvText) {
+        String prompt = buildCvRewritePrompt(cvText);
+
+        OpenRouterChatRequest request = new OpenRouterChatRequest(
+                aiProperties.model(),
+                List.of(new OpenRouterMessage("user", prompt)),
+                0,
+                null
+        );
+
+        return callOpenRouter(request, "CV rewrite").trim();
+    }
+
     private String buildPrompt(
             String text,
             List<String> allowedSkills,
@@ -103,31 +115,28 @@ public class AiServiceClient {
 
                 Rules:
                 - Use only skills from the allowed skills list.
-                - Put the desired profession/title/domain in job.jobname, for example "React Frontend Developer", "Java Backend Developer", "Data Analyst", "UX Designer".
+                - Put the desired profession/title/domain in job.jobname, for example "React Frontend Developer", "Java Backend Developer", "Data Analyst", "UX Designer", "Nurse", "Intensive Care Nurse".
                 - Keep job.description null unless the user explicitly asks for a keyword that is not a title, skill, company, salary, location, work type, education or experience.
                 - Do not add Customer Service, Communication, Teamwork or similar soft skills unless explicitly mentioned.
                 - If the user mentions a skill that cannot be mapped to allowed skills, put it in unknownSkills.
                 - Map synonyms to the closest allowed value when obvious.
                 - Map "frontend", "front-end", "UI", "React UI" to frontend-style titles and allowed frontend skills.
                 - Map "backend", "back-end", "server-side", "API" to backend-style titles and allowed backend skills.
+                - Map healthcare words such as "medicine", "nursing", "patient care", "intensive care", "vital signs", "medicinska sestra" to healthcare-style titles and allowed healthcare skills.
                 - Map local words such as "programer", "razvijalec", "inzenjer", "hibrid", "od kuce", "na daljavo" to their English meaning.
                 - Use null for values that are not mentioned.
                 - Do not invent salary, location, dates, company names, or experience.
-                - requiredExperience is a number. Use years if the user says years.
+                - requiredExperience MUST be an integer number only.
+                - Never return text like "3 years" or "2+ years".
                 - minSalary means the user's minimum acceptable salary.
                 - maxSalary means the user's maximum acceptable salary.
                 - Do not put coordinates unless the user explicitly writes exact numeric coordinates.
-                - If a country/city is mentioned, write its normal English name.
+                - If one city/country is mentioned, fill both the single field and the list field.
+                - If multiple cities/countries are mentioned, put them in cities/countries.
                 - If the user asks for remote jobs, put "Remote" in workTypes and do not force a city.
                 - If the user asks for hybrid jobs in a city/country, include both workTypes and location.
                 - The output JSON must have exactly this structure:
 
-- requiredExperience MUST be an integer number only.
-- Never return text like "3 years" or "2+ years".
-- Correct example:
-  "requiredExperience": 3
-- Incorrect example:
-  "requiredExperience": "3 years"
                 {
                   "job": {
                     "companyname": null,
@@ -146,8 +155,11 @@ public class AiServiceClient {
                   "location": {
                     "cityDistrict": null,
                     "city": null,
+                    "cities": [],
                     "region": null,
+                    "regions": [],
                     "country": null,
+                    "countries": [],
                     "latitude": null,
                     "longitude": null
                   },
@@ -196,14 +208,14 @@ public class AiServiceClient {
                 Rules:
                 - Use only exact values from the allowed skills list in skills.
                 - For CV extraction keep job.jobname null unless the CV explicitly contains a desired target job title.
-                - If the CV contains roles/professions such as Backend Developer or Full Stack Developer, put them in skills only if they exist in the allowed skills list.
-                - Map aliases to allowed values, for example REST APIs -> REST API, Entity Framework Core or EF Core -> Entity Framework, Azure basic -> Azure, Agile/Scrum -> Agile and Scrum.
+                - Map aliases to allowed values, for example REST APIs -> REST API, EF Core -> Entity Framework, Agile/Scrum -> Agile and Scrum.
                 - Do not return duplicate skills.
                 - Put total relevant years into job.requiredExperience as an integer number of years.
                 - Use experienceLevelName only when the level is clear: Intern, Entry, Junior, Mid, Senior, Lead, Manager.
                 - Use educationLevel only if it maps clearly to one allowed education level.
                 - Put workTypes only if the CV explicitly states remote, hybrid, on-site, field, student, full-time or part-time preference.
-                - Put current city/country in location when clearly present in the CV, for example Maribor -> city Maribor and country Slovenia.
+                - Put current city/country in location when clearly present.
+                - If one city/country is present, fill both the single field and the list field.
                 - Never put previous employers into companyname.
                 - Never invent salary, dates, sourceWebsite, latitude or longitude.
                 - Keep job.description null unless the CV contains an important role keyword that cannot fit into job.jobname or skills.
@@ -228,8 +240,11 @@ public class AiServiceClient {
                   "location": {
                     "cityDistrict": null,
                     "city": null,
+                    "cities": [],
                     "region": null,
+                    "regions": [],
                     "country": null,
+                    "countries": [],
                     "latitude": null,
                     "longitude": null
                   },
@@ -246,6 +261,54 @@ public class AiServiceClient {
                 String.join(", ", allowedWorkTypes),
                 cvText
         );
+    }
+
+    private String buildCvRewritePrompt(String cvText) {
+        return """
+                You MUST base the response ONLY on the provided CV text.
+
+                Do not reuse information from previous requests.
+                Do not assume the profession is software engineering.
+                The CV may belong to any profession.
+
+                Examples:
+                - healthcare
+                - law
+                - accounting
+                - education
+                - logistics
+                - engineering
+                - administration
+
+                Never change the profession/domain from the CV.
+                If the CV is medical, legal, finance, teaching or another field, preserve that field exactly.
+                Never invent technologies, programming languages or software skills unless explicitly written in the CV.
+
+                Convert this CV into one short first-person job search profile.
+
+                The output will be sent to another AI system that extracts job filters.
+
+                Rules:
+                - Always write in first person using "I".
+                - Never refer to the candidate in third person.
+                - Return only plain text.
+                - Write 1 short paragraph only.
+                - Maximum 3 sentences.
+                - Do not use markdown.
+                - Do not use sections.
+                - Do not include company names.
+                - Do not include school names.
+                - Do not include languages unless they are clearly job-relevant.
+                - Do not include salary unless salary expectation is clearly written.
+                - Do not include work type unless remote/hybrid/on-site preference is clearly written.
+                - Include candidate location if clearly present.
+                - Include total years of relevant experience if present.
+                - Include normalized education level if present.
+                - Include only important professional skills explicitly mentioned in the CV.
+
+                CV text:
+                %s
+                """.formatted(cvText);
     }
 
     private AiJobFilterExtractionResponse parseAiResponse(String content) {
@@ -287,6 +350,9 @@ public class AiServiceClient {
             nullBlankText(location, "city");
             nullBlankText(location, "region");
             nullBlankText(location, "country");
+            ensureArray(location, "cities");
+            ensureArray(location, "regions");
+            ensureArray(location, "countries");
             coerceDecimal(location, "latitude");
             coerceDecimal(location, "longitude");
         }
@@ -309,6 +375,7 @@ public class AiServiceClient {
             node.putArray(field);
             return;
         }
+
         if (!value.isArray()) {
             node.putArray(field);
         }
@@ -393,13 +460,48 @@ public class AiServiceClient {
         }
 
         int start = trimmed.indexOf('{');
-        int end = trimmed.lastIndexOf('}');
-
-        if (start >= 0 && end > start) {
-            return trimmed.substring(start, end + 1);
+        if (start < 0) {
+            return trimmed;
         }
 
-        return trimmed;
+        boolean inString = false;
+        boolean escaped = false;
+        int depth = 0;
+
+        for (int i = start; i < trimmed.length(); i++) {
+            char ch = trimmed.charAt(i);
+
+            if (escaped) {
+                escaped = false;
+                continue;
+            }
+
+            if (ch == '\\') {
+                escaped = true;
+                continue;
+            }
+
+            if (ch == '"') {
+                inString = !inString;
+                continue;
+            }
+
+            if (inString) {
+                continue;
+            }
+
+            if (ch == '{') {
+                depth++;
+            } else if (ch == '}') {
+                depth--;
+
+                if (depth == 0) {
+                    return trimmed.substring(start, i + 1);
+                }
+            }
+        }
+
+        return trimmed.substring(start);
     }
 
     private String callOpenRouter(OpenRouterChatRequest request, String purpose) {
@@ -414,6 +516,7 @@ public class AiServiceClient {
         if (aiProperties.openrouterReferer() != null && !aiProperties.openrouterReferer().isBlank()) {
             headers.set("HTTP-Referer", aiProperties.openrouterReferer());
         }
+
         if (aiProperties.openrouterTitle() != null && !aiProperties.openrouterTitle().isBlank()) {
             headers.set("X-Title", aiProperties.openrouterTitle());
         }
@@ -423,6 +526,14 @@ public class AiServiceClient {
                 new HttpEntity<>(request, headers),
                 OpenRouterChatResponse.class
         );
+
+        if (response != null && response.error() != null) {
+            throw new IllegalStateException(
+                    "OpenRouter error for " + purpose + ": "
+                            + response.error().message()
+                            + " (code: " + response.error().code() + ")"
+            );
+        }
 
         if (response == null || response.choices() == null || response.choices().isEmpty()) {
             throw new IllegalStateException("OpenRouter did not return a valid " + purpose + " response.");
@@ -452,7 +563,8 @@ public class AiServiceClient {
     }
 
     private record OpenRouterChatResponse(
-            List<OpenRouterChoice> choices
+            List<OpenRouterChoice> choices,
+            OpenRouterError error
     ) {
     }
 
@@ -461,73 +573,9 @@ public class AiServiceClient {
     ) {
     }
 
-    public String rewriteCvToProfileText(String cvText) {
-        String prompt = buildCvRewritePrompt(cvText);
-
-        OpenRouterChatRequest request = new OpenRouterChatRequest(
-                aiProperties.model(),
-                List.of(new OpenRouterMessage("user", prompt)),
-                0,
-                null
-        );
-
-        return callOpenRouter(request, "CV rewrite").trim();
-    }
-
-    private String buildCvRewritePrompt(String cvText) {
-        return """
-You MUST base the response ONLY on the provided CV text.
-
-Do not reuse information from previous requests.
-Do not assume the profession is software engineering.
-The CV may belong to any profession.
-
-Examples:
-- healthcare
-- law
-- accounting
-- education
-- logistics
-- engineering
-- administration
-
-Never change the profession/domain from the CV.
-
-
-If the CV is medical, legal, finance, teaching or another field, preserve that field exactly.
-
-Never invent technologies, programming languages or software skills unless explicitly written in the CV.
-
-Convert this CV into one short first-person job search profile.
-
-The output will be sent to another AI system that extracts job filters.
-
-- The profile should sound like a concise job-search summary, not a biography.
-- Prefer concise factual statements over descriptive storytelling.
-
-Rules:
-- Always write in first person using "I".
-- Never refer to the candidate in third person.
-- Return only plain text.
-- Write 1 short paragraph only.
-- Maximum 3 sentences.
-- Do not use markdown.
-- Do not use sections.
-- Do not include company names.
-- Do not include school names.
-- Do not include languages unless they are clearly job-relevant.
-- Do not include salary unless salary expectation is clearly written.
-- Do not include work type unless remote/hybrid/on-site preference is clearly written.
-- Include candidate location if clearly present.
-- Include total years of relevant experience if present.
-- Include normalized education level if present.
-- Include only important professional skills explicitly mentioned in the CV.
-- Always include candidate location if present in the CV.
-
-
-
-CV text:
-%s
-""".formatted(cvText);
+    private record OpenRouterError(
+            String message,
+            Object code
+    ) {
     }
 }

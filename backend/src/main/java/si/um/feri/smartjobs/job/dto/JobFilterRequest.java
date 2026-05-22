@@ -29,8 +29,11 @@ public record JobFilterRequest(
     public record LocationCriteria(
             String cityDistrict,
             String city,
+            List<String> cities,
             String region,
+            List<String> regions,
             String country,
+            List<String> countries,
             BigDecimal latitude,
             BigDecimal longitude
     ) {

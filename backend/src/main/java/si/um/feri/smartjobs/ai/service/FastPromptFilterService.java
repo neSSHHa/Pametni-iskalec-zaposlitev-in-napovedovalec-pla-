@@ -88,12 +88,15 @@ public class FastPromptFilterService {
                         null
                 ),
                 new JobFilterRequest.LocationCriteria(
-                        null,
-                        location.city(),
-                        null,
-                        location.country(),
-                        null,
-                        null
+                    null,
+                    location.city(),
+                    location.city() == null ? List.of() : List.of(location.city()),
+                    null,
+                    List.of(),
+                    location.country(),
+                    location.country() == null ? List.of() : List.of(location.country()),
+                    null,
+                    null
                 ),
                 workTypes,
                 skills
