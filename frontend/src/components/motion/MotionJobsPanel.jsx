@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const accentColors = ["#69f5ff", "#ff6fb7", "#ffd166", "#8ef0a7", "#a78bfa"];
+const accentColors = ["#2563eb", "#0f766e", "#475569", "#7c3aed", "#0369a1"];
 const PAGE_SIZE = 5;
 
 export default function MotionJobsPanel({
@@ -40,8 +40,8 @@ export default function MotionJobsPanel({
     <section className="motion-panel job-panel">
       <div className="panel-head">
         <div>
-          <span>{mode === "cv" ? "CV-ranked roles" : mode === "search" ? "Prompt-ranked roles" : "Vsi oglasi"}</span>
-          <h2>{resultCount} {mode === "idle" ? "aktivnih oglasov" : "ujemajocih vlog"}</h2>
+          <span>{mode === "cv" ? "CV rezultati" : mode === "search" ? "Prompt rezultati" : "Aktivni oglasi"}</span>
+          <h2>{resultCount} {mode === "idle" ? "oglasov" : "ujemanj"}</h2>
         </div>
         <b>{score}%</b>
       </div>

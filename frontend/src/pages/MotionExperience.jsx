@@ -13,6 +13,7 @@ import MotionStats from "../components/motion/MotionStats.jsx";
 
 const fallbackQuery = "";
 const JOB_PAGE_SIZE = 50;
+let initialDataCache = null;
 const countryCodes = {
   slovenia: "SI",
   slovenija: "SI",
@@ -265,31 +266,31 @@ function mapAnalyticsToStats(analytics) {
     {
       title: "Najbolj zazelene vescine",
       value: statValue(analytics?.topSkills),
-      detail: analytics?.topSkills?.slice(0, 4).map((item) => item.label).join(", ") || "Podatki se napolnijo iz backend analytics API-ja.",
+      detail: analytics?.topSkills?.slice(0, 4).map((item) => item.label).join("\n") || "Podatki se napolnijo iz backend analytics API-ja.",
       tone: "cyan",
     },
     {
       title: "Najbolj iskane vloge",
       value: statValue(analytics?.topRoles),
-      detail: analytics?.topRoles?.slice(0, 4).map((item) => `${item.label} (${item.count})`).join(", ") || "Razvijalci, dizajnerji, kuharji, terapevti in druge vloge.",
+      detail: analytics?.topRoles?.slice(0, 4).map((item) => `${item.label} (${item.count})`).join("\n") || "Razvijalci, dizajnerji, kuharji, terapevti in druge vloge.",
       tone: "pink",
     },
     {
       title: "Delovna mesta po mestih/regijah",
       value: statValue(analytics?.cityStats),
-      detail: analytics?.regionStats?.slice(0, 4).map((item) => `${item.label} (${item.count})`).join(", ") || "Pregled mest in regij iz lokacij v oglasih.",
+      detail: analytics?.regionStats?.slice(0, 4).map((item) => `${item.label} (${item.count})`).join("\n") || "Pregled mest in regij iz lokacij v oglasih.",
       tone: "lime",
     },
     {
       title: "Raven izkusenj",
       value: statValue(analytics?.experienceLevelStats),
-      detail: analytics?.experienceLevelStats?.slice(0, 4).map((item) => `${item.label} ${item.percentage}%`).join(", ") || "Distribucija oglasov po zahtevani senioriteti.",
+      detail: analytics?.experienceLevelStats?.slice(0, 4).map((item) => `${item.label} ${item.percentage}%`).join("\n") || "Distribucija oglasov po zahtevani senioriteti.",
       tone: "amber",
     },
     {
       title: "Tip dela",
       value: statValue(analytics?.workTypeStats),
-      detail: analytics?.workTypeStats?.slice(0, 4).map((item) => `${item.label} (${item.count})`).join(", ") || "Remote, hybrid in on-site signal iz baze.",
+      detail: analytics?.workTypeStats?.slice(0, 4).map((item) => `${item.label} (${item.count})`).join("\n") || "Remote, hybrid in on-site signal iz baze.",
       tone: "cyan",
     },
     {
@@ -302,7 +303,7 @@ function mapAnalyticsToStats(analytics) {
 }
 
 function mapRoleMix(analytics) {
-  const colors = ["#69f5ff", "#ff6fb7", "#ffd166", "#8ef0a7", "#a78bfa"];
+  const colors = ["#2563eb", "#0f766e", "#475569", "#7c3aed", "#0369a1"];
   const roles = analytics?.topRoles?.length ? analytics.topRoles : [];
   const max = Math.max(...roles.map((role) => role.count), 1);
   return roles.slice(0, 5).map((role, index) => [
@@ -377,33 +378,90 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
   const [activeFilter, setActiveFilter] = useState(null);
   const [analytics, setAnalytics] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
+  const [theme, setTheme] = useState(() => localStorage.getItem("smartjobs-theme") || "light");
 
   const activeMode = resultPage && initialMode !== "idle" ? initialMode : mode;
+  const isAnalyticsPage = activeMode === "analytics";
   const score = analytics?.summary?.averageMatch
     ?? (jobs.length ? Math.round(jobs.reduce((sum, job) => sum + job.match, 0) / jobs.length) : 0);
   const signals = useMemo(() => mapAnalyticsToSignals(analytics, jobsTotalCount || jobs.length), [analytics, jobs.length, jobsTotalCount]);
   const statCards = useMemo(() => mapAnalyticsToStats(analytics), [analytics]);
   const roleMix = useMemo(() => mapRoleMix(analytics), [analytics]);
   const { countries, cities } = useMemo(() => mapLocations(analytics), [analytics]);
-  const tickerItems = useMemo(() => cities.slice(0, 5).map((city) => `${city.name} ${city.jobs}`), [cities]);
+
+  const toggleTheme = () => {
+    setTheme((currentTheme) => {
+      const nextTheme = currentTheme === "light" ? "dark" : "light";
+      localStorage.setItem("smartjobs-theme", nextTheme);
+      return nextTheme;
+    });
+  };
+
+  useEffect(() => {
+    if (!loading) {
+      setLoadingProgress(0);
+      return undefined;
+    }
+
+    const startedAt = Date.now();
+    setLoadingProgress(3);
+    const interval = window.setInterval(() => {
+      const elapsedSeconds = (Date.now() - startedAt) / 1000;
+      let nextProgress;
+
+      if (elapsedSeconds <= 15) {
+        nextProgress = 3 + (elapsedSeconds / 15) * 32;
+      } else if (elapsedSeconds <= 45) {
+        nextProgress = 35 + ((elapsedSeconds - 15) / 30) * 35;
+      } else if (elapsedSeconds <= 90) {
+        nextProgress = 70 + ((elapsedSeconds - 45) / 45) * 18;
+      } else {
+        nextProgress = 88 + Math.min(8, ((elapsedSeconds - 90) / 180) * 8);
+      }
+
+      setLoadingProgress(Math.min(96, nextProgress));
+    }, 500);
+
+    return () => window.clearInterval(interval);
+  }, [loading]);
 
   useEffect(() => {
     let cancelled = false;
 
     async function loadInitialData() {
+      if (initialDataCache) {
+        setJobs(initialDataCache.jobs);
+        setJobsTotalCount(initialDataCache.totalCount);
+        setJobsPage(initialDataCache.page);
+        setJobsHasMore(initialDataCache.hasMore);
+        setActiveFilter(null);
+        setAnalytics(initialDataCache.analytics);
+        setStatus("");
+        return;
+      }
+
       try {
         setStatus("Nalaganje podatkov iz backend API-ja...");
         const [jobsData, analyticsData] = await Promise.all([getJobs({ page: 0, size: JOB_PAGE_SIZE }), getAnalyticsDashboard(50)]);
         if (cancelled) return;
         const mappedJobs = listFromApiResponse(jobsData).map(mapJob);
+        const cachedData = {
+          jobs: mappedJobs,
+          totalCount: totalFromApiResponse(jobsData, mappedJobs.length),
+          page: jobsData?.page ?? 0,
+          hasMore: Boolean(jobsData?.hasMore),
+          analytics: { ...analyticsData, isFiltered: false },
+        };
+        initialDataCache = cachedData;
         setJobs(mappedJobs);
-        setJobsTotalCount(totalFromApiResponse(jobsData, mappedJobs.length));
-        setJobsPage(jobsData?.page ?? 0);
-        setJobsHasMore(Boolean(jobsData?.hasMore));
+        setJobsTotalCount(cachedData.totalCount);
+        setJobsPage(cachedData.page);
+        setJobsHasMore(cachedData.hasMore);
         setActiveFilter(null);
-        setAnalytics({ ...analyticsData, isFiltered: false });
+        setAnalytics(cachedData.analytics);
         setStatus("");
       } catch (err) {
         if (cancelled) return;
@@ -454,6 +512,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
 
     try {
       const data = await searchJobsByPrompt(query, processingMode);
+      setLoadingProgress(100);
       const mappedJobs = listFromApiResponse(data).map(mapJob);
       setJobs(mappedJobs);
       const totalCount = totalFromApiResponse(data, mappedJobs.length);
@@ -483,6 +542,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
 
     try {
       const data = await uploadCv(file, processingMode);
+      setLoadingProgress(100);
       const mappedJobs = (data?.jobs || []).map(mapJob);
       setJobs(mappedJobs);
       const totalCount = totalFromApiResponse(data, mappedJobs.length);
@@ -501,61 +561,71 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
   };
 
   return (
-    <MotionShell mode={activeMode} score={score} tickerItems={tickerItems}>
-      {loading ? <MotionLoadingOverlay mode={activeMode} status={status} /> : null}
-      <MotionHero
-        mode={activeMode}
-        score={score}
-        query={query}
-        cvName={cvName}
-        resultPage={false}
-        loading={loading}
-        status={status}
-        error={error}
-        processingMode={processingMode}
-        onProcessingModeChange={setProcessingMode}
-        onQueryChange={setQuery}
-        onPromptSubmit={submitPrompt}
-        onCvUpload={handleCvUpload}
-      />
-      <MotionSignals signals={signals} />
-      <section className="motion-grid">
-        <MotionJobsPanel
+    <MotionShell mode={activeMode} score={score} theme={theme} onThemeToggle={toggleTheme}>
+      {loading ? <MotionLoadingOverlay mode={activeMode} status={status} progress={loadingProgress} /> : null}
+      {!isAnalyticsPage ? (
+        <MotionHero
           mode={activeMode}
           score={score}
-          jobs={jobs}
-          totalCount={jobsTotalCount || jobs.length}
-          filterRequest={activeFilter}
-          hasMore={activeMode === "idle" && jobsHasMore}
+          query={query}
+          cvName={cvName}
+          resultPage={activeMode === "cv" || activeMode === "search"}
           loading={loading}
+          status={status}
           error={error}
-          onLoadMore={loadMoreJobs}
+          processingMode={processingMode}
+          onProcessingModeChange={setProcessingMode}
+          onQueryChange={setQuery}
+          onPromptSubmit={submitPrompt}
+          onCvUpload={handleCvUpload}
         />
-        <MotionScorePanel mode={activeMode} score={score} roleMix={roleMix} />
-      </section>
-      <MotionMapSection countries={countries} cities={cities} analytics={analytics} />
-      <MotionCityEqualizer cities={cities} />
-      <MotionStats cards={statCards} />
+      ) : null}
+      {activeMode !== "idle" && !isAnalyticsPage ? (
+        <section className="motion-grid" id="results">
+          <MotionJobsPanel
+            mode={activeMode}
+            score={score}
+            jobs={jobs}
+            totalCount={jobsTotalCount || jobs.length}
+            filterRequest={activeFilter}
+            hasMore={false}
+            loading={loading}
+            error={error}
+            onLoadMore={loadMoreJobs}
+          />
+          <MotionScorePanel mode={activeMode} score={score} roleMix={roleMix} />
+        </section>
+      ) : null}
+      {isAnalyticsPage || activeMode !== "idle" ? (
+        <section className={`analytics-section ${isAnalyticsPage ? "analytics-page" : ""}`}>
+          <div className="section-heading" id="analytics">
+            <span>{isAnalyticsPage ? "Analitika trga" : "Analitika izbora"}</span>
+            <h2>{isAnalyticsPage ? "Pregled najbolj iskanih vlog, vescin in lokacij" : "Dodatni pogled na trenutne rezultate"}</h2>
+          </div>
+          <MotionSignals signals={signals} />
+          <MotionMapSection countries={countries} cities={cities} analytics={analytics} />
+          <MotionCityEqualizer cities={cities} />
+          <MotionStats cards={statCards} />
+        </section>
+      ) : null}
     </MotionShell>
   );
 }
 
-function MotionLoadingOverlay({ mode, status }) {
+function MotionLoadingOverlay({ mode, status, progress = 0 }) {
   const steps = mode === "cv"
     ? ["Berem CV", "Izvlacim vescine", "Racunam ujemanje", "Sestavljam analitiko"]
     : ["Berem prompt", "Prepoznavam namero", "Filtriram oglase", "Osvezujem analitiko"];
 
   return (
     <div className="motion-loading-overlay" role="status" aria-live="polite">
-      <div className="loading-orbit">
-        <span></span>
-        <span></span>
-        <span></span>
-        <b>{mode === "cv" ? "CV" : "AI"}</b>
-      </div>
       <div className="loading-copy">
         <strong>{status || "Pripravljam rezultate..."}</strong>
-        <p>To lahko traja nekaj trenutkov, ker lokalni AI sestavlja filter in rangira oglase.</p>
+        <p>AI pripravi filter, backend izracuna kompatibilnost in osvezi statistiko.</p>
+        <div className="loading-progress">
+          <i style={{ width: `${Math.max(0, Math.min(100, progress))}%` }}></i>
+        </div>
+        <strong className="loading-percent">{Math.round(progress)}%</strong>
         <div>
           {steps.map((step, index) => (
             <em key={step} style={{ animationDelay: `${index * 180}ms` }}>{step}</em>

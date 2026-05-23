@@ -1,14 +1,17 @@
 const navLinks = [
-  ["Home", "/motion"],
-  ["Prompt", "/motion-prompt"],
-  ["CV", "/motion-cv"],
+  ["Discover", "/motion"],
+  ["Analytics", "/analytics"],
 ];
 
-export default function MotionShell({ mode, score, tickerItems = [], children }) {
-  const modeLabel = mode === "cv" ? "CV pulse active" : mode === "search" ? "Prompt pulse active" : "Prototype idle";
+function navigate(event, href) {
+  event.preventDefault();
+  window.history.pushState({}, "", href);
+  window.dispatchEvent(new Event("jobradar:navigate"));
+}
 
+export default function MotionShell({ mode, score, theme, onThemeToggle, children }) {
   return (
-    <main className={`motion-shell mode-${mode}`}>
+    <main className={`motion-shell mode-${mode} theme-${theme}`}>
       <div className="motion-bg" aria-hidden="true">
         <span></span>
         <span></span>
@@ -16,33 +19,28 @@ export default function MotionShell({ mode, score, tickerItems = [], children })
       </div>
 
       <aside className="motion-rail">
-        <a className="motion-mark" href="/motion">
-          <b>J</b>
-          <span>JobPilot</span>
+        <a className="motion-mark" href="/motion" onClick={(event) => navigate(event, "/motion")}>
+          <b className="logo-glyph" aria-hidden="true">
+            <i></i>
+          </b>
+          <span><em>Job</em>Radar</span>
         </a>
         <nav aria-label="Motion pages">
           {navLinks.map(([label, href]) => (
-            <a href={href} key={label}>{label}</a>
+            <a href={href} key={label} onClick={(event) => navigate(event, href)}>{label}</a>
           ))}
         </nav>
+        <button className="theme-toggle" type="button" onClick={onThemeToggle}>
+          <span>{theme === "light" ? "Light" : "Dark"}</span>
+          <i aria-hidden="true"></i>
+        </button>
         <div className="rail-meter">
-          <span>Signal</span>
+          <span>Avg match</span>
           <strong>{score}%</strong>
         </div>
       </aside>
 
       <section className="motion-stage">
-        <header className="motion-topline">
-          <div>
-            <span>Motion Lab</span>
-            <strong>{modeLabel}</strong>
-          </div>
-          <div className="ticker">
-            {tickerItems.length ? tickerItems.map((item) => (
-              <span key={item}>{item}</span>
-            )) : <span>Backend data</span>}
-          </div>
-        </header>
         {children}
       </section>
     </main>

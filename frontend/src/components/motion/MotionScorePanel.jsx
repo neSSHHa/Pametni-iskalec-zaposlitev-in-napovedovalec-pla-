@@ -3,7 +3,7 @@ export default function MotionScorePanel({ mode, score, roleMix = [] }) {
 
   return (
     <aside className="motion-panel score-panel">
-      <div className="score-orbit">
+      <div className="score-orbit" style={{ "--score": `${Math.max(0, Math.min(100, Number(score) || 0))}%` }}>
         <span></span>
         <strong>{score}</strong>
         <small>{mode === "cv" ? "CV match" : "market fit"}</small>
