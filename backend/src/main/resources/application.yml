@@ -25,4 +25,4 @@ smartjobs:
     openrouter-api-key: ${OPENROUTER_API_KEY:}
     openrouter-referer: ${OPENROUTER_REFERER:http://localhost:3000}
     openrouter-title: ${OPENROUTER_TITLE:Smart Jobs Platform}
-    model: ${OPENROUTER_MODEL:nvidia/nemotron-3-super-120b-a12b:free}
+    model: ${OPENROUTER_MODEL:poolside/laguna-xs.2:free}

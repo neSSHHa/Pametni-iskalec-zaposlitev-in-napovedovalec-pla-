@@ -46,9 +46,10 @@ public class AiServiceClient {
             String text,
             List<String> allowedSkills,
             List<String> allowedEducationLevels,
+            List<String> allowedExperienceLevels,
             List<String> allowedWorkTypes
     ) {
-        String prompt = buildPrompt(text, allowedSkills, allowedEducationLevels, allowedWorkTypes);
+        String prompt = buildPrompt(text, "prompt", allowedSkills, allowedEducationLevels, allowedExperienceLevels, allowedWorkTypes);
 
         OpenRouterChatRequest request = new OpenRouterChatRequest(
                 aiProperties.model(),
@@ -64,9 +65,10 @@ public class AiServiceClient {
             String cvText,
             List<String> allowedSkills,
             List<String> allowedEducationLevels,
+            List<String> allowedExperienceLevels,
             List<String> allowedWorkTypes
     ) {
-        String prompt = buildCvFilterPrompt(cvText, allowedSkills, allowedEducationLevels, allowedWorkTypes);
+        String prompt = buildPrompt(cvText, "cv", allowedSkills, allowedEducationLevels, allowedExperienceLevels, allowedWorkTypes);
 
         OpenRouterChatRequest request = new OpenRouterChatRequest(
                 aiProperties.model(),
@@ -92,51 +94,56 @@ public class AiServiceClient {
     }
 
     private String buildPrompt(
-            String text,
+            String input,
+            String type,
             List<String> allowedSkills,
             List<String> allowedEducationLevels,
+            List<String> allowedExperienceLevels,
             List<String> allowedWorkTypes
     ) {
+        String typeRules = "cv".equals(type) ? cvRules() : promptRules();
+
         return """
-                You convert a user job-search request into a precise job filter JSON.
+                You extract a job-search filter from user input.
 
-                Return ONLY valid JSON. Do not explain. Do not use markdown.
-                The request can be written in Serbian, Croatian, Bosnian, Slovenian, English, German, or mixed language.
-                Translate the meaning internally to English before choosing values.
+                Input type: %s
+                Return ONLY strict JSON. No markdown. No explanation.
 
-                Allowed skills:
+                Critical rules:
+                - The app domain is unknown. It can be IT, healthcare, finance, logistics, education, construction, USA jobs, Europe jobs, anything.
+                - The controlled database values below are the source of truth for skills, workTypes, educationLevel and experienceLevelName.
+                - Use ONLY values from the allowed lists for skills, workTypes, educationLevel and experienceLevelName.
+                - job.jobname and location are free-text extraction fields: infer them from the input and normalize to English when clear.
+                - Translate city/country names to normal English names when clear, for example Wien -> Vienna, Beograd -> Belgrade.
+                - If a controlled value is not in the allowed list, do not put it in skills/workTypes/educationLevel/experienceLevelName.
+                - If the user clearly mentions an important skill/title that is not allowed, put it into unknownSkills.
+                - Extract skills exhaustively, not selectively.
+                - skills must contain every allowed skill that is directly mentioned or clearly implied by the text.
+                - Adding a soft skill such as Communication must never remove professional skills such as Nurse, Registered Nurse, Dental Nurse, Patient Care, etc.
+                - Do not return only one skill if multiple allowed skills are supported by the text.
+                - If a soft/general skill is mentioned and allowed, include it in addition to all specific professional skills supported by the text.
+                - Do not invent salary, company, dates, coordinates, location or experience.
+                - requiredExperience must be an integer number of years or null.
+                - If the text contains salary/plata/placa/zarada/pay such as "salary 5000 eur", "plata od 3500", "$70000", put that numeric amount into job.minSalary.
+                - If the text contains a salary range such as "5000-7000", put the lower number into minSalary and higher number into maxSalary.
+                - Never leave minSalary null when an explicit salary number is written.
+                - job.jobname should be concise, for example "Nurse", "Java Developer", "Accountant", "Warehouse Worker".
+                - If exactly one city/region/country is mentioned, fill both the single field and the matching list field.
+                - If multiple cities are mentioned, put all normalized English names into location.cities and put the first one into location.city.
+                - If multiple regions are mentioned, put all normalized English names into location.regions and put the first one into location.region.
+                - If multiple countries are mentioned, put all normalized English names into location.countries and put the first one into location.country.
+                - Never drop additional cities/regions/countries just because one single location field is already filled.
+
+                Type-specific rules:
                 %s
 
-                Allowed education levels:
-                %s
+                Controlled database values:
+                skills: %s
+                workTypes: %s
+                educationLevels: %s
+                experienceLevels: %s
 
-                Allowed work types:
-                %s
-
-                Rules:
-                - Use only skills from the allowed skills list.
-                - Put the desired profession/title/domain in job.jobname, for example "React Frontend Developer", "Java Backend Developer", "Data Analyst", "UX Designer", "Nurse", "Intensive Care Nurse".
-                - Keep job.description null unless the user explicitly asks for a keyword that is not a title, skill, company, salary, location, work type, education or experience.
-                - Do not add Customer Service, Communication, Teamwork or similar soft skills unless explicitly mentioned.
-                - If the user mentions a skill that cannot be mapped to allowed skills, put it in unknownSkills.
-                - Map synonyms to the closest allowed value when obvious.
-                - Map "frontend", "front-end", "UI", "React UI" to frontend-style titles and allowed frontend skills.
-                - Map "backend", "back-end", "server-side", "API" to backend-style titles and allowed backend skills.
-                - Map healthcare words such as "medicine", "nursing", "patient care", "intensive care", "vital signs", "medicinska sestra" to healthcare-style titles and allowed healthcare skills.
-                - Map local words such as "programer", "razvijalec", "inzenjer", "hibrid", "od kuce", "na daljavo" to their English meaning.
-                - Use null for values that are not mentioned.
-                - Do not invent salary, location, dates, company names, or experience.
-                - requiredExperience MUST be an integer number only.
-                - Never return text like "3 years" or "2+ years".
-                - minSalary means the user's minimum acceptable salary.
-                - maxSalary means the user's maximum acceptable salary.
-                - Do not put coordinates unless the user explicitly writes exact numeric coordinates.
-                - If one city/country is mentioned, fill both the single field and the list field.
-                - If multiple cities/countries are mentioned, put them in cities/countries.
-                - If the user asks for remote jobs, put "Remote" in workTypes and do not force a city.
-                - If the user asks for hybrid jobs in a city/country, include both workTypes and location.
-                - The output JSON must have exactly this structure:
-
+                Exact output shape:
                 {
                   "job": {
                     "companyname": null,
@@ -168,99 +175,46 @@ public class AiServiceClient {
                   "unknownSkills": []
                 }
 
-                User text:
+                Text:
                 %s
                 """.formatted(
-                String.join(", ", allowedSkills),
-                String.join(", ", allowedEducationLevels),
-                String.join(", ", allowedWorkTypes),
-                text
+                type,
+                typeRules,
+                jsonArray(allowedSkills),
+                jsonArray(allowedWorkTypes),
+                jsonArray(allowedEducationLevels),
+                jsonArray(allowedExperienceLevels),
+                input
         );
     }
 
-    private String buildCvFilterPrompt(
-            String cvText,
-            List<String> allowedSkills,
-            List<String> allowedEducationLevels,
-            List<String> allowedWorkTypes
-    ) {
+    private String promptRules() {
         return """
-                You extract a job-matching filter from a candidate CV.
+                - Interpret the text as a user's desired job search.
+                - Extract requested profession/role into job.jobname when clear.
+                - Extract requested location into location when clear.
+                - Extract requested work type, education, experience level, experience years and salary when clear.
+                - Do not treat the user's current/past employer as companyname unless they explicitly want jobs at that company.""";
+    }
 
-                Return ONLY valid JSON. Do not explain. Do not use markdown.
-                The CV can be written in Serbian, Croatian, Bosnian, Slovenian, English, German, or mixed language.
-                Translate the meaning internally to English before choosing values.
-
-                Allowed skills:
-                %s
-
-                Allowed education levels:
-                %s
-
-                Allowed work types:
-                %s
-
-                Goal:
-                - Build a filter that finds jobs suitable for this candidate.
-                - Preserve the real profession/domain from the CV.
-                - Do not assume the candidate is a software engineer unless the CV says so.
-
-                Rules:
-                - Use only exact values from the allowed skills list in skills.
-                - For CV extraction keep job.jobname null unless the CV explicitly contains a desired target job title.
-                - Map aliases to allowed values, for example REST APIs -> REST API, EF Core -> Entity Framework, Agile/Scrum -> Agile and Scrum.
-                - Do not return duplicate skills.
-                - Put total relevant years into job.requiredExperience as an integer number of years.
-                - Use experienceLevelName only when the level is clear: Intern, Entry, Junior, Mid, Senior, Lead, Manager.
-                - Use educationLevel only if it maps clearly to one allowed education level.
-                - Put workTypes only if the CV explicitly states remote, hybrid, on-site, field, student, full-time or part-time preference.
-                - Put current city/country in location when clearly present.
-                - If one city/country is present, fill both the single field and the list field.
-                - Never put previous employers into companyname.
-                - Never invent salary, dates, sourceWebsite, latitude or longitude.
-                - Keep job.description null unless the CV contains an important role keyword that cannot fit into job.jobname or skills.
-                - If a skill is important but cannot be mapped to allowed skills, put it in unknownSkills.
-                - The output JSON must have exactly this structure:
-
-                {
-                  "job": {
-                    "companyname": null,
-                    "jobname": null,
-                    "description": null,
-                    "requiredExperience": null,
-                    "predictedMinSalary": null,
-                    "predictedMaxSalary": null,
-                    "sourceWebsite": null,
-                    "datePosted": null,
-                    "minSalary": null,
-                    "maxSalary": null,
-                    "experienceLevelName": null,
-                    "educationLevel": null
-                  },
-                  "location": {
-                    "cityDistrict": null,
-                    "city": null,
-                    "cities": [],
-                    "region": null,
-                    "regions": [],
-                    "country": null,
-                    "countries": [],
-                    "latitude": null,
-                    "longitude": null
-                  },
-                  "workTypes": [],
-                  "skills": [],
-                  "unknownSkills": []
-                }
-
-                CV text:
-                %s
-                """.formatted(
-                String.join(", ", allowedSkills),
-                String.join(", ", allowedEducationLevels),
-                String.join(", ", allowedWorkTypes),
-                cvText
-        );
+    private String cvRules() {
+        return """
+                - Interpret the text as a candidate CV/resume/profile, not as a direct job ad.
+                - Build a filter for jobs suitable for the candidate.
+                - Never put previous employers, schools or project names into companyname.
+                - job.jobname should be the candidate's target role if explicitly stated; otherwise infer the broad suitable profession from the CV.
+                - skills must include all allowed skills supported by the candidate's experience, education, certifications, tools, responsibilities or stated strengths.
+                - requiredExperience should be total relevant professional experience in years when the CV supports it.
+                - If total years are not written directly, estimate requiredExperience from dated work/project/internship periods in the CV.
+                - Count relevant periods from start date to end date/present and merge overlapping periods.
+                - Convert total relevant duration to integer years using these strict thresholds: less than 6 months = 0; 6 to 17 months = 1; 18 to 29 months = 2; continue the same pattern.
+                - Understand month names and short forms across common CV languages, for example Jan, Feb, Apr, Dec, Januar, April, Dezember, mar, nov, avg, sep.
+                - If date ranges are present but ambiguous, prefer a conservative lower estimate. If experience cannot be inferred at all, use null.
+                - experienceLevelName should reflect the candidate level only if clear from the CV or years of experience.
+                - educationLevel should use an allowed value only when the CV clearly supports it.
+                - location should be the candidate's current/residence/preferred location when clear; do not use old employer locations unless they are clearly current.
+                - workTypes should be filled only if the CV states a preference or availability for remote/hybrid/on-site/full-time/part-time/etc.
+                - Salary fields should be filled only if the CV states salary expectation or desired pay.""";
     }
 
     private String buildCvRewritePrompt(String cvText) {
@@ -502,6 +456,14 @@ public class AiServiceClient {
         }
 
         return trimmed.substring(start);
+    }
+
+    private String jsonArray(List<String> values) {
+        try {
+            return objectMapper.writeValueAsString(values == null ? List.of() : values);
+        } catch (JsonProcessingException e) {
+            throw new IllegalStateException("Could not serialize allowed AI values.", e);
+        }
     }
 
     private String callOpenRouter(OpenRouterChatRequest request, String purpose) {

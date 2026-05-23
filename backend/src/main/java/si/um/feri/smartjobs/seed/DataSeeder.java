@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import si.um.feri.smartjobs.ai.service.AiAllowedValuesService;
+import si.um.feri.smartjobs.job.service.JobService;
 import si.um.feri.smartjobs.seed.educationLevel.EducationLevelSeed;
 import si.um.feri.smartjobs.seed.experienceLevel.ExperienceLevelSeed;
 import si.um.feri.smartjobs.seed.workType.WorkTypeSeed;
@@ -35,6 +36,7 @@ public class DataSeeder implements CommandLineRunner {
     private final UserSkillSeed userSkillSeed;
     private final SyntheticJobSeed sjs;
     private final AiAllowedValuesService aiAllowedValuesService;
+    private final JobService jobService;
 
     public DataSeeder(
             EducationLevelSeed educationLevelSeed,
@@ -50,7 +52,8 @@ public class DataSeeder implements CommandLineRunner {
             UserSeed userSeed,
             UserSkillSeed userSkillSeed,
             SyntheticJobSeed sjs,
-            AiAllowedValuesService aiAllowedValuesService) {
+            AiAllowedValuesService aiAllowedValuesService,
+            JobService jobService) {
         this.educationLevelSeed = educationLevelSeed;
         this.experienceLevelSeed = experienceLevelSeed;
         this.workTypeSeed = workTypeSeed;
@@ -65,6 +68,7 @@ public class DataSeeder implements CommandLineRunner {
         this.userSkillSeed = userSkillSeed;
         this.sjs = sjs;
         this.aiAllowedValuesService = aiAllowedValuesService;
+        this.jobService = jobService;
     }
 
     @Override
@@ -80,6 +84,7 @@ public class DataSeeder implements CommandLineRunner {
         skillRelationSeed.seed();
         sjs.seedReferenceData();
         aiAllowedValuesService.refresh();
+        jobService.refreshSkillRelationIndex();
 
         jobSeed.seed();
 
@@ -89,5 +94,6 @@ public class DataSeeder implements CommandLineRunner {
         workTypeJobSeed.seed();
         userSkillSeed.seed();
         sjs.seed();
+        jobService.refreshJobLookupIndex();
     }
 }

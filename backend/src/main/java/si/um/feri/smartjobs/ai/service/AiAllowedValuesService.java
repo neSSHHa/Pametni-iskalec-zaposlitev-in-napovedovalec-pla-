@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import jakarta.annotation.PostConstruct;
 import si.um.feri.smartjobs.educationLevel.entity.EducationLevel;
 import si.um.feri.smartjobs.educationLevel.repository.EducationLevelRepository;
+import si.um.feri.smartjobs.experienceLevel.entity.ExperienceLevel;
+import si.um.feri.smartjobs.experienceLevel.repository.ExperienceLevelRepository;
 import si.um.feri.smartjobs.skill.entity.Skill;
 import si.um.feri.smartjobs.skill.repository.SkillRepository;
 import si.um.feri.smartjobs.workType.entity.WorkType;
@@ -36,20 +38,24 @@ public class AiAllowedValuesService {
 
     private final SkillRepository skillRepository;
     private final EducationLevelRepository educationLevelRepository;
+    private final ExperienceLevelRepository experienceLevelRepository;
     private final WorkTypeRepository workTypeRepository;
 
     private List<String> allowedSkills = List.of();
     private List<String> allowedEducationLevels = List.of();
+    private List<String> allowedExperienceLevels = List.of();
     private List<String> allowedWorkTypes = List.of();
     private List<CachedSkill> cachedSkills = List.of();
 
     public AiAllowedValuesService(
             SkillRepository skillRepository,
             EducationLevelRepository educationLevelRepository,
+            ExperienceLevelRepository experienceLevelRepository,
             WorkTypeRepository workTypeRepository
     ) {
         this.skillRepository = skillRepository;
         this.educationLevelRepository = educationLevelRepository;
+        this.experienceLevelRepository = experienceLevelRepository;
         this.workTypeRepository = workTypeRepository;
     }
 
@@ -77,15 +83,21 @@ public class AiAllowedValuesService {
                 .sorted()
                 .toList();
 
+        allowedExperienceLevels = experienceLevelRepository.findAll().stream()
+                .map(ExperienceLevel::getName)
+                .sorted()
+                .toList();
+
         allowedWorkTypes = workTypeRepository.findAll().stream()
                 .map(WorkType::getName)
                 .sorted()
                 .toList();
 
         LOGGER.info(
-                "AI allowed values refreshed. Skills: {}, education levels: {}, work types: {}.",
+                "AI allowed values refreshed. Skills: {}, education levels: {}, experience levels: {}, work types: {}.",
                 allowedSkills.size(),
                 allowedEducationLevels.size(),
+                allowedExperienceLevels.size(),
                 allowedWorkTypes.size()
         );
     }
@@ -113,6 +125,10 @@ public class AiAllowedValuesService {
 
     public List<String> getAllowedEducationLevels() {
         return allowedEducationLevels;
+    }
+
+    public List<String> getAllowedExperienceLevels() {
+        return allowedExperienceLevels;
     }
 
     public List<String> getAllowedWorkTypes() {

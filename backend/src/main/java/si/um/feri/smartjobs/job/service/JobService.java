@@ -5,6 +5,7 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -12,8 +13,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import jakarta.annotation.PostConstruct;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import si.um.feri.smartjobs.job.dto.JobDto;
@@ -47,6 +51,8 @@ public class JobService {
     public static final int MAX_PAGE_SIZE = 200;
     public static final int DEFAULT_MATCH_LIMIT = 200;
     public static final int DEFAULT_MIN_MATCH_SCORE = 30;
+    private static final int FALLBACK_MIN_MATCH_SCORE = 2;
+    private static final int MIN_RESULTS_BEFORE_SCORE_FALLBACK = 50;
 
     private static final Set<String> STOP_WORDS = Set.of(
             "a", "an", "and", "or", "the", "for", "with", "of", "to", "in", "on", "at", "as",
@@ -79,6 +85,8 @@ public class JobService {
     private final JobSkillRepository jobSkillRepository;
     private final SkillRelationRepository skillRelationRepository;
     private final WorkTypeJobRepository workTypeJobRepository;
+    private volatile SkillRelationIndex skillRelationIndex = SkillRelationIndex.empty();
+    private volatile JobLookupIndex jobLookupIndex = JobLookupIndex.empty();
 
     public JobService(
             JobRepository jobRepository,
@@ -90,6 +98,29 @@ public class JobService {
         this.jobSkillRepository = jobSkillRepository;
         this.skillRelationRepository = skillRelationRepository;
         this.workTypeJobRepository = workTypeJobRepository;
+    }
+
+    @PostConstruct
+    public void refreshSkillRelationIndexOnStartup() {
+        refreshSkillRelationIndex();
+        refreshJobLookupIndex();
+    }
+
+    @Scheduled(cron = "0 10 3 * * MON", zone = "Europe/Ljubljana")
+    public void refreshSkillRelationIndexWeekly() {
+        refreshSkillRelationIndex();
+        refreshJobLookupIndex();
+    }
+
+    public void refreshSkillRelationIndex() {
+        skillRelationIndex = buildSkillRelationIndex(skillRelationRepository.findAll());
+    }
+
+    public void refreshJobLookupIndex() {
+        jobLookupIndex = buildJobLookupIndex(
+                jobSkillRepository.findAll(),
+                workTypeJobRepository.findAll()
+        );
     }
 
     public List<JobDto> findAll() {
@@ -147,17 +178,29 @@ public class JobService {
         }
 
         boolean hasCriteria = hasActiveCriteria(request);
-        List<SkillRelation> skillRelations = isEmpty(request.skills()) ? List.of() : skillRelationRepository.findAll();
-        List<Job> jobs = jobRepository.findAll();
+        SkillRelationIndex activeSkillRelationIndex = isEmpty(request.skills())
+                ? SkillRelationIndex.empty()
+                : skillRelationIndex;
+        List<Job> jobs = findCandidateJobs(request, activeSkillRelationIndex);
         BatchLookup lookup = buildLookup(jobs);
 
         List<ScoredJob> scoredJobs = jobs.stream()
-                .map(job -> new ScoredJob(job, calculateMatchScore(job, request, skillRelations, lookup)))
+                .map(job -> new ScoredJob(job, calculateMatchScore(job, request, activeSkillRelationIndex, lookup)))
                 .filter(scoredJob -> !hasCriteria || scoredJob.score().comparedFields() == 0
                         || scoredJob.score().matchedFields() > 0)
                 .filter(scoredJob -> scoredJob.score().matchPercentage() >= minScore)
                 .sorted(Comparator.comparingInt((ScoredJob scoredJob) -> scoredJob.score().matchPercentage()).reversed())
                 .toList();
+
+        if (minScore > FALLBACK_MIN_MATCH_SCORE && scoredJobs.size() < MIN_RESULTS_BEFORE_SCORE_FALLBACK) {
+            scoredJobs = jobs.stream()
+                    .map(job -> new ScoredJob(job, calculateMatchScore(job, request, activeSkillRelationIndex, lookup)))
+                    .filter(scoredJob -> !hasCriteria || scoredJob.score().comparedFields() == 0
+                            || scoredJob.score().matchedFields() > 0)
+                    .filter(scoredJob -> scoredJob.score().matchPercentage() >= FALLBACK_MIN_MATCH_SCORE)
+                    .sorted(Comparator.comparingInt((ScoredJob scoredJob) -> scoredJob.score().matchPercentage()).reversed())
+                    .toList();
+        }
 
         int safeLimit = Math.max(1, limit);
         List<JobDto> page = scoredJobs.stream()
@@ -197,12 +240,14 @@ public class JobService {
     }
 
     private JobDto toDto(Job job, int matchScore, int confidenceScore, BatchLookup lookup) {
-        List<String> skills = lookup.skillsByJobId().getOrDefault(job.getId(), List.of()).stream()
-                .map(jobSkill -> jobSkill.getSkill().getName())
-                .toList();
+        List<String> skills = lookup.skillsByJobId()
+                .getOrDefault(job.getId(), SkillValues.empty())
+                .displayNames();
 
-        String workMode = lookup.workTypesByJobId().getOrDefault(job.getId(), List.of()).stream()
-                .map(workTypeJob -> workTypeJob.getWorkType().getName())
+        String workMode = lookup.workTypesByJobId()
+                .getOrDefault(job.getId(), WorkTypeValues.empty())
+                .displayNames()
+                .stream()
                 .reduce((first, second) -> first + ", " + second)
                 .orElse("Unknown");
 
@@ -233,7 +278,7 @@ public class JobService {
         );
     }
 
-    private MatchScore calculateMatchScore(Job job, JobFilterRequest request, List<SkillRelation> skillRelations, BatchLookup lookup) {
+    private MatchScore calculateMatchScore(Job job, JobFilterRequest request, SkillRelationIndex skillRelationIndex, BatchLookup lookup) {
         MatchScore score = new MatchScore();
         JobFilterRequest.JobCriteria userCriteria = request.job();
         JobFilterRequest.LocationCriteria userLocation = request.location();
@@ -271,7 +316,7 @@ public class JobService {
             score.addJobSalaryRequirement(jobMinSalary, jobMaxSalary, null, null, SALARY_WEIGHT);
         }
 
-        addSkillScore(score, job, request.skills(), skillRelations, lookup);
+        addSkillScore(score, job, request.skills(), skillRelationIndex, lookup);
         addWorkTypeScore(score, job, request.workTypes(), lookup);
 
         if (!isRemote(job, lookup)) {
@@ -349,11 +394,10 @@ public class JobService {
         weights.add(userValue != null && jobValue.equals(userValue) ? 1.0 : 0.0);
     }
 
-    private void addSkillScore(MatchScore score, Job job, List<String> userSkills, List<SkillRelation> skillRelations, BatchLookup lookup) {
-        List<String> jobSkillValues = lookup.skillsByJobId().getOrDefault(job.getId(), List.of()).stream()
-                .flatMap(jobSkill -> List.of(jobSkill.getSkill().getId(), jobSkill.getSkill().getName()).stream())
-                .map(this::normalize)
-                .toList();
+    private void addSkillScore(MatchScore score, Job job, List<String> userSkills, SkillRelationIndex skillRelationIndex, BatchLookup lookup) {
+        List<String> jobSkillValues = lookup.skillsByJobId()
+                .getOrDefault(job.getId(), SkillValues.empty())
+                .normalizedValues();
 
         if (jobSkillValues.isEmpty()) {
             return;
@@ -365,47 +409,37 @@ public class JobService {
                         .filter(this::hasText)
                         .map(this::normalize)
                         .toList();
+        Set<String> userSkillValueSet = new LinkedHashSet<>(userSkillValues);
 
         // Job skills so zahteve. Extra user skills ne znizajo rezultata.
         List<Double> weights = jobSkillValues.stream()
-                .map(jobSkill -> skillMatchWeight(jobSkill, userSkillValues, skillRelations))
+                .map(jobSkill -> skillMatchWeight(jobSkill, userSkillValueSet, skillRelationIndex))
                 .toList();
 
         double average = weights.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
         score.addWeighted(SKILL_WEIGHT, average);
     }
 
-    private double skillMatchWeight(String jobSkill, List<String> userSkillValues, List<SkillRelation> relations) {
+    private double skillMatchWeight(String jobSkill, Set<String> userSkillValues, SkillRelationIndex skillRelationIndex) {
         if (userSkillValues.contains(jobSkill)) {
             return DIRECT_SKILL_MATCH;
         }
 
-        return relations.stream()
-                .mapToDouble(relation -> relationMatchWeight(jobSkill, userSkillValues, relation))
+        Map<String, Double> relatedSkills = skillRelationIndex.relatedBySkill().get(jobSkill);
+        if (relatedSkills == null || relatedSkills.isEmpty()) {
+            return 0.0;
+        }
+
+        return userSkillValues.stream()
+                .map(relatedSkills::get)
+                .filter(weight -> weight != null)
+                .mapToDouble(Double::doubleValue)
                 .max()
                 .orElse(0.0);
     }
 
-    private double relationMatchWeight(String jobSkill, List<String> userSkillValues, SkillRelation relation) {
-        String sourceId = normalize(relation.getSourceSkill().getId());
-        String sourceName = normalize(relation.getSourceSkill().getName());
-        String targetId = normalize(relation.getTargetSkill().getId());
-        String targetName = normalize(relation.getTargetSkill().getName());
-
-        boolean jobIsSource = jobSkill.equals(sourceId) || jobSkill.equals(sourceName);
-        boolean jobIsTarget = jobSkill.equals(targetId) || jobSkill.equals(targetName);
-        boolean userHasSource = userSkillValues.contains(sourceId) || userSkillValues.contains(sourceName);
-        boolean userHasTarget = userSkillValues.contains(targetId) || userSkillValues.contains(targetName);
-
-        if ((jobIsSource && userHasTarget) || (jobIsTarget && userHasSource)) {
-            return relationWeight(relation.getRelationshipType());
-        }
-
-        return 0.0;
-    }
-
     private double relationWeight(String relationshipType) {
-        return switch (relationshipType.toUpperCase(Locale.ROOT)) {
+        return switch ((relationshipType == null ? "" : relationshipType).toUpperCase(Locale.ROOT)) {
             case "FRAMEWORK_OF", "IMPLEMENTATION_OF" -> 0.8;
             case "SPECIALIZATION_OF" -> 0.7;
             case "PART_OF", "TOOL_FOR", "USED_WITH" -> 0.6;
@@ -413,6 +447,56 @@ public class JobService {
             case "RELATED_TO", "SUPPORTS", "DATABASE_TECHNOLOGY" -> 0.4;
             default -> 0.4;
         };
+    }
+
+    private SkillRelationIndex buildSkillRelationIndex(List<SkillRelation> relations) {
+        Map<String, Map<String, Double>> relatedBySkill = new HashMap<>();
+
+        for (SkillRelation relation : relations) {
+            if (relation.getSourceSkill() == null || relation.getTargetSkill() == null) {
+                continue;
+            }
+
+            Set<String> sourceValues = normalizedSkillValues(
+                    relation.getSourceSkill().getId(),
+                    relation.getSourceSkill().getName()
+            );
+            Set<String> targetValues = normalizedSkillValues(
+                    relation.getTargetSkill().getId(),
+                    relation.getTargetSkill().getName()
+            );
+            double weight = relationWeight(relation.getRelationshipType());
+
+            addRelatedSkillValues(relatedBySkill, sourceValues, targetValues, weight);
+            addRelatedSkillValues(relatedBySkill, targetValues, sourceValues, weight);
+        }
+
+        return new SkillRelationIndex(relatedBySkill);
+    }
+
+    private void addRelatedSkillValues(
+            Map<String, Map<String, Double>> relatedBySkill,
+            Set<String> fromValues,
+            Set<String> toValues,
+            double weight
+    ) {
+        for (String from : fromValues) {
+            Map<String, Double> related = relatedBySkill.computeIfAbsent(from, ignored -> new HashMap<>());
+            for (String to : toValues) {
+                related.merge(to, weight, Math::max);
+            }
+        }
+    }
+
+    private Set<String> normalizedSkillValues(String id, String name) {
+        LinkedHashSet<String> values = new LinkedHashSet<>();
+        if (hasText(id)) {
+            values.add(normalize(id));
+        }
+        if (hasText(name)) {
+            values.add(normalize(name));
+        }
+        return values;
     }
 
     private void addWorkTypeScore(MatchScore score, Job job, List<String> userWorkTypes, BatchLookup lookup) {
@@ -444,6 +528,128 @@ public class JobService {
                 .orElse(0.0);
 
         score.addWeighted(WORK_TYPE_WEIGHT, average);
+    }
+
+    private List<Job> findCandidateJobs(JobFilterRequest request, SkillRelationIndex skillRelationIndex) {
+        if (!hasActiveCriteria(request)) {
+            return jobRepository.findAll();
+        }
+
+        LinkedHashSet<String> candidateIds = new LinkedHashSet<>();
+
+        addSkillCandidateIds(candidateIds, request.skills(), skillRelationIndex);
+        addWorkTypeCandidateIds(candidateIds, request.workTypes());
+
+        boolean hasLocationCriteria = hasActiveLocationCriteria(request.location());
+        LinkedHashSet<String> locationCandidateIds = findLocationCandidateIds(request.location());
+        if (hasLocationCriteria) {
+            if (locationCandidateIds.isEmpty()) {
+                return List.of();
+            }
+            if (candidateIds.isEmpty()) {
+                candidateIds.addAll(locationCandidateIds);
+            } else {
+                candidateIds.retainAll(locationCandidateIds);
+            }
+        }
+
+        if (candidateIds.isEmpty()) {
+            if (hasLocationCriteria) {
+                return List.of();
+            }
+            return jobRepository.findAll();
+        }
+
+        return jobRepository.findByIdIn(candidateIds);
+    }
+
+    private void addSkillCandidateIds(LinkedHashSet<String> candidateIds, List<String> skills, SkillRelationIndex skillRelationIndex) {
+        if (isEmpty(skills)) {
+            return;
+        }
+
+        LinkedHashSet<String> skillNames = skills.stream()
+                .filter(this::hasText)
+                .map(String::trim)
+                .collect(LinkedHashSet::new, LinkedHashSet::add, LinkedHashSet::addAll);
+
+        LinkedHashSet<String> normalizedValues = skillNames.stream()
+                .map(this::normalize)
+                .collect(LinkedHashSet::new, LinkedHashSet::add, LinkedHashSet::addAll);
+
+        skillNames.addAll(skillRelationIndex.relatedValues(normalizedValues));
+        normalizedValues.addAll(skillRelationIndex.relatedValues(normalizedValues));
+
+        jobSkillRepository.findBySkill_NameIn(skillNames).stream()
+                .map(jobSkill -> jobSkill.getJob() == null ? null : jobSkill.getJob().getId())
+                .filter(this::hasText)
+                .forEach(candidateIds::add);
+
+        jobSkillRepository.findBySkill_IdIn(normalizedValues).stream()
+                .map(jobSkill -> jobSkill.getJob() == null ? null : jobSkill.getJob().getId())
+                .filter(this::hasText)
+                .forEach(candidateIds::add);
+    }
+
+    private void addWorkTypeCandidateIds(LinkedHashSet<String> candidateIds, List<String> workTypes) {
+        if (isEmpty(workTypes)) {
+            return;
+        }
+
+        LinkedHashSet<String> values = workTypes.stream()
+                .filter(this::hasText)
+                .map(String::trim)
+                .collect(LinkedHashSet::new, LinkedHashSet::add, LinkedHashSet::addAll);
+
+        workTypeJobRepository.findByWorkType_NameIn(values).stream()
+                .map(workTypeJob -> workTypeJob.getJob() == null ? null : workTypeJob.getJob().getId())
+                .filter(this::hasText)
+                .forEach(candidateIds::add);
+    }
+
+    private LinkedHashSet<String> findLocationCandidateIds(JobFilterRequest.LocationCriteria location) {
+        LinkedHashSet<String> candidateIds = new LinkedHashSet<>();
+        if (location == null) {
+            return candidateIds;
+        }
+
+        LinkedHashSet<String> cities = new LinkedHashSet<>();
+        if (hasText(location.city())) {
+            cities.add(location.city());
+        }
+        if (location.cities() != null) {
+            location.cities().stream().filter(this::hasText).forEach(cities::add);
+        }
+        cities.stream()
+                .flatMap(city -> jobRepository.findByLocation_CityContainingIgnoreCase(city).stream())
+                .map(Job::getId)
+                .forEach(candidateIds::add);
+
+        LinkedHashSet<String> regions = new LinkedHashSet<>();
+        if (hasText(location.region())) {
+            regions.add(location.region());
+        }
+        if (location.regions() != null) {
+            location.regions().stream().filter(this::hasText).forEach(regions::add);
+        }
+        regions.stream()
+                .flatMap(region -> jobRepository.findByLocation_RegionContainingIgnoreCase(region).stream())
+                .map(Job::getId)
+                .forEach(candidateIds::add);
+
+        LinkedHashSet<String> countries = new LinkedHashSet<>();
+        if (hasText(location.country())) {
+            countries.add(location.country());
+        }
+        if (location.countries() != null) {
+            location.countries().stream().filter(this::hasText).forEach(countries::add);
+        }
+        countries.stream()
+                .flatMap(country -> jobRepository.findByLocation_CountryContainingIgnoreCase(country).stream())
+                .map(Job::getId)
+                .forEach(candidateIds::add);
+
+        return candidateIds;
     }
 
     private boolean hasActiveCriteria(JobFilterRequest request) {
@@ -481,10 +687,9 @@ public class JobService {
     }
 
     private List<String> jobWorkTypes(Job job, BatchLookup lookup) {
-        return lookup.workTypesByJobId().getOrDefault(job.getId(), List.of()).stream()
-                .flatMap(workTypeJob -> List.of(workTypeJob.getWorkType().getId(), workTypeJob.getWorkType().getName()).stream())
-                .map(this::normalize)
-                .toList();
+        return lookup.workTypesByJobId()
+                .getOrDefault(job.getId(), WorkTypeValues.empty())
+                .normalizedValues();
     }
 
     private BatchLookup buildLookup(List<Job> jobs) {
@@ -493,15 +698,102 @@ public class JobService {
             return new BatchLookup(Map.of(), Map.of());
         }
 
-        Map<String, List<JobSkill>> skillsByJobId = jobSkillRepository.findByJob_IdIn(jobIds).stream()
-                .filter(jobSkill -> jobSkill.getJob() != null)
-                .collect(Collectors.groupingBy(jobSkill -> jobSkill.getJob().getId()));
+        JobLookupIndex index = jobLookupIndex;
+        Map<String, SkillValues> skillsByJobId = new HashMap<>();
+        Map<String, WorkTypeValues> workTypesByJobId = new HashMap<>();
+        List<String> missingSkillJobIds = new ArrayList<>();
+        List<String> missingWorkTypeJobIds = new ArrayList<>();
 
-        Map<String, List<WorkTypeJob>> workTypesByJobId = workTypeJobRepository.findByJob_IdIn(jobIds).stream()
-                .filter(workTypeJob -> workTypeJob.getJob() != null)
-                .collect(Collectors.groupingBy(workTypeJob -> workTypeJob.getJob().getId()));
+        for (String jobId : jobIds) {
+            SkillValues skillValues = index.skillsByJobId().get(jobId);
+            if (skillValues == null) {
+                missingSkillJobIds.add(jobId);
+            } else {
+                skillsByJobId.put(jobId, skillValues);
+            }
+
+            WorkTypeValues workTypeValues = index.workTypesByJobId().get(jobId);
+            if (workTypeValues == null) {
+                missingWorkTypeJobIds.add(jobId);
+            } else {
+                workTypesByJobId.put(jobId, workTypeValues);
+            }
+        }
+
+        if (!missingSkillJobIds.isEmpty()) {
+            skillsByJobId.putAll(skillValuesByJobId(jobSkillRepository.findByJob_IdIn(missingSkillJobIds)));
+        }
+
+        if (!missingWorkTypeJobIds.isEmpty()) {
+            workTypesByJobId.putAll(workTypeValuesByJobId(workTypeJobRepository.findByJob_IdIn(missingWorkTypeJobIds)));
+        }
 
         return new BatchLookup(skillsByJobId, workTypesByJobId);
+    }
+
+    private JobLookupIndex buildJobLookupIndex(List<JobSkill> jobSkills, List<WorkTypeJob> workTypeJobs) {
+        return new JobLookupIndex(
+                skillValuesByJobId(jobSkills),
+                workTypeValuesByJobId(workTypeJobs)
+        );
+    }
+
+    private Map<String, SkillValues> skillValuesByJobId(List<JobSkill> jobSkills) {
+        return jobSkills.stream()
+                .filter(jobSkill -> jobSkill.getJob() != null && jobSkill.getSkill() != null)
+                .collect(Collectors.groupingBy(
+                        jobSkill -> jobSkill.getJob().getId(),
+                        Collectors.collectingAndThen(Collectors.toList(), this::toSkillValues)
+                ));
+    }
+
+    private SkillValues toSkillValues(List<JobSkill> jobSkills) {
+        LinkedHashSet<String> displayNames = new LinkedHashSet<>();
+        LinkedHashSet<String> normalizedValues = new LinkedHashSet<>();
+
+        for (JobSkill jobSkill : jobSkills) {
+            if (jobSkill.getSkill() == null) {
+                continue;
+            }
+            if (hasText(jobSkill.getSkill().getName())) {
+                displayNames.add(jobSkill.getSkill().getName());
+                normalizedValues.add(normalize(jobSkill.getSkill().getName()));
+            }
+            if (hasText(jobSkill.getSkill().getId())) {
+                normalizedValues.add(normalize(jobSkill.getSkill().getId()));
+            }
+        }
+
+        return new SkillValues(new ArrayList<>(displayNames), new ArrayList<>(normalizedValues));
+    }
+
+    private Map<String, WorkTypeValues> workTypeValuesByJobId(List<WorkTypeJob> workTypeJobs) {
+        return workTypeJobs.stream()
+                .filter(workTypeJob -> workTypeJob.getJob() != null && workTypeJob.getWorkType() != null)
+                .collect(Collectors.groupingBy(
+                        workTypeJob -> workTypeJob.getJob().getId(),
+                        Collectors.collectingAndThen(Collectors.toList(), this::toWorkTypeValues)
+                ));
+    }
+
+    private WorkTypeValues toWorkTypeValues(List<WorkTypeJob> workTypeJobs) {
+        LinkedHashSet<String> displayNames = new LinkedHashSet<>();
+        LinkedHashSet<String> normalizedValues = new LinkedHashSet<>();
+
+        for (WorkTypeJob workTypeJob : workTypeJobs) {
+            if (workTypeJob.getWorkType() == null) {
+                continue;
+            }
+            if (hasText(workTypeJob.getWorkType().getName())) {
+                displayNames.add(workTypeJob.getWorkType().getName());
+                normalizedValues.add(normalize(workTypeJob.getWorkType().getName()));
+            }
+            if (hasText(workTypeJob.getWorkType().getId())) {
+                normalizedValues.add(normalize(workTypeJob.getWorkType().getId()));
+            }
+        }
+
+        return new WorkTypeValues(new ArrayList<>(displayNames), new ArrayList<>(normalizedValues));
     }
 
     private BigDecimal firstNonNull(BigDecimal first, BigDecimal second) {
@@ -634,9 +926,47 @@ public class JobService {
     }
 
     private record BatchLookup(
-            Map<String, List<JobSkill>> skillsByJobId,
-            Map<String, List<WorkTypeJob>> workTypesByJobId
+            Map<String, SkillValues> skillsByJobId,
+            Map<String, WorkTypeValues> workTypesByJobId
     ) {
+    }
+
+    private record JobLookupIndex(
+            Map<String, SkillValues> skillsByJobId,
+            Map<String, WorkTypeValues> workTypesByJobId
+    ) {
+        static JobLookupIndex empty() {
+            return new JobLookupIndex(Map.of(), Map.of());
+        }
+    }
+
+    private record SkillValues(List<String> displayNames, List<String> normalizedValues) {
+        static SkillValues empty() {
+            return new SkillValues(List.of(), List.of());
+        }
+    }
+
+    private record WorkTypeValues(List<String> displayNames, List<String> normalizedValues) {
+        static WorkTypeValues empty() {
+            return new WorkTypeValues(List.of(), List.of());
+        }
+    }
+
+    private record SkillRelationIndex(Map<String, Map<String, Double>> relatedBySkill) {
+        static SkillRelationIndex empty() {
+            return new SkillRelationIndex(Map.of());
+        }
+
+        Set<String> relatedValues(Set<String> skillValues) {
+            LinkedHashSet<String> result = new LinkedHashSet<>();
+            for (String skillValue : skillValues) {
+                Map<String, Double> related = relatedBySkill.get(skillValue);
+                if (related != null) {
+                    result.addAll(related.keySet());
+                }
+            }
+            return result;
+        }
     }
 
     private class MatchScore {

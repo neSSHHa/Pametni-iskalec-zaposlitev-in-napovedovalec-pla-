@@ -32,7 +32,7 @@ import java.util.Random;
 @Component
 public class SyntheticJobSeed {
 
-        private static final int TARGET_JOB_COUNT = 7_000;
+        private static final int TARGET_JOB_COUNT = 20_000;
         private static final int TARGET_SKILL_COUNT = 2_000;
         private static final int BATCH_SIZE = 500;
 
@@ -107,9 +107,10 @@ public class SyntheticJobSeed {
                 List<JobSkill> skillBatch = new ArrayList<>();
                 List<WorkTypeJob> workTypeBatch = new ArrayList<>();
 
+                long jobsToCreate = TARGET_JOB_COUNT - existingJobs;
                 int created = 0;
 
-                for (int i = 1; jobRepository.count() + created < TARGET_JOB_COUNT; i++) {
+                for (int i = 1; created < jobsToCreate; i++) {
                         String jobId = "syn-job-" + padded(i);
 
                         if (jobRepository.existsById(jobId)) {
