@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class Location {
 
     @Id
-    @Column(length = 36)
+    @Column(length = 255)
     private String id;
 
     @Column(length = 150)

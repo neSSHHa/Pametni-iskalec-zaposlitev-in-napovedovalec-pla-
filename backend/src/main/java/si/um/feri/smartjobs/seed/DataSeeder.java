@@ -19,7 +19,7 @@ import si.um.feri.smartjobs.seed.user.UserSeed;
 import si.um.feri.smartjobs.seed.userSkill.UserSkillSeed;
 import si.um.feri.smartjobs.seed.synthetic.SyntheticJobSeed;
 
-@Component
+//@Component
 public class DataSeeder implements CommandLineRunner {
 
     private final EducationLevelSeed educationLevelSeed;

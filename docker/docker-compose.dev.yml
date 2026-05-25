@@ -2,3 +2,19 @@ services:
   backend:
     environment:
       SPRING_PROFILES_ACTIVE: dev
+
+  data-importer:
+    profiles:
+      - import
+    build: ../data-ingestion
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-smartjobs}
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD:-nenadnenad}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      backend:
+        condition: service_started

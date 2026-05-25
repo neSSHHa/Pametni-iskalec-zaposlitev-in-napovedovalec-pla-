@@ -19,22 +19,29 @@ import java.time.LocalDate;
 public class Job {
 
     @Id
-    @Column(length = 36)
+    @Column(length = 255)
     private String id;
+@Column(nullable = false, columnDefinition = "TEXT")
+private String companyName;
 
-    @Column(nullable = false)
-    private String companyName;
+@Column(nullable = false, columnDefinition = "TEXT")
+private String jobName;
 
-    @Column(nullable = false)
-    private String jobName;
-
-    @Column(columnDefinition = "MEDIUMTEXT")
+@Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(length = 32)
+    private String status;
+
+    @Column(name = "sourceJobKey", length = 512)
+    private String sourceJobKey;
+
+    @Column(columnDefinition = "TEXT")
+    private String sourceWebsite;
+    
     private Integer requiredExperience;
     private BigDecimal predictedMaxSalary;
     private BigDecimal predictedMinSalary;
-    private String sourceWebsite;
     private LocalDate datePosted;
     private LocalDate createdAt;
     private LocalDate updatedAt;
@@ -97,4 +104,8 @@ public class Job {
     public Location getLocation() { return location; }
     public EducationLevel getEducationLevel() {return educationLevel;}
     public void setEducationLevel(EducationLevel educationLevel) {this.educationLevel = educationLevel;}
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+    public String getSourceJobKey() { return sourceJobKey; }
+    public void setSourceJobKey(String sourceJobKey) { this.sourceJobKey = sourceJobKey; }
     }

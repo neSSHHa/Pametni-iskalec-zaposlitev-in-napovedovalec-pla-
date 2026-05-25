@@ -1,0 +1,230 @@
+﻿id,cityDistrict,city,region,country,latitude,longitude
+loc-ljubljana-central-slovenia,NULL,Ljubljana,Central Slovenia,Slovenia,NULL,NULL
+loc-komenda-central-slovenia,NULL,Komenda,Central Slovenia,Slovenia,NULL,NULL
+loc-grosuplje-central-slovenia,NULL,Grosuplje,Central Slovenia,Slovenia,NULL,NULL
+loc-domzale-central-slovenia,NULL,Domžale,Central Slovenia,Slovenia,NULL,NULL
+loc-kamnik-central-slovenia,NULL,Kamnik,Central Slovenia,Slovenia,NULL,NULL
+loc-kranj-upper-carniola-ljubljana-central-slovenia,NULL,Kranj,Upper Carniola,Slovenia,NULL,NULL
+loc-logatec-central-slovenia,NULL,Logatec,Central Slovenia,Slovenia,NULL,NULL
+loc-skofja-loka-upper-carniola,NULL,Škofja Loka,Upper Carniola,Slovenia,NULL,NULL
+loc-kranj-upper-carniola,NULL,Kranj,Upper Carniola,Slovenia,NULL,NULL
+loc-radovljica-upper-carniola,NULL,Radovljica,Upper Carniola,Slovenia,NULL,NULL
+loc-upper-carniola,NULL,Upper Carniola,NULL,Slovenia,NULL,NULL
+loc-velenje-savinja,NULL,Velenje,Savinja,Slovenia,NULL,NULL
+loc-savinja,NULL,Savinja,NULL,Slovenia,NULL,NULL
+loc-podcetrtek-savinja,NULL,Podčetrtek,Savinja,Slovenia,NULL,NULL
+loc-zalec-savinja,NULL,Žalec,Savinja,Slovenia,NULL,NULL
+loc-sentjur-pri-celju-savinja,NULL,Šentjur pri Celju,Savinja,Slovenia,NULL,NULL
+loc-slovenske-konjice-savinja,NULL,Slovenske Konjice,Savinja,Slovenia,NULL,NULL
+loc-mozirje-savinja,NULL,Mozirje,Savinja,Slovenia,NULL,NULL
+loc-celje-savinja,NULL,Celje,Savinja,Slovenia,NULL,NULL
+loc-lasko-savinja,NULL,Laško,Savinja,Slovenia,NULL,NULL
+loc-trebnje-southeast-slovenia,NULL,Trebnje,Southeast Slovenia,Slovenia,NULL,NULL
+loc-novo-mesto-southeast-slovenia,NULL,Novo mesto,Southeast Slovenia,Slovenia,NULL,NULL
+loc-mirna-southeast-slovenia,NULL,Mirna,Southeast Slovenia,Slovenia,NULL,NULL
+loc-metlika-southeast-slovenia,NULL,Metlika,Southeast Slovenia,Slovenia,NULL,NULL
+loc-novo-mesto-southeast-slovenia-brezice-lower-sava,NULL,Novo mesto,Southeast Slovenia,Slovenia,NULL,NULL
+loc-nova-gorica-gorizia,NULL,Nova Gorica,Gorizia,Slovenia,NULL,NULL
+loc-ajdovscina-gorizia,NULL,Ajdovščina,Gorizia,Slovenia,NULL,NULL
+loc-tolmin-gorizia,NULL,Tolmin,Gorizia,Slovenia,NULL,NULL
+loc-idrija-gorizia,NULL,Idrija,Gorizia,Slovenia,NULL,NULL
+loc-brezice-lower-sava,NULL,Brežice,Lower Sava,Slovenia,NULL,NULL
+loc-krsko-lower-sava,NULL,Krško,Lower Sava,Slovenia,NULL,NULL
+loc-sevnica-lower-sava,NULL,Sevnica,Lower Sava,Slovenia,NULL,NULL
+loc-postojna-inner-carniola-karst,NULL,Postojna,Inner Carniola-Karst,Slovenia,NULL,NULL
+loc-cerknica-inner-carniola-karst,NULL,Cerknica,Inner Carniola-Karst,Slovenia,NULL,NULL
+loc-ilirska-bistrica-inner-carniola-karst,NULL,Ilirska Bistrica,Inner Carniola-Karst,Slovenia,NULL,NULL
+loc-gornja-radgona-mura,NULL,Gornja Radgona,Mura,Slovenia,NULL,NULL
+loc-lendava-mura,NULL,Lendava,Mura,Slovenia,NULL,NULL
+loc-murska-sobota-mura,NULL,Murska Sobota,Mura,Slovenia,NULL,NULL
+loc-moravske-toplice-mura,NULL,Moravske Toplice,Mura,Slovenia,NULL,NULL
+loc-crna-na-koroskem-carinthia,NULL,Črna na Koroškem,Carinthia,Slovenia,NULL,NULL
+loc-dravograd-carinthia,NULL,Dravograd,Carinthia,Slovenia,NULL,NULL
+loc-ravne-na-koroskem-carinthia,NULL,Ravne na Koroškem,Carinthia,Slovenia,NULL,NULL
+loc-slovenj-gradec-carinthia,NULL,Slovenj Gradec,Carinthia,Slovenia,NULL,NULL
+loc-hrpelje-kozina-coastal-karst,NULL,Hrpelje-Kozina,Coastal-Karst,Slovenia,NULL,NULL
+loc-trbovlje-central-sava,NULL,Trbovlje,Central Sava,Slovenia,NULL,NULL
+loc-zagorje-ob-savi-central-sava,NULL,Zagorje ob Savi,Central Sava,Slovenia,NULL,NULL
+loc-medvode-central-slovenia,NULL,Medvode,Central Slovenia,Slovenia,NULL,NULL
+loc-central-slovenia,NULL,Central Slovenia,NULL,Slovenia,NULL,NULL
+loc-naklo-upper-carniola,NULL,Naklo,Upper Carniola,Slovenia,NULL,NULL
+loc-ziri-upper-carniola,NULL,Žiri,Upper Carniola,Slovenia,NULL,NULL
+loc-cerklje-na-gorenjskem-upper-carniola,NULL,Cerklje na Gorenjskem,Upper Carniola,Slovenia,NULL,NULL
+loc-zelezniki-upper-carniola-skofja-loka-upper-carniola,NULL,Železniki,Upper Carniola,Slovenia,NULL,NULL
+loc-drava,NULL,Drava,NULL,Slovenia,NULL,NULL
+loc-lenart-drava,NULL,Lenart,Drava,Slovenia,NULL,NULL
+loc-maribor-drava,NULL,Maribor,Drava,Slovenia,NULL,NULL
+loc-zrece-savinja,NULL,Zreče,Savinja,Slovenia,NULL,NULL
+loc-smarje-pri-jelsah-savinja,NULL,Šmarje pri Jelšah,Savinja,Slovenia,NULL,NULL
+loc-nazarje-savinja,NULL,Nazarje,Savinja,Slovenia,NULL,NULL
+loc-ribnica-southeast-slovenia,NULL,Ribnica,Southeast Slovenia,Slovenia,NULL,NULL
+loc-zuzemberk-southeast-slovenia,NULL,Žužemberk,Southeast Slovenia,Slovenia,NULL,NULL
+loc-crnomelj-southeast-slovenia,NULL,Črnomelj,Southeast Slovenia,Slovenia,NULL,NULL
+loc-southeast-slovenia,NULL,Southeast Slovenia,NULL,Slovenia,NULL,NULL
+loc-radlje-ob-dravi-carinthia,NULL,Radlje ob Dravi,Carinthia,Slovenia,NULL,NULL
+loc-sezana-coastal-karst,NULL,Sežana,Coastal-Karst,Slovenia,NULL,NULL
+loc-central-sava,NULL,Central Sava,NULL,Slovenia,NULL,NULL
+loc-hrastnik-central-sava,NULL,Hrastnik,Central Sava,Slovenia,NULL,NULL
+loc-skofljica-central-slovenia,NULL,Škofljica,Central Slovenia,Slovenia,NULL,NULL
+loc-kranjska-gora-upper-carniola,NULL,Kranjska Gora,Upper Carniola,Slovenia,NULL,NULL
+loc-sencur-upper-carniola,NULL,Šenčur,Upper Carniola,Slovenia,NULL,NULL
+loc-jesenice-upper-carniola,NULL,Jesenice,Upper Carniola,Slovenia,NULL,NULL
+loc-ptuj-drava,NULL,Ptuj,Drava,Slovenia,NULL,NULL
+loc-dobrna-savinja,NULL,Dobrna,Savinja,Slovenia,NULL,NULL
+loc-izola-coastal-karst,NULL,Izola,Coastal-Karst,Slovenia,NULL,NULL
+loc-trzin-central-slovenia,NULL,Trzin,Central Slovenia,Slovenia,NULL,NULL
+loc-videm-drava-dobrepolje-central-slovenia,NULL,Videm,Drava,Slovenia,NULL,NULL
+loc-vrhnika-central-slovenia,NULL,Vrhnika,Central Slovenia,Slovenia,NULL,NULL
+loc-trzic-upper-carniola,NULL,Tržič,Upper Carniola,Slovenia,NULL,NULL
+loc-slovenska-bistrica-drava,NULL,Slovenska Bistrica,Drava,Slovenia,NULL,NULL
+loc-sostanj-savinja,NULL,Šoštanj,Savinja,Slovenia,NULL,NULL
+loc-sentrupert-southeast-slovenia,NULL,Šentrupert,Southeast Slovenia,Slovenia,NULL,NULL
+loc-straza-southeast-slovenia,NULL,Straža,Southeast Slovenia,Slovenia,NULL,NULL
+loc-sempeter-vrtojba-gorizia,NULL,Šempeter-Vrtojba,Gorizia,Slovenia,NULL,NULL
+loc-ljutomer-mura,NULL,Ljutomer,Mura,Slovenia,NULL,NULL
+loc-gradisce-pri-materiji-coastal-karst,NULL,Gradišče pri Materiji,Coastal-Karst,Slovenia,NULL,NULL
+loc-lukovica-central-slovenia-ljubljana-central-slovenia,NULL,Lukovica,Central Slovenia,Slovenia,NULL,NULL
+loc-kamnik-central-slovenia-ljubljana-central-slovenia,NULL,Kamnik,Central Slovenia,Slovenia,NULL,NULL
+loc-ljubljana-central-slovenia-medvode-central-slovenia,NULL,Ljubljana,Central Slovenia,Slovenia,NULL,NULL
+loc-moravce-central-slovenia-ljubljana-central-slovenia,NULL,Moravče,Central Slovenia,Slovenia,NULL,NULL
+loc-ivancna-gorica-central-slovenia,NULL,Ivančna Gorica,Central Slovenia,Slovenia,NULL,NULL
+loc-vrhnika-central-slovenia-ljubljana-central-slovenia,NULL,Vrhnika,Central Slovenia,Slovenia,NULL,NULL
+loc-ljubljana-central-slovenia-ivancna-gorica-central-slovenia,NULL,Ljubljana,Central Slovenia,Slovenia,NULL,NULL
+loc-ljubljana-central-slovenia-grosuplje-central-slovenia,NULL,Ljubljana,Central Slovenia,Slovenia,NULL,NULL
+loc-menges-central-slovenia,NULL,Mengeš,Central Slovenia,Slovenia,NULL,NULL
+loc-vodice-central-slovenia,NULL,Vodice,Central Slovenia,Slovenia,NULL,NULL
+loc-ljubljana-central-slovenia-skofljica-central-slovenia,NULL,Ljubljana,Central Slovenia,Slovenia,NULL,NULL
+loc-lesce-upper-carniola,NULL,Lesce,Upper Carniola,Slovenia,NULL,NULL
+loc-maribor-drava-miklavz-na-dravskem-polju-drava,NULL,Maribor,Drava,Slovenia,NULL,NULL
+loc-maribor-drava-kungota-drava,NULL,Maribor,Drava,Slovenia,NULL,NULL
+loc-maribor-drava-markovci-drava,NULL,Maribor,Drava,Slovenia,NULL,NULL
+loc-maribor-drava-lenart-drava,NULL,Maribor,Drava,Slovenia,NULL,NULL
+loc-maribor-drava-dornava-drava,NULL,Maribor,Drava,Slovenia,NULL,NULL
+loc-maribor-drava-ptuj-drava,NULL,Maribor,Drava,Slovenia,NULL,NULL
+loc-oplotnica-drava-maribor-drava,NULL,Oplotnica,Drava,Slovenia,NULL,NULL
+loc-kidricevo-drava-maribor-drava,NULL,Kidričevo,Drava,Slovenia,NULL,NULL
+loc-maribor-drava-sentilj-drava,NULL,Maribor,Drava,Slovenia,NULL,NULL
+loc-selnica-ob-dravi-drava,NULL,Selnica ob Dravi,Drava,Slovenia,NULL,NULL
+loc-sentilj-drava,NULL,Šentilj,Drava,Slovenia,NULL,NULL
+loc-pesnica-drava,NULL,Pesnica,Drava,Slovenia,NULL,NULL
+loc-majsperk-drava,NULL,Majšperk,Drava,Slovenia,NULL,NULL
+loc-poljcane-drava,NULL,Poljčane,Drava,Slovenia,NULL,NULL
+loc-maribor-drava-pesnica-drava,NULL,Maribor,Drava,Slovenia,NULL,NULL
+loc-maribor-drava-podlehnik-drava,NULL,Maribor,Drava,Slovenia,NULL,NULL
+loc-vitanje-savinja,NULL,Vitanje,Savinja,Slovenia,NULL,NULL
+loc-kozje-savinja,NULL,Kozje,Savinja,Slovenia,NULL,NULL
+loc-ljubno-savinja,NULL,Ljubno,Savinja,Slovenia,NULL,NULL
+loc-prebold-savinja,NULL,Prebold,Savinja,Slovenia,NULL,NULL
+loc-vojnik-savinja,NULL,Vojnik,Savinja,Slovenia,NULL,NULL
+loc-braslovce-savinja,NULL,Braslovče,Savinja,Slovenia,NULL,NULL
+loc-radece-lower-sava-savinja,NULL,Radeče,Lower Sava,Slovenia,NULL,NULL
+loc-solcava-savinja,NULL,Solčava,Savinja,Slovenia,NULL,NULL
+loc-rogaska-slatina-savinja,NULL,Rogaška Slatina,Savinja,Slovenia,NULL,NULL
+loc-polzela-savinja,NULL,Polzela,Savinja,Slovenia,NULL,NULL
+loc-kocevje-southeast-slovenia,NULL,Kočevje,Southeast Slovenia,Slovenia,NULL,NULL
+loc-smarjeske-toplice-southeast-slovenia,NULL,Šmarješke Toplice,Southeast Slovenia,Slovenia,NULL,NULL
+loc-dolenjske-toplice-southeast-slovenia,NULL,Dolenjske Toplice,Southeast Slovenia,Slovenia,NULL,NULL
+loc-kobarid-gorizia,NULL,Kobarid,Gorizia,Slovenia,NULL,NULL
+loc-bovec-gorizia,NULL,Bovec,Gorizia,Slovenia,NULL,NULL
+loc-gorizia,NULL,Gorizia,NULL,Slovenia,NULL,NULL
+loc-cerkno-gorizia,NULL,Cerkno,Gorizia,Slovenia,NULL,NULL
+loc-brda-gorizia,NULL,Brda,Gorizia,Slovenia,NULL,NULL
+loc-kuzma-mura,NULL,Kuzma,Mura,Slovenia,NULL,NULL
+loc-mislinja-carinthia,NULL,Mislinja,Carinthia,Slovenia,NULL,NULL
+loc-koper-coastal-karst,NULL,Koper,Coastal-Karst,Slovenia,NULL,NULL
+loc-coastal-karst,NULL,Coastal-Karst,NULL,Slovenia,NULL,NULL
+loc-piran-coastal-karst,NULL,Piran,Coastal-Karst,Slovenia,NULL,NULL
+loc-trbovlje-central-sava-pilon-granma,NULL,Trbovlje,Central Sava,Slovenia,NULL,NULL
+loc-dobrova-polhov-gradec-central-slovenia,NULL,Dobrova-Polhov Gradec,Central Slovenia,Slovenia,NULL,NULL
+loc-moravce-central-slovenia,NULL,Moravče,Central Slovenia,Slovenia,NULL,NULL
+loc-maribor-drava-ljubljana-central-slovenia,NULL,Maribor,Drava,Slovenia,NULL,NULL
+loc-bled-upper-carniola,NULL,Bled,Upper Carniola,Slovenia,NULL,NULL
+loc-ormoz-drava,NULL,Ormož,Drava,Slovenia,NULL,NULL
+loc-gorisnica-drava,NULL,Gorišnica,Drava,Slovenia,NULL,NULL
+loc-starse-drava,NULL,Starše,Drava,Slovenia,NULL,NULL
+loc-duplek-drava,NULL,Duplek,Drava,Slovenia,NULL,NULL
+loc-trnovska-vas-drava,NULL,Trnovska Vas,Drava,Slovenia,NULL,NULL
+loc-maribor-drava-slovenska-bistrica-drava,NULL,Maribor,Drava,Slovenia,NULL,NULL
+loc-gorisnica-drava-ptuj-drava,NULL,Gorišnica,Drava,Slovenia,NULL,NULL
+loc-vransko-savinja,NULL,Vransko,Savinja,Slovenia,NULL,NULL
+loc-godovic-gorizia,NULL,Godovič,Gorizia,Slovenia,NULL,NULL
+loc-krsko-lower-sava-brezice-lower-sava,NULL,Krško,Lower Sava,Slovenia,NULL,NULL
+loc-pivka-inner-carniola-karst,NULL,Pivka,Inner Carniola-Karst,Slovenia,NULL,NULL
+loc-radenci-mura,NULL,Radenci,Mura,Slovenia,NULL,NULL
+loc-odranci-mura,NULL,Odranci,Mura,Slovenia,NULL,NULL
+loc-turnisce-mura,NULL,Turnišče,Mura,Slovenia,NULL,NULL
+loc-prevalje-carinthia,NULL,Prevalje,Carinthia,Slovenia,NULL,NULL
+loc-piran-coastal-karst-izola-coastal-karst,NULL,Piran,Coastal-Karst,Slovenia,NULL,NULL
+loc-litija-central-sava,NULL,Litija,Central Sava,Slovenia,NULL,NULL
+loc-novo-mesto-southeast-slovenia-ljubljana-central-slovenia,NULL,Novo mesto,Southeast Slovenia,Slovenia,NULL,NULL
+loc-upper-carniola-medvode-central-slovenia,NULL,Upper Carniola,Medvode,Slovenia,NULL,NULL
+loc-jesenice-upper-carniola-ljubljana-central-slovenia,NULL,Jesenice,Upper Carniola,Slovenia,NULL,NULL
+loc-ljubljana-central-slovenia-logatec-central-slovenia,NULL,Ljubljana,Central Slovenia,Slovenia,NULL,NULL
+loc-ljubljana-central-slovenia-domzale-central-slovenia,NULL,Ljubljana,Central Slovenia,Slovenia,NULL,NULL
+loc-komenda-central-slovenia-ljubljana-central-slovenia,NULL,Komenda,Central Slovenia,Slovenia,NULL,NULL
+loc-menges-central-slovenia-ljubljana-central-slovenia,NULL,Mengeš,Central Slovenia,Slovenia,NULL,NULL
+loc-velike-lasce-central-slovenia,NULL,Velike Lašče,Central Slovenia,Slovenia,NULL,NULL
+loc-logatec-central-slovenia-ljubljana-central-slovenia,NULL,Logatec,Central Slovenia,Slovenia,NULL,NULL
+loc-bohinj-upper-carniola-kranjska-gora-upper-carniola,NULL,Bohinj,Upper Carniola,Slovenia,NULL,NULL
+loc-zelezniki-upper-carniola,NULL,Železniki,Upper Carniola,Slovenia,NULL,NULL
+loc-upper-carniola-ljubljana-central-slovenia,NULL,Upper Carniola,Ljubljana,Slovenia,NULL,NULL
+loc-central-slovenia-upper-carniola,NULL,Central Slovenia,Upper Carniola,Slovenia,NULL,NULL
+loc-ptuj-drava-slovenska-bistrica-drava,NULL,Ptuj,Drava,Slovenia,NULL,NULL
+loc-maribor-drava-zalec-savinja,NULL,Maribor,Drava,Slovenia,NULL,NULL
+loc-celje-savinja-zalec-savinja,NULL,Celje,Savinja,Slovenia,NULL,NULL
+loc-sentjernej-southeast-slovenia,NULL,Šentjernej,Southeast Slovenia,Slovenia,NULL,NULL
+loc-mirna-pec-southeast-slovenia,NULL,Mirna Peč,Southeast Slovenia,Slovenia,NULL,NULL
+loc-kostel-southeast-slovenia,NULL,Kostel,Southeast Slovenia,Slovenia,NULL,NULL
+loc-central-slovenia-gorizia,NULL,Central Slovenia,Gorizia,Slovenia,NULL,NULL
+loc-ajdovscina-gorizia-ljubljana-central-slovenia,NULL,Ajdovščina,Gorizia,Slovenia,NULL,NULL
+loc-kostanjevica-na-krki-lower-sava,NULL,Kostanjevica na Krki,Lower Sava,Slovenia,NULL,NULL
+loc-radece-lower-sava-central-sava,NULL,Radeče,Lower Sava,Slovenia,NULL,NULL
+loc-novo-mesto-southeast-slovenia-sevnica-lower-sava,NULL,Novo mesto,Southeast Slovenia,Slovenia,NULL,NULL
+loc-novo-mesto-southeast-slovenia-krsko-lower-sava,NULL,Novo mesto,Southeast Slovenia,Slovenia,NULL,NULL
+loc-leskovec-zl-nsk-krsko-lower-sava,NULL,Leskovec,Zlínský,Slovenia,NULL,NULL
+loc-coastal-karst-pivka-inner-carniola-karst,NULL,Coastal-Karst,Pivka,Slovenia,NULL,NULL
+loc-coastal-karst-postojna-inner-carniola-karst,NULL,Coastal-Karst,Postojna,Slovenia,NULL,NULL
+loc-coastal-karst-ilirska-bistrica-inner-carniola-karst,NULL,Coastal-Karst,Ilirska Bistrica,Slovenia,NULL,NULL
+loc-ljubljana-central-slovenia-pivka-inner-carniola-karst,NULL,Ljubljana,Central Slovenia,Slovenia,NULL,NULL
+loc-logatec-central-slovenia-pivka-inner-carniola-karst,NULL,Logatec,Central Slovenia,Slovenia,NULL,NULL
+loc-cerknica-inner-carniola-karst-pivka-inner-carniola-karst,NULL,Cerknica,Inner Carniola-Karst,Slovenia,NULL,NULL
+loc-postojna-inner-carniola-karst-pivka-inner-carniola-karst,NULL,Postojna,Inner Carniola-Karst,Slovenia,NULL,NULL
+loc-inner-carniola-karst,NULL,Inner Carniola-Karst,NULL,Slovenia,NULL,NULL
+loc-puconci-mura,NULL,Puconci,Mura,Slovenia,NULL,NULL
+loc-rogasovci-mura,NULL,Rogašovci,Mura,Slovenia,NULL,NULL
+loc-mura,NULL,Mura,NULL,Slovenia,NULL,NULL
+loc-lendava-mura-murska-sobota-mura,NULL,Lendava,Mura,Slovenia,NULL,NULL
+loc-murska-sobota-mura-celje-savinja,NULL,Murska Sobota,Mura,Slovenia,NULL,NULL
+loc-kuzma-mura-puconci-mura,NULL,Kuzma,Mura,Slovenia,NULL,NULL
+loc-moravske-toplice-mura-murska-sobota-mura,NULL,Moravske Toplice,Mura,Slovenia,NULL,NULL
+loc-mezica-carinthia,NULL,Mežica,Carinthia,Slovenia,NULL,NULL
+loc-radlje-ob-dravi-carinthia-crna-na-koroskem-carinthia,NULL,Radlje ob Dravi,Carinthia,Slovenia,NULL,NULL
+loc-carinthia,NULL,Carinthia,NULL,Slovenia,NULL,NULL
+loc-slovenj-gradec-carinthia-ljubljana-central-slovenia,NULL,Slovenj Gradec,Carinthia,Slovenia,NULL,NULL
+loc-slovenj-gradec-carinthia-velenje-savinja,NULL,Slovenj Gradec,Carinthia,Slovenia,NULL,NULL
+loc-ravne-na-koroskem-carinthia-slovenj-gradec-carinthia,NULL,Ravne na Koroškem,Carinthia,Slovenia,NULL,NULL
+loc-ljubljana-central-slovenia-hrastnik-central-sava,NULL,Ljubljana,Central Slovenia,Slovenia,NULL,NULL
+loc-hrastnik-central-sava-ljubljana-central-slovenia,NULL,Hrastnik,Central Sava,Slovenia,NULL,NULL
+loc-ljubljana-central-slovenia-litija-central-sava,NULL,Ljubljana,Central Slovenia,Slovenia,NULL,NULL
+loc-trbovlje-central-sava-litija-central-sava,NULL,Trbovlje,Central Sava,Slovenia,NULL,NULL
+loc-savinja-drava,NULL,Savinja,Drava,Slovenia,NULL,NULL
+loc-dol-pri-ljubljani-central-slovenia,NULL,Dol pri Ljubljani,Central Slovenia,Slovenia,NULL,NULL
+loc-velike-lasce-central-slovenia-ljubljana-central-slovenia,NULL,Velike Lašče,Central Slovenia,Slovenia,NULL,NULL
+loc-brezovica-central-slovenia,NULL,Brezovica,Central Slovenia,Slovenia,NULL,NULL
+loc-vrhnika-central-slovenia-logatec-central-slovenia,NULL,Vrhnika,Central Slovenia,Slovenia,NULL,NULL
+loc-smartno-pri-litiji-central-slovenia,NULL,Šmartno pri Litiji,Central Slovenia,Slovenia,NULL,NULL
+loc-celje-savinja-velenje-savinja,NULL,Celje,Savinja,Slovenia,NULL,NULL
+loc-semic-southeast-slovenia,NULL,Semič,Southeast Slovenia,Slovenia,NULL,NULL
+loc-ljubljana-central-slovenia-velenje-savinja,NULL,Ljubljana,Central Slovenia,Slovenia,NULL,NULL
+loc-novo-mesto-southeast-slovenia-straza-southeast-slovenia,NULL,Novo mesto,Southeast Slovenia,Slovenia,NULL,NULL
+loc-idrija-gorizia-ljubljana-central-slovenia,NULL,Idrija,Gorizia,Slovenia,NULL,NULL
+loc-lukovica-central-slovenia-domzale-central-slovenia,NULL,Lukovica,Central Slovenia,Slovenia,NULL,NULL
+loc-preddvor-upper-carniola,NULL,Preddvor,Upper Carniola,Slovenia,NULL,NULL
+loc-nova-gorica-gorizia-tolmin-gorizia,NULL,Nova Gorica,Gorizia,Slovenia,NULL,NULL
+loc-logatec-central-slovenia-ilirska-bistrica-inner-carniola-karst,NULL,Logatec,Central Slovenia,Slovenia,NULL,NULL
+loc-ljubljana-central-slovenia-postojna-inner-carniola-karst,NULL,Ljubljana,Central Slovenia,Slovenia,NULL,NULL
+loc-ljubljana-central-slovenia-brezovica-central-slovenia,NULL,Ljubljana,Central Slovenia,Slovenia,NULL,NULL
+loc-bohinj-upper-carniola,NULL,Bohinj,Upper Carniola,Slovenia,NULL,NULL
+loc-zirovnica-upper-carniola,NULL,Žirovnica,Upper Carniola,Slovenia,NULL,NULL
+loc-novo-mesto-southeast-slovenia-kocevje-southeast-slovenia,NULL,Novo mesto,Southeast Slovenia,Slovenia,NULL,NULL
+loc-vipava-gorizia,NULL,Vipava,Gorizia,Slovenia,NULL,NULL

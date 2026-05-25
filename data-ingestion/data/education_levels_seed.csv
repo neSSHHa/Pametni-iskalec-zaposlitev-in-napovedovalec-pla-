@@ -1,0 +1,11 @@
+﻿id,name
+edu-primary,Primary
+edu-lower-vocational,Lower vocational
+edu-secondary-vocational,Secondary vocational
+edu-secondary-general,Secondary general
+edu-higher-vocational,Higher vocational
+edu-bachelor,Bachelor
+edu-master,Master
+edu-phd,PhD
+edu-certification,Professional certification
+edu-not-specified,Not specified
