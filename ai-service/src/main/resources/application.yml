@@ -1,0 +1,14 @@
+server:
+  port: ${AI_SERVICE_PORT:8090}
+
+spring:
+  application:
+    name: smartjobs-ai-service
+
+smartjobs:
+  ai:
+    openrouter-url: ${OPENROUTER_URL:https://openrouter.ai/api/v1}
+    openrouter-api-key: ${OPENROUTER_API_KEY:}
+    openrouter-referer: ${OPENROUTER_REFERER:http://localhost:3000}
+    openrouter-title: ${OPENROUTER_TITLE:Smart Jobs Platform}
+    model: ${OPENROUTER_MODEL:poolside/laguna-xs.2:free}
