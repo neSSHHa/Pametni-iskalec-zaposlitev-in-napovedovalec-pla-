@@ -35,7 +35,7 @@ export default function EuropeJobsMap({ countries, cities }) {
         wheelX: "none",
         pinchZoom: true,
         minZoomLevel: 2.25,
-        maxZoomLevel: 16,
+        maxZoomLevel: 84,
         homeZoomLevel: 2.75,
         homeGeoPoint: { latitude: 52, longitude: 13 },
       }),
@@ -113,7 +113,7 @@ export default function EuropeJobsMap({ countries, cities }) {
       );
 
       container.events.on("click", () => {
-        chart.zoomToGeoPoint({ latitude: context.lat, longitude: context.lng }, 6, true, 720);
+        chart.zoomToGeoPoint({ latitude: context.lat, longitude: context.lng }, 16, true, 720);
         window.setTimeout(() => showCities(context.code), 220);
       });
 
@@ -128,18 +128,22 @@ export default function EuropeJobsMap({ countries, cities }) {
         longitudeField: "lng",
       }),
     );
+    const cityPointData = [...cities].sort((a, b) => Number(a.jobs || 0) - Number(b.jobs || 0));
 
     cityPoints.bullets.push((root, _series, dataItem) => {
       const context = dataItem.dataContext;
+      const jobs = Number(context.jobs || 0);
+      const radius = jobs >= 1000 ? 25 : jobs >= 200 ? 18 : 14;
       const container = am5.Container.new(root, {
         centerX: am5.p50,
         centerY: am5.p50,
+        zIndex: jobs,
         tooltipText: `${context.name}: ${context.jobs} jobs`,
       });
 
       container.children.push(
         am5.Circle.new(root, {
-          radius: 14,
+          radius,
           fill: am5.color(context.color),
           stroke: am5.color(0xffffff),
           strokeWidth: 3,
@@ -152,7 +156,7 @@ export default function EuropeJobsMap({ countries, cities }) {
           populateText: true,
           centerX: am5.p50,
           centerY: am5.p50,
-          fontSize: 11,
+          fontSize: jobs >= 1000 ? 12 : 11,
           fontWeight: "800",
           fill: am5.color(0xffffff),
         }),
@@ -161,7 +165,7 @@ export default function EuropeJobsMap({ countries, cities }) {
       return am5.Bullet.new(root, { sprite: container });
     });
 
-    cityPoints.data.setAll(cities);
+    cityPoints.data.setAll(cityPointData);
     cityPoints.hide(0);
 
     let cityMode = false;
@@ -169,8 +173,8 @@ export default function EuropeJobsMap({ countries, cities }) {
     const showCities = (countryCode) => {
       activeCountryCode = countryCode || activeCountryCode;
       const visibleCities = activeCountryCode
-        ? cities.filter((city) => countryMatches(city.country, activeCountryCode))
-        : cities;
+        ? cityPointData.filter((city) => countryMatches(city.country, activeCountryCode))
+        : cityPointData;
 
       cityPoints.data.setAll(visibleCities);
       cityPoints.show(240);
@@ -195,7 +199,7 @@ export default function EuropeJobsMap({ countries, cities }) {
 
       if (country) {
         window.setTimeout(() => {
-          chart.zoomToGeoPoint({ latitude: country.lat, longitude: country.lng }, 6, true, 560);
+          chart.zoomToGeoPoint({ latitude: country.lat, longitude: country.lng }, 16, true, 560);
           showCities(country.code);
         }, 220);
       }
@@ -222,7 +226,7 @@ export default function EuropeJobsMap({ countries, cities }) {
       if (Math.abs(wheel.delta) < 90 || now - wheel.last < 90) return;
 
       const currentZoom = chart.get("zoomLevel") ?? 2.75;
-      const nextZoom = Math.min(Math.max(currentZoom * Math.exp((-wheel.delta / 430) * Math.log(2)), 2.25), 16);
+      const nextZoom = Math.min(Math.max(currentZoom * Math.exp((-wheel.delta / 300) * Math.log(2)), 2.25), 84);
       const rect = node.getBoundingClientRect();
 
       chart.zoomToPoint({ x: event.clientX - rect.left, y: event.clientY - rect.top }, nextZoom, false, 170);
@@ -240,8 +244,8 @@ export default function EuropeJobsMap({ countries, cities }) {
         showCountries();
         chart.goHome(650);
       },
-      zoomIn: () => chart.zoomIn(),
-      zoomOut: () => chart.zoomOut(),
+      zoomIn: () => chart.zoomToGeoPoint(chart.geoPoint(), Math.min((chart.get("zoomLevel") ?? 2.75) * 2, 84), true, 260),
+      zoomOut: () => chart.zoomToGeoPoint(chart.geoPoint(), Math.max((chart.get("zoomLevel") ?? 2.75) / 1.75, 2.25), true, 260),
     };
 
     return () => {
