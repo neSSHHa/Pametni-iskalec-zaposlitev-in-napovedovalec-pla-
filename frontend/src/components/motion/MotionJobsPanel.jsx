@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { BarChart3, Bookmark, BriefcaseBusiness, Check, MapPin, Scale, X } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 
-const accentColors = ["#69f5ff", "#ff6fb7", "#ffd166", "#8ef0a7", "#a78bfa"];
-const PAGE_SIZE = 5;
+const accentColors = ["#8b5cf6", "#10b981", "#64748b", "#a855f7", "#3b82f6"];
+const PAGE_SIZE = 7;
 
 export default function MotionJobsPanel({
   mode,
@@ -9,10 +10,13 @@ export default function MotionJobsPanel({
   jobs = [],
   totalCount,
   filterRequest,
+  query = "",
+  cvName = "",
   hasMore = false,
   loading = false,
   error = "",
   onLoadMore,
+  onViewStatistics,
 }) {
   const displayJobs = jobs;
   const resultCount = totalCount ?? displayJobs.length;
@@ -21,6 +25,7 @@ export default function MotionJobsPanel({
   const visibleJobs = displayJobs.slice(0, visibleCount);
   const hiddenLoadedJobs = Math.max(displayJobs.length - visibleCount, 0);
   const remainingJobs = Math.max(resultCount - visibleJobs.length, 0);
+  const chips = useMemo(() => filterChips(filterRequest), [filterRequest]);
 
   const handleLoadMore = () => {
     if (hiddenLoadedJobs > 0) {
@@ -38,80 +43,129 @@ export default function MotionJobsPanel({
 
   return (
     <section className="motion-panel job-panel">
-      <div className="panel-head">
+      <div className="results-overview">
         <div>
-          <span>{mode === "cv" ? "CV-ranked roles" : mode === "search" ? "Prompt-ranked roles" : "Vsi oglasi"}</span>
-          <h2>{resultCount} {mode === "idle" ? "aktivnih oglasov" : "ujemajocih vlog"}</h2>
+          <span>Search results</span>
+          <h2>Found <b>{Number(resultCount || 0).toLocaleString("sl-SI")}</b> jobs</h2>
+          <p>Results are ranked by compatibility, with additional market statistics.</p>
         </div>
-        <b>{score}%</b>
+        <CompatibilitySummary score={score} />
       </div>
-      {loading ? <p className="motion-status">Cakam odgovor API-ja...</p> : null}
+
+      <QuerySummaryCard mode={mode} query={query} cvName={cvName} chips={chips} />
+
+      {loading ? <p className="motion-status">Waiting for the API response...</p> : null}
       {error ? <p className="motion-error">{error}</p> : null}
-      <FilterChips filterRequest={filterRequest} />
-      {hiddenLoadedJobs || hasMore ? (
-        <LoadMoreButton remainingJobs={remainingJobs} hasMore={hasMore && !hiddenLoadedJobs} onClick={handleLoadMore} />
+      {!loading && !displayJobs.length ? <p className="motion-status">No listings for the current selection.</p> : null}
+      {!loading && displayJobs.length ? (
+        <div className="result-toolbar">
+          <p className="result-range">Showing {visibleJobs.length} of {Number(resultCount || 0).toLocaleString("sl-SI")} results.</p>
+          <button className="view-statistics-button" type="button" onClick={onViewStatistics}>
+            <BarChart3 size={18} strokeWidth={1.9} />
+            View statistics
+          </button>
+        </div>
       ) : null}
 
       <div className="job-stream">
-        {!loading && !displayJobs.length ? (
-          <p className="motion-status">Ni oglasov za trenutni izbor.</p>
-        ) : null}
-        {!loading && displayJobs.length ? (
-          <p className="motion-status">Prikazujem {visibleJobs.length} od {resultCount} rezultatov.</p>
-        ) : null}
         {visibleJobs.map((job, index) => (
-          <article
-            className="motion-job"
+          <JobCard
+            accent={accentColors[index % accentColors.length]}
+            index={index}
+            job={job}
             key={job.id}
-            role="button"
-            tabIndex={0}
-            onClick={() => setSelectedJob(job)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" || event.key === " ") setSelectedJob(job);
-            }}
-            style={{ "--accent": accentColors[index % accentColors.length], animationDelay: `${index * 95}ms` }}
-          >
-            <div className="job-index">{String(index + 1).padStart(2, "0")}</div>
-            <div>
-              <span>{job.company}</span>
-              <h3>{job.title}</h3>
-              <p>{job.city}, {job.country} - {job.mode} - {job.level}</p>
-            </div>
-            <aside>
-              <strong>{mode === "idle" ? Math.min(job.match + 1, 99) : job.match}%</strong>
-              <small>compatibility</small>
-              {job.confidence !== null && job.confidence !== undefined ? (
-                <small>{job.confidence}% confidence</small>
-              ) : null}
-              <span>{job.salary}</span>
-            </aside>
-            <footer>
-              {job.tags.map((tag) => <em key={tag}>{tag}</em>)}
-            </footer>
-          </article>
+            mode={mode}
+            onOpen={() => setSelectedJob(job)}
+          />
         ))}
       </div>
+
       {hiddenLoadedJobs || hasMore ? (
         <LoadMoreButton remainingJobs={remainingJobs} hasMore={hasMore && !hiddenLoadedJobs} onClick={handleLoadMore} />
       ) : null}
-      {selectedJob ? <JobDetailsPage job={selectedJob} onClose={() => setSelectedJob(null)} /> : null}
+      {selectedJob ? <JobDetailsModal job={selectedJob} filterRequest={filterRequest} onClose={() => setSelectedJob(null)} /> : null}
     </section>
   );
 }
 
-function FilterChips({ filterRequest }) {
-  const chips = filterChips(filterRequest);
-  if (!chips.length) return null;
+function CompatibilitySummary({ score }) {
+  const safeScore = Math.max(0, Math.min(100, Number(score) || 0));
 
   return (
-    <div className="filter-chip-strip" aria-label="Active filters">
-      {chips.map((chip) => (
-        <span key={`${chip.label}-${chip.value}`}>
-          <b>{chip.label}</b>
-          {chip.value}
-        </span>
-      ))}
-    </div>
+    <aside className="compatibility-summary">
+      <div className="score-ring" style={{ "--score": `${safeScore}%` }}>
+        <strong>{safeScore}%</strong>
+        <span>Total compatibility</span>
+      </div>
+      <p>Calculated from current results and match score values.</p>
+    </aside>
+  );
+}
+
+function QuerySummaryCard({ mode, query, cvName, chips }) {
+  const text = mode === "cv"
+    ? (cvName ? `CV: ${cvName}` : "CV analiza")
+    : query || "Prompt ni naveden.";
+
+  return (
+    <article className="query-summary-card">
+      <div className="query-icon"><Scale size={24} strokeWidth={1.8} /></div>
+      <div>
+        <span>Your query</span>
+        <p>{text}</p>
+        {chips.length ? (
+          <div className="filter-chip-strip" aria-label="Detected filters">
+            {chips.map((chip) => <span key={chip}>{chip}</span>)}
+          </div>
+        ) : null}
+      </div>
+      <div className="query-radar" aria-hidden="true">
+        <span></span>
+      </div>
+    </article>
+  );
+}
+
+function JobCard({ job, index, accent, mode, onOpen }) {
+  return (
+    <article
+      className="motion-job"
+      role="button"
+      tabIndex={0}
+      onClick={onOpen}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") onOpen();
+      }}
+      style={{ "--accent": accent, animationDelay: `${index * 80}ms` }}
+    >
+      <div className="job-logo">{initials(job.company)}</div>
+      <div className="job-main">
+        <span>{job.company}</span>
+        <h3>{job.title}</h3>
+        <p>
+          <MapPin size={13} /> {job.city}, {job.country}
+          {job.mode ? <> <i></i> {job.mode}</> : null}
+          {job.level ? <> <i></i> {job.level}</> : null}
+        </p>
+        <footer>
+          {job.tags.map((tag) => <em key={tag}>{tag}</em>)}
+        </footer>
+      </div>
+      <aside>
+        <strong>{mode === "idle" ? Math.min(job.match + 1, 99) : job.match}%</strong>
+        <small>Compatibility</small>
+        <div className="match-dots" aria-hidden="true">
+          {Array.from({ length: 8 }).map((_, dotIndex) => (
+            <i className={dotIndex < Math.ceil((Number(job.match) || 0) / 14) ? "active" : ""} key={dotIndex}></i>
+          ))}
+        </div>
+        {job.confidence !== null && job.confidence !== undefined ? <small>{job.confidence}% confidence</small> : null}
+        <span>{job.salary}</span>
+      </aside>
+      <button className="job-save-button" type="button" aria-label="Save or compare job" onClick={(event) => event.stopPropagation()}>
+        <Bookmark size={19} strokeWidth={1.8} />
+      </button>
+    </article>
   );
 }
 
@@ -122,84 +176,112 @@ function filterChips(filterRequest) {
   const location = filterRequest.location || {};
   const chips = [];
 
-  addChip(chips, "Role", job.jobname);
-  addChip(chips, "City", location.city);
-  addChip(chips, "Country", location.country);
-  addChip(chips, "Region", location.region);
-  addChip(chips, "Level", job.experienceLevelName);
-  addChip(chips, "Education", job.educationLevel);
-  addChip(chips, "Experience", job.requiredExperience ? `${job.requiredExperience}y` : "");
-  addListChips(chips, "Work", filterRequest.workTypes);
-  addListChips(chips, "Skill", filterRequest.skills);
+  addChip(chips, job.jobname);
+  addChip(chips, location.city);
+  addChip(chips, location.country);
+  addChip(chips, location.region);
+  addChip(chips, job.experienceLevelName);
+  addChip(chips, job.educationLevel);
+  addChip(chips, job.requiredExperience ? `${job.requiredExperience}+ years of experience` : "");
+  addListChips(chips, filterRequest.workTypes);
+  addListChips(chips, filterRequest.skills);
 
-  return chips;
+  return [...new Set(chips)].slice(0, 18);
 }
 
-function addChip(chips, label, value) {
+function addChip(chips, value) {
   if (value === null || value === undefined || value === "") return;
-  chips.push({ label, value: String(value) });
+  chips.push(String(value));
 }
 
-function addListChips(chips, label, values) {
+function addListChips(chips, values) {
   if (!Array.isArray(values)) return;
-  values.filter(Boolean).forEach((value) => addChip(chips, label, value));
+  values.filter(Boolean).forEach((value) => addChip(chips, value));
 }
 
 function LoadMoreButton({ remainingJobs, hasMore, onClick }) {
   return (
     <button className="job-load-more" type="button" onClick={onClick}>
       Load more
-      <span>{hasMore ? "nalozi naslednjo stran" : `${remainingJobs} skritih oglasov`}</span>
+      <span>{hasMore ? "load next page" : `${remainingJobs} hidden listings`}</span>
     </button>
   );
 }
 
-function JobDetailsPage({ job, onClose }) {
+function JobDetailsModal({ job, filterRequest, onClose }) {
+  const userSkills = Array.isArray(filterRequest?.skills) ? filterRequest.skills : [];
+
   return (
-    <div className="job-details-backdrop">
-      <article className="job-details-page">
+    <div className="job-details-backdrop" role="dialog" aria-modal="true" onClick={onClose}>
+      <article className="job-details-page" onClick={(event) => event.stopPropagation()}>
+        <button className="job-details-close" type="button" onClick={onClose} aria-label="Close job details">
+          <X size={22} strokeWidth={1.8} />
+        </button>
         <header>
-          <button className="job-details-close" type="button" onClick={onClose}>Nazaj</button>
-          <span>{job.company}</span>
-          <h2>{job.title}</h2>
-          <div className="job-details-meta">
-            <b>{job.match}% compatibility</b>
-            {job.confidence !== null && job.confidence !== undefined ? (
-              <b>{job.confidence}% confidence</b>
-            ) : null}
-            <b>{job.city}, {job.country}</b>
-            <b>{job.mode}</b>
-            <b>{job.level}</b>
+          <div className="job-logo large">{initials(job.company)}</div>
+          <div>
+            <span>{job.company}</span>
+            <h2>{job.title}</h2>
+            <div className="job-details-meta">
+              <b>{job.city}, {job.country}</b>
+              <b>{job.mode}</b>
+              <b>{job.level}</b>
+            </div>
           </div>
+          <aside>
+            <strong>{job.match}%</strong>
+            <span>Compatibility</span>
+          </aside>
         </header>
-        <div className="job-details-layout">
-          <section>
-            <span>Opis vloge</span>
-            <p>{job.description || "Opis za ta oglas ni naveden."}</p>
-            <footer>
-              {job.tags.map((tag) => <em key={tag}>{tag}</em>)}
-            </footer>
-          </section>
-          <dl>
-            <div>
-              <dt>Izobrazba</dt>
-              <dd>{job.educationLevel}</dd>
-            </div>
-            <div>
-              <dt>Placa</dt>
-              <dd>{job.salary}</dd>
-            </div>
-            <div>
-              <dt>Objavljeno</dt>
-              <dd>{job.postedDate || "Ni navedeno"}</dd>
-            </div>
-            <div>
-              <dt>Vir</dt>
-              <dd>{job.sourceUrl || "Ni navedeno"}</dd>
-            </div>
-          </dl>
+
+        <div className="job-details-tags">
+          {job.tags.map((tag) => <em key={tag}>{tag}</em>)}
         </div>
+
+        <section>
+          <span>Job description</span>
+          <p>{job.description || "No description is available for this listing."}</p>
+        </section>
+
+        <div className="match-columns">
+          <section>
+            <span>What you have</span>
+            <ul>
+              {(userSkills.length ? userSkills : job.tags).map((skill) => (
+                <li key={skill}><Check size={16} /> {skill}</li>
+              ))}
+            </ul>
+          </section>
+          <section>
+            <span>What the job has</span>
+            <ul>
+              {job.tags.map((skill) => <li key={skill}><BriefcaseBusiness size={16} /> {skill}</li>)}
+            </ul>
+          </section>
+        </div>
+
+        <dl>
+          <div>
+            <dt>Salary</dt>
+            <dd>{job.salary}</dd>
+          </div>
+          <div>
+            <dt>Education</dt>
+            <dd>{job.educationLevel}</dd>
+          </div>
+        </dl>
       </article>
     </div>
   );
+}
+
+function initials(value = "") {
+  const letters = value
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join("");
+
+  return letters || "J";
 }

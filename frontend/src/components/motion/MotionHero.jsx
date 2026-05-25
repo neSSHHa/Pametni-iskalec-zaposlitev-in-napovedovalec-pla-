@@ -1,30 +1,12 @@
-function MotionResultCard({ mode, score }) {
-  return (
-    <aside className={`motion-result-card motion-result-card-${mode}`}>
-      <span>{mode === "cv" ? "CV result route" : "Prompt result route"}</span>
-      <strong>{score}%</strong>
-      <h2>{mode === "cv" ? "CV fit matrix is already active." : "Prompt intent is already active."}</h2>
-      <p>
-        {mode === "cv"
-          ? "This page behaves like the post-upload state: jobs are ranked by CV match, with market signals and map context."
-          : "This page behaves like the post-prompt state: jobs are ranked by search intent, with stats and city demand below."}
-      </p>
-      <div>
-        <a href="/motion-prompt">Prompt result</a>
-        <a href="/motion-cv">CV result</a>
-      </div>
-    </aside>
-  );
-}
+import { Brain, CheckCircle2, FileUp, Scale, Search, Target, Zap, Sparkles } from "lucide-react";
 
 const processingModes = [
-  ["fast", "Fast", "instant"],
-  ["thinking", "Thinking", "main AI"],
+  ["fast", Zap, "Instant", "fast"],
+  ["thinking", Sparkles, "Thinking", "AI"],
 ];
 
 export default function MotionHero({
   mode,
-  score,
   query,
   cvName,
   resultPage,
@@ -39,86 +21,135 @@ export default function MotionHero({
 }) {
   const activeResultMode = mode === "cv" ? "cv" : "search";
 
+  if (resultPage && !loading) {
+    return (
+      <section className="motion-hero motion-result-hero">
+        <div className="motion-copy">
+          <span className="motion-kicker">{activeResultMode === "cv" ? "CV results" : "Prompt results"}</span>
+          <h1><span>{activeResultMode === "cv" ? "CV results." : "Prompt results."}</span></h1>
+          <p>Results are ranked by compatibility.</p>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section className={`motion-hero ${resultPage ? "motion-result-hero" : ""}`}>
+    <section className="motion-hero home-hero">
       <div className="motion-copy">
-        <span className="motion-kicker">
-          {resultPage ? (activeResultMode === "cv" ? "CV match output" : "Prompt match output") : "Pametni iskalec zaposlitev"}
-        </span>
-        <h1>
-          {resultPage ? (
-            activeResultMode === "cv" ? (
-              <>
-                <span>CV</span>
-                <span>match</span>
-                <span>ignition.</span>
-              </>
-            ) : (
-              <>
-                <span>Prompt</span>
-                <span>result</span>
-                <span>pulse.</span>
-              </>
-            )
-          ) : (
-            <>
-              <span>Najdi</span>
-              <span>pravo delo</span>
-              <span>hitreje.</span>
-            </>
-          )}
-        </h1>
-        <p>
-          {resultPage
-            ? "Rezultati so povezani z backend API-jem, CV/prompt filtrom, zemljevidom povprasevanja in analitiko."
-            : "Vnesi prompt ali nalozi CV. Sistem uporabi obstojece API-je, razvrsti oglase in prikaze statistiko trga."}
-        </p>
+        <div className="radar-bg" aria-hidden="true">
+          <span className="radar-dot d1"></span>
+          <span className="radar-dot d2"></span>
+          <span className="radar-dot d3"></span>
+          <span className="radar-dot d4"></span>
+          <span className="radar-dot d5"></span>
+        </div>
+        <h1>Find jobs that truly <span>match you</span></h1>
+        <p>Upload your CV or describe what you want. Job Radar analyzes listings and returns the best matches.</p>
       </div>
 
-      {resultPage && !loading ? (
-        <MotionResultCard mode={activeResultMode} score={score} />
-      ) : (
-        <form className="motion-command" onSubmit={onPromptSubmit}>
-          <div className="command-glow"></div>
-          <label>Prompt za iskanje</label>
-          <textarea
-            value={query}
-            onChange={(event) => onQueryChange(event.target.value)}
-            placeholder="Npr. junior Java developer remote, React frontend v Ljubljani, medicinska sestra Maribor..."
-            rows={5}
-          />
-          {status ? <p className="motion-status">{status}</p> : null}
-          {error ? <p className="motion-error">{error}</p> : null}
-          <div className="motion-mode-switch" role="group" aria-label="Processing mode">
-            {processingModes.map(([value, label, detail]) => (
-              <button
-                key={value}
-                type="button"
-                className={processingMode === value ? "active" : ""}
-                onClick={() => onProcessingModeChange(value)}
-              >
-                <span>{label}</span>
-                <small>{detail}</small>
-              </button>
-            ))}
+      <div className="home-mode-switch" role="group" aria-label="Processing mode">
+        {processingModes.map(([value, Icon, label, detail]) => (
+          <button
+            key={value}
+            type="button"
+            className={processingMode === value ? "active" : ""}
+            onClick={() => onProcessingModeChange(value)}
+          >
+            <Icon size={14} strokeWidth={1.9} />
+            <span>{label}</span>
+            <small>{detail}</small>
+          </button>
+        ))}
+      </div>
+
+      <form className="motion-command search-panel" onSubmit={onPromptSubmit}>
+        {status && mode !== "idle" ? <p className="motion-status">{status}</p> : null}
+        {error ? <p className="motion-error">{error}</p> : null}
+
+        <div className="panel-side">
+          <div className="tab-title">
+            <FileUp size={24} strokeWidth={1.9} />
+            <span>Upload CV</span>
           </div>
-          <div className="motion-actions">
-            <label className={`motion-upload ${cvName ? "ready" : ""}`}>
-              <input
-                type="file"
-                accept=".pdf,.doc,.docx"
-                onChange={(event) => onCvUpload(event.target.files?.[0])}
-              />
-              <span>{cvName ? "CV nalozen" : "Nalozi CV"}</span>
-              <strong>{cvName || "PDF / DOCX"}</strong>
-            </label>
-            <button type="submit" disabled={loading}>
-              <span>{loading ? "Obdelujem..." : mode === "idle" ? "Poisci" : "Osvezi"}</span>
-              <i></i>
+          <label className={`upload-box ${cvName ? "ready" : ""}`}>
+            <input
+              type="file"
+              accept=".pdf,.doc,.docx"
+              onChange={(event) => onCvUpload(event.target.files?.[0])}
+            />
+            <span className="file-icon" aria-hidden="true">
+              <span className="file-lines"><i></i><i></i><i></i></span>
+            </span>
+            <strong>{cvName || "Drag your CV here"}</strong>
+            <span className="upload-or">or</span>
+            <span className="btn-primary">{cvName ? "CV selected" : "Upload CV"}</span>
+            <small>{cvName ? "Document is ready for analysis" : "PDF, DOCX supported"}</small>
+          </label>
+        </div>
+
+        <div className="panel-side">
+          <div className="tab-title">
+            <Search size={24} strokeWidth={1.9} />
+            <span>Prompt Search</span>
+          </div>
+          <div className="prompt-box">
+            <h3>Describe what you want</h3>
+            <p>Add details so the system can return better matches.</p>
+            <textarea
+              value={query}
+              onChange={(event) => onQueryChange(event.target.value)}
+              placeholder="E.g. I am looking for a junior .NET role in Maribor, remote or hybrid, salary from 1800 EUR, 2+ years of experience, C#, SQL..."
+            />
+            <button className="search-btn" type="submit" disabled={loading || !query.trim()}>
+              <Search size={21} strokeWidth={2} />
+              <span>{loading ? "Processing..." : "Search jobs"}</span>
             </button>
           </div>
-        </form>
-      )}
+        </div>
+      </form>
+
+      <h2 className="section-title">How it works</h2>
+      <section className="steps">
+        <StepCard number="1" icon={<FileUp size={38} />} title="Upload a CV or write a prompt" text="Add your CV or describe the ideal job you want." />
+        <StepCard number="2" icon={<Brain size={38} />} title="AI analysis" text="The system analyzes your experience, skills and preferences." />
+        <StepCard number="3" icon={<Target size={38} />} title="Job matching" text="You get a list of roles that best fit your profile." />
+        <StepCard number="4" icon={<Scale size={38} />} title="Compare opportunities" text="Save and compare several jobs in one place." />
+      </section>
+
+      <section className="mission">
+        <div className="mission-content">
+          <div className="eyebrow">Our goal</div>
+          <h2>More than a regular job search</h2>
+          <ul className="check-list">
+            <li><CheckCircle2 size={18} /> Remove endless scrolling through irrelevant listings</li>
+            <li><CheckCircle2 size={18} /> Use AI to understand what the candidate really wants</li>
+            <li><CheckCircle2 size={18} /> Connect CV, preferences and the labor market in one system</li>
+            <li><CheckCircle2 size={18} /> Enable transparent job comparison</li>
+            <li><CheckCircle2 size={18} /> Help people find better jobs faster</li>
+          </ul>
+          <button className="outline-btn" type="button">Learn more about our mission</button>
+        </div>
+
+        <div className="mission-visual" aria-hidden="true">
+          <div className="float-badge one">Save time</div>
+          <div className="float-badge two">Smart analysis</div>
+          <div className="float-badge three">Transparent</div>
+          <div className="phone-card">
+            <div className="mini-radar"></div>
+          </div>
+        </div>
+      </section>
     </section>
+  );
+}
+
+function StepCard({ number, icon, title, text }) {
+  return (
+    <article className="step-card">
+      <div className="step-number">{number}</div>
+      <div className="step-icon">{icon}</div>
+      <h3>{title}</h3>
+      <p>{text}</p>
+    </article>
   );
 }

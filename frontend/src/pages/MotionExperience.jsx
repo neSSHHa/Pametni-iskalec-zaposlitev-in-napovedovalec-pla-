@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { BarChart3, Brain, Database, FileText, Search, UserRound } from "lucide-react";
 import { getAnalyticsDashboard } from "../api/analyticsApi.js";
 import { uploadCv } from "../api/cvApi.js";
 import { getJobs, searchJobsByPrompt } from "../api/jobApi.js";
@@ -6,13 +7,14 @@ import MotionCityEqualizer from "../components/motion/MotionCityEqualizer.jsx";
 import MotionHero from "../components/motion/MotionHero.jsx";
 import MotionJobsPanel from "../components/motion/MotionJobsPanel.jsx";
 import MotionMapSection from "../components/motion/MotionMapSection.jsx";
-import MotionScorePanel from "../components/motion/MotionScorePanel.jsx";
 import MotionShell from "../components/motion/MotionShell.jsx";
 import MotionSignals from "../components/motion/MotionSignals.jsx";
 import MotionStats from "../components/motion/MotionStats.jsx";
 
 const fallbackQuery = "";
 const JOB_PAGE_SIZE = 50;
+const ANALYTICS_DASHBOARD_LIMIT = 50;
+let initialDataCache = null;
 const countryCodes = {
   slovenia: "SI",
   slovenija: "SI",
@@ -119,7 +121,7 @@ function mapJob(job, index) {
 
   return {
     id: job.id || `${job.title}-${index}`,
-    title: job.title || "Odprta vloga",
+    title: job.title || "Open role",
     company: job.companyName || "Podjetje ni navedeno",
     city,
     region,
@@ -130,18 +132,18 @@ function mapJob(job, index) {
     salary: formatSalary(job),
     sourceUrl: job.sourceUrl || "",
     description: job.description || "",
-    educationLevel: job.educationLevel || "Ni navedeno",
+    educationLevel: job.educationLevel || "Not specified",
     postedDate: job.postedDate || "",
     matchLevel: job.matchLevel || "",
     match: Number.isFinite(Number(job.matchScore)) ? Number(job.matchScore) : Math.max(72, 96 - index * 3),
     confidence: Number.isFinite(Number(job.confidenceScore)) ? Number(job.confidenceScore) : null,
-    level: job.experienceLevel || "Ni navedeno",
-    mode: job.workMode || "Ni navedeno",
+    level: job.experienceLevel || "Not specified",
+    mode: job.workMode || "Not specified",
     tags: Array.isArray(job.skills) && job.skills.length ? job.skills.slice(0, 4) : ["AI match", "Skill fit"],
   };
 }
 
-function statValue(list, fallback = "Ni podatkov") {
+function statValue(list, fallback = "No data") {
   return list?.[0]?.label || fallback;
 }
 
@@ -158,7 +160,7 @@ function countItems(items, getter) {
 
     list.filter(Boolean).forEach((value) => {
       const label = String(value).trim();
-      if (!label || label === "Ni navedeno" || label === "Unknown") return;
+      if (!label || label === "Ni navedeno" || label === "Not specified" || label === "Unknown") return;
       acc.set(label, (acc.get(label) || 0) + 1);
     });
 
@@ -180,7 +182,7 @@ function classifyRole(title = "") {
   if (/(prodaj|sales|consultant|svetovalec)/.test(normalized)) return "Prodaja in storitve";
   if (/(skladisc|voznik|logistik|warehouse)/.test(normalized)) return "Logistika in transport";
   if (/(ucitelj|teaching|sola)/.test(normalized)) return "Izobrazevanje";
-  return "Druge vloge";
+  return "Other roles";
 }
 
 function buildFilteredAnalytics(filteredJobs, meta = {}) {
@@ -236,6 +238,35 @@ function buildFilteredAnalytics(filteredJobs, meta = {}) {
   };
 }
 
+function hasAnalyticsData(analytics) {
+  if (!analytics) return false;
+  const summary = analytics.summary || {};
+  const listKeys = [
+    "topSkills",
+    "topRoles",
+    "cityStats",
+    "regionStats",
+    "countryStats",
+    "experienceLevelStats",
+    "workTypeStats",
+  ];
+
+  return Number(summary.totalJobs || 0) > 0
+    || Number(summary.totalCompanies || 0) > 0
+    || listKeys.some((key) => Array.isArray(analytics[key]) && analytics[key].length > 0);
+}
+
+function analyticsOrJobFallback(analyticsData, mappedJobs, totalCount) {
+  if (hasAnalyticsData(analyticsData)) {
+    return { ...analyticsData, isFiltered: false };
+  }
+
+  return {
+    ...buildFilteredAnalytics(mappedJobs, { totalCount }),
+    isFiltered: false,
+  };
+}
+
 function mapAnalyticsToSignals(analytics, jobsCount) {
   const summary = analytics?.summary;
   const totalJobs = summary?.totalJobs ?? jobsCount ?? 0;
@@ -245,64 +276,64 @@ function mapAnalyticsToSignals(analytics, jobsCount) {
 
   if (!analytics?.isFiltered) {
     return [
-      [String(totalJobs), "aktivnih oglasov", "Celotna baza delovnih mest"],
-      [statValue(analytics?.topSkills), "top vescina", "Najpogostejsa zahteva v oglasih"],
-      [statValue(analytics?.topRoles), "najbolj iskana vloga", "Trenutni trg po kategorijah"],
-      [statValue(analytics?.cityStats), "najmocnejsa lokacija", `${summary?.totalLocations ?? analytics?.cityStats?.length ?? 0} lokacij v bazi`],
+      [String(totalJobs), "active listings", "The complete job database"],
+      [statValue(analytics?.topSkills), "top skill", "Most common requirement in listings"],
+      [statValue(analytics?.topRoles), "most wanted role", "Current market by category"],
+      [statValue(analytics?.cityStats), "strongest location", `${summary?.totalLocations ?? analytics?.cityStats?.length ?? 0} locations in the database`],
     ];
   }
 
   return [
-    [String(totalJobs), "ujemajocih vlog", analytics?.isFiltered ? "Za trenutni CV/prompt" : "Aktivni oglasi v bazi"],
-    [averageMatch ? `${averageMatch}%` : statValue(analytics?.topSkills), averageMatch ? "povprecno ujemanje" : "top vescina", averageMatch ? "Povprecen match score rezultatov" : "Najpogostejsa zahteva v oglasih"],
-    [statValue(analytics?.cityStats), "najmocnejsa lokacija", `${summary?.totalLocations ?? analytics?.cityStats?.length ?? 0} lokacij v izboru`],
-    [String(remoteJobs + hybridJobs), "remote/hybrid", "Fleksibilne vloge v izboru"],
+    [String(totalJobs), "matching roles", analytics?.isFiltered ? "For the current CV/prompt" : "Active listings in the database"],
+    [averageMatch ? `${averageMatch}%` : statValue(analytics?.topSkills), averageMatch ? "average match" : "top skill", averageMatch ? "Average match score of results" : "Most common requirement in listings"],
+    [statValue(analytics?.cityStats), "strongest location", `${summary?.totalLocations ?? analytics?.cityStats?.length ?? 0} locations in this selection`],
+    [String(remoteJobs + hybridJobs), "remote/hybrid", "Flexible roles in this selection"],
   ];
 }
 
 function mapAnalyticsToStats(analytics) {
   return [
     {
-      title: "Najbolj zazelene vescine",
+      title: "Most wanted skills",
       value: statValue(analytics?.topSkills),
-      detail: analytics?.topSkills?.slice(0, 4).map((item) => item.label).join(", ") || "Podatki se napolnijo iz backend analytics API-ja.",
+      detail: analytics?.topSkills?.slice(0, 4).map((item) => item.label).join("\n") || "Data is loaded from the backend analytics API.",
       tone: "cyan",
     },
     {
-      title: "Najbolj iskane vloge",
+      title: "Most wanted roles",
       value: statValue(analytics?.topRoles),
-      detail: analytics?.topRoles?.slice(0, 4).map((item) => `${item.label} (${item.count})`).join(", ") || "Razvijalci, dizajnerji, kuharji, terapevti in druge vloge.",
+      detail: analytics?.topRoles?.slice(0, 4).map((item) => `${item.label} (${item.count})`).join("\n") || "Developers, designers, chefs, therapists and other roles.",
       tone: "pink",
     },
     {
-      title: "Delovna mesta po mestih/regijah",
+      title: "Jobs by cities/regions",
       value: statValue(analytics?.cityStats),
-      detail: analytics?.regionStats?.slice(0, 4).map((item) => `${item.label} (${item.count})`).join(", ") || "Pregled mest in regij iz lokacij v oglasih.",
+      detail: analytics?.regionStats?.slice(0, 4).map((item) => `${item.label} (${item.count})`).join("\n") || "Overview of cities and regions from listing locations.",
       tone: "lime",
     },
     {
-      title: "Raven izkusenj",
+      title: "Experience level",
       value: statValue(analytics?.experienceLevelStats),
-      detail: analytics?.experienceLevelStats?.slice(0, 4).map((item) => `${item.label} ${item.percentage}%`).join(", ") || "Distribucija oglasov po zahtevani senioriteti.",
+      detail: analytics?.experienceLevelStats?.slice(0, 4).map((item) => `${item.label} ${item.percentage}%`).join("\n") || "Distribution of listings by required seniority.",
       tone: "amber",
     },
     {
-      title: "Tip dela",
+      title: "Work type",
       value: statValue(analytics?.workTypeStats),
-      detail: analytics?.workTypeStats?.slice(0, 4).map((item) => `${item.label} (${item.count})`).join(", ") || "Remote, hybrid in on-site signal iz baze.",
+      detail: analytics?.workTypeStats?.slice(0, 4).map((item) => `${item.label} (${item.count})`).join("\n") || "Remote, hybrid and on-site signals from the database.",
       tone: "cyan",
     },
     {
-      title: "Podjetja v izboru",
+      title: "Companies in selection",
       value: String(analytics?.summary?.totalCompanies ?? "0"),
-      detail: analytics?.isFiltered ? "Stevilo podjetij samo med filtriranimi rezultati." : "Stevilo podjetij v trenutno nalozenih oglasih.",
+      detail: analytics?.isFiltered ? "Number of companies in filtered results only." : "Number of companies in the currently loaded listings.",
       tone: "pink",
     },
   ];
 }
 
 function mapRoleMix(analytics) {
-  const colors = ["#69f5ff", "#ff6fb7", "#ffd166", "#8ef0a7", "#a78bfa"];
+  const colors = ["#2563eb", "#0f766e", "#475569", "#7c3aed", "#0369a1"];
   const roles = analytics?.topRoles?.length ? analytics.topRoles : [];
   const max = Math.max(...roles.map((role) => role.count), 1);
   return roles.slice(0, 5).map((role, index) => [
@@ -376,39 +407,107 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
   const [jobsHasMore, setJobsHasMore] = useState(false);
   const [activeFilter, setActiveFilter] = useState(null);
   const [analytics, setAnalytics] = useState(null);
+  const [lastResultsMode, setLastResultsMode] = useState("");
+  const [initialLoading, setInitialLoading] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
+  const [theme, setTheme] = useState(() => localStorage.getItem("smartjobs-theme") || "light");
 
-  const activeMode = resultPage && initialMode !== "idle" ? initialMode : mode;
+  const activeMode = mode;
+  const isAnalyticsPage = activeMode === "analytics";
   const score = analytics?.summary?.averageMatch
     ?? (jobs.length ? Math.round(jobs.reduce((sum, job) => sum + job.match, 0) / jobs.length) : 0);
   const signals = useMemo(() => mapAnalyticsToSignals(analytics, jobsTotalCount || jobs.length), [analytics, jobs.length, jobsTotalCount]);
   const statCards = useMemo(() => mapAnalyticsToStats(analytics), [analytics]);
-  const roleMix = useMemo(() => mapRoleMix(analytics), [analytics]);
   const { countries, cities } = useMemo(() => mapLocations(analytics), [analytics]);
-  const tickerItems = useMemo(() => cities.slice(0, 5).map((city) => `${city.name} ${city.jobs}`), [cities]);
+
+  const toggleTheme = () => {
+    setTheme((currentTheme) => {
+      const nextTheme = currentTheme === "light" ? "dark" : "light";
+      localStorage.setItem("smartjobs-theme", nextTheme);
+      return nextTheme;
+    });
+  };
+
+  useEffect(() => {
+    if (!loading) {
+      setLoadingProgress(0);
+      return undefined;
+    }
+
+    const startedAt = Date.now();
+    setLoadingProgress(3);
+    const interval = window.setInterval(() => {
+      const elapsedSeconds = (Date.now() - startedAt) / 1000;
+      let nextProgress;
+
+      if (elapsedSeconds <= 15) {
+        nextProgress = 3 + (elapsedSeconds / 15) * 32;
+      } else if (elapsedSeconds <= 45) {
+        nextProgress = 35 + ((elapsedSeconds - 15) / 30) * 35;
+      } else if (elapsedSeconds <= 90) {
+        nextProgress = 70 + ((elapsedSeconds - 45) / 45) * 18;
+      } else {
+        nextProgress = 88 + Math.min(8, ((elapsedSeconds - 90) / 180) * 8);
+      }
+
+      setLoadingProgress(Math.min(96, nextProgress));
+    }, 500);
+
+    return () => window.clearInterval(interval);
+  }, [loading]);
 
   useEffect(() => {
     let cancelled = false;
 
     async function loadInitialData() {
+      if (initialDataCache) {
+        const cachedAnalytics = hasAnalyticsData(initialDataCache.analytics)
+          ? initialDataCache.analytics
+          : analyticsOrJobFallback(null, initialDataCache.jobs, initialDataCache.totalCount);
+        setJobs(initialDataCache.jobs);
+        setJobsTotalCount(initialDataCache.totalCount);
+        setJobsPage(initialDataCache.page);
+        setJobsHasMore(initialDataCache.hasMore);
+        setActiveFilter(null);
+        setAnalytics(cachedAnalytics);
+        initialDataCache = { ...initialDataCache, analytics: cachedAnalytics };
+        setStatus("");
+        return;
+      }
+
       try {
-        setStatus("Nalaganje podatkov iz backend API-ja...");
-        const [jobsData, analyticsData] = await Promise.all([getJobs({ page: 0, size: JOB_PAGE_SIZE }), getAnalyticsDashboard(50)]);
+        setInitialLoading(true);
+        setStatus("Loading data from the backend API...");
+        const [jobsData, analyticsData] = await Promise.all([getJobs({ page: 0, size: JOB_PAGE_SIZE }), getAnalyticsDashboard(ANALYTICS_DASHBOARD_LIMIT)]);
         if (cancelled) return;
         const mappedJobs = listFromApiResponse(jobsData).map(mapJob);
+        const totalCount = totalFromApiResponse(jobsData, mappedJobs.length);
+        const cachedData = {
+          jobs: mappedJobs,
+          totalCount,
+          page: jobsData?.page ?? 0,
+          hasMore: Boolean(jobsData?.hasMore),
+          analytics: analyticsOrJobFallback(analyticsData, mappedJobs, totalCount),
+        };
+        initialDataCache = cachedData;
         setJobs(mappedJobs);
-        setJobsTotalCount(totalFromApiResponse(jobsData, mappedJobs.length));
-        setJobsPage(jobsData?.page ?? 0);
-        setJobsHasMore(Boolean(jobsData?.hasMore));
+        setJobsTotalCount(cachedData.totalCount);
+        setJobsPage(cachedData.page);
+        setJobsHasMore(cachedData.hasMore);
         setActiveFilter(null);
-        setAnalytics({ ...analyticsData, isFiltered: false });
+        setAnalytics(cachedData.analytics);
         setStatus("");
       } catch (err) {
         if (cancelled) return;
-        setError("Backend trenutno ni dosegljiv. UI je nalozen, podatki se prikazejo ko se API zazene.");
+        setError("The backend is currently unavailable. The UI is loaded and data will appear when the API starts.");
         setStatus("");
+      } finally {
+        if (!cancelled) {
+          setInitialLoading(false);
+        }
       }
     }
 
@@ -421,7 +520,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
   const loadMoreJobs = async () => {
     if (activeMode !== "idle" || loading || !jobsHasMore) return;
     setLoading(true);
-    setStatus("Nalaganje naslednjih oglasov...");
+    setStatus("Loading the next listings...");
 
     try {
       const nextPage = jobsPage + 1;
@@ -432,7 +531,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       setJobsPage(data?.page ?? nextPage);
       setJobsHasMore(Boolean(data?.hasMore));
     } catch (err) {
-      setError("Naslednja stran oglasov trenutno ni dosegljiva.");
+      setError("The next page of listings is currently unavailable.");
     } finally {
       setLoading(false);
       setStatus("");
@@ -442,18 +541,19 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
   const submitPrompt = async (event) => {
     event.preventDefault();
     if (!query.trim()) {
-      setError("Vnesi prompt ali nalozi CV za filtriranje oglasov.");
+      setError("Enter a prompt or upload a CV to filter listings.");
       return;
     }
     setMode("search");
     setLoading(true);
     setError("");
     setStatus(processingMode === "thinking"
-      ? "AI bere prompt in filtrira oglase..."
-      : "Fast mode prepozna jasne kriterije in takoj rangira oglase...");
+      ? "AI is reading the prompt and filtering listings..."
+      : "Fast mode detects clear criteria and ranks listings...");
 
     try {
       const data = await searchJobsByPrompt(query, processingMode);
+      setLoadingProgress(100);
       const mappedJobs = listFromApiResponse(data).map(mapJob);
       setJobs(mappedJobs);
       const totalCount = totalFromApiResponse(data, mappedJobs.length);
@@ -462,9 +562,10 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       setJobsHasMore(false);
       setActiveFilter(data?.filterRequest || null);
       setAnalytics(buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch }));
+      setLastResultsMode("search");
       window.history.pushState({}, "", "/motion-prompt");
     } catch (err) {
-      setError("Prompt API nije vratio rezultat. Proveri backend/AI servis.");
+      setError("The prompt API did not return a result. Check the backend and AI service.");
     } finally {
       setLoading(false);
       setStatus("");
@@ -478,11 +579,12 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
     setLoading(true);
     setError("");
     setStatus(processingMode === "thinking"
-      ? "CV se cita, AI izvlaci profil i povezuje oglase..."
-      : "CV se cita, fast parser izvlaci vescine i rangira oglase...");
+      ? "The CV is being read, AI is extracting the profile and matching listings..."
+      : "The CV is being read, the fast parser is extracting skills and ranking listings...");
 
     try {
       const data = await uploadCv(file, processingMode);
+      setLoadingProgress(100);
       const mappedJobs = (data?.jobs || []).map(mapJob);
       setJobs(mappedJobs);
       const totalCount = totalFromApiResponse(data, mappedJobs.length);
@@ -491,74 +593,148 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       setJobsHasMore(false);
       setActiveFilter(data?.filterRequest || null);
       setAnalytics(buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch }));
+      setLastResultsMode("cv");
       window.history.pushState({}, "", "/motion-cv");
     } catch (err) {
-      setError("CV API nije vratio rezultat. Proveri da li backend i AI servis rade.");
+      setError("The CV API did not return a result. Check that the backend and AI service are running.");
     } finally {
       setLoading(false);
       setStatus("");
     }
   };
 
+  const showCurrentStatistics = () => {
+    if (activeMode === "idle") return;
+    setMode("analytics");
+    window.history.pushState({}, "", "/analytics");
+  };
+
+  const returnToJobs = () => {
+    const nextMode = lastResultsMode || (cvName ? "cv" : "search");
+    setMode(nextMode);
+    window.history.pushState({}, "", nextMode === "cv" ? "/motion-cv" : "/motion-prompt");
+  };
+
+  const resetHome = () => {
+    setMode("idle");
+    setQuery(fallbackQuery);
+    setCvName("");
+    setActiveFilter(null);
+    setLastResultsMode("");
+    setInitialLoading(false);
+    setLoading(false);
+    setError("");
+    setStatus("");
+    window.history.pushState({}, "", "/motion");
+    window.dispatchEvent(new Event("jobradar:navigate"));
+  };
+
   return (
-    <MotionShell mode={activeMode} score={score} tickerItems={tickerItems}>
-      {loading ? <MotionLoadingOverlay mode={activeMode} status={status} /> : null}
-      <MotionHero
-        mode={activeMode}
-        score={score}
-        query={query}
-        cvName={cvName}
-        resultPage={false}
-        loading={loading}
-        status={status}
-        error={error}
-        processingMode={processingMode}
-        onProcessingModeChange={setProcessingMode}
-        onQueryChange={setQuery}
-        onPromptSubmit={submitPrompt}
-        onCvUpload={handleCvUpload}
-      />
-      <MotionSignals signals={signals} />
-      <section className="motion-grid">
-        <MotionJobsPanel
+    <MotionShell mode={activeMode} score={score} theme={theme} onThemeToggle={toggleTheme} onHomeClick={resetHome} onStatisticsClick={showCurrentStatistics}>
+      {loading ? <MotionLoadingOverlay mode={activeMode} status={status} progress={loadingProgress} /> : null}
+      {!isAnalyticsPage ? (
+        <MotionHero
           mode={activeMode}
           score={score}
-          jobs={jobs}
-          totalCount={jobsTotalCount || jobs.length}
-          filterRequest={activeFilter}
-          hasMore={activeMode === "idle" && jobsHasMore}
+          query={query}
+          cvName={cvName}
+          resultPage={activeMode === "cv" || activeMode === "search"}
           loading={loading}
+          status={status}
           error={error}
-          onLoadMore={loadMoreJobs}
+          processingMode={processingMode}
+          onProcessingModeChange={setProcessingMode}
+          onQueryChange={setQuery}
+          onPromptSubmit={submitPrompt}
+          onCvUpload={handleCvUpload}
         />
-        <MotionScorePanel mode={activeMode} score={score} roleMix={roleMix} />
-      </section>
-      <MotionMapSection countries={countries} cities={cities} analytics={analytics} />
-      <MotionCityEqualizer cities={cities} />
-      <MotionStats cards={statCards} />
+      ) : null}
+      {activeMode !== "idle" && !isAnalyticsPage ? (
+        <section className="motion-grid" id="results">
+          <MotionJobsPanel
+            mode={activeMode}
+            score={score}
+            jobs={jobs}
+            totalCount={jobsTotalCount || jobs.length}
+            filterRequest={activeFilter}
+            query={query}
+            cvName={cvName}
+            hasMore={false}
+            loading={loading}
+            error={error}
+            onLoadMore={loadMoreJobs}
+            onViewStatistics={showCurrentStatistics}
+          />
+        </section>
+      ) : null}
+      {isAnalyticsPage ? (
+        <section className={`analytics-section ${isAnalyticsPage ? "analytics-page" : ""}`}>
+          {lastResultsMode ? (
+            <div className="analytics-return-row">
+              <button className="back-to-jobs-button" type="button" onClick={returnToJobs}>
+                Back to jobs
+              </button>
+            </div>
+          ) : null}
+          {initialLoading && !analytics ? (
+            <div className="analytics-loading-card">
+              <strong>Loading statistics...</strong>
+              <p>Reading listings, skills, locations and market signals from the backend API.</p>
+            </div>
+          ) : (
+            <>
+              <MotionSignals signals={signals} />
+              <MotionMapSection countries={countries} cities={cities} analytics={analytics} />
+              <MotionCityEqualizer cities={cities} />
+              <MotionStats cards={statCards} />
+            </>
+          )}
+        </section>
+      ) : null}
     </MotionShell>
   );
 }
 
-function MotionLoadingOverlay({ mode, status }) {
-  const steps = mode === "cv"
-    ? ["Berem CV", "Izvlacim vescine", "Racunam ujemanje", "Sestavljam analitiko"]
-    : ["Berem prompt", "Prepoznavam namero", "Filtriram oglase", "Osvezujem analitiko"];
+function MotionLoadingOverlay({ mode, status, progress = 0 }) {
+  const isCvMode = mode === "cv";
+  const steps = isCvMode
+    ? [
+        ["Reading CV", UserRound],
+        ["Extracting skills", Brain],
+        ["Calculating match", Database],
+        ["Building analytics", BarChart3],
+      ]
+    : [
+        ["Reading prompt", Search],
+        ["Detecting intent", Brain],
+        ["Filtering listings", Database],
+        ["Refreshing analytics", BarChart3],
+      ];
+  const safeProgress = Math.max(0, Math.min(100, progress));
 
   return (
     <div className="motion-loading-overlay" role="status" aria-live="polite">
-      <div className="loading-orbit">
-        <span></span>
-        <span></span>
-        <span></span>
-        <b>{mode === "cv" ? "CV" : "AI"}</b>
-      </div>
       <div className="loading-copy">
-        <strong>{status || "Pripravljam rezultate..."}</strong>
-        <p>To lahko traja nekaj trenutkov, ker lokalni AI sestavlja filter in rangira oglase.</p>
-        <div>
-          {steps.map((step, index) => (
-            <em key={step} style={{ animationDelay: `${index * 180}ms` }}>{step}</em>
+        <div className="loading-visual-card" aria-hidden="true">
+          <FileText size={46} strokeWidth={1.65} />
+          <span>{isCvMode ? "CV" : "AI"}</span>
+        </div>
+        <strong>
+          {isCvMode ? "Reading CV, " : "Reading prompt, "}
+          <span>AI is extracting the profile and matching listings...</span>
+        </strong>
+        <p>AI prepares the filter, the backend calculates compatibility and refreshes analytics.</p>
+        <div className="loading-progress">
+          <i style={{ width: `${safeProgress}%` }}></i>
+        </div>
+        <strong className="loading-percent">{Math.round(safeProgress)}%</strong>
+        <p className="loading-status">{status || "Analyzing data and preparing results."}</p>
+        <div className="loading-steps">
+          {steps.map(([step, Icon], index) => (
+            <em key={step} style={{ animationDelay: `${index * 180}ms` }}>
+              <Icon size={18} strokeWidth={1.9} />
+              {step}
+            </em>
           ))}
         </div>
       </div>

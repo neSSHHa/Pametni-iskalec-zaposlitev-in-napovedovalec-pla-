@@ -4,7 +4,7 @@ export default function MotionCityEqualizer({ cities }) {
 
   return (
     <section className="city-equalizer">
-      {!topCities.length ? <p className="motion-status">Ni lokacij za trenutni izbor.</p> : null}
+      {!topCities.length ? <p className="motion-status">No locations for the current selection.</p> : null}
       {topCities.map((city, index) => (
         <article key={`${city.country}-${city.name}`} style={{ animationDelay: `${index * 80}ms` }}>
           <span>{city.name}</span>
