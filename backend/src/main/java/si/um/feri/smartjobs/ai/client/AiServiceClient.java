@@ -108,6 +108,10 @@ public class AiServiceClient {
 
                 Input type: %s
                 Return ONLY strict JSON. No markdown. No explanation.
+                The response must be parseable by Jackson ObjectMapper.
+                Do not stop before closing all braces and brackets.
+                Do not add trailing commas.
+                Do not output partial JSON.
 
                 Critical rules:
                 - The app domain is unknown. It can be IT, healthcare, finance, logistics, education, construction, USA jobs, Europe jobs, anything.
