@@ -27,7 +27,7 @@ public class CareerJetGetNewJobsSL {
             throw new RuntimeException("Missing CAREERJET_API_KEY environment variable.");
         }
 
-        String userIp = "46.122.65.13";
+        String userIp = ""
 
         String auth = Base64.getEncoder()
                 .encodeToString((apiKey + ":").getBytes(StandardCharsets.UTF_8));
