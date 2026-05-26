@@ -86,3 +86,79 @@ sk-metalworking,Metalworking,skill-production
 sk-automotive-repair,Automotive Repair,skill-technical
 sk-graphic-design,Graphic Design,skill-technical
 sk-library-science,Library Science,skill-administration
+sk-active-directory,Active Directory,skill-technical
+sk-agriculture,Agriculture,skill-other
+sk-anesthesiology,Anesthesiology,skill-healthcare
+sk-baking,Baking,skill-cooking
+sk-bus-driving,Bus Driving,skill-logistics
+sk-cardiology,Cardiology,skill-healthcare
+sk-carpentry,Carpentry,skill-construction
+sk-communication,Communication,skill-soft-skill
+sk-croatian-language,Croatian Language,skill-language
+sk-cybersecurity,Cybersecurity,skill-technical
+sk-dental-care,Dental Care,skill-healthcare
+sk-dermatovenerology,Dermatovenerology,skill-healthcare
+sk-dhcp,DHCP,skill-technical
+sk-dialysis-care,Dialysis Care,skill-healthcare
+sk-dns,DNS,skill-technical
+sk-driving-category-b,Driving License Category B,skill-logistics
+sk-driving-category-c,Driving License Category C,skill-logistics
+sk-driving-category-ce,Driving License Category CE,skill-logistics
+sk-driving-category-d,Driving License Category D,skill-logistics
+sk-driving-category-e,Driving License Category E,skill-logistics
+sk-driving-instruction,Driving Instruction,skill-education
+sk-emergency-medicine,Emergency Medicine,skill-healthcare
+sk-endoscopy,Endoscopy,skill-healthcare
+sk-facade-work,Facade Work,skill-construction
+sk-firewall-management,Firewall Management,skill-technical
+sk-first-aid,First Aid,skill-healthcare
+sk-forestry,Forestry,skill-other
+sk-gardening,Gardening,skill-other
+sk-geriatric-care,Geriatric Care,skill-healthcare
+sk-home-care,Home Care,skill-healthcare
+sk-hungarian-language,Hungarian Language,skill-language
+sk-hyper-v,Hyper-V,skill-technical
+sk-iis,IIS,skill-technical
+sk-intensive-care,Intensive Care,skill-healthcare
+sk-internal-medicine,Internal Medicine,skill-healthcare
+sk-intrusion-detection,Intrusion Detection,skill-technical
+sk-italian-language,Italian Language,skill-language
+sk-java,Java,skill-technical
+sk-lan-wan-networking,LAN/WAN Networking,skill-technical
+sk-linux,Linux,skill-technical
+sk-masonry,Masonry,skill-construction
+sk-midwifery,Midwifery,skill-healthcare
+sk-nephrology,Nephrology,skill-healthcare
+sk-network-administration,Network Administration,skill-technical
+sk-network-monitoring,Network Monitoring,skill-technical
+sk-neurology,Neurology,skill-healthcare
+sk-oncology,Oncology,skill-healthcare
+sk-operating-room-care,Operating Room Care,skill-healthcare
+sk-orthopedics,Orthopedics,skill-healthcare
+sk-packaging,Packaging,skill-production
+sk-painting,Painting,skill-construction
+sk-pediatrics,Pediatrics,skill-healthcare
+sk-plumbing,Plumbing,skill-technical
+sk-postal-delivery,Postal Delivery,skill-logistics
+sk-project-management,Project Management,skill-management
+sk-proxmox,Proxmox,skill-technical
+sk-psychiatry,Psychiatry,skill-healthcare
+sk-quality-control,Quality Control,skill-production
+sk-radiology,Radiology,skill-healthcare
+sk-reception-work,Reception Work,skill-administration
+sk-restaurant-service,Restaurant Service,skill-hospitality
+sk-roofing,Roofing,skill-construction
+sk-security-work,Security Work,skill-other
+sk-serbian-language,Serbian Language,skill-language
+sk-sewing,Sewing,skill-production
+sk-sterilization,Sterilization,skill-healthcare
+sk-surgery,Surgery,skill-healthcare
+sk-switches-routers,Switches and Routers,skill-technical
+sk-technical-documentation,Technical Documentation,skill-technical
+sk-textile-work,Textile Work,skill-production
+sk-tire-service,Tire Service,skill-technical
+sk-vehicle-towing,Vehicle Towing,skill-logistics
+sk-virtualization,Virtualization,skill-technical
+sk-vmware,VMware,skill-technical
+sk-windows-server,Windows Server,skill-technical
+sk-wireless-networking,Wireless Networking,skill-technical

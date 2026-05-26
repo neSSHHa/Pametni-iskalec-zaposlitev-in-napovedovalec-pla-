@@ -1,0 +1,384 @@
+{
+  "newSkills": [
+    {
+      "id": "sk-active-directory",
+      "name": "Active Directory",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-agriculture",
+      "name": "Agriculture",
+      "SkillTypeId": "skill-other"
+    },
+    {
+      "id": "sk-anesthesiology",
+      "name": "Anesthesiology",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-baking",
+      "name": "Baking",
+      "SkillTypeId": "skill-cooking"
+    },
+    {
+      "id": "sk-bus-driving",
+      "name": "Bus Driving",
+      "SkillTypeId": "skill-logistics"
+    },
+    {
+      "id": "sk-cardiology",
+      "name": "Cardiology",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-carpentry",
+      "name": "Carpentry",
+      "SkillTypeId": "skill-construction"
+    },
+    {
+      "id": "sk-communication",
+      "name": "Communication",
+      "SkillTypeId": "skill-soft-skill"
+    },
+    {
+      "id": "sk-croatian-language",
+      "name": "Croatian Language",
+      "SkillTypeId": "skill-language"
+    },
+    {
+      "id": "sk-cybersecurity",
+      "name": "Cybersecurity",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-dental-care",
+      "name": "Dental Care",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-dermatovenerology",
+      "name": "Dermatovenerology",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-dhcp",
+      "name": "DHCP",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-dialysis-care",
+      "name": "Dialysis Care",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-dns",
+      "name": "DNS",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-driving-category-b",
+      "name": "Driving License Category B",
+      "SkillTypeId": "skill-logistics"
+    },
+    {
+      "id": "sk-driving-category-c",
+      "name": "Driving License Category C",
+      "SkillTypeId": "skill-logistics"
+    },
+    {
+      "id": "sk-driving-category-ce",
+      "name": "Driving License Category CE",
+      "SkillTypeId": "skill-logistics"
+    },
+    {
+      "id": "sk-driving-category-d",
+      "name": "Driving License Category D",
+      "SkillTypeId": "skill-logistics"
+    },
+    {
+      "id": "sk-driving-category-e",
+      "name": "Driving License Category E",
+      "SkillTypeId": "skill-logistics"
+    },
+    {
+      "id": "sk-driving-instruction",
+      "name": "Driving Instruction",
+      "SkillTypeId": "skill-education"
+    },
+    {
+      "id": "sk-emergency-medicine",
+      "name": "Emergency Medicine",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-endoscopy",
+      "name": "Endoscopy",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-facade-work",
+      "name": "Facade Work",
+      "SkillTypeId": "skill-construction"
+    },
+    {
+      "id": "sk-firewall-management",
+      "name": "Firewall Management",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-first-aid",
+      "name": "First Aid",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-forestry",
+      "name": "Forestry",
+      "SkillTypeId": "skill-other"
+    },
+    {
+      "id": "sk-gardening",
+      "name": "Gardening",
+      "SkillTypeId": "skill-other"
+    },
+    {
+      "id": "sk-geriatric-care",
+      "name": "Geriatric Care",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-home-care",
+      "name": "Home Care",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-hungarian-language",
+      "name": "Hungarian Language",
+      "SkillTypeId": "skill-language"
+    },
+    {
+      "id": "sk-hyper-v",
+      "name": "Hyper-V",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-iis",
+      "name": "IIS",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-intensive-care",
+      "name": "Intensive Care",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-internal-medicine",
+      "name": "Internal Medicine",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-intrusion-detection",
+      "name": "Intrusion Detection",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-italian-language",
+      "name": "Italian Language",
+      "SkillTypeId": "skill-language"
+    },
+    {
+      "id": "sk-java",
+      "name": "Java",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-lan-wan-networking",
+      "name": "LAN/WAN Networking",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-linux",
+      "name": "Linux",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-masonry",
+      "name": "Masonry",
+      "SkillTypeId": "skill-construction"
+    },
+    {
+      "id": "sk-midwifery",
+      "name": "Midwifery",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-nephrology",
+      "name": "Nephrology",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-network-administration",
+      "name": "Network Administration",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-network-monitoring",
+      "name": "Network Monitoring",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-neurology",
+      "name": "Neurology",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-oncology",
+      "name": "Oncology",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-operating-room-care",
+      "name": "Operating Room Care",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-orthopedics",
+      "name": "Orthopedics",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-packaging",
+      "name": "Packaging",
+      "SkillTypeId": "skill-production"
+    },
+    {
+      "id": "sk-painting",
+      "name": "Painting",
+      "SkillTypeId": "skill-construction"
+    },
+    {
+      "id": "sk-pediatrics",
+      "name": "Pediatrics",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-plumbing",
+      "name": "Plumbing",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-postal-delivery",
+      "name": "Postal Delivery",
+      "SkillTypeId": "skill-logistics"
+    },
+    {
+      "id": "sk-project-management",
+      "name": "Project Management",
+      "SkillTypeId": "skill-management"
+    },
+    {
+      "id": "sk-proxmox",
+      "name": "Proxmox",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-psychiatry",
+      "name": "Psychiatry",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-quality-control",
+      "name": "Quality Control",
+      "SkillTypeId": "skill-production"
+    },
+    {
+      "id": "sk-radiology",
+      "name": "Radiology",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-reception-work",
+      "name": "Reception Work",
+      "SkillTypeId": "skill-administration"
+    },
+    {
+      "id": "sk-restaurant-service",
+      "name": "Restaurant Service",
+      "SkillTypeId": "skill-hospitality"
+    },
+    {
+      "id": "sk-roofing",
+      "name": "Roofing",
+      "SkillTypeId": "skill-construction"
+    },
+    {
+      "id": "sk-security-work",
+      "name": "Security Work",
+      "SkillTypeId": "skill-other"
+    },
+    {
+      "id": "sk-serbian-language",
+      "name": "Serbian Language",
+      "SkillTypeId": "skill-language"
+    },
+    {
+      "id": "sk-sewing",
+      "name": "Sewing",
+      "SkillTypeId": "skill-production"
+    },
+    {
+      "id": "sk-sterilization",
+      "name": "Sterilization",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-surgery",
+      "name": "Surgery",
+      "SkillTypeId": "skill-healthcare"
+    },
+    {
+      "id": "sk-switches-routers",
+      "name": "Switches and Routers",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-technical-documentation",
+      "name": "Technical Documentation",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-textile-work",
+      "name": "Textile Work",
+      "SkillTypeId": "skill-production"
+    },
+    {
+      "id": "sk-tire-service",
+      "name": "Tire Service",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-vehicle-towing",
+      "name": "Vehicle Towing",
+      "SkillTypeId": "skill-logistics"
+    },
+    {
+      "id": "sk-virtualization",
+      "name": "Virtualization",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-vmware",
+      "name": "VMware",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-windows-server",
+      "name": "Windows Server",
+      "SkillTypeId": "skill-technical"
+    },
+    {
+      "id": "sk-wireless-networking",
+      "name": "Wireless Networking",
+      "SkillTypeId": "skill-technical"
+    }
+  ]
+}
