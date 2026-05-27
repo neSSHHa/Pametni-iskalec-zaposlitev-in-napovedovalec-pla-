@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { ComparisonProvider } from "./context/ComparisonContext.jsx";
+import CompareJobsPage from "./pages/CompareJobsPage.jsx";
 import MotionCvResultPage from "./pages/MotionCvResultPage.jsx";
 import MotionLandingPage from "./pages/MotionLandingPage.jsx";
 import MotionPromptResultPage from "./pages/MotionPromptResultPage.jsx";
@@ -20,9 +22,17 @@ export default function App() {
     };
   }, []);
 
-  if (path === "/motion-cv" || path === "/cv") return <MotionCvResultPage />;
-  if (path === "/motion-prompt" || path === "/prompt") return <MotionPromptResultPage />;
-  if (path === "/analytics") return <MotionExperience initialMode="analytics" resultPage />;
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [path]);
 
-  return <MotionLandingPage />;
+  let page;
+
+  if (path === "/motion-cv" || path === "/cv") page = <MotionCvResultPage />;
+  else if (path === "/motion-prompt" || path === "/prompt") page = <MotionPromptResultPage />;
+  else if (path === "/analytics") page = <MotionExperience initialMode="analytics" resultPage />;
+  else if (path === "/compare") page = <CompareJobsPage />;
+  else page = <MotionLandingPage />;
+
+  return <ComparisonProvider>{page}</ComparisonProvider>;
 }

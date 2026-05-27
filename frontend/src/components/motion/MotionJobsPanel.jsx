@@ -1,5 +1,6 @@
-import { BarChart3, Bookmark, BriefcaseBusiness, Check, MapPin, Scale, X } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { BarChart3, BriefcaseBusiness, Check, MapPin, Scale, X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useComparison } from "../../context/ComparisonContext.jsx";
 
 const accentColors = ["#8b5cf6", "#10b981", "#64748b", "#a855f7", "#3b82f6"];
 const PAGE_SIZE = 7;
@@ -22,6 +23,7 @@ export default function MotionJobsPanel({
   const resultCount = totalCount ?? displayJobs.length;
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [selectedJob, setSelectedJob] = useState(null);
+  const comparison = useComparison();
   const visibleJobs = displayJobs.slice(0, visibleCount);
   const hiddenLoadedJobs = Math.max(displayJobs.length - visibleCount, 0);
   const remainingJobs = Math.max(resultCount - visibleJobs.length, 0);
@@ -76,6 +78,8 @@ export default function MotionJobsPanel({
             key={job.id}
             mode={mode}
             onOpen={() => setSelectedJob(job)}
+            onToggleCompare={() => comparison.toggleJob({ ...job, compareSourcePath: window.location.pathname })}
+            selectedForCompare={comparison.isSelected(job.id)}
           />
         ))}
       </div>
@@ -83,7 +87,15 @@ export default function MotionJobsPanel({
       {hiddenLoadedJobs || hasMore ? (
         <LoadMoreButton remainingJobs={remainingJobs} hasMore={hasMore && !hiddenLoadedJobs} onClick={handleLoadMore} />
       ) : null}
-      {selectedJob ? <JobDetailsModal job={selectedJob} filterRequest={filterRequest} onClose={() => setSelectedJob(null)} /> : null}
+      {selectedJob ? (
+        <JobDetailsModal
+          job={selectedJob}
+          filterRequest={filterRequest}
+          onClose={() => setSelectedJob(null)}
+          onToggleCompare={() => comparison.toggleJob({ ...selectedJob, compareSourcePath: window.location.pathname })}
+          selectedForCompare={comparison.isSelected(selectedJob.id)}
+        />
+      ) : null}
     </section>
   );
 }
@@ -115,7 +127,11 @@ function QuerySummaryCard({ mode, query, cvName, chips }) {
         <p>{text}</p>
         {chips.length ? (
           <div className="filter-chip-strip" aria-label="Detected filters">
-            {chips.map((chip) => <span key={chip}>{chip}</span>)}
+            {chips.map((chip) => (
+              <span className={chip.type === "role" ? "role-chip" : ""} key={`${chip.type}-${chip.label}`}>
+                {chip.label}
+              </span>
+            ))}
           </div>
         ) : null}
       </div>
@@ -126,10 +142,10 @@ function QuerySummaryCard({ mode, query, cvName, chips }) {
   );
 }
 
-function JobCard({ job, index, accent, mode, onOpen }) {
+function JobCard({ job, index, accent, mode, onOpen, onToggleCompare, selectedForCompare }) {
   return (
     <article
-      className="motion-job"
+      className={`motion-job ${selectedForCompare ? "selected-for-compare" : ""}`}
       role="button"
       tabIndex={0}
       onClick={onOpen}
@@ -162,8 +178,17 @@ function JobCard({ job, index, accent, mode, onOpen }) {
         {job.confidence !== null && job.confidence !== undefined ? <small>{job.confidence}% confidence</small> : null}
         <span>{job.salary}</span>
       </aside>
-      <button className="job-save-button" type="button" aria-label="Save or compare job" onClick={(event) => event.stopPropagation()}>
-        <Bookmark size={19} strokeWidth={1.8} />
+      <button
+        className={`job-compare-card-button ${selectedForCompare ? "active" : ""}`}
+        type="button"
+        aria-label={selectedForCompare ? "Remove job from comparison" : "Add job to comparison"}
+        onClick={(event) => {
+          event.stopPropagation();
+          onToggleCompare?.();
+        }}
+      >
+        <Scale size={17} strokeWidth={1.9} />
+        <span>{selectedForCompare ? "Comparing" : "Compare"}</span>
       </button>
     </article>
   );
@@ -176,7 +201,7 @@ function filterChips(filterRequest) {
   const location = filterRequest.location || {};
   const chips = [];
 
-  addChip(chips, job.jobname);
+  addChip(chips, job.jobname, "role");
   addChip(chips, location.city);
   addChip(chips, location.country);
   addChip(chips, location.region);
@@ -186,17 +211,27 @@ function filterChips(filterRequest) {
   addListChips(chips, filterRequest.workTypes);
   addListChips(chips, filterRequest.skills);
 
-  return [...new Set(chips)].slice(0, 18);
+  return uniqueChips(chips).slice(0, 18);
 }
 
-function addChip(chips, value) {
+function addChip(chips, value, type = "filter") {
   if (value === null || value === undefined || value === "") return;
-  chips.push(String(value));
+  chips.push({ label: String(value), type });
 }
 
 function addListChips(chips, values) {
   if (!Array.isArray(values)) return;
   values.filter(Boolean).forEach((value) => addChip(chips, value));
+}
+
+function uniqueChips(chips) {
+  const seen = new Set();
+  return chips.filter((chip) => {
+    const key = chip.label.toLowerCase();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 function LoadMoreButton({ remainingJobs, hasMore, onClick }) {
@@ -208,12 +243,17 @@ function LoadMoreButton({ remainingJobs, hasMore, onClick }) {
   );
 }
 
-function JobDetailsModal({ job, filterRequest, onClose }) {
+export function JobDetailsModal({ job, filterRequest, onClose, onToggleCompare, selectedForCompare = false }) {
   const userSkills = Array.isArray(filterRequest?.skills) ? filterRequest.skills : [];
+  const detailsRef = useRef(null);
+
+  useEffect(() => {
+    detailsRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [job?.id]);
 
   return (
     <div className="job-details-backdrop" role="dialog" aria-modal="true" onClick={onClose}>
-      <article className="job-details-page" onClick={(event) => event.stopPropagation()}>
+      <article className="job-details-page" ref={detailsRef} onClick={(event) => event.stopPropagation()}>
         <button className="job-details-close" type="button" onClick={onClose} aria-label="Close job details">
           <X size={22} strokeWidth={1.8} />
         </button>
@@ -227,10 +267,28 @@ function JobDetailsModal({ job, filterRequest, onClose }) {
               <b>{job.mode}</b>
               <b>{job.level}</b>
             </div>
+            {job.sourceUrl ? (
+              <div className="job-source-row">
+                <span>Source</span>
+                <a className="job-source-link" href={job.sourceUrl} target="_blank" rel="noreferrer">
+                  Open source listing
+                </a>
+              </div>
+            ) : null}
           </div>
           <aside>
             <strong>{job.match}%</strong>
             <span>Compatibility</span>
+            {onToggleCompare ? (
+              <button
+                className={`job-details-compare-button ${selectedForCompare ? "active" : ""}`}
+                type="button"
+                onClick={onToggleCompare}
+              >
+                <Scale size={15} strokeWidth={1.8} />
+                <span>{selectedForCompare ? "Comparing" : "Compare"}</span>
+              </button>
+            ) : null}
           </aside>
         </header>
 

@@ -8476,3 +8476,1162 @@ body {
     display: none;
   }
 }
+
+/* Comparison workflow */
+.compare-button {
+  position: relative;
+}
+
+.compare-button.active,
+.compare-button:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
+  background: var(--accent-soft);
+}
+
+.compare-count-badge {
+  position: absolute;
+  right: -7px;
+  bottom: -7px;
+  display: grid;
+  min-width: 28px;
+  height: 22px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--line));
+  border-radius: 999px;
+  color: #ffffff;
+  background: var(--accent);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
+  font-size: 10px;
+  font-weight: 760;
+  line-height: 1;
+}
+
+.comparison-toast {
+  position: fixed;
+  top: 94px;
+  right: clamp(18px, 3vw, 42px);
+  z-index: 120;
+  width: min(360px, calc(100vw - 32px));
+  border: 1px solid color-mix(in srgb, var(--accent, #2563eb) 28%, #d8e1ef);
+  border-radius: 14px;
+  padding: 14px 18px;
+  color: var(--text, #111827);
+  background: color-mix(in srgb, var(--surface, #ffffff) 94%, transparent);
+  box-shadow: 0 22px 65px rgba(15, 23, 42, 0.16);
+  font-size: 14px;
+  font-weight: 650;
+  animation: comparisonToastIn 260ms ease both;
+}
+
+.theme-dark .comparison-toast {
+  color: #f8fafc;
+  background: rgba(17, 24, 33, 0.96);
+  box-shadow: 0 22px 65px rgba(0, 0, 0, 0.34);
+}
+
+@keyframes comparisonToastIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.motion-job.selected-for-compare {
+  border-color: color-mix(in srgb, var(--accent) 46%, var(--line));
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 9%, transparent), transparent 42%),
+    var(--surface);
+  box-shadow: 0 20px 55px rgba(37, 99, 235, 0.13);
+}
+
+.motion-job {
+  grid-template-columns: 46px minmax(0, 1fr) auto auto;
+}
+
+.job-compare-card-button {
+  display: inline-flex;
+  min-width: 166px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--line));
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent-soft) 70%, transparent);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 720;
+  white-space: nowrap;
+}
+
+.job-compare-card-button:hover,
+.job-compare-card-button.active {
+  color: #ffffff;
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.compare-page {
+  display: grid;
+  gap: 20px;
+}
+
+.compare-page.compact {
+  gap: 18px;
+}
+
+.compare-hero {
+  display: grid;
+  gap: 12px;
+  max-width: 880px;
+}
+
+.compare-hero.compact {
+  display: flex;
+  max-width: none;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+}
+
+.compare-hero h1 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(34px, 4vw, 58px);
+  font-weight: 520;
+  letter-spacing: -0.055em;
+  line-height: 0.96;
+}
+
+.compare-hero p {
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(17px, 1.4vw, 22px);
+  line-height: 1.5;
+}
+
+.compare-back-button,
+.compare-clear-button,
+.compare-actions-row button,
+.compare-empty-card button,
+.compare-placeholder-card button {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--line));
+  border-radius: 999px;
+  padding: 11px 15px;
+  color: var(--text);
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.compare-back-button:hover,
+.compare-clear-button:hover,
+.compare-actions-row button:hover,
+.compare-empty-card button:hover,
+.compare-placeholder-card button:hover {
+  color: #ffffff;
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.compare-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+.compare-actions-row p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.compare-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.compare-job-card,
+.compare-empty-card,
+.compare-section {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 85% 18%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 34%),
+    var(--surface);
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+}
+
+.compare-job-card {
+  display: grid;
+  gap: 14px;
+  min-height: 220px;
+  padding: 20px;
+}
+
+.compare-job-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.compare-job-card header span {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 12px;
+  color: #ffffff;
+  background: var(--accent);
+  font-weight: 760;
+}
+
+.compare-job-card header button {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+}
+
+.compare-job-card header button:hover {
+  color: #ffffff;
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.compare-job-card h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 560;
+  line-height: 1.05;
+}
+
+.compare-job-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.compare-job-card div {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.compare-job-card div span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: var(--muted);
+  background: var(--surface-soft);
+  font-size: 13px;
+}
+
+.compare-job-card strong {
+  margin-top: auto;
+  color: var(--accent);
+  font-size: 42px;
+  font-weight: 560;
+  line-height: 0.95;
+}
+
+.compare-job-card small {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.compare-placeholder-card {
+  place-items: center;
+  text-align: center;
+}
+
+.compare-placeholder-card svg,
+.compare-empty-card svg {
+  color: var(--accent);
+}
+
+.compare-empty-card {
+  display: grid;
+  min-height: 360px;
+  place-items: center;
+  padding: 34px;
+  text-align: center;
+}
+
+.compare-empty-card h2,
+.compare-placeholder-card h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 560;
+}
+
+.compare-empty-card p,
+.compare-placeholder-card p {
+  max-width: 460px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.compare-sections {
+  display: grid;
+  gap: 12px;
+}
+
+.compare-section {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+}
+
+.compare-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 4px;
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 650;
+}
+
+.compare-section h2 svg {
+  color: var(--accent);
+}
+
+.compare-row {
+  display: grid;
+  grid-template-columns: minmax(110px, 150px) repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-items: start;
+  border-top: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  padding-top: 12px;
+}
+
+.compare-row span {
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.compare-row p {
+  min-height: 38px;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 10px 11px;
+  color: var(--text);
+  background: var(--surface-soft);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.compare-row.different p {
+  border-color: color-mix(in srgb, var(--accent) 18%, transparent);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 7%, transparent), transparent 70%),
+    var(--surface-soft);
+}
+
+.compare-row.same p {
+  color: var(--muted);
+}
+
+.compare-row.highlight p {
+  color: var(--accent);
+  font-size: 20px;
+  font-weight: 760;
+}
+
+.compare-row.long p {
+  max-height: 240px;
+  overflow: auto;
+}
+
+.skill-compare-block {
+  display: grid;
+  gap: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--line) 72%, transparent);
+  padding-top: 12px;
+}
+
+.skill-compare-block > span {
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.skill-compare-block div {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.skill-compare-block em {
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: var(--text);
+  background: var(--surface-soft);
+  font-size: 13px;
+  font-style: normal;
+}
+
+.skill-compare-block p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.theme-dark .compare-job-card,
+.theme-dark .compare-empty-card,
+.theme-dark .compare-section {
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+}
+
+@media (max-width: 900px) {
+  .compare-card-grid,
+  .compare-row {
+    grid-template-columns: 1fr;
+  }
+
+  .compare-actions-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .compare-actions-row button {
+    width: 100%;
+  }
+
+  .job-compare-card-button {
+    min-width: 0;
+  }
+}
+
+.motion-shell .compare-button,
+.motion-shell.mode-idle .compare-button {
+  overflow: visible !important;
+}
+
+.motion-shell .compare-count-badge {
+  right: -10px;
+  bottom: -8px;
+  z-index: 5;
+  min-width: 26px;
+  height: 19px;
+  padding: 0 7px;
+  color: #ffffff;
+  border: 2px solid var(--background);
+  background: var(--accent);
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--accent) 34%, transparent);
+}
+
+.comparison-toast {
+  color: #ffffff;
+  border-color: color-mix(in srgb, var(--accent) 76%, #ffffff 24%);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 92%, #111827 8%), color-mix(in srgb, var(--accent-2) 84%, #111827 16%));
+  box-shadow: 0 18px 48px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+.comparison-toast svg {
+  color: #ffffff;
+}
+
+.job-compare-card-button.active,
+.job-compare-card-button.active:hover {
+  color: #ffffff !important;
+  border-color: var(--accent) !important;
+  background: var(--accent) !important;
+}
+
+.job-compare-card-button.active span,
+.job-compare-card-button.active svg {
+  color: #ffffff !important;
+  stroke: currentColor;
+}
+
+.jr-topbar nav a {
+  box-shadow: none !important;
+}
+
+.jr-topbar nav a:not(.active) {
+  color: var(--muted) !important;
+}
+
+.jr-topbar nav a.active {
+  color: var(--accent) !important;
+}
+
+.motion-shell.theme-light .motion-loading-overlay {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(79, 140, 255, 0.13), transparent 34%),
+    radial-gradient(circle at 82% 100%, rgba(124, 58, 237, 0.12), transparent 38%),
+    rgba(245, 248, 252, 0.88) !important;
+}
+
+.motion-shell.theme-light .loading-copy {
+  border-color: rgba(113, 136, 170, 0.24) !important;
+  background:
+    radial-gradient(circle at 78% 22%, rgba(79, 140, 255, 0.12), transparent 26%),
+    linear-gradient(135deg, #ffffff, #f7fbff 58%, #f1f5ff) !important;
+  box-shadow: 0 34px 90px rgba(45, 64, 102, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+.motion-shell.theme-light .loading-copy > strong:not(.loading-percent),
+.motion-shell.theme-light .loading-percent {
+  color: #111827 !important;
+}
+
+.motion-shell.theme-light .loading-copy > strong:not(.loading-percent) span {
+  color: #2563eb !important;
+  text-shadow: none !important;
+}
+
+.motion-shell.theme-light .loading-copy > p:not(.loading-status),
+.motion-shell.theme-light .loading-status {
+  color: #60708a !important;
+}
+
+.motion-shell.theme-light .loading-progress::before {
+  background: #dbe7f3 !important;
+}
+
+.motion-shell.theme-light .loading-copy em {
+  color: #1f2a44 !important;
+  border-color: rgba(37, 99, 235, 0.16) !important;
+  background: #ffffff !important;
+}
+
+.motion-shell.theme-light.mode-idle .upload-box,
+.motion-shell.theme-light.mode-idle .prompt-box {
+  border-color: rgba(113, 136, 170, 0.24) !important;
+  background:
+    linear-gradient(180deg, #ffffff, #f8fbff) !important;
+  box-shadow: 0 18px 50px rgba(45, 64, 102, 0.09) !important;
+}
+
+.motion-shell.theme-light.mode-idle .upload-box strong,
+.motion-shell.theme-light.mode-idle .prompt-box h3 {
+  color: #111827 !important;
+}
+
+.motion-shell.theme-light.mode-idle .upload-box small,
+.motion-shell.theme-light.mode-idle .prompt-box p {
+  color: #5f6f89 !important;
+}
+
+.motion-shell.mode-idle .europass-helper {
+  margin: 12px 0 0 !important;
+  color: var(--muted) !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+}
+
+.motion-shell.mode-idle .europass-helper a {
+  color: var(--accent) !important;
+  font-weight: 720 !important;
+  text-decoration: none !important;
+}
+
+.motion-shell.mode-idle .europass-helper a:hover {
+  text-decoration: underline !important;
+}
+
+.job-details-page dl a {
+  color: var(--accent);
+  font-weight: 760;
+  text-decoration: none;
+}
+
+.job-details-page dl a:hover {
+  text-decoration: underline;
+}
+
+.compare-clear-button {
+  border-color: color-mix(in srgb, var(--accent) 34%, var(--line)) !important;
+}
+
+.motion-shell .motion-mark {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  color: var(--text) !important;
+  font-size: 25px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+}
+
+.motion-shell .logo-mark {
+  position: relative !important;
+  width: 36px !important;
+  height: 36px !important;
+  flex: 0 0 36px !important;
+  border: 2px solid var(--purple) !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  box-shadow: 0 0 24px rgba(139, 92, 246, 0.45) !important;
+}
+
+.motion-shell .logo-mark::before {
+  position: absolute !important;
+  inset: 8px !important;
+  content: "" !important;
+  border: 2px solid var(--purple) !important;
+  border-radius: 50% !important;
+}
+
+.motion-shell .logo-mark::after {
+  position: absolute !important;
+  top: 4px !important;
+  right: -2px !important;
+  width: 10px !important;
+  height: 10px !important;
+  content: "" !important;
+  border-radius: 50% !important;
+  background: var(--purple) !important;
+  box-shadow: -10px 10px 0 -3px var(--purple-3) !important;
+}
+
+.motion-shell .motion-mark span {
+  color: var(--text) !important;
+  font-size: 25px !important;
+  font-weight: 800 !important;
+}
+
+.job-compare-card-button:hover,
+.job-compare-card-button:hover span,
+.job-compare-card-button:hover svg,
+.job-compare-card-button.active,
+.job-compare-card-button.active span,
+.job-compare-card-button.active svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.job-compare-card-button:hover,
+.job-compare-card-button.active {
+  border-color: var(--accent) !important;
+  background: var(--accent) !important;
+}
+
+.comparison-toast {
+  color: #ffffff !important;
+  border: 1px solid #fecaca !important;
+  background: #dc2626 !important;
+  box-shadow: 0 18px 42px rgba(220, 38, 38, 0.34) !important;
+}
+
+.motion-shell .motion-mark .logo-mark {
+  background: transparent !important;
+  border: 2px solid #8b5cf6 !important;
+  box-shadow: 0 0 24px rgba(139, 92, 246, 0.45) !important;
+}
+
+.motion-shell .motion-mark .logo-mark::before {
+  border-color: #8b5cf6 !important;
+}
+
+.motion-shell .motion-mark .logo-mark::after {
+  background: #8b5cf6 !important;
+  box-shadow: -10px 10px 0 -3px #a78bfa !important;
+}
+
+/* Absolute final brand lock: identical Job Radar mark on every route/theme. */
+body .motion-shell .jr-topbar .motion-mark {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  color: #08102a !important;
+  text-decoration: none !important;
+}
+
+body .motion-shell.theme-dark .jr-topbar .motion-mark {
+  color: #f8fbff !important;
+}
+
+body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+  position: relative !important;
+  display: block !important;
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+  flex: 0 0 36px !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: transparent !important;
+  object-fit: contain !important;
+  box-shadow: none !important;
+}
+
+body .motion-shell .jr-topbar .motion-mark > .logo-mark::before {
+  content: none !important;
+}
+
+body .motion-shell .jr-topbar .motion-mark > .logo-mark::after {
+  content: none !important;
+}
+
+body .motion-shell .jr-topbar .motion-mark > span {
+  color: currentColor !important;
+  font-size: 25px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+  line-height: 1 !important;
+  text-transform: none !important;
+  writing-mode: initial !important;
+}
+
+.job-source-link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent-soft) 70%, transparent);
+  font-size: 13px;
+  font-weight: 760;
+  text-decoration: none;
+}
+
+.job-source-link:hover {
+  color: #ffffff;
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.job-source-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.job-source-row > span {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.job-source-row em {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: var(--muted);
+  background: var(--surface-soft);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 650;
+}
+
+/* Absolute final loading palette: purple only, no blue/cyan accent. */
+body .motion-shell .motion-loading-overlay .loading-copy > strong:not(.loading-percent) span,
+body .motion-shell.theme-light .motion-loading-overlay .loading-copy > strong:not(.loading-percent) span {
+  color: #7c3aed !important;
+  text-shadow: 0 0 26px rgba(124, 58, 237, 0.22) !important;
+}
+
+body .motion-shell .motion-loading-overlay .loading-progress i {
+  background: linear-gradient(90deg, #7c3aed, #8b5cf6 58%, #a78bfa) !important;
+  box-shadow: 0 0 24px rgba(139, 92, 246, 0.48), 0 0 32px rgba(124, 58, 237, 0.36) !important;
+}
+
+body .motion-shell .motion-loading-overlay .loading-progress i::after {
+  background: #a78bfa !important;
+  box-shadow: 0 0 18px #a78bfa, 0 0 28px rgba(139, 92, 246, 0.42) !important;
+}
+
+body .motion-shell .motion-loading-overlay .loading-visual-card {
+  color: #a78bfa !important;
+  border-color: rgba(139, 92, 246, 0.44) !important;
+  background:
+    radial-gradient(circle at 60% 34%, rgba(139, 92, 246, 0.34), transparent 40%),
+    linear-gradient(135deg, rgba(54, 34, 108, 0.96), rgba(28, 20, 58, 0.92)) !important;
+}
+
+body .motion-shell.theme-light .motion-loading-overlay .loading-visual-card {
+  background:
+    radial-gradient(circle at 60% 34%, rgba(139, 92, 246, 0.18), transparent 40%),
+    linear-gradient(135deg, #ffffff, #f4efff) !important;
+}
+
+body .motion-shell .motion-loading-overlay .loading-copy em svg {
+  color: #8b5cf6 !important;
+  filter: drop-shadow(0 0 9px rgba(139, 92, 246, 0.42)) !important;
+}
+
+/* Absolute final navbar lock: same alignment on Home, Statistics, Jobs and Compare. */
+body .motion-shell .jr-topbar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 40 !important;
+  display: grid !important;
+  grid-template-columns: 240px minmax(260px, 1fr) 240px !important;
+  align-items: center !important;
+  min-height: 90px !important;
+  padding: 0 clamp(22px, 4vw, 44px) !important;
+}
+
+body .motion-shell .jr-topbar .motion-mark {
+  grid-column: 1 !important;
+  justify-self: start !important;
+}
+
+body .motion-shell .jr-topbar nav {
+  position: static !important;
+  grid-column: 2 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 46px !important;
+  transform: none !important;
+  left: auto !important;
+}
+
+body .motion-shell .jr-topbar .topbar-actions {
+  grid-column: 3 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 12px !important;
+  height: 90px !important;
+}
+
+body .motion-shell .jr-topbar .theme-toggle,
+body .motion-shell .jr-topbar .compare-button {
+  position: relative !important;
+  display: grid !important;
+  width: 46px !important;
+  height: 46px !important;
+  min-width: 46px !important;
+  min-height: 46px !important;
+  place-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+}
+
+body .motion-shell .jr-topbar .theme-toggle > svg,
+body .motion-shell .jr-topbar .compare-button > svg {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  display: block !important;
+  width: 20px !important;
+  height: 20px !important;
+  margin: 0 !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+body .motion-shell .jr-topbar .theme-toggle > span,
+body .motion-shell .jr-topbar .compare-button > span {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}
+
+body .motion-shell .jr-topbar .compare-count-badge {
+  position: absolute !important;
+  right: -10px !important;
+  bottom: -8px !important;
+  z-index: 10 !important;
+  clip: auto !important;
+  clip-path: none !important;
+  overflow: visible !important;
+}
+
+body .motion-shell.mode-compare .motion-stage {
+  padding-top: 46px !important;
+}
+
+body .motion-shell.mode-compare .compare-page.compact {
+  gap: 14px !important;
+}
+
+body .motion-shell.mode-compare .compare-hero.compact {
+  padding-bottom: 12px !important;
+}
+
+body .motion-shell.mode-compare .motion-kicker,
+body .motion-shell.mode-compare .compare-section h2 svg {
+  color: #7c3aed !important;
+}
+
+.compare-job-title-button {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 560;
+  line-height: 1.05;
+  text-align: left;
+}
+
+.compare-job-title-button:hover {
+  color: #7c3aed;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+/* Details modal polish: compact skill chips and a clearer source link row. */
+.job-details-page .job-source-row {
+  display: inline-flex !important;
+  width: fit-content !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 12px 0 18px !important;
+  border: 1px solid rgba(124, 58, 237, 0.18) !important;
+  border-radius: 999px !important;
+  padding: 7px 8px 7px 14px !important;
+  background: rgba(124, 58, 237, 0.07) !important;
+  box-shadow: 0 16px 34px rgba(124, 58, 237, 0.08) !important;
+}
+
+.job-details-page .job-source-row > span {
+  color: #7c3aed !important;
+  font-size: 12px !important;
+  font-weight: 850 !important;
+  letter-spacing: 0.12em !important;
+  line-height: 1 !important;
+}
+
+.job-details-page .job-source-link {
+  min-height: 34px !important;
+  margin: 0 !important;
+  border-color: #7c3aed !important;
+  padding: 7px 15px !important;
+  color: #ffffff !important;
+  background: #7c3aed !important;
+  box-shadow: 0 12px 24px rgba(124, 58, 237, 0.18) !important;
+}
+
+.job-details-page .job-source-link:hover {
+  border-color: #6d28d9 !important;
+  background: #6d28d9 !important;
+  transform: translateY(-1px) !important;
+}
+
+.job-details-page .job-source-row em {
+  display: inline-flex !important;
+  min-height: 34px !important;
+  align-items: center !important;
+  margin: 0 !important;
+  border-color: rgba(124, 58, 237, 0.18) !important;
+  padding: 7px 14px !important;
+  color: var(--muted) !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+}
+
+.job-details-page .job-details-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: flex-start !important;
+  gap: 9px !important;
+  margin: 12px 0 24px !important;
+}
+
+.job-details-page .job-details-tags em {
+  display: inline-flex !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 32px !important;
+  height: auto !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 999px !important;
+  padding: 7px 13px !important;
+  line-height: 1.15 !important;
+  white-space: nowrap !important;
+}
+
+/* Final typography rule: the Motion UI must not use bold text anywhere. */
+body .motion-shell,
+body .motion-shell *,
+body .motion-shell *::before,
+body .motion-shell *::after,
+body .motion-shell :is(h1, h2, h3, h4, h5, h6, strong, b, button, a, label, small, span, em, p, li, input, textarea) {
+  font-weight: 400 !important;
+}
+
+body .motion-shell :is(.motion-kicker, .job-source-row > span, .job-details-page header span, .motion-job aside small, .compare-section h2, .compare-row-label) {
+  letter-spacing: 0.12em !important;
+}
+
+/* Large text still looked heavy at weight 400, so these hero/header areas are lighter. */
+body .motion-shell :is(.motion-hero h1, .motion-hero h1 span, .hero-title, .hero-title span) {
+  font-weight: 380 !important;
+  letter-spacing: -0.02em !important;
+}
+
+body .motion-shell .jr-topbar .motion-mark > span,
+body .motion-shell :is(.mode-pill, .mode-pill span, .mode-pill small) {
+  font-weight: 400 !important;
+}
+
+/* Details modal spacing: detached from top and less empty air in the header. */
+body .motion-shell .job-details-backdrop {
+  z-index: 999 !important;
+  align-items: center !important;
+  justify-items: center !important;
+  padding: 112px 24px 28px !important;
+}
+
+body .motion-shell .job-details-page {
+  gap: 10px !important;
+  width: min(100%, 1040px) !important;
+  max-height: calc(100svh - 140px) !important;
+  padding: 26px 36px 30px !important;
+}
+
+body .motion-shell .job-details-page header {
+  grid-template-columns: 72px minmax(0, 1fr) auto !important;
+  gap: 18px !important;
+  align-items: center !important;
+  padding-right: 48px !important;
+}
+
+body .motion-shell .job-details-page h2 {
+  margin: 4px 0 8px !important;
+  font-size: clamp(30px, 3.4vw, 48px) !important;
+  line-height: 0.98 !important;
+}
+
+body .motion-shell .job-details-meta {
+  gap: 9px !important;
+  margin-top: 6px !important;
+}
+
+body .motion-shell .job-details-page .job-source-row {
+  margin: 10px 0 0 !important;
+}
+
+body .motion-shell .job-details-page .job-details-tags {
+  gap: 8px !important;
+  margin: 0 0 8px !important;
+}
+
+body .motion-shell .job-details-page section {
+  display: grid !important;
+  gap: 8px !important;
+}
+
+body .motion-shell .job-details-page section p {
+  margin: 0 !important;
+  line-height: 1.55 !important;
+}
+
+body .motion-shell .match-columns {
+  gap: 14px !important;
+}
+
+body .motion-shell .match-columns section {
+  align-content: start !important;
+  align-items: start !important;
+  padding: 16px !important;
+}
+
+body .motion-shell .match-columns ul {
+  align-content: start !important;
+  gap: 8px !important;
+  margin-top: 8px !important;
+}
+
+body .motion-shell .filter-chip-strip .role-chip {
+  border-color: rgba(124, 58, 237, 0.34) !important;
+  color: #6d28d9 !important;
+  background: rgba(124, 58, 237, 0.11) !important;
+}
+
+body .motion-shell .job-details-compare-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  min-height: 34px !important;
+  margin-top: 12px !important;
+  border: 1px solid rgba(124, 58, 237, 0.28) !important;
+  border-radius: 999px !important;
+  padding: 7px 14px !important;
+  color: #6d28d9 !important;
+  background: rgba(124, 58, 237, 0.08) !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+}
+
+body .motion-shell .job-details-compare-button:hover,
+body .motion-shell .job-details-compare-button.active {
+  border-color: #7c3aed !important;
+  color: #ffffff !important;
+  background: #7c3aed !important;
+}
+
+body .motion-shell .job-details-compare-button span {
+  color: currentColor !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+}
+
+/* Loading icon tile should stay light and purple, never dark/black. */
+body .motion-shell .motion-loading-overlay .loading-visual-card,
+body .motion-shell.theme-light .motion-loading-overlay .loading-visual-card,
+body .motion-shell.theme-dark .motion-loading-overlay .loading-visual-card {
+  color: #8b5cf6 !important;
+  border-color: rgba(139, 92, 246, 0.28) !important;
+  background:
+    radial-gradient(circle at 62% 32%, rgba(139, 92, 246, 0.16), transparent 44%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(246, 241, 255, 0.94)) !important;
+  box-shadow: 0 18px 38px rgba(139, 92, 246, 0.16) !important;
+}

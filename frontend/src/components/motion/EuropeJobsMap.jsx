@@ -36,8 +36,8 @@ export default function EuropeJobsMap({ countries, cities }) {
         pinchZoom: true,
         minZoomLevel: 2.25,
         maxZoomLevel: 84,
-        homeZoomLevel: 2.75,
-        homeGeoPoint: { latitude: 52, longitude: 13 },
+        homeZoomLevel: 32,
+        homeGeoPoint: { latitude: 46.1512, longitude: 14.9955 },
       }),
     );
 
@@ -236,13 +236,18 @@ export default function EuropeJobsMap({ countries, cities }) {
 
     node.addEventListener("wheel", onWheel, { passive: false });
 
-    polygonSeries.events.on("datavalidated", () => chart.goHome(0));
+    polygonSeries.events.on("datavalidated", () => {
+      chart.goHome(0);
+      window.setTimeout(() => {
+        chart.zoomToGeoPoint({ latitude: 46.1512, longitude: 14.9955 }, 32, true, 500);
+      }, 120);
+    });
     chart.appear(800, 100);
 
     apiRef.current = {
       reset: () => {
         showCountries();
-        chart.goHome(650);
+        chart.zoomToGeoPoint({ latitude: 46.1512, longitude: 14.9955 }, 32, true, 650);
       },
       zoomIn: () => chart.zoomToGeoPoint(chart.geoPoint(), Math.min((chart.get("zoomLevel") ?? 2.75) * 2, 84), true, 260),
       zoomOut: () => chart.zoomToGeoPoint(chart.geoPoint(), Math.max((chart.get("zoomLevel") ?? 2.75) / 1.75, 2.25), true, 260),
@@ -261,7 +266,7 @@ export default function EuropeJobsMap({ countries, cities }) {
       <div className="map-controls">
         <button type="button" onClick={() => apiRef.current?.zoomIn()}>+</button>
         <button type="button" onClick={() => apiRef.current?.zoomOut()}>-</button>
-        <button type="button" onClick={() => apiRef.current?.reset()}>Europe</button>
+        <button type="button" onClick={() => apiRef.current?.reset()}>Slovenia</button>
       </div>
       <div className="map-help">Click a country, scroll to zoom</div>
       <div className="map-canvas" ref={chartRef}></div>

@@ -14,6 +14,7 @@ import MotionStats from "../components/motion/MotionStats.jsx";
 const fallbackQuery = "";
 const JOB_PAGE_SIZE = 50;
 const ANALYTICS_DASHBOARD_LIMIT = 50;
+const RESULTS_STORAGE_KEY = "jobradar-last-results";
 let initialDataCache = null;
 const countryCodes = {
   slovenia: "SI",
@@ -111,6 +112,14 @@ function formatSalary(job) {
   return [min, max].filter(Boolean).join(" - ");
 }
 
+function sourceValue(job) {
+  return job?.sourceUrl || job?.sourceWebsite || job?.url || "";
+}
+
+function isUrl(value) {
+  return /^https?:\/\//i.test(String(value || "").trim());
+}
+
 function mapJob(job, index) {
   const parts = String(job.location || "").split(",").map((part) => part.trim()).filter(Boolean);
   const city = job.city || parts[0] || "Unknown";
@@ -118,6 +127,7 @@ function mapJob(job, index) {
   const country = job.country || parts.at(-1) || "";
   const latitude = numberOrNull(job.latitude);
   const longitude = numberOrNull(job.longitude);
+  const source = sourceValue(job);
 
   return {
     id: job.id || `${job.title}-${index}`,
@@ -130,7 +140,10 @@ function mapJob(job, index) {
     latitude,
     longitude,
     salary: formatSalary(job),
-    sourceUrl: job.sourceUrl || "",
+    salaryMin: job.salaryMin ?? null,
+    salaryMax: job.salaryMax ?? null,
+    sourceUrl: isUrl(source) ? source : "",
+    sourceLabel: source || "Source not available",
     description: job.description || "",
     educationLevel: job.educationLevel || "Not specified",
     postedDate: job.postedDate || "",
@@ -396,18 +409,53 @@ function totalFromApiResponse(data, fallback) {
   return Number.isFinite(Number(data?.totalCount)) ? Number(data.totalCount) : fallback;
 }
 
+function readStoredResults(expectedMode) {
+  if (typeof window === "undefined") return null;
+
+  try {
+    const raw = window.sessionStorage.getItem(RESULTS_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (expectedMode && parsed?.mode !== expectedMode) return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function saveStoredResults(payload) {
+  if (typeof window === "undefined") return;
+
+  try {
+    window.sessionStorage.setItem(RESULTS_STORAGE_KEY, JSON.stringify(payload));
+  } catch {
+    // If storage is unavailable, the app still works; only back navigation restore is skipped.
+  }
+}
+
+function clearStoredResults() {
+  if (typeof window === "undefined") return;
+
+  try {
+    window.sessionStorage.removeItem(RESULTS_STORAGE_KEY);
+  } catch {
+    // Ignore storage errors.
+  }
+}
+
 export default function MotionExperience({ initialMode = "idle", resultPage = false }) {
-  const [mode, setMode] = useState(initialMode);
-  const [query, setQuery] = useState(fallbackQuery);
-  const [cvName, setCvName] = useState("");
-  const [processingMode, setProcessingMode] = useState("fast");
-  const [jobs, setJobs] = useState([]);
-  const [jobsTotalCount, setJobsTotalCount] = useState(0);
-  const [jobsPage, setJobsPage] = useState(0);
-  const [jobsHasMore, setJobsHasMore] = useState(false);
-  const [activeFilter, setActiveFilter] = useState(null);
-  const [analytics, setAnalytics] = useState(null);
-  const [lastResultsMode, setLastResultsMode] = useState("");
+  const storedResult = resultPage ? readStoredResults(initialMode) : null;
+  const [mode, setMode] = useState(storedResult?.mode || initialMode);
+  const [query, setQuery] = useState(storedResult?.query || fallbackQuery);
+  const [cvName, setCvName] = useState(storedResult?.cvName || "");
+  const [processingMode, setProcessingMode] = useState("thinking");
+  const [jobs, setJobs] = useState(storedResult?.jobs || []);
+  const [jobsTotalCount, setJobsTotalCount] = useState(storedResult?.jobsTotalCount || 0);
+  const [jobsPage, setJobsPage] = useState(storedResult?.jobsPage || 0);
+  const [jobsHasMore, setJobsHasMore] = useState(Boolean(storedResult?.jobsHasMore));
+  const [activeFilter, setActiveFilter] = useState(storedResult?.activeFilter || null);
+  const [analytics, setAnalytics] = useState(storedResult?.analytics || null);
+  const [lastResultsMode, setLastResultsMode] = useState(storedResult?.lastResultsMode || (storedResult?.mode || ""));
   const [initialLoading, setInitialLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -443,17 +491,17 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       const elapsedSeconds = (Date.now() - startedAt) / 1000;
       let nextProgress;
 
-      if (elapsedSeconds <= 15) {
-        nextProgress = 3 + (elapsedSeconds / 15) * 32;
-      } else if (elapsedSeconds <= 45) {
-        nextProgress = 35 + ((elapsedSeconds - 15) / 30) * 35;
-      } else if (elapsedSeconds <= 90) {
-        nextProgress = 70 + ((elapsedSeconds - 45) / 45) * 18;
+      if (elapsedSeconds <= 4) {
+        nextProgress = 5 + (elapsedSeconds / 4) * 52;
+      } else if (elapsedSeconds <= 9) {
+        nextProgress = 57 + ((elapsedSeconds - 4) / 5) * 29;
+      } else if (elapsedSeconds <= 18) {
+        nextProgress = 86 + ((elapsedSeconds - 9) / 9) * 10;
       } else {
-        nextProgress = 88 + Math.min(8, ((elapsedSeconds - 90) / 180) * 8);
+        nextProgress = 96 + Math.min(2, ((elapsedSeconds - 18) / 30) * 2);
       }
 
-      setLoadingProgress(Math.min(96, nextProgress));
+      setLoadingProgress(Math.min(98, nextProgress));
     }, 500);
 
     return () => window.clearInterval(interval);
@@ -463,6 +511,11 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
     let cancelled = false;
 
     async function loadInitialData() {
+      if (resultPage && storedResult?.jobs?.length) {
+        setStatus("");
+        return;
+      }
+
       if (initialDataCache) {
         const cachedAnalytics = hasAnalyticsData(initialDataCache.analytics)
           ? initialDataCache.analytics
@@ -557,12 +610,25 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       const mappedJobs = listFromApiResponse(data).map(mapJob);
       setJobs(mappedJobs);
       const totalCount = totalFromApiResponse(data, mappedJobs.length);
+      const nextAnalytics = buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch });
       setJobsTotalCount(totalCount);
       setJobsPage(data?.page ?? 0);
       setJobsHasMore(false);
       setActiveFilter(data?.filterRequest || null);
-      setAnalytics(buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch }));
+      setAnalytics(nextAnalytics);
       setLastResultsMode("search");
+      saveStoredResults({
+        mode: "search",
+        query,
+        cvName: "",
+        jobs: mappedJobs,
+        jobsTotalCount: totalCount,
+        jobsPage: data?.page ?? 0,
+        jobsHasMore: false,
+        activeFilter: data?.filterRequest || null,
+        analytics: nextAnalytics,
+        lastResultsMode: "search",
+      });
       window.history.pushState({}, "", "/motion-prompt");
     } catch (err) {
       setError("The prompt API did not return a result. Check the backend and AI service.");
@@ -588,12 +654,25 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       const mappedJobs = (data?.jobs || []).map(mapJob);
       setJobs(mappedJobs);
       const totalCount = totalFromApiResponse(data, mappedJobs.length);
+      const nextAnalytics = buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch });
       setJobsTotalCount(totalCount);
       setJobsPage(data?.page ?? 0);
       setJobsHasMore(false);
       setActiveFilter(data?.filterRequest || null);
-      setAnalytics(buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch }));
+      setAnalytics(nextAnalytics);
       setLastResultsMode("cv");
+      saveStoredResults({
+        mode: "cv",
+        query,
+        cvName: file.name,
+        jobs: mappedJobs,
+        jobsTotalCount: totalCount,
+        jobsPage: data?.page ?? 0,
+        jobsHasMore: false,
+        activeFilter: data?.filterRequest || null,
+        analytics: nextAnalytics,
+        lastResultsMode: "cv",
+      });
       window.history.pushState({}, "", "/motion-cv");
     } catch (err) {
       setError("The CV API did not return a result. Check that the backend and AI service are running.");
@@ -625,6 +704,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
     setLoading(false);
     setError("");
     setStatus("");
+    clearStoredResults();
     window.history.pushState({}, "", "/motion");
     window.dispatchEvent(new Event("jobradar:navigate"));
   };

@@ -1,4 +1,5 @@
 import { Scale, SunMoon } from "lucide-react";
+import { useComparison } from "../../context/ComparisonContext.jsx";
 
 const navLinks = [
   ["Home", "/motion"],
@@ -13,6 +14,13 @@ function navigate(event, href) {
 
 export default function MotionShell({ mode, score, theme, onThemeToggle, onHomeClick, onStatisticsClick, children }) {
   const path = window.location.pathname;
+  const comparison = useComparison();
+  const jobsActive = ["/motion-prompt", "/motion-cv"].includes(path) || (mode !== "idle" && mode !== "analytics" && mode !== "compare" && path !== "/compare");
+
+  const openComparison = () => {
+    window.history.pushState({}, "", "/compare");
+    window.dispatchEvent(new Event("jobradar:navigate"));
+  };
 
   return (
     <main className={`motion-shell mode-${mode} theme-${theme}`}>
@@ -27,13 +35,13 @@ export default function MotionShell({ mode, score, theme, onThemeToggle, onHomeC
           event.preventDefault();
           onHomeClick?.();
         }}>
-          <b className="logo-mark" aria-hidden="true"></b>
+          <img className="logo-mark" src="/jobradar.svg" alt="" aria-hidden="true" />
           <span>Job Radar</span>
         </a>
         <nav aria-label="Motion pages">
           {navLinks.map(([label, href]) => (
             <a
-              className={(href === "/analytics" ? path === "/analytics" : mode === "idle" && path !== "/analytics") ? "active" : ""}
+              className={(href === "/analytics" ? path === "/analytics" : path === "/motion" && mode === "idle") ? "active" : ""}
               href={href}
               key={label}
               onClick={(event) => {
@@ -55,16 +63,22 @@ export default function MotionShell({ mode, score, theme, onThemeToggle, onHomeC
               {label}
             </a>
           ))}
-          {mode !== "idle" ? <a className="active" href="/motion-prompt" onClick={(event) => event.preventDefault()}>Jobs</a> : null}
+          {jobsActive ? <a className="active" href="/motion-prompt" onClick={(event) => event.preventDefault()}>Jobs</a> : null}
         </nav>
         <div className="topbar-actions">
           <button className="theme-toggle" type="button" onClick={onThemeToggle} aria-label="Toggle dark or light mode">
             <SunMoon size={18} strokeWidth={1.9} />
             <span>{theme === "light" ? "Light" : "Dark"}</span>
           </button>
-          <button className="compare-button" type="button" aria-label="Compare jobs">
+          <button
+            className={`compare-button ${path === "/compare" ? "active" : ""}`}
+            type="button"
+            aria-label={`Compare jobs ${comparison.count} of ${comparison.maxJobs}`}
+            onClick={openComparison}
+          >
             <Scale size={20} strokeWidth={1.8} />
-            <span>Compare jobs (0)</span>
+            <span>Compare jobs ({comparison.count}/{comparison.maxJobs})</span>
+            <b className="compare-count-badge" aria-hidden="true">{comparison.count}/{comparison.maxJobs}</b>
           </button>
           <div className="rail-meter">
             <span>Avg match</span>

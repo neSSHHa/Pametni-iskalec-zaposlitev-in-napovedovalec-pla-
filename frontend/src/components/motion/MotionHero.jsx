@@ -85,6 +85,16 @@ export default function MotionHero({
             <span className="btn-primary">{cvName ? "CV selected" : "Upload CV"}</span>
             <small>{cvName ? "Document is ready for analysis" : "PDF, DOCX supported"}</small>
           </label>
+          <p className="europass-helper">
+            No CV yet? Create one with the{" "}
+            <a
+              href="https://europa.eu/europass/eportfolio/screen/cv-editor?lang=en&previous=https:%2F%2Feuropa.eu%2Feuropass%2Fen"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Europass CV builder
+            </a>.
+          </p>
         </div>
 
         <div className="panel-side">
