@@ -40,9 +40,9 @@ public class JobService {
 
     // Skupaj 100 tock. Ce job nima podatka, se njegova teza ne steje v availablePoints.
     private static final double SKILL_WEIGHT = 40.0;
-    private static final double TITLE_WEIGHT = 20.0;
-    private static final double EXPERIENCE_WEIGHT = 15.0;
-    private static final double LOCATION_WEIGHT = 10.0;
+    private static final double TITLE_WEIGHT = 15.0;
+    private static final double EXPERIENCE_WEIGHT = 10.0;
+    private static final double LOCATION_WEIGHT = 20.0;
     private static final double WORK_TYPE_WEIGHT = 7.0;
     private static final double EDUCATION_WEIGHT = 5.0;
     private static final double SALARY_WEIGHT = 3.0;
@@ -327,18 +327,20 @@ public class JobService {
     }
 
     private void addLocationScore(MatchScore score, Location jobLocation, JobFilterRequest.LocationCriteria userLocation) {
-        if (jobLocation == null) {
+        if (jobLocation == null || !hasActiveLocationCriteria(userLocation)) {
             return;
         }
 
         List<Double> weights = new ArrayList<>();
 
-        addJobTextWeight(weights, jobLocation.getCityDistrict(), userLocation == null ? null : userLocation.cityDistrict());
-        addJobAnyTextWeight(weights, jobLocation.getCity(), userLocation == null ? null : userLocation.city(), userLocation == null ? null : userLocation.cities());
-        addJobAnyTextWeight(weights, jobLocation.getRegion(), userLocation == null ? null : userLocation.region(), userLocation == null ? null : userLocation.regions());
-        addJobAnyTextWeight(weights, jobLocation.getCountry(), userLocation == null ? null : userLocation.country(), userLocation == null ? null : userLocation.countries());
-        addJobExactWeight(weights, jobLocation.getLatitude(), userLocation == null ? null : userLocation.latitude());
-        addJobExactWeight(weights, jobLocation.getLongitude(), userLocation == null ? null : userLocation.longitude());
+        if (hasCityLocationCriteria(userLocation)) {
+            addJobTextWeight(weights, jobLocation.getCityDistrict(), userLocation.cityDistrict());
+            addJobAnyTextWeight(weights, jobLocation.getCity(), userLocation.city(), userLocation.cities());
+        } else if (hasRegionLocationCriteria(userLocation)) {
+            addJobAnyTextWeight(weights, jobLocation.getRegion(), userLocation.region(), userLocation.regions());
+        } else {
+            addJobAnyTextWeight(weights, jobLocation.getCountry(), userLocation.country(), userLocation.countries());
+        }
 
         if (weights.isEmpty()) {
             return;
@@ -349,11 +351,11 @@ public class JobService {
     }
 
     private void addJobTextWeight(List<Double> weights, String jobValue, String userValue) {
-        if (!hasText(jobValue)) {
+        if (!hasText(jobValue) || !hasText(userValue)) {
             return;
         }
 
-        weights.add(hasText(userValue) ? textMatchWeight(userValue, jobValue) : 0.0);
+        weights.add(textMatchWeight(userValue, jobValue));
     }
 
     private void addJobAnyTextWeight(List<Double> weights, String jobValue, String singleUserValue, List<String> userValues) {
@@ -374,7 +376,6 @@ public class JobService {
         }
 
         if (values.isEmpty()) {
-            weights.add(0.0);
             return;
         }
 
@@ -387,11 +388,11 @@ public class JobService {
     }
 
     private void addJobExactWeight(List<Double> weights, Object jobValue, Object userValue) {
-        if (jobValue == null) {
+        if (jobValue == null || userValue == null) {
             return;
         }
 
-        weights.add(userValue != null && jobValue.equals(userValue) ? 1.0 : 0.0);
+        weights.add(jobValue.equals(userValue) ? 1.0 : 0.0);
     }
 
     private void addSkillScore(MatchScore score, Job job, List<String> userSkills, SkillRelationIndex skillRelationIndex, BatchLookup lookup) {
@@ -408,15 +409,34 @@ public class JobService {
                 : userSkills.stream()
                         .filter(this::hasText)
                         .map(this::normalize)
+                        .distinct()
                         .toList();
+
+        if (userSkillValues.isEmpty()) {
+            score.addWeighted(SKILL_WEIGHT, 0.0);
+            return;
+        }
+
         Set<String> userSkillValueSet = new LinkedHashSet<>(userSkillValues);
+        Set<String> jobSkillValueSet = new LinkedHashSet<>(jobSkillValues);
 
-        // Job skills so zahteve. Extra user skills ne znizajo rezultata.
-        List<Double> weights = jobSkillValues.stream()
-                .map(jobSkill -> skillMatchWeight(jobSkill, userSkillValueSet, skillRelationIndex))
-                .toList();
+        // Main part: how many of the skills requested by the user are covered by this job?
+        // Exact matches count as 1.0. Related skills use the relationship weight from SkillRelationIndex.
+        // Example: user wants Teaching + Biology.
+        // Job with Teaching + Biology scores much higher than job with only Teaching.
+        double userSkillCoverage = userSkillValues.stream()
+                .mapToDouble(userSkill -> skillMatchWeight(userSkill, jobSkillValueSet, skillRelationIndex))
+                .average()
+                .orElse(0.0);
 
-        double average = weights.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
+        // Smaller extra part: reward jobs whose own skills are also relevant to the user.
+        // This keeps related/specialized job skills useful, but prevents one broad skill from dominating.
+        double jobSkillCoverage = jobSkillValues.stream()
+                .mapToDouble(jobSkill -> skillMatchWeight(jobSkill, userSkillValueSet, skillRelationIndex))
+                .average()
+                .orElse(0.0);
+
+        double average = userSkillCoverage * 0.85 + jobSkillCoverage * 0.15;
         score.addWeighted(SKILL_WEIGHT, average);
     }
 
@@ -625,6 +645,10 @@ public class JobService {
                 .map(Job::getId)
                 .forEach(candidateIds::add);
 
+        if (!cities.isEmpty()) {
+            return candidateIds;
+        }
+
         LinkedHashSet<String> regions = new LinkedHashSet<>();
         if (hasText(location.region())) {
             regions.add(location.region());
@@ -636,6 +660,10 @@ public class JobService {
                 .flatMap(region -> jobRepository.findByLocation_RegionContainingIgnoreCase(region).stream())
                 .map(Job::getId)
                 .forEach(candidateIds::add);
+
+        if (!regions.isEmpty()) {
+            return candidateIds;
+        }
 
         LinkedHashSet<String> countries = new LinkedHashSet<>();
         if (hasText(location.country())) {
@@ -680,6 +708,19 @@ public class JobService {
                 || !isEmpty(criteria.countries())
                 || criteria.latitude() != null
                 || criteria.longitude() != null);
+    }
+
+    private boolean hasCityLocationCriteria(JobFilterRequest.LocationCriteria criteria) {
+        return criteria != null && (hasText(criteria.cityDistrict())
+                || hasText(criteria.city())
+                || !isEmpty(criteria.cities())
+                || criteria.latitude() != null
+                || criteria.longitude() != null);
+    }
+
+    private boolean hasRegionLocationCriteria(JobFilterRequest.LocationCriteria criteria) {
+        return criteria != null && (hasText(criteria.region())
+                || !isEmpty(criteria.regions()));
     }
 
     private boolean isRemote(Job job, BatchLookup lookup) {

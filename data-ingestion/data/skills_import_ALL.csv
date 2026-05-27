@@ -162,3 +162,21 @@ sk-virtualization,Virtualization,skill-technical
 sk-vmware,VMware,skill-technical
 sk-windows-server,Windows Server,skill-technical
 sk-wireless-networking,Wireless Networking,skill-technical
+sk-secondary-education,Secondary Education,skill-education
+sk-higher-education,Higher Education,skill-education
+sk-vocational-education,Vocational Education,skill-education
+sk-healthcare-education,Healthcare Education,skill-education
+sk-science-education,Science Education,skill-education
+sk-language-education,Language Education,skill-education
+sk-computer-science-education,Computer Science Education,skill-education
+sk-business-education,Business Education,skill-education
+sk-student-work,Student Work,skill-other
+sk-finance,Finance,skill-finance
+sk-japanese-cuisine,Japanese Cuisine,skill-cooking
+sk-asian-cuisine,Asian Cuisine,skill-cooking
+sk-italian-cuisine,Italian Cuisine,skill-cooking
+sk-mediterranean-cuisine,Mediterranean Cuisine,skill-cooking
+sk-pastry-making,Pastry Making,skill-cooking
+sk-production-line-work,Production Line Work,skill-production
+sk-material-handling,Material Handling,skill-production
+sk-industrial-manufacturing,Industrial Manufacturing,skill-production
