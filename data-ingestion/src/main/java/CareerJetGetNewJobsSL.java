@@ -1,10 +1,15 @@
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
-import java.net.http.*;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.time.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.HashSet;
@@ -27,7 +32,7 @@ public class CareerJetGetNewJobsSL {
             throw new RuntimeException("Missing CAREERJET_API_KEY environment variable.");
         }
 
-        String userIp = ""
+        String userIp = "";
 
         String auth = Base64.getEncoder()
                 .encodeToString((apiKey + ":").getBytes(StandardCharsets.UTF_8));

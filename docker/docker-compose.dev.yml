@@ -7,12 +7,15 @@ services:
     profiles:
       - import
     build: ../data-ingestion
+    volumes:
+      - ../data-ingestion/data:/app/data
     environment:
       MYSQL_HOST: mysql
       MYSQL_PORT: 3306
       MYSQL_DATABASE: ${MYSQL_DATABASE:-smartjobs}
       MYSQL_USER: root
       MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD:-nenadnenad}
+      ZRSZ_JSON_URL: ${ZRSZ_JSON_URL:-}
     depends_on:
       mysql:
         condition: service_healthy
