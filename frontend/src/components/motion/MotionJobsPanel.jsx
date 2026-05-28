@@ -1,5 +1,5 @@
 import { BarChart3, BriefcaseBusiness, Check, MapPin, Scale, X } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useComparison } from "../../context/ComparisonContext.jsx";
 
 const accentColors = ["#8b5cf6", "#10b981", "#64748b", "#a855f7", "#3b82f6"];
@@ -19,7 +19,8 @@ export default function MotionJobsPanel({
   onLoadMore,
   onViewStatistics,
 }) {
-  const displayJobs = jobs;
+  const [sortMode, setSortMode] = useState("compatibility");
+  const displayJobs = useMemo(() => sortJobs(jobs, sortMode), [jobs, sortMode]);
   const resultCount = totalCount ?? displayJobs.length;
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [selectedJob, setSelectedJob] = useState(null);
@@ -61,11 +62,32 @@ export default function MotionJobsPanel({
       {!loading && !displayJobs.length ? <p className="motion-status">No listings for the current selection.</p> : null}
       {!loading && displayJobs.length ? (
         <div className="result-toolbar">
-          <p className="result-range">Showing {visibleJobs.length} of {Number(resultCount || 0).toLocaleString("sl-SI")} results.</p>
-          <button className="view-statistics-button" type="button" onClick={onViewStatistics}>
-            <BarChart3 size={18} strokeWidth={1.9} />
-            View statistics
-          </button>
+          <div className="result-toolbar-left">
+            <p className="result-range">Showing {visibleJobs.length} of {Number(resultCount || 0).toLocaleString("sl-SI")} results.</p>
+          </div>
+          <div className="result-toolbar-actions">
+            <div className="result-sort-control" aria-label="Sort results">
+              <span>Sort by</span>
+              <button
+                className={sortMode === "compatibility" ? "active" : ""}
+                type="button"
+                onClick={() => setSortMode("compatibility")}
+              >
+                Compatibility
+              </button>
+              <button
+                className={sortMode === "datePosted" ? "active" : ""}
+                type="button"
+                onClick={() => setSortMode("datePosted")}
+              >
+                Date posted
+              </button>
+            </div>
+            <button className="view-statistics-button" type="button" onClick={onViewStatistics}>
+              <BarChart3 size={18} strokeWidth={1.9} />
+              View statistics
+            </button>
+          </div>
         </div>
       ) : null}
 
@@ -162,6 +184,7 @@ function JobCard({ job, index, accent, mode, onOpen, onToggleCompare, selectedFo
           <MapPin size={13} /> {job.city}, {job.country}
           {job.mode ? <> <i></i> {job.mode}</> : null}
           {job.level ? <> <i></i> {job.level}</> : null}
+          {job.postedDate ? <> <i></i> Posted {formatPostedDate(job.postedDate)}</> : null}
         </p>
         <footer>
           {job.tags.map((tag) => <em key={tag}>{tag}</em>)}
@@ -192,6 +215,39 @@ function JobCard({ job, index, accent, mode, onOpen, onToggleCompare, selectedFo
       </button>
     </article>
   );
+}
+
+function sortJobs(jobs, sortMode) {
+  const indexedJobs = jobs.map((job, index) => ({ job, index }));
+
+  indexedJobs.sort((left, right) => {
+    if (sortMode === "datePosted") {
+      const dateDiff = dateValue(right.job.postedDate) - dateValue(left.job.postedDate);
+      if (dateDiff !== 0) return dateDiff;
+    }
+
+    const matchDiff = (Number(right.job.match) || 0) - (Number(left.job.match) || 0);
+    if (matchDiff !== 0) return matchDiff;
+    return left.index - right.index;
+  });
+
+  return indexedJobs.map(({ job }) => job);
+}
+
+function dateValue(value) {
+  if (!value) return 0;
+  const parsed = Date.parse(value);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function formatPostedDate(value) {
+  const parsed = Date.parse(value);
+  if (!Number.isFinite(parsed)) return value;
+  return new Intl.DateTimeFormat("sl-SI", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(new Date(parsed));
 }
 
 function filterChips(filterRequest) {
@@ -246,10 +302,26 @@ function LoadMoreButton({ remainingJobs, hasMore, onClick }) {
 export function JobDetailsModal({ job, filterRequest, onClose, onToggleCompare, selectedForCompare = false }) {
   const userSkills = Array.isArray(filterRequest?.skills) ? filterRequest.skills : [];
   const detailsRef = useRef(null);
+  const descriptionRef = useRef(null);
+  const [descriptionExpanded, setDescriptionExpanded] = useState(false);
+  const [descriptionCanExpand, setDescriptionCanExpand] = useState(false);
+  const descriptionText = job.description || "No description is available for this listing.";
+  const shouldShowDescriptionToggle = descriptionCanExpand || descriptionText.length > 260;
 
   useEffect(() => {
     detailsRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    setDescriptionExpanded(false);
+    setDescriptionCanExpand(false);
   }, [job?.id]);
+
+  useLayoutEffect(() => {
+    if (descriptionExpanded) return;
+
+    const description = descriptionRef.current;
+    if (!description) return;
+
+    setDescriptionCanExpand(description.scrollHeight > description.clientHeight + 1);
+  }, [job?.id, job?.description, descriptionExpanded]);
 
   return (
     <div className="job-details-backdrop" role="dialog" aria-modal="true" onClick={onClose}>
@@ -298,7 +370,18 @@ export function JobDetailsModal({ job, filterRequest, onClose, onToggleCompare, 
 
         <section>
           <span>Job description</span>
-          <p>{job.description || "No description is available for this listing."}</p>
+          <p ref={descriptionRef} className={descriptionExpanded ? "expanded" : "collapsed"}>
+            {descriptionText}
+          </p>
+          {shouldShowDescriptionToggle ? (
+            <button
+              className="description-toggle-button"
+              type="button"
+              onClick={() => setDescriptionExpanded((expanded) => !expanded)}
+            >
+              {descriptionExpanded ? "See less" : "See more"}
+            </button>
+          ) : null}
         </section>
 
         <div className="match-columns">

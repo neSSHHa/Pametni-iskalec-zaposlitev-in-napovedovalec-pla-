@@ -8037,6 +8037,58 @@ body {
   margin: 0 !important;
 }
 
+.result-toolbar-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.result-toolbar-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.result-sort-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  border: 1px solid rgba(124, 58, 237, 0.22);
+  border-radius: 999px;
+  padding: 5px;
+  color: var(--muted);
+  background: rgba(124, 58, 237, 0.06);
+}
+
+.result-sort-control span {
+  padding: 0 9px 0 10px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.result-sort-control button {
+  min-height: 34px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 13px;
+  color: var(--muted);
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+}
+
+.result-sort-control button.active {
+  color: #ffffff;
+  background: #7c3aed;
+  box-shadow: 0 10px 22px rgba(124, 58, 237, 0.22);
+}
+
 .view-statistics-button {
   display: inline-flex;
   align-items: center;
@@ -9573,6 +9625,35 @@ body .motion-shell .job-details-page section p {
   line-height: 1.55 !important;
 }
 
+body .motion-shell .job-details-page section p.collapsed {
+  display: block !important;
+  max-height: calc(1.55em * 3) !important;
+  overflow: hidden !important;
+}
+
+body .motion-shell .job-details-page section p.expanded {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+body .motion-shell .description-toggle-button {
+  width: fit-content !important;
+  border: 1px solid rgba(124, 58, 237, 0.24) !important;
+  border-radius: 999px !important;
+  padding: 7px 13px !important;
+  color: #6d28d9 !important;
+  background: rgba(124, 58, 237, 0.07) !important;
+  font: inherit !important;
+  font-size: 13px !important;
+  cursor: pointer !important;
+}
+
+body .motion-shell .description-toggle-button:hover {
+  border-color: #7c3aed !important;
+  color: #ffffff !important;
+  background: #7c3aed !important;
+}
+
 body .motion-shell .match-columns {
   gap: 14px !important;
 }
@@ -9622,6 +9703,14 @@ body .motion-shell .job-details-compare-button span {
   color: currentColor !important;
   font-size: 13px !important;
   line-height: 1 !important;
+}
+
+body .motion-shell .motion-job aside {
+  gap: 7px !important;
+}
+
+body .motion-shell .job-compare-card-button {
+  margin-top: 12px !important;
 }
 
 /* Loading icon tile should stay light and purple, never dark/black. */
