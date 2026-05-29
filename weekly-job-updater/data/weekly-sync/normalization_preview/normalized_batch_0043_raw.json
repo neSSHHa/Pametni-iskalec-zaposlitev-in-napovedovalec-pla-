@@ -1,0 +1,254 @@
+{
+  "jobs": [
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|cestar/gradbeni delavec (m/ž)|novo mesto, southeast slovenia",
+      "description": "in gospodarno izvajanje del -za skrbno, gospodarno in strokovno ravnanje z materiali, delovnimi sredstvi, opremo in časom. Delo v stimulativnem, dinamičnem okolju, ki nodi možnosti za osebno in strokovno rast, razvoj in dodatno izobraževanje. Delo v okolju",
+      "salary": {
+        "min": null,
+        "max": null
+      },
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "requiredExperience": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-construction-work"],
+      "companyname": "Unknown company",
+      "locationId": "loc-novo-mesto-southeast-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-19",
+      "sourceWebsite": "https://jobviewtrack.com/v2/uZcg-saFzbLsz-bg6yOg44zXM6v7_noOFHvDk_6defq8ojY2z0WvhvfnIHiVigKXEWTE2NKwbWFg-TVR6jfSbeCMAPn6mKvPkp7NtVc3ryBs0SuYnibLgBaIC_DnuseJSrRYy5waZddg0BztBRLxPxgHa86hA78pbp7cXwo4BzCXR1VJr2fRI8W1BsNXQ3oUljAwESL7poOuxOQ5vGzf_19lyMMexRJD5pN-zxdA6qA",
+      "jobname": "Gradbeni delavec",
+      "educationLevelId": "edu-not-specified",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|gradbeni delavec - asfalter (m/ž)|trebnje, southeast slovenia",
+      "description": "v železokrivnici. Natančnost, samostojnost in samoiniciativnost. Sposobnost delovanja v timu. Delo v stimulativnem, dinamičnem okolju, ki nodi možnosti za osebno in strokovno rast, razvoj in dodatno izobraževanje. Delo v okolju, kjer lahko vsakdo",
+      "salary": {
+        "min": null,
+        "max": null
+      },
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "requiredExperience": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-construction-work"],
+      "companyname": "Unknown company",
+      "locationId": "loc-trebnje-southeast-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-19",
+      "sourceWebsite": "https://jobviewtrack.com/v2/2ZBIcPDQsxjIS0hUL0l3BNtzezOIibT-eocYet6NSWLctpIp3Eq8wX1lL0I-klqp3G1u-gfKJfmFU1XQgzkifm0Ax0DdMZyqcCtH4GenO5IocIOiF_KcTXuOdptfLItMmq7O0Jfc0IX9LXwqVzR5DGeAiamyXRMtP3LwpZUrhaqPUBEcZxAXwzK-zVWgvdc9XvKizxK3bNpoku3Gbc9JbqELmUMV07NgykFS_Z2s_3c",
+      "jobname": "Gradbeni delavec - asfalter",
+      "educationLevelId": "edu-not-specified",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|hidrotehnični delavec - vzdrževanje vodotokov (m/ž)|novo mesto, southeast slovenia",
+      "description": "vodotokov. Vozniški izpit B kategorije. Izpit za varno delo z motorno žago (kandidat se lahko usposobi tudi v okviru. Odnos do sprememb in sposobnost delovanja v timu. Delo v stimulativnem, dinamičnem okolju, ki nodi možnosti za osebno in strokovno rast, razvoj in dodatno izobraževanje. Delo v okolju, kjer lahko vsakdo",
+      "salary": {
+        "min": null,
+        "max": null
+      },
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "requiredExperience": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-technical-maintenance"],
+      "companyname": "Unknown company",
+      "locationId": "loc-novo-mesto-southeast-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-18",
+      "sourceWebsite": "https://jobviewtrack.com/v2/6olWpdMrDSrAaI0zLwZcEybdFu3wj-Tgc5nE9RiCXQO8hsJ6n5_kgSIwWS_BMh-cWmT4x1knLyE0ifank3wQRGsz08G8IQfZRJDl5d9HG-fKj8O1AA2CvVyCyfYl8R4IJz5GVu2WstHuKOuMvlljrH-yHNdRfPYVde_rxeagQDrt0jXaFZzmNa76zTn6wyl_nkSOzb-Btwggg54qyx84XQ6DIvR0DePx2iQLYeOP6dE",
+      "jobname": "Hidrotehnični delavec - vzdrževanje vodotokov",
+      "educationLevelId": "edu-not-specified",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "orkoplast|nastavljalec strojev za preoblikovanje pločevin|trebnje, southeast slovenia",
+      "description": "priprava orodij za izdelovanje kovinskih izdelkov na stiskalnice. delo na stiskalnicah za preoblikovanje pločevin. stimulativno in redno plačilo. delo v stabilnem podjetju. možnost dodatnega izobraževanja. možnost napredovanja",
+      "salary": {
+        "min": null,
+        "max": null
+      },
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "requiredExperience": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-machine-operation"],
+      "companyname": "Orkoplast",
+      "locationId": "loc-trebnje-southeast-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-18",
+      "sourceWebsite": "https://jobviewtrack.com/v2/uF5iLlegJQsA8xhLFWDDt22OijhNczHDqj7egfRKnjg3HL5N-Ci1TfQk8Zv1IWNPalumu-cNXO4e0ujPATPL6WzbfUEaFwrMvVBb5nEyrcQJp0mVYj6bhIIm8b4BRAckGzTku5qtuH7GRMROSdOvAfh6XPpnxF_qBCgz8DfV8BlGGBT0ynKh8SKkw8SxueRtTf6J7HuuTi9TM8rYRztwIoUPgNQbf_ssnehxL9B48F8",
+      "jobname": "Nastavljalec strojev za preoblikovanje pločevin",
+      "educationLevelId": "edu-not-specified",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "krka|samostojni tehnolog v tehnični službi v proizvodnji zdravil (m/ž)|novo mesto, southeast slovenia",
+      "description": "pripravljenost za delo v skupini in prevzemanje odgovornosti. znanje angleškega jezika. poznavanje uporabniških orodij MS Office. vozniški izpit B-kategorije. priložnost za karierni razvoj in možnosti za delo v tujini. dinamično timsko delo pri reševanju",
+      "salary": {
+        "min": null,
+        "max": null
+      },
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "requiredExperience": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-information-systems",
+        "sk-english-language"
+      ],
+      "companyname": "Krka",
+      "locationId": "loc-novo-mesto-southeast-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-18",
+      "sourceWebsite": "https://jobviewtrack.com/v2/qykHFCnchdOWqt2DgxY4V809-7_tvYm277HIiI3ACZ4QABXQjt0A_Qvgysw7yeBcXdGGYMQjzNQKHT25YdlD6dwPlcyfwCtGX724CGtqzP7bwnEPnw7ShrBaRjGhPDpqkMKSVmeMPg5mGVrewB_0JQsHZJ7WuIUoxrmnEK7I2V-0v9CNZA6hbMlYz2Bo9t5TnO4u4va6Hsd-BwB7rjP-IiFMEhsJ7hlt6EhZnJwXiOg",
+      "jobname": "Samostojni tehnolog v Tehnični službi v Proizvodnji zdravil",
+      "educationLevelId": "edu-not-specified",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "mjob|pomoč v proizvodnji senčil|novo mesto, southeast slovenia",
+      "description": "moč. pridnost. razpoložljivost za delo. resnost. polnoletnost",
+      "salary": {
+        "min": 7.73,
+        "max": 7.73
+      },
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "requiredExperience": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-production-work"],
+      "companyname": "Mjob",
+      "locationId": "loc-novo-mesto-southeast-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-18",
+      "sourceWebsite": "https://jobviewtrack.com/v2/oMjPO-ZMol9lKSPaIZBoZ-Oy6lTawMs2BCC3M_2oJd1HZldy5wyZjsHTlqfFhoIOZmbsU7TsY8DTIJC8aHm4GSOlgcvq0kIqYNZFWWTTUzR19Oybb1hoOcjEauMeZ76mIy4UbevfsjVqIY7HPOt2qF1lJ3OiTjEKc7PS7GicTSRDXfXC2MD6uk54jbuGOYFJCvCsv1KZw87tvLXsLpYSyHhO-C0OGTcCKZbw_KGNo4U",
+      "jobname": "Pomoč v proizvodnji senčil",
+      "educationLevelId": "edu-not-specified",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "orkoplast|vodja avtomatizacije|trebnje, southeast slovenia",
+      "description": "sposobnosti. zaposlitev za nedoločen čas s poskusno dobo. delo na zahtevnih in inovativnih projektih. možnost strokovnega",
+      "salary": {
+        "min": null,
+        "max": null
+      },
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "requiredExperience": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-automation"],
+      "companyname": "Orkoplast",
+      "locationId": "loc-trebnje-southeast-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-17",
+      "sourceWebsite": "https://jobviewtrack.com/v2/RdUTdlLqYYZIlE3O74G8wF5vIBnjeLTT0duMDCWemf0a1fCEQrztPNiYbxIWFK5UijOUJ4aHK3ZO7oKB5ewqn2Rkbt8jCiCEdYfkasS0zvc5OY0Nmg9bV1Mi8F5X6bWQAw4gbPI9U_NjhEZZ8_TI8ZCNXM-V64_KP-cGJqHbRLeLG7nTqUE53kpB2C8VXk-47TKm4kCJP7EYdenTVNL7dM1B9RKKHR3zq1I2XL2bZHg",
+      "jobname": "Vodja avtomatizacije",
+      "educationLevelId": "edu-not-specified",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "cineplexx si, druzba za predvajanje filmov, d.o.o.|blagajnik, novo mesto|novo mesto, southeast slovenia",
+      "description": ", da so naši gostje odlično opremljeni s svežo pokovko, nachosi in hladnimi pijačami. Delo z blagajno: Plačila obdeluješ hitro, varno. Vaše prijave pošljite do 31.5.2026. KAJ PONUJAMO: Odlično plačilo: Tvoje delo cenimo! Ponujamo plačilo, višje od zakonsko",
+      "salary": {
+        "min": null,
+        "max": null
+      },
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "requiredExperience": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-customer-service"],
+      "companyname": "CINEPLEXX SI, druzba za predvajanje filmov, d.o.o.",
+      "locationId": "loc-novo-mesto-southeast-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-16",
+      "sourceWebsite": "https://jobviewtrack.com/v2/zrHfJWUfj3ZKOBQwRDyJThupDizQNqRH8QEl2p0YKKy6AUWYUjMhCTN7RIZiGet-iFNNFDXe9LZNsh2fTl4P3FBBMEZ3LMtcJOBBLKs4SluhDzk-muuR1j95Xb7UUtIrHteRLQlRvgJl9g518OZFtL8p_GJ8-Ok3kj44hoCHRT1shFsYPczUlDx4GSl34_6iy-FCBVPcBXNz0JKqlpvS8XdEa__sQq-MLSdtpaYLfWQ",
+      "jobname": "Blagajnik, Novo mesto",
+      "educationLevelId": "edu-not-specified",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "trimo|poslovni kontroler|trebnje, southeast slovenia",
+      "description": "in odgovornosti pri delu s podatki. Afiniteta za delo z numeričnimi podatki ter njihovo analizo in interpretacijo. Napredno znanje... Microsoft Excela (delo z večjimi bazami podatkov, kompleksnejše formule,povezovanje podatkov). Prednost predstavlja poznavanje",
+      "salary": {
+        "min": null,
+        "max": null
+      },
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "requiredExperience": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-information-systems",
+        "sk-information-technology"
+      ],
+      "companyname": "Trimo",
+      "locationId": "loc-trebnje-southeast-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-16",
+      "sourceWebsite": "https://jobviewtrack.com/v2/ikLZl3q8FXF2O5JBO8ZVx28g7OsXKXQV70enY-hUDd703m413irujpHtaqAJgHjxT_l6SUzet17l5sfgC-i1ZlfLy-eqrul9JiT6RO-AhXFa5CWgm5yoCm_DJlnq8OHjXGo5Wd2D8fYtiB8IFeM0YKb6oS8IK4VOPeLtFdHzSoS4WHuRjymV1M-lLEjXfi1GVXVsmecxwuqiTHFpBYgAZEoYIqHp-PzBy865M40yzo4",
+      "jobname": "Poslovni kontroler",
+      "educationLevelId": "edu-not-specified",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "javni stanovanjski sklad mestne obcine novo mesto|direktor javnega stanovanjskega sklada mestne občine novo mesto - m/ž|novo mesto, southeast slovenia",
+      "description": "besedil - osnovno; delo s preglednicami - osnovno; delo z bazami podatkov - osnovno; računalniško oblikovanje - osnovno. Drugo",
+      "salary": {
+        "min": null,
+        "max": null
+      },
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "requiredExperience": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-administration",
+        "sk-information-systems"
+      ],
+      "companyname": "Javni stanovanjski sklad Mestne obcine Novo mesto",
+      "locationId": "loc-novo-mesto-southeast-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-16",
+      "sourceWebsite": "https://jobviewtrack.com/v2/16lEzJU2pJFOSwTXgI25j-4SqCZE93tEFj-QrgfbFEUQPody_eoi7Fe_GALhGOxMuzBBPljRmIFQhA9RbtDGXTbkRGNY7PdVkfEUenNMAzxzIs6wd676ZKWBHAmtEmjjF4VJvSVFlh2uj2haslp1QvrICr0teAcAQ3PA4c7LIoyHFVxBDIaiJGRLVgWMkL1a17Q5IHgS7q-ETEpnB2L8qF_qPbzPz4-8vBxA-xIglcI",
+      "jobname": "DIREKTOR JAVNEGA STANOVANJSKEGA SKLADA MESTNE OBČINE NOVO MESTO - M/Ž",
+      "educationLevelId": "edu-not-specified",
+      "status": "ACTIVE"
+    }
+  ],
+  "batchErrors": []
+}

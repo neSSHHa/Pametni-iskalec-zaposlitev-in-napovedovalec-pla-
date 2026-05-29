@@ -1,0 +1,237 @@
+{
+  "jobs": [
+    {
+      "newSkillRelations": [
+        {
+          "sourceSkillId": "sk-dietary-cooking",
+          "relationshipType": "RELATED_TO",
+          "targetSkillId": "sk-food-safety"
+        },
+        {
+          "sourceSkillId": "sk-food-safety",
+          "relationshipType": "PART_OF",
+          "targetSkillId": "sk-food-safety"
+        }
+      ],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|dietni kuhar iv v zsv, šifra dm: f094075 - m/ž|grosuplje, central slovenia",
+      "warnings": [],
+      "description": "PRIPRAVA (DIETNE) PREHRANE PO JEDILNIKU, PRIPRAVA SLAŠČIC, DELITEV OBROKOV, ROČNO IN STROJNO POMIVANJE POSODDE, SKRB ZA ČISTOČO IN RED V KUHINJI IN JEDILNICAH, NADZOR NAD ŽIVILI, UPOŠTEVANJE HACCAP NAV",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-dietary-cooking",
+        "sk-food-safety"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-grosuplje-central-slovenia",
+      "datePosted": "2026-05-20",
+      "sourceWebsite": "https://jobviewtrack.com/v2/LvztXXf1nzgFzLnCnYwi9_AirOwu0jZODN_u1RF7p8iJqucRL3fzXfpzCO1om8s7oUwnFj3xiGk-AEWY_miZJB6PhNvTxVsy4G05xoC2iEvtl57-OYSyEkWSNb8Fy-uaPL7fG8KSZrW3_hl3t2QFlIyS8xhatbkksIHpVmG03cBWqZCzlAtAUxCzfC0BVg_MAE9wisa1QSYA23IH_oinPe05it9feelMX_BXOAL190M",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Dietni kuhar",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|dietni kuhar - m/ž|mozirje, savinja",
+      "warnings": [],
+      "description": "PRIPRAVA, KUHANJE NAVADNE IN DIETNE HRANE PO JEDILNIKIH, - PRIPRAVA OBROKOV ZA SERVIRANJE V JEDILNICI IN NA ODDELKIH, - PO NAROČILU ZDRAVNIKA ALI GLAVNE SESTRE PRIPRAVA POSEBNIH OBROKOV, - ORGANIZIRAN",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-dietary-cooking"],
+      "companyname": "Unknown company",
+      "locationId": "loc-mozirje-savinja",
+      "datePosted": "2026-05-19",
+      "sourceWebsite": "https://jobviewtrack.com/v2/ItH3pn7nKxwJpx7GQc-K31xykhl3FxwJQlJZQR5R6PSXxZrmjPwrP-Gl2RuqZyUZ2Fqj65kAd7bbhWHVVa4gLymIfxSin-uN-N2Bew7hh3vcJI4osqFgmMdKb6Rl6dI6XZpUPvN_xQrA5-3ghuQwpDww20sRBqHqcJNi9MbJKKLdImoRheq77pY8a2zTaB6R6Y3kWA1fFMW2xgDUmi7O7EvjDhjfkPW9h1cZs4pXULw",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Dietni kuhar",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|kuhar, maribor|maribor, drava",
+      "warnings": [],
+      "description": ", pri samem delu pa vas podpirajo izkušeni mentorji in sodelavci. Dobili boste vsa orodja, da postanete XXXL <b>kuhar<\/b>. Potrebujete",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-cooking"],
+      "companyname": "Unknown company",
+      "locationId": "loc-maribor-drava",
+      "datePosted": "2026-05-19",
+      "sourceWebsite": "https://jobviewtrack.com/v2/jOV-7N7ucbIRYMQ51XI8z1GMEfUICezxzN2PcVDiO4W8VDdeE6s_67eRTaSZUThXeP2xBcteRNChtrrSRa-FSx3pSGFB-OiwSQ9JTY_yPGOMOc3QGiXuovSqYDvt5Rd0XCv8k6mZ-RsFJwTsytfZwZvYRxxGmmZarfJyh3hSsEkQsRFIjs0MMsUo3D_LlSeYkOJLUj7ZSaI5G4DmJzqvEZ-L9F9xfgvKb81AhbnZr0Y",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Kuhar",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|kuhar, ljubljana|ljubljana, central slovenia",
+      "warnings": [],
+      "description": ", pri samem delu pa vas podpirajo izkušeni mentorji in sodelavci. Dobili boste vsa orodja, da postanete XXXL <b>kuhar<\/b>. Potrebujete",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-cooking"],
+      "companyname": "Unknown company",
+      "locationId": "loc-ljubljana-central-slovenia",
+      "datePosted": "2026-05-19",
+      "sourceWebsite": "https://jobviewtrack.com/v2/pj0Y6uO-eP_7iaraX-YZXZajE_EQ9plhXY8lqlhHK9jPPZ-EWFBuz_fH2aRgc_jrKP-zZtucnPG8s1I2mCfZPY4g3JLnh8qOjnIhdNbhZRjCvSiI-RT19LJRtBNSM3ntj7nblvlbEmn1EWfIEJGGKsf70Cf5_wmQv6ycZ0aARPTuGN3uivrIt4pts-iQ3VTxjpWsPR-E3pX5Hdx30MFsTEwCQiUtN8E190Gy6QgqqPs",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Kuhar",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|kuhar/kuharica - priložnost za upokojence, ljubljana|ljubljana, central slovenia",
+      "warnings": [],
+      "description": "Kaj boste počeli?   pripravljali enostavne in okusne jedi   skrbeli za urejenost in čistočo kuhinje   sodelovali v prijetni in povezani ekipi   prispevali k dobri izkušnji naših gostov s svojo kuharsk",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-cooking"],
+      "companyname": "Unknown company",
+      "locationId": "loc-ljubljana-central-slovenia",
+      "datePosted": "2026-05-18",
+      "sourceWebsite": "https://jobviewtrack.com/v2/zyenSLsx7TeUV0kL4DRDigPQr2rR8XgC8URdGhT6l9_EwbJrfimWUoH634zjnqXlFS1DYX6_z5TEG-T7olJ6HN8v3AFd6ICFu8zfnmVeR87530Zc97P2EFhDhOfNwRwdngywSsDpgDypODE52P9XQ6XZZyfqo01bq0nQUJ_bW8HYvdlp34JCWER6T8sk9S-ix1oZSkF4S908NlGxJiSWNQZnYZcvjGO1yir3pBBxQ8E",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Kuhar/kuharica - priložnost za upokojence",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "dom dr. jozeta potrca poljcane|f094039 kuhar iv (cido majšperk) - m/ž|slovenska bistrica, drava",
+      "warnings": [],
+      "description": "PRIPRAVLJANJE ŽIVIL IN KUHANJE JEDI, NAPITKOV ZA UPORABNIKI IN DELITEV OBROKOV HRANE UPORABNIKOM, SKRB ZA KAKOVOSTNO IN NEOPOREČNO PREHRANO UPORABNIKOV, SKRB ZA RACIONALNO PORABO ŽIVIL, DNEVNO VODENJE",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-cooking"],
+      "companyname": "DOM DR. JOZETA POTRCA POLJCANE",
+      "locationId": "loc-slovenska-bistrica-drava",
+      "datePosted": "2026-05-18",
+      "sourceWebsite": "https://jobviewtrack.com/v2/WJwg2rabhme1h4oKtp3n2-ISOoj8lqi_VuAihwYoMunz5SQPwR_7dEfC622mXC0JiI6nWwO-NfbOWeRA0-TbKtImIhRg3zrZNBI8GetHTn_ddbbUoMY8T8xKhrKHyOQ8naRYJSDRBdU-i5YdGC5RGBWsX78IfWgM8r-oUmqK9LCR7a_Ogjbiaad7mZPApNvlxitPyI5kKWwo40PQE3XxaDheZGUqiLH8z97oluaUE1Y",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "F094039 KUHAR IV (CIDO MAJŠPERK)",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [{
+        "sourceSkillId": "sk-haccp",
+        "relationshipType": "PART_OF",
+        "targetSkillId": "sk-food-safety"
+      }],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "rimski vrelec d.o.o.|vodja zajtrkov - kuhar/kuharica (gospodinja)|slovenia",
+      "warnings": [],
+      "description": "priprava in prezentacija zajtrkov na visokem nivoju   organizacija dela v kuhinji, poznavanje HACCP sistema in skrb za red   nadzor kakovosti sestavin in normativov   aktivno sodelovanje pri kreiranju",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-haccp",
+        "sk-food-safety"
+      ],
+      "companyname": "Rimski vrelec d.o.o.",
+      "locationId": "loc-coastal-karst",
+      "datePosted": "2026-05-17",
+      "sourceWebsite": "https://jobviewtrack.com/v2/NZtGEfcUl6R_i9v_o0SjiR8h-wUtAm_NTJNe95RDE2m2HiZisBFhHwJ9uvGe5EnCWlh6XMrpAIBSANtFsDo6tDl2xHBtttr6UQOgUip3OecWmdhS2fgkAsrFIPiXk7Uywdjt-gAlrqpnYQDRW2h662T-tQrKdXXmrXafcqDPHudNFYPfvyxdfMTMay3P7-bokyTSacP5xSoYlUuEWLsDtD0Ji_JZtZJxl4laVmllnZk",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Vodja zajtrkov - kuhar/kuharica (gospodinja)",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|kuhar-picopek - m/ž|brežice, lower sava",
+      "warnings": [],
+      "description": "SAMOSTOJNO DELO V KUHINJI   Izobrazba: nižja poklicna   Pošlјete življenjepis na: mladen.strnisa@gmail.com",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-cooking"],
+      "companyname": "Unknown company",
+      "locationId": "loc-brezice-lower-sava",
+      "datePosted": "2026-05-14",
+      "sourceWebsite": "https://jobviewtrack.com/v2/4LiZc50IlGKvNnZQ89bxw89Uu4OsK8bkeYLvemf5cNtUSs-LbzWRar5UkZ63yteTHwNPxxZ3G5PonVvo8BiY9kNbJuX7rGTGyLZaqu0dhiHg-yhz6ZBhXk8dBmy6sWGuypCAqB3DEMin53D7MGGs5DBcS2MUGjCBVaSKxTVERpPJGG1zhQXHRZK1gmRk1Ma482AhYgQNuM2He1JLPjDGFay8b9F-LRw_nw65ruTZZtw",
+      "educationLevelId": "edu-lower-vocational",
+      "jobname": "KUHAR-PICOPEK",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [{
+        "sourceSkillId": "sk-food-safety",
+        "relationshipType": "PART_OF",
+        "targetSkillId": "sk-food-safety"
+      }],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "adecco|kuhar delilec (m/ž)|slovenia",
+      "warnings": [],
+      "description": "- Priprava jedi v kuhinji,  - delo na delilni liniji in oskrbovanje delilne linije,  - delo v pomivalnici,  - tehnološka obdelava hrane,  - blagajniško poslovanje na lokaciji,  - upoštevanje HACCP pre",
+      "newLocation": {
+        "country": "Slovenia",
+        "city": "Slovenia",
+        "latitude": null,
+        "id": "loc-slovenia",
+        "region": null,
+        "longitude": null
+      },
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-cooking",
+        "sk-food-safety"
+      ],
+      "companyname": "Adecco",
+      "locationId": "loc-country",
+      "datePosted": "2026-05-13",
+      "sourceWebsite": "https://jobviewtrack.com/v2/N3zcj1VY7dRHkB1aXh_G0wQldBBjvSBP8bZsTriXouLko9e15jvaxw3XPae71i0FSMDfBXkz5mV1i5f8nfMns0_EN94wmkQ6low8chQ5ISRoOb0oxQN3dUGdQwnR-ezazQRTXiVIA-K9TLLEMeGhqoTscLy4Cs6H1emCQI2aI3aBH6i_eZ_3TgO3eyDXruEhadgLet1RAZYAY6oEBQOqEe9sFaIbyJmsaQCbzHr5En4",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Kuhar delilec",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [{
+        "sourceSkillId": "sk-food-safety",
+        "relationshipType": "PART_OF",
+        "targetSkillId": "sk-food-safety"
+      }],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "adecco|kuhar (m/ž)|maribor, drava",
+      "warnings": [],
+      "description": "priprava in izdaja obrokov (zajtrki, malice, kosila, solate, sladice),   estetska priprava in predstavitev jedi,   sodelovanje pri pripravi jedilnikov,   skrb za čistočo in HACCP standarde,   čiščenje",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-cooking",
+        "sk-food-safety"
+      ],
+      "companyname": "Adecco",
+      "locationId": "loc-maribor-drava",
+      "datePosted": "2026-05-12",
+      "sourceWebsite": "https://jobviewtrack.com/v2/wmdaKrTvC563O_8G4BNbBsciquM2mmxe6d02zevIDOKq0riXfmJKpf_o9zNlYT4PIZzz4d8kjEADG-hFvdatT9sODqWMrutfMOlTi8UPkc0kPCreMihjcJKbhrgVAM62yuYPaYw7Uj01rSWDACy0bF202wq2TXdKyjjWs1yJkEuA4oyMzsQJ_9rv-jH1h7A_H49AvK6Y9U0TGbL12FOOns_99-JYrzZKH1Igxklmbd8",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Kuhar",
+      "status": "ACTIVE"
+    }
+  ],
+  "batchErrors": []
+}

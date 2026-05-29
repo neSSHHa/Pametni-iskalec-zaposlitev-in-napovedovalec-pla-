@@ -1,0 +1,284 @@
+{
+  "jobs": [
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "osnovna sola mezica|učitelj glasbene umetnosti - m/ž|ravne na koroškem, carinthia",
+      "warnings": [],
+      "description": "Računalniška znanja: urejevalniki besedil - osnovno; delo s preglednicami - osnovno; delo z bazami podatkov - osnovno; Drugega: Vlogi je potrebno",
+      "newLocation": {
+        "country": "Slovenia",
+        "city": "Ravne na Koroškem",
+        "latitude": 46.54,
+        "cityDistrict": null,
+        "id": null,
+        "region": "Carinthia",
+        "longitude": 14.97
+      },
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": [
+        "sk-computer-science",
+        "sk-microsoft-office"
+      ],
+      "companyname": "OSNOVNA SOLA MEZICA",
+      "locationId": "loc-ravne-na-koroskem-carinthia",
+      "newSkills": [],
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/ZL89McQcoHQHr1esd80Di5aQ6gpV4qVf4oH-r41Y2GiuqvqujyeBm399Zz7LssoS0ogTFd6n1mE5Xa1kzbVBRn-KqAUOuD4vK5ts_m7-7GlFJrigJCxVFbbwSlHrCRRkOdKFjQeddbEJIp8TX-qLdSwbgt5-hmbHxP2-axGNeVyd_nN9plMC6-y3gzXuZFyfXEUBQ-l6kqqeMXe0Lbf10rpS1eSDO8IP-Mc2MWHvy9k",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Učitelj glasbene umetnosti - m/ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "grain trgovina in storitve d.o.o.|mešalec barve - m/ž|ljubljana, central slovenia",
+      "warnings": [],
+      "description": "besedil - osnovno; delo s preglednicami - osnovno; delo z bazami podatkov - osnovno; programiranje - osnovno; poznavanje",
+      "newLocation": {
+        "country": null,
+        "city": null,
+        "latitude": null,
+        "cityDistrict": null,
+        "id": null,
+        "region": null,
+        "longitude": null
+      },
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": [
+        "sk-computer-science",
+        "sk-information-systems",
+        "sk-information-technology"
+      ],
+      "companyname": "GRAIN trgovina in storitve d.o.o.",
+      "locationId": "loc-ljubljana-central-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/-bVj9taRpg43im7-s3ZDLvnZFrZwSXIcPcj3jbyr72GAog6x43_uF6MA6FY4H0uhjCwslKZybEhEXsBlIRBPuROCmLYC4GFlcEgXCem76LDBD7JTd0b5gLn1TtxPBTut9Ig-f5N4gulcmUnCHS-Rc3ErKDD_22fZCcoF9-ujWUUymecgdcxwqUgyZGB6qiShuyrOOTUtrfSe4rWBO8v9KRV7WC5JvBnQh1iDeLnTRAQ",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Mešalec barve - m/ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "savoy, varovanje, d.o.o.|varnostnik - m/ž|maribor, drava",
+      "warnings": [],
+      "description": "IN ODGOVORNE POSAMEZNIKE, KI ŽELIJO STABILNO ZAPOSLITEV IN PONOSNO OPRAVLJAJO delo, ki skrbi za red in varnost v trgovinah. Nudimo... ali polovični delovni čas, delo v urejenem, profesionalnem okolju, mentorstvo in podporo izkušene ekipa. Če ste vestni",
+      "newLocation": {
+        "country": null,
+        "city": null,
+        "latitude": null,
+        "cityDistrict": null,
+        "id": null,
+        "region": null,
+        "longitude": null
+      },
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": ["sk-safety"],
+      "companyname": "SAVOY, varovanje, d.o.o.",
+      "locationId": "loc-maribor-drava",
+      "newSkills": [],
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/xuuewqG2telsKOk-Yz1UgCq7weRRkXlV0x5r1Os2QEw5E_3UFLwKmUqo6nKOOsf7b-0It7og7EjYT3PH4ek8n2AUDWdkWHFifFB6kvnm9UufyFljgpV_Qpq2Qy8XZP9EN5flH6BezK_3lYJPqzch1wrjZDiCsNtiXFQIfwlpeTDLis9Gkr8MlrlLv-Die0PNX3fGkUZH-pSJdXki1Px2JGPeYRWJckRGResbMi2BiVM",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Varnostnik - m/ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "zdravstveni dom celje|zdravnik specialist - pedopsihiater - m/ž|celje, savinja",
+      "warnings": [],
+      "description": "Računalniška znanja: urejevalniki besedil - osnovno; delo s preglednicami - osnovno; delo z bazami podatkov - osnovno; poznavanje...) in specialističnem izpisu, veljavno licenco Zdravniške zbornice Slovenije za delo na področju otroške in mladostniške psihiatrije, kopijo",
+      "newLocation": {
+        "country": null,
+        "city": null,
+        "latitude": null,
+        "cityDistrict": null,
+        "id": null,
+        "region": null,
+        "longitude": null
+      },
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": [
+        "sk-medicine",
+        "sk-patient-care"
+      ],
+      "companyname": "Zdravstveni Dom Celje",
+      "locationId": "loc-celje-savinja",
+      "newSkills": [],
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/zF8oyIf75UAVX9iljyzNssJbCZBD_rBm-QxQp9I97RjKmPq8zHsouvjaWawY7ub0p1SrMbw0DrEOLEUkgDFFJV1wWi6ifFLn0kiQXzinRJzckN-793NE7Zrs9OCO9CivSIqxpX4xCbYryXi5vvX2a0BAN8unBXx5PeBdg9JRGn6HVUGz_miEEyWf8yDu6J1wT9pORr60SU5Vx5PuJXcUWo6h4e8H8tVHGHt1XaEgd8s",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Zdravnik specialist - pedopsihiater - m/ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "psihiatricna bolnisnica vojnik|zdravstveni tehnik, srednja medicinska sestra v negovalni enoti v bolnišnični dejavnosti - pripravnik - m/ž|celje, savinja",
+      "warnings": [],
+      "description": "razumevanje tekoče, govorjenje tekoče, pisanje tekoče Računalniška znanja: urejevalniki besedil - osnovno; delo s preglednicami... - osnovno; delo z bazami podatkov - osnovno Drugo: KONČANA SREDNJA ZDRAVSTVENA ŠOLA, ZNANJE SLOVENSKEGA JEZIKA NAJMANJ NA RAVNI",
+      "newLocation": {
+        "country": null,
+        "city": null,
+        "latitude": null,
+        "cityDistrict": null,
+        "id": null,
+        "region": null,
+        "longitude": null
+      },
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": [
+        "sk-nursing",
+        "sk-patient-care"
+      ],
+      "companyname": "PSIHIATRICNA BOLNISNICA VOJNIK",
+      "locationId": "loc-celje-savinja",
+      "newSkills": [],
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/evq3BfrPOyGSWAIN4AOIlyiGz-viWfrXWvN2pxXjmrNSKvxaG0iR1bzILGj5aWG1kXbyLZo5AJlrklzfypvfb2zjtOshAZ4KATToqDVtEHfaUfv0BwjnSZat2W5m-vOrKAtenAGpUnWsTjThoVMh5DGN5WjL_Y33N3FAJkWcpIPtNXElYB68Z5Ue7TO25FJebhw-aRwR_qht4Y0qBX-j6XAKS3V5BrmiEeAnYg04o6w",
+      "educationLevelId": "edu-secondary-vocational",
+      "jobname": "Zdravstveni tehnik, srednja medicinska sestra v negovalni enoti v bolnišnični dejavnosti - pripravnik - m/ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "diagnosticni center bled d.o.o.|snažilka / snažilec (m/ž)|slovenia",
+      "warnings": [],
+      "description": "opravljeno delo, natančnost in zanesljivost, samostojnost in samoiniciativnost, pripadnost družbi in primeren odnos... (predvidoma enega leta , z možnostjo podaljšanja). Delo je za polni delovni čas. Nudimo vam delo v urejenem in prijetnem",
+      "newLocation": {
+        "country": null,
+        "city": null,
+        "latitude": null,
+        "cityDistrict": null,
+        "id": null,
+        "region": null,
+        "longitude": null
+      },
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": ["sk-production"],
+      "companyname": "Diagnosticni center Bled d.o.o.",
+      "locationId": "loc-central-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/HQXJ78FsUblWbSbKYEjq-bYupcvVVC3IdowImsSeKLEAeYoyrS-5VDVWN8kiMpXVMMgSuBH_I3_Gqxgw5Ic2tyqOo6YcewxdJs_cZJVPHIuIJUfFy6UsNgRyQNdGmsin7hDbU9irDcqG6h9OnB6Sq_EtGTfqnIcjVLCw9UasupZ1mdFnJxcVHwg4xFpzjZ1X1-QHSaWVfVb27Wv5LiOyS4JKDKbg53fXuco3mfwZW-0",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Snažilka / snažilec (m/ž)",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "inzenirska zbornica slovenije|svetovalec za pravne osebe|ljubljana, central slovenia",
+      "warnings": [],
+      "description": "in predpisi, pogodbe, pravni akti zbornice, odgovori na pritožbe in tožbe idr.); prva pravna pomoč članom; koordinira delo služb",
+      "newLocation": {
+        "country": null,
+        "city": null,
+        "latitude": null,
+        "cityDistrict": null,
+        "id": null,
+        "region": null,
+        "longitude": null
+      },
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": ["sk-legal-work"],
+      "companyname": "Inzenirska zbornica Slovenije",
+      "locationId": "loc-ljubljana-central-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/TAjLh8KAo7nN1XUVMe7_wqw-kU2kfjJd8Gyvltnk7RHUSAcj7BYFw2eK852gFruxeLlszH2D2IXYiKKPJpzn6ztdindeReC_Bny-lHyZBLUl823VHGKK-xQfBjOwIKul1XCHQdhAGQRBzF5N7Vz-bdGQqVjVsP108a3siYADhm6qPwc9jUzQx8m7Qt951YIJEqvn_1nn5v73XT3D41AofYh-oBzY7nNWH8ey3RZKwMc",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Svetovalec za pravne osebe",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "splosna bolnisnica jesenice|zdravnik specialist z opravljeno temeljno specializacijo iz nevrologije (m/ž)|jesenice, upper carniola",
+      "warnings": [],
+      "description": "Jesenice (delo bo deljeno na delo v nevrološki ambulanti, delo v urgentnem centru ter v sklopu konziliarne službe (pretežno na internističnem oddelku)). Od kandidata pričakujemo strokovnost, vključitev v timsko delo in sposobnost prilagajanja, hitrega",
+      "newLocation": {
+        "country": null,
+        "city": null,
+        "latitude": null,
+        "cityDistrict": null,
+        "id": null,
+        "region": null,
+        "longitude": null
+      },
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": [
+        "sk-medicine",
+        "sk-patient-care"
+      ],
+      "companyname": "Splosna bolnisnica Jesenice",
+      "locationId": "loc-jesenice-upper-carniola",
+      "newSkills": [],
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/pUHdjSzi4GdaGvd8CFA4ASuB07OiR0xITzSE8nmXiFz5MKbROjtyOOSw9pS4dVu4sLf-BQg3pZg0iMYkB7Cs-4lfXZX-OH9Aul5mg0zAu42CuBGvdA0P6dbIzSVbVcK-RaCvDqyFw2Oe6k2YswZ8h2LNCrSTLeNqLD909cEK_TNVKDyDTM4L-KEJZNnGWavVtEGStOaQduzCvazaNAxkbZfT0UxTEAix-DJorSxgzik",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Zdravnik specialist z opravljeno temeljno specializacijo iz nevrologije (m/ž)",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "savoy, varovanje, d.o.o.|varnostnik - m/ž|kranj, upper carniola",
+      "warnings": [],
+      "description": "IN ODGOVORNE POSAMEZNIKE, KI ŽELIJO STABILNO ZAPOSLITEV IN PONOSNO OPRAVLJAJO delo, ki skrbi za red in varnost v trgovinah. Nudimo... ali polovični delovni čas, delo v urejenem, profesionalnem okolju, mentorstvo in podporo izkušene ekipa. Če ste vestni",
+      "newLocation": {
+        "country": null,
+        "city": null,
+        "latitude": null,
+        "cityDistrict": null,
+        "id": null,
+        "region": null,
+        "longitude": null
+      },
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": ["sk-safety"],
+      "companyname": "SAVOY, varovanje, d.o.o.",
+      "locationId": "loc-kranj-upper-carniola",
+      "newSkills": [],
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/okLTNlTT3bZDKHV-Vk2iGhKYdZuEBMkkX3UKSrq9ZQPNcuMOvrlBcO_s2X_eO7eq2QrZeRgmKEHr9cNT97JHbDEF38ujeOoJzprkkPlDJxuahxKjL_zKvXtBsR_bUD7spaiVduMWM-RTqCEHHMR49DLy0SnoQFqXG1hZvT3GCk8jHynzjdzhJY4eWxdxOWGQuhB3_Z-oydeY-BZx6wevW-mNrIjp3wKjjJ183rz0ZcM",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Varnostnik - m/ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|carinski deklarant - m/ž|ljubljana, central slovenia",
+      "warnings": [],
+      "description": "; delo s preglednicami - osnovno; delo z bazami podatkov - osnovno; poznavanje računalniških omrežij - osnovno; poznavanje",
+      "newLocation": {
+        "country": null,
+        "city": null,
+        "latitude": null,
+        "cityDistrict": null,
+        "id": null,
+        "region": null,
+        "longitude": null
+      },
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": [
+        "sk-administration",
+        "sk-logistics"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-ljubljana-central-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/hft1oQRN4kMOQycfMJFMajInf3V5uA710MYXesL1HWp_U8wCFd-yqUrnfjFxQE71kxbigBiOUoa2WTw6-biWBCBrH9DIBR87LI6AABtCsxbd5GvHKLMzyhf2q7l34A6FXbRGLl5VKMVW_9S6Pwr_QcxLCQugxQOpkA7wsKSgNI_h_is5URdmQN9d7xPxJzK8zI3w-zhU8heiAQcc9t7R4d8wi095B8ZNhHGh1aoPmBk",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Carinski deklarant - m/ž",
+      "status": "ACTIVE"
+    }
+  ],
+  "batchErrors": []
+}

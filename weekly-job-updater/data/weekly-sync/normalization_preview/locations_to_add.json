@@ -1,0 +1,78 @@
+[
+  {
+    "country": "Slovenia",
+    "city": "Dutovlje",
+    "latitude": null,
+    "id": "loc-dutovlje-gorizia",
+    "region": "Gorizia",
+    "longitude": null
+  },
+  {
+    "country": "Slovenia",
+    "city": "Laško",
+    "latitude": null,
+    "cityDistrict": null,
+    "id": "loc-lasko-savinja",
+    "region": "Savinja",
+    "longitude": null
+  },
+  {
+    "country": "Slovenia",
+    "city": "Lucija",
+    "latitude": null,
+    "id": "loc-lucija-coastal-karst",
+    "region": "Coastal-Karst",
+    "longitude": null
+  },
+  {
+    "country": "Slovenia",
+    "city": "Notranje Gorice",
+    "latitude": null,
+    "id": "loc-notranje-gorice",
+    "region": null,
+    "longitude": null
+  },
+  {
+    "country": "Slovenia",
+    "city": "Nova Gorica",
+    "latitude": null,
+    "cityDistrict": null,
+    "id": "loc-nova-gorica",
+    "region": "Gorizia",
+    "longitude": null
+  },
+  {
+    "country": "Slovenia",
+    "city": "Slovenia",
+    "latitude": null,
+    "id": "loc-slovenia",
+    "region": null,
+    "longitude": null
+  },
+  {
+    "country": "Slovenia",
+    "city": "Slovenske Konjice",
+    "latitude": null,
+    "cityDistrict": null,
+    "id": "loc-slovenske-konjice-savinja",
+    "region": "Savinja",
+    "longitude": null
+  },
+  {
+    "country": "Slovenia",
+    "city": "Starše",
+    "latitude": null,
+    "id": "loc-starše-drava",
+    "region": "Drava",
+    "longitude": null
+  },
+  {
+    "country": "Slovenia",
+    "city": "Žalec",
+    "latitude": null,
+    "cityDistrict": null,
+    "id": "loc-zalec-savinja",
+    "region": "Savinja",
+    "longitude": null
+  }
+]

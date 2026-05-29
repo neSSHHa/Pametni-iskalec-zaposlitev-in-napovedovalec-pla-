@@ -1,0 +1,223 @@
+{
+  "jobs": [
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "|proizvodni delavec za srednje zahtevna dela (m/ž) - m/ž|tolmin, gorizia",
+      "warnings": [],
+      "description": "PRIPRAVLJANJE STROJEV IN NAPRAV ZA ZAGON, POSLUŽEVANJE IN NADZOR NAD DELOVANJEM, OPRAVLJANJE SREDNJE ZAHTEVNIH PROIZVODNIH IN MONTAŽNIH DEL. Izobrazba: nižja poklicna; Metalurgija, strojništvo in kovolazna izobrazba.",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "requiredExperience": "srednje zahtevna dela",
+      "skillIds": [
+        "sk-production-work",
+        "sk-machine-operation"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-tolmin-gorizia",
+      "newSkills": [],
+      "datePosted": "2026-05-08",
+      "sourceWebsite": "https://jobviewtrack.com/v2/t7fWNvdhnKfe-Pq9hY3I3KVTnfapPQYjyQFn5f_4olqBZyjSt9LMLd7PN5oVImBhSwQrGTbUzBJrwS2sPmyqSWgSqJ71nsBYx0aJGANB2a1HGbFo1HB_GJqF27vhlVJDTAme-D62ZQqX--AIIu-zyeERXCYykIq0662ojIuMnybo3zCZDHSsl20w6VBexufwJkTGH8VUBoLbjzdKQRaCva11Vmg3y1p2dhcceZYWMsM",
+      "jobname": "PROIZVODNI DELAVEC ZA SREDNJE ZAHTEVNA DELA (M/Ž)",
+      "educationLevelId": "edu-lower-vocational",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-junior",
+      "sourceJobKey": "|proizvodni delavec - m/ž|brežice, lower sava",
+      "warnings": [],
+      "description": "MANJ ZAHTEVNA MONTERSKA DELA, IZVAJANJE KONTROLNIH AKTIVNOSTIH PO DOKUMENTACIJI IN NAVODILIH VODJE, SKRB ZA PRVI NIVO VZDRŽEVANJA STROJEV, NAPRAV IN PRIPRAV, MANJ ZAHTEVNO NASTAVLJANJE ORODIJ IN PRIPR.",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "requiredExperience": "manj zahtevna monterska dela",
+      "skillIds": [
+        "sk-assembly",
+        "sk-machine-operation"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-brezice-lower-sava",
+      "newSkills": [],
+      "datePosted": "2026-05-07",
+      "sourceWebsite": "https://jobviewtrack.com/v2/RjGU8vnDyN2XpBPlecO7n7dEmpf-CVW7fYE-Z9zBDAA5tVr1k1-Xr74oO9a__LeiPeOR1X4uHBGYt6-2zIiHo3QhOP7Xy4VLe02bEeYxOkMZqhOn7BxVBeYVmF7c2HFlPHbIHAYQIWnMF_CtJLSD5d7dcM0uUlO1s2oVc1smIccra2u928w1kAlGT9McSR15AMq6iZCDYhMoQ88hw61CpFItv7vCoA6ougiOqAKekas",
+      "jobname": "PROIZVODNI DELAVEC - M/Ž",
+      "educationLevelId": "edu-lower-vocational",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-junior",
+      "sourceJobKey": "|proizvodni delavec - m/ž|metlika, southeast slovenia",
+      "warnings": [],
+      "description": "MANJ ZAHTEVNA MONTERSKA DELA, IZVAJANJE KONTROLNIH AKTIVNOSTIH PO DOKUMENTACIJI IN NAVODILIH VODJE, SKRB ZA PRVI NIVO VZDRŽEVANJA STROJEV, NAPRAV IN PRIPRAV, MANJ ZAHTEVNO NASTAVLJANJE ORODIJ IN PRIPR.",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "requiredExperience": "manj zahtevna monterska dela",
+      "skillIds": [
+        "sk-assembly",
+        "sk-machine-operation"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-metlika-southeast-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-07",
+      "sourceWebsite": "https://jobviewtrack.com/v2/8BSilISWYXv3crDES4wUHrZt-G1NLBgQycFDpZ3Eh9x49ZTh3VUnHKYUcoJwnh1O0rU4rcoH73XlSw-qf-f4J1lI-JzyaU2lpeqzHKQW1sCsjRYxY5HippFFk0bv33moFXAh4gFKl075XAKqS_sLvqKtrOl_-QrXncvs8C9kqsQIGYlMKvfcEd2gWf2QBBSMa4Ea8gDxMjp48NyaAzDuRHijSwFPcgsI5XAI035thVc",
+      "jobname": "PROIZVODNI DELAVEC - M/Ž",
+      "educationLevelId": "edu-lower-vocational",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "|proizvodni delavec (m/ž)|železniki, upper carniola - škofja loka, upper carniola",
+      "warnings": [],
+      "description": "posluževanje in oskrbovanje strojev, odprava manjših zastojev, sestavljanje in montaža polizdelkov, izvajanje kontrole kakovosti, izdelava embalaže in pakiranje.",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "requiredExperience": "željo po delu, pripravljenost na izvajanje nalog",
+      "skillIds": [
+        "sk-production-work",
+        "sk-assembly",
+        "sk-machine-operation"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-zelezniki-upper-carniola",
+      "newSkills": [],
+      "datePosted": "2026-05-06",
+      "sourceWebsite": "https://jobviewtrack.com/v2/92blEX_5AEKMTsYBx7GBg1vfrb3iZswNUTx9VG9AwdEPq4RG5SNDiJmfEEneE8pHR8T3ja41ce1NrZ7oGnLKlLJy9sP4JIcN2nPNVxmeR81_bGKmekt7MyghbpCYrodK3QyaxvDiKmP82XZcIdav5U1mOG-RqsylwdL1gwhLRg8QBSbgnE16mICyB8WjcVnYBfxfzC_C6bHAn8siI4mbqrIWPDbpOToD15rhMvHnJhM",
+      "jobname": "Proizvodni delavec (m/Ž)",
+      "educationLevelId": "edu-lower-vocational",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "iskra mehanizmi|proizvodni delavec (m/ž)|slovenia",
+      "warnings": [],
+      "description": "Iskra Mehanizmi d.o.o. (IM), je podjetje z več kot šestdesetletnimi izkušnjami na področjih finomehanike, elektromehanike in elektronike. Že od ustanovitve podjetja, ki je v celoti usmerjeno v izvoz,",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "requiredExperience": "izvoz, finomehanika, elektromehanika",
+      "skillIds": [
+        "sk-production-work",
+        "sk-technical-maintenance"
+      ],
+      "companyname": "Iskra Mehanizmi",
+      "locationId": "loc-central-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-04",
+      "sourceWebsite": "https://jobviewtrack.com/v2/EBqmoZkOYv4QrnIsI4Qj0I2I_JOEjMLKQ_2erkbPlZbeJX2lg30HpLrKlFWOi0OIRadwMCRb0oUXmgT8HL-CFo28SbI3rDAjZAs8yuysCtUPbNJ4AqoRHKsmdsShpbmHOacpePI022rnrmQT8Ordg5vaYGf5pEPRLG4OJiOq8Jk5xObwHRx-ck4pgqZIj4oP4_xXQx2viS4uqeF1lH145RDqCzL_xFTGJO5EATGCAUU",
+      "jobname": "Proizvodni delavec (m/ž)",
+      "educationLevelId": "edu-not-specified",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "papirnica vevče|proizvodni delavec (m/ž)|slovenia",
+      "warnings": [],
+      "description": "Papirnica Vevče je ena najstarejših industrijskih papirnic v regiji, z več kot 180 leti tradicije. Deluje kot del mednarodne skupine Brigl & Bergmeister in se osredotoča na proizvodnjo visokokakovostn",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "requiredExperience": "proizvodnjo visokokakovostn papirja",
+      "skillIds": ["sk-production-work"],
+      "companyname": "Papirnica Vevče",
+      "locationId": "loc-central-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-04-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/TJ-mEYld8n0OjjEeXW6oPzzDYWlc6l9GN9NwV6gpTHUlllyUnaXaPAy1WMaPtwdMdp3sOmNwvR4lg4C-vTRZT70CVq4zO_8iqchEduXHQpl2kgm3xINyBdU9qQCEDwl0VSIILbxioddsTNFndiYaD9y_lKYV3D3LC9PX2dxV2B141ACLQdB2qYNBMKiE7jwi7nc9DeELYABN9PTTE8K3NBt-jx1DcU-KiKisE67cm5k",
+      "jobname": "Proizvodni delavec (m/Ž)",
+      "educationLevelId": "edu-not-specified",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "bosch|proizvodni delavec (m/ž)|slovenia",
+      "warnings": [],
+      "description": "Opis podjetja Družba Bosch Rexroth d.o.o. je bila ustanovljena v letu 1998 in je hčerinsko podjetje koncerna Bosch Rexroth AG. Znotraj koncerna družba Bosch Rexroth d.o.o., velja za priznanega speci",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "requiredExperience": "speci",
+      "skillIds": [
+        "sk-production-work",
+        "sk-technical-maintenance"
+      ],
+      "companyname": "Bosch",
+      "locationId": "loc-central-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-04-24",
+      "sourceWebsite": "https://jobviewtrack.com/v2/EUdLYh4nDkggq-a75YVsW3VaZmmBOuBF55XmtPiEpIdQBs7kRol2tmjmhuWaALLzYxuJ6bnaobD56I3YeHWgyg2AS6BQO0y-sU6fbMMY1vj5TW2-NLvPcT-gKKFwb7vLPGOcfjJyLDFpGK_g1xGLk9GFY-YCSlcEzhVaXfTSMbAB8o9eLea3lxdv4354XozSbOjuNG-o9J0jMqXFNX1d8Jhmlb26OOsC5ibXhTRDwbc",
+      "jobname": "Proizvodni delavec (m/ž)",
+      "educationLevelId": "edu-not-specified",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "|proizvodni delavec - m/ž|sežana, coastal-karst",
+      "warnings": [],
+      "description": "-ULIVANJE IN RAZKALUPLJANJE BETONSKIH UTEŽI -PRIPRAVA VIBRACIJSKE MIZE ZA NASLEDNJI DAN-NALAGANJE IN RAZLAGANJE PALET -ČIŠČENJE DELOVNEGA OKOLJA -OBČASNA DELA Z UPRAVLJANJEM VILIČARJA -OBČASNA DELA NA",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "requiredExperience": "ulivanje in razkalupanje betonskih uteži, nalaganje in razlaganje palet",
+      "skillIds": [
+        "sk-construction-work",
+        "sk-machine-operation"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-sezana-coastal-karst",
+      "newSkills": [],
+      "datePosted": "2026-03-14",
+      "sourceWebsite": "https://jobviewtrack.com/v2/i7kxrg2EEZdNs6AGh_kdDbsHF6sXxhWDXtsIpzIlZPUoQV68e5XXTlqONHTzlMw-12N3G3M2SR-R5NfXkLKoPPgJkn_wcCbR25acdzU7UB68drhHObr3btP4Frc3qv772V0I_iAYhTNXhNcco2neRBTNSuHJmasAcFVfu-0_NFauDxDkr75OXj6qmNFx9CiUxBKzao1qPizGk-OHQLAy3tEF-cHsuP4-GY2HCDEm2mw",
+      "jobname": "PROIZVODNI DELAVEC - M/Ž",
+      "educationLevelId": "edu-lower-vocational",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "|proizvodni delavec - m/ž|cerknica, inner carniola-karst",
+      "warnings": [],
+      "description": "IZVAJANJE CELOTNEGA PROCESA PROIZVODNJE IZDELKA, ENOSTAVNA DELA V PROIZVODNJI (VIZUALNO PREBIRANJE, SESTAVLJANJE, EMBALIRANJE), SREDNJE ZAHTEVNA DELA V RAZLIČNIH ODDELKH V PROIZVODNJI, MOŽNOST DELA N",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "requiredExperience": "celotni proces proizvodnje izdelka, enostavna dela v proizvodnji",
+      "skillIds": [
+        "sk-production-work",
+        "sk-assembly"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-cerknica-inner-carniola-karst",
+      "newSkills": [],
+      "datePosted": "2026-03-02",
+      "sourceWebsite": "https://jobviewtrack.com/v2/XRDj0i_-SlC28n3QwoqOJr1MarBOIpGaAL1hdS3pOPnIDcHl38g7jjAnPFA-JVK_6uiAe2uH65KzEUIkkaIbdt6I1EWgdMt9s4pZ_q4VPQQh5ta3snVRMkwT80BrWncfvhyqLxUA2g-Dh4eSYVcZGP6MSo7OYB5pVs7lY9-ce5I7ZJlkoUR2GHkYfgHJRYAzuNaGEmDc4Y5_HTUGmCfdPd8-hy46EZCBJsUYHB0fdz64fhcsW77qb42klYPbL6A_",
+      "jobname": "PROIZVODNI DELAVEC - M/Ž",
+      "educationLevelId": "edu-lower-vocational",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-senior",
+      "sourceJobKey": "univerzitetni klinični center ljubljana|dipl. medicinska sestra - dispečer v reševalni postaji, e037009, dispečerska služba zdravstva, dispečerski center zdravstva ljubljana - m/ž|ljubljana, central slovenia",
+      "warnings": [],
+      "description": " strokovna (prejšnja) ipd. Drugo: <b>DIPLOMIRANA<\/b> <b>MEDICINSKA<\/b> <b>SESTRA<\/b> (VS)/1.bol.st/, <b>DIPLOMIRANA<\/b> <b>MEDICINSKA<\/b> <b>SESTRA<\/b> (VS), VIŠJI... ZDRAVSTVENI TEHNIK, VIŠJA <b>MEDICINSKA<\/b> <b>SESTRA<\/b> - SPECIALIST, VELJAVNA LICENCA. Zahtevana dodatna znanja/pogoji: tečaj temeljnih",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "requiredExperience": "strokovna (prejšnja) ipd., diplomirana medicinska sestra, zdravstveni tehnik, višja medicinska sestra - specialist",
+      "skillIds": [
+        "sk-nursing",
+        "sk-patient-care"
+      ],
+      "companyname": "Univerzitetni klinični center Ljubljana",
+      "locationId": "loc-ljubljana-central-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/W9jwCcfKqMNe-j1prQ1Ef4LsJLkvE9_GiD8b5LqR4-47UoNrTcDi2eyMF8KPzkpbrfkQc5qriJsS3X9vfSvrSLqpkqWqqpt_7l7QAy-w4fM8FHnfdwE3yEl4SbguKwlOwZs3fwBmiJc1EB30iqTuQKtGHpZJnwGlJEzNWn97bO2L7pGyuTCME8MJZcjgfPwPUbCOzPE-JUMq78UGO5mm0ZCNAs7EZLQpAbCo_qQZGrs",
+      "jobname": "DIPL. MEDICINSKA SESTRA - DISPEČER V REŠEVALNI POSTAJI, E037009, DISPEČERSKA SLUŽBA ZDRAVSTVA, DISPEČERSKI CENTER ZDRAVSTVA LJUBLJANA - M/Ž",
+      "educationLevelId": "edu-bachelor",
+      "status": "ACTIVE"
+    }
+  ],
+  "batchErrors": []
+}

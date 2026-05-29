@@ -1,0 +1,298 @@
+[
+  {
+    "startIndex": 90,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0010.json",
+    "message": "A JSONObject text must begin with '{' at 0 [character 1 line 1]",
+    "batchNumber": 10,
+    "endIndexExclusive": 100
+  },
+  {
+    "startIndex": 160,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0017.json",
+    "message": "A JSONObject text must begin with '{' at 0 [character 1 line 1]",
+    "batchNumber": 17,
+    "endIndexExclusive": 170
+  },
+  {
+    "startIndex": 350,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0036.json",
+    "message": "Duplicate key \"newLocation\" at 714 [character 715 line 1]",
+    "batchNumber": 36,
+    "endIndexExclusive": 360
+  },
+  {
+    "startIndex": 500,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0051.json",
+    "message": "Connection reset",
+    "batchNumber": 51,
+    "endIndexExclusive": 510
+  },
+  {
+    "startIndex": 510,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0052.json",
+    "message": "Connection reset",
+    "batchNumber": 52,
+    "endIndexExclusive": 520
+  },
+  {
+    "startIndex": 520,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0053.json",
+    "message": "Connection reset",
+    "batchNumber": 53,
+    "endIndexExclusive": 530
+  },
+  {
+    "startIndex": 530,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0054.json",
+    "message": "Connection reset",
+    "batchNumber": 54,
+    "endIndexExclusive": 540
+  },
+  {
+    "startIndex": 540,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0055.json",
+    "message": "Connection reset",
+    "batchNumber": 55,
+    "endIndexExclusive": 550
+  },
+  {
+    "startIndex": 550,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0056.json",
+    "batchNumber": 56,
+    "endIndexExclusive": 560
+  },
+  {
+    "startIndex": 560,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0057.json",
+    "batchNumber": 57,
+    "endIndexExclusive": 570
+  },
+  {
+    "startIndex": 570,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0058.json",
+    "batchNumber": 58,
+    "endIndexExclusive": 580
+  },
+  {
+    "startIndex": 580,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0059.json",
+    "batchNumber": 59,
+    "endIndexExclusive": 590
+  },
+  {
+    "startIndex": 590,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0060.json",
+    "batchNumber": 60,
+    "endIndexExclusive": 600
+  },
+  {
+    "startIndex": 600,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0061.json",
+    "batchNumber": 61,
+    "endIndexExclusive": 610
+  },
+  {
+    "startIndex": 610,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0062.json",
+    "batchNumber": 62,
+    "endIndexExclusive": 620
+  },
+  {
+    "startIndex": 620,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0063.json",
+    "batchNumber": 63,
+    "endIndexExclusive": 630
+  },
+  {
+    "startIndex": 630,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0064.json",
+    "batchNumber": 64,
+    "endIndexExclusive": 640
+  },
+  {
+    "startIndex": 640,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0065.json",
+    "batchNumber": 65,
+    "endIndexExclusive": 650
+  },
+  {
+    "startIndex": 650,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0066.json",
+    "batchNumber": 66,
+    "endIndexExclusive": 660
+  },
+  {
+    "startIndex": 660,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0067.json",
+    "batchNumber": 67,
+    "endIndexExclusive": 670
+  },
+  {
+    "startIndex": 670,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0068.json",
+    "batchNumber": 68,
+    "endIndexExclusive": 680
+  },
+  {
+    "startIndex": 680,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0069.json",
+    "batchNumber": 69,
+    "endIndexExclusive": 690
+  },
+  {
+    "startIndex": 690,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0070.json",
+    "batchNumber": 70,
+    "endIndexExclusive": 700
+  },
+  {
+    "startIndex": 700,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0071.json",
+    "batchNumber": 71,
+    "endIndexExclusive": 710
+  },
+  {
+    "startIndex": 710,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0072.json",
+    "batchNumber": 72,
+    "endIndexExclusive": 720
+  },
+  {
+    "startIndex": 720,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0073.json",
+    "batchNumber": 73,
+    "endIndexExclusive": 730
+  },
+  {
+    "startIndex": 730,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0074.json",
+    "batchNumber": 74,
+    "endIndexExclusive": 740
+  },
+  {
+    "startIndex": 740,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0075.json",
+    "batchNumber": 75,
+    "endIndexExclusive": 750
+  },
+  {
+    "startIndex": 750,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0076.json",
+    "batchNumber": 76,
+    "endIndexExclusive": 760
+  },
+  {
+    "startIndex": 760,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0077.json",
+    "batchNumber": 77,
+    "endIndexExclusive": 770
+  },
+  {
+    "startIndex": 770,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0078.json",
+    "batchNumber": 78,
+    "endIndexExclusive": 780
+  },
+  {
+    "startIndex": 780,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0079.json",
+    "batchNumber": 79,
+    "endIndexExclusive": 790
+  },
+  {
+    "startIndex": 790,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0080.json",
+    "batchNumber": 80,
+    "endIndexExclusive": 800
+  },
+  {
+    "startIndex": 800,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0081.json",
+    "batchNumber": 81,
+    "endIndexExclusive": 810
+  },
+  {
+    "startIndex": 810,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0082.json",
+    "batchNumber": 82,
+    "endIndexExclusive": 820
+  },
+  {
+    "startIndex": 820,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0083.json",
+    "batchNumber": 83,
+    "endIndexExclusive": 830
+  },
+  {
+    "startIndex": 830,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0084.json",
+    "batchNumber": 84,
+    "endIndexExclusive": 840
+  },
+  {
+    "startIndex": 840,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0085.json",
+    "batchNumber": 85,
+    "endIndexExclusive": 850
+  },
+  {
+    "startIndex": 850,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0086.json",
+    "batchNumber": 86,
+    "endIndexExclusive": 860
+  },
+  {
+    "startIndex": 860,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0087.json",
+    "batchNumber": 87,
+    "endIndexExclusive": 870
+  },
+  {
+    "startIndex": 870,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0088.json",
+    "batchNumber": 88,
+    "endIndexExclusive": 880
+  },
+  {
+    "startIndex": 880,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0089.json",
+    "batchNumber": 89,
+    "endIndexExclusive": 890
+  },
+  {
+    "startIndex": 890,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0090.json",
+    "batchNumber": 90,
+    "endIndexExclusive": 900
+  },
+  {
+    "startIndex": 900,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0091.json",
+    "batchNumber": 91,
+    "endIndexExclusive": 910
+  },
+  {
+    "startIndex": 910,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0092.json",
+    "batchNumber": 92,
+    "endIndexExclusive": 920
+  },
+  {
+    "startIndex": 920,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0093.json",
+    "batchNumber": 93,
+    "endIndexExclusive": 930
+  },
+  {
+    "startIndex": 930,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0094.json",
+    "batchNumber": 94,
+    "endIndexExclusive": 940
+  },
+  {
+    "startIndex": 940,
+    "batchFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\normalization_batches\\batch_0095.json",
+    "batchNumber": 95,
+    "endIndexExclusive": 945
+  }
+]

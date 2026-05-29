@@ -1,0 +1,220 @@
+{
+  "jobs": [
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-manager",
+      "sourceJobKey": "|direktor javnega zavoda svetovalni center za otroke, mladostnike in starše istre - m/ž|starše, drava",
+      "warnings": [],
+      "description": "Direct professional work: mentoring, connecting with other institutions and organizations.",
+      "newLocation": {
+        "country": "Slovenia",
+        "city": "Starše",
+        "latitude": null,
+        "id": "loc-starše-drava",
+        "region": "Drava",
+        "longitude": null
+      },
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": [
+        "sk-management",
+        "sk-administration"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-starše-drava",
+      "newSkills": [],
+      "datePosted": "2026-05-22",
+      "sourceWebsite": "https://jobviewtrack.com/v2/gKok7QsSSFV60DsbcapKrYKqnRWw3MmANESaIg0D861dRQleZqBJgy-iYbxciukmWcBj0In4uiKMGz9yp5lZnOCUYQgojheYL4l6MM-nV_gSohROU9XlfjCHiZHRA3Y6ukx-x63RKrkjaugr_diduAkameQ2Vm09l0Ao36uMfm4PUWqbvLi-NmNrWIlJK4RnLsjSv_137oWyxx9nia4CCZQBBW9RJkFmMtzhA3jibUg",
+      "educationLevelId": "edu-master",
+      "jobname": "Director of Public Institute Counseling Center for Children, Youth and Parents",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-senior",
+      "sourceJobKey": "|krovec / klepar - m/ž|ptuj, drava",
+      "warnings": [],
+      "description": "Seeking experienced roofer/carpenter for work in Slovenia - Styria. Work involves roofing and carpentry.",
+      "newLocation": null,
+      "workTypeIds": ["work-field"],
+      "skillIds": [
+        "sk-construction-work",
+        "sk-mechanical-repair"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-ptuj-drava",
+      "newSkills": [],
+      "datePosted": "2026-05-22",
+      "sourceWebsite": "https://jobviewtrack.com/v2/A2KrEWLRgYfmFl_6tuzY7FIfflRpJRpgwPFMJI_P5dfZ-uFuIgtqrT6idmeg8sbcAO2t0FBj2Qw3HVlsM4jzg2YEVPsqdryx6YoXWXxQwNAUIywTi_kmBPJN07r0lPbdc1v9FL_rxA9NDu1BWhEur9ceSvSRiYdcDhrQhV5Ao58SYpqMMbQkjOlrHIDzl_itNrKF_CNRVzpu6vBgfLvhiKaZrkCyn2tH8dB8_8_cSE8",
+      "educationLevelId": "edu-secondary-vocational",
+      "jobname": "Roofer/Carpenter",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-entry",
+      "sourceJobKey": "|čistilec prostorov - m/ž|maribor, drava",
+      "warnings": [],
+      "description": "Cleaning spaces. Requires communication skills, non-conflictual approach. Work on site.",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "skillIds": ["sk-cleaning"],
+      "companyname": "Unknown company",
+      "locationId": "loc-maribor-drava",
+      "newSkills": [],
+      "datePosted": "2026-05-22",
+      "sourceWebsite": "https://jobviewtrack.com/v2/TnhdpiQS5qdUj0RGmPzTy86pUop3aEOKBiYk-UQ5cVmJ2SB3FiCs5tArQHd95xwLBVXfSh6CIgPub-QUsPikR9C8ad98Na9YYJZgqLOoRVDQ0Z-9aWkfjazYh0U4Q2lT8zrC6N70SibIw8sZz0Q5NKjm0PpF6bjVYUQ2mL3YD-ZCQTiVtIBFiGwKGZbbAbny2DfEeUrtBMxnAVYcHFtUYlja2-PLVlF6BjTcJODTOUE",
+      "educationLevelId": "edu-primary",
+      "jobname": "Cleaning Spaces",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-lead",
+      "sourceJobKey": "|strokovni vodja za osebno asistenco - m/ž|maribor, drava",
+      "warnings": [],
+      "description": "Organization and management of the entire personal assistance process. Requires review of foreign legislation and implementation. Difficult work with invoices, databases, computer graphics.",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "skillIds": [
+        "sk-social-work",
+        "sk-patient-care",
+        "sk-management"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-maribor-drava",
+      "newSkills": [],
+      "datePosted": "2026-05-22,",
+      "sourceWebsite": "https://jobviewtrack.com/v2/XFQhW1J1ZIv49qdM9uTQjLzokHC4rQgGA9LGv8xYKBG3-d6leA_Q3UobEhyog3oL1TdqoF25gut5rBo4zQfdA1CKPZ-WsmJcGFtyjjv9uNB4DepqjwYXKEjYopas6QZAyPHLFUpYSj3ySZ3nIRcJMM-fpam2Yq0NsVP6EjU61xyAPeQ5yleGsfj1RHRANt0OGajzXO5x8ZceIzNG_MGlKFVGvFRjVl8gbg7cO1jofMo",
+      "educationLevelId": "edu-master",
+      "jobname": "Professional Leader for Personal Assistance",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "|vzgojitelj predšolskih otrok - m/ž|lenart, drava",
+      "warnings": [],
+      "description": "Work with spreadsheets - basic; work with databases - basic; knowledge of computer networks - basic; other: candidate must have good develop...",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "skillIds": [
+        "sk-early-childhood-education",
+        "sk-teaching"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-lenart-drava",
+      "newSkills": [],
+      "datePosted": "2026-05-21",
+      "sourceWebsite": "https://jobviewtrack.com/v2/KwBUpRGLcq0t2V1GxwaC8cUorNKtTx9HnrnWzDbMbnijiu9fUJxY8y61-g1MLW6PHct5m5jtiSLpr5WBSml9mJ9v60E29iu41wlxY-nsbAcQhmy6K3SfBjQjaCxjRCGopg62ZbTVNzx_qfA6v_RI9b8_dZ6lJeCQZCdCq44HKxdeqNh3OArkipQGUnDrmJptSO2lRiN7o2HEXyek-y413s92l4vyL8-gnVnOI89AN7c",
+      "educationLevelId": "edu-bachelor",
+      "jobname": "Preschool Teacher",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-junior",
+      "sourceJobKey": "|osebni asistent - m/ž|lenart, drava",
+      "warnings": [],
+      "description": "Computer skills: text editors - basic; work with spreadsheets - basic. Other: certificate of non-repudiation, respectful relationship with users.",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "skillIds": [
+        "sk-social-work",
+        "sk-administration"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-lenart-drava",
+      "newSkills": [],
+      "datePosted": "2026-05-21",
+      "sourceWebsite": "https://jobviewtrack.com/v2/KbENVEpOIP5FTCbmgRl6er7c7W1aEQO5FgJWfslpF2cFtQYcgm7mnANpgpPsx0XuKDBrcXFo3vslvVF-ICFjsL7Geaz7qEK_VUTEZWDSnBmeD7tVM1uLfGSAC1DTuPVxco3Q3H8fQpKEbHqsfeHzkX7MHxz8Q6P613HlO-8Hnmvg9s3ILr5iAZzi2GPlEBhrhqNi11JhW9DGBDYVo_xgJwgLNK9ooLB6JXhn_CNSZd8",
+      "educationLevelId": "edu-secondary-general",
+      "jobname": "Personal Assistant",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-manager",
+      "sourceJobKey": "|direktor - m/ž|maribor, drava",
+      "warnings": [],
+      "description": "Business results, represents the company in business operations with business partners, professional institutions, state authorities. Work requires compliance with laws and regulations.",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "skillIds": [
+        "sk-management",
+        "sk-administration"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-maribor-drava",
+      "newSkills": [],
+      "datePosted": "2026-05-21",
+      "sourceWebsite": "https://jobviewtrack.com/v2/F7Sy6252oxSJqezIM1tjlrfv8X5hJk0-fj_XxcCNIy1gX7oHYT1WAzOLhJ0aSDEEIW75Gohskpp_muVWckAG1t6rZCQj_zs0VO9auEtrbAI_NLibsnz68bFY00tTkINPMH3OCPMEzYOz1HeiZA0fehaIRxALOVAIDA8GVvrHOp5xekuU41HkqEDNW4U_C19gkrG3RZMdxBSoj5rlELyjjldjkDDmF7b9YOdPqWhvP0w",
+      "educationLevelId": "edu-master",
+      "jobname": "Director",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-senior",
+      "sourceJobKey": "|avtomehanik/avtoserviser - m/ž|ptuj, drava",
+      "warnings": [],
+      "description": "Work involves diagnostics with diagnostic devices. Education: secondary... satisfactory. Computer skills: text editors - basic; work with spreadsheets - basic; work with databases - basic.",
+      "newLocation": null,
+      "workTypeIds": ["work-field"],
+      "skillIds": [
+        "sk-automotive-repair",
+        "sk-mechanical-repair"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-ptuj-drava",
+      "newSkills": [],
+      "datePosted": "2026-05-21",
+      "sourceWebsite": "https://jobviewtrack.com/v2/B_aAWZyw29I_8Z1-eX1TbHJw1LMvnH5JedtmL1xRHDw0CsQibHc01yr_T4DjhyqjD6O8wAnvIoFE2dJ1NI4WX1sAtrt8wjw0f0JXxm2_yUD1kdnpo5DrLedYDSsyTHbbKWD8xlBGNJdpmCbUjgrw-4F9UFf1aET5bWrG8-dftoATQ7vlorD2xNbW73q9eHhMczdS9W5Iu53ztKiqQi0u2LZNdJ0nRA1uBSm5QWGKoO0",
+      "educationLevelId": "edu-secondary-vocational",
+      "jobname": "Automotive Mechanic/Automotive Service",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-junior",
+      "sourceJobKey": "|osebni asistent - m/ž|ormož, drava",
+      "warnings": [],
+      "description": "Computer skills: text editors - basic; work with spreadsheets - basic. Other: certificate of non-repudiation, respectful relationship with users.",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "skillIds": [
+        "sk-social-work",
+        "sk-administration"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-ormoz-drava",
+      "newSkills": [],
+      "datePosted": "2026-05-21",
+      "sourceWebsite": "https://jobviewtrack.com/v2/6OPPa4a2kWbAS_XY1qlo-XoxEojNjb-PF-HwZ7gizf4t26NJTlLQ_cvd3vidnkfXg1zWlNCkebXtdtZjQj2x7Glv40wDHA3HCHh1FfFdcAc3OIl93KCb7wKEYj-IjFMdde7lslPBAUxaLvquEQ1UX63vDqmo8VpuHwQZWemZ7R7LWPeBIorUfL_P6LDyjZYEp3H16hrc4WcerlRVRCrkW_KHf9ksIlao_zbl36QX2IM",
+      "educationLevelId": "edu-secondary-general",
+      "jobname": "Personal Assistant",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "|referent izterjave na terenu - m/ž|maribor, drava",
+      "warnings": [],
+      "description": "Computer skills: text editors - basic; work with spreadsheets - basic; work with databases - basic. Other: Candidate must have good developed...",
+      "newLocation": null,
+      "workTypeIds": ["work-field"],
+      "skillIds": [
+        "sk-debt-collection",
+        "sk-administration"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-maribor-drava",
+      "newSkills": [],
+      "datePosted": "2026-05-21",
+      "sourceWebsite": "https://jobviewtrack.com/v2/iaWbymD2yHfTqmOr5VcHtyLxGorAaFtFhnEbTXPIT1fdRrLxX53UgIw_UQI2P2beYNoRLhZIkvgBcW6ap-QXrdEp4BTbR7LzUv14qEeJ4aWjo-BrHNobvkOawttJGxmGBQ86mdNSWFAqu03g__Qm7T10uvzkrAMzUw0QpM4kpafbXQ6EKfRHsdunqNtZG8VGWin6xSzIod-eFAva8oqBVkGd7tAhZ6MYvYMiDrFN9lM",
+      "educationLevelId": "edu-bachelor",
+      "jobname": "Field Collection Officer",
+      "status": "ACTIVE"
+    }
+  ],
+  "batchErrors": []
+}

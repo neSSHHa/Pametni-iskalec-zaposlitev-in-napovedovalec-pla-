@@ -1,0 +1,222 @@
+{
+  "jobs": [
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|prodajalec - m/ž|nova gorica, gorizia",
+      "warnings": [],
+      "description": "PRODAJA TRGOVSKEGA BLAGA V MARKETU V GORIŠKIH BRDIH. DELO V TRGOVINI IN DELIKATESI. Izobrazba: nižja poklicna Drugo: Z MOŽNOSTJO SKLENITVE NOVE POGODBE.",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-sales"],
+      "companyname": "Unknown company",
+      "locationId": "loc-nova-gorica-gorizia",
+      "datePosted": "2026-05-14",
+      "sourceWebsite": "https://jobviewtrack.com/v2/cngNm9tBFmkxEQXqaL2A5Wqng0Lvf1ZVw9JUldsMuBt8jy0gvNgu0T6Gmv0qCdjLYfjnOIUa_63bPMp3RVmL1J6yBnS3CQr5NINM5xpXOzbSw601P7V7xKVJZNuGyYMDVm6Q_yIzdxPOJxhLDxlrbF7_UFJ7e__ux6ux0G-rpTqkPEfcy46vWvQcXNNwVFlED-U7f_TIhpkyN4KSQ1GLLNrfUxNcsr79swTq08U1mnU",
+      "educationLevelId": "edu-lower-vocational",
+      "jobname": "Prodajalec",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|prodajalec - m/ž|brežice, lower sava",
+      "warnings": [],
+      "description": "PRODAJA BLAGA, SVETOVANJE, IZDAJA IN SPREJEM BLAGA. Izobrazba: srednja poklicna Znanje jezikov: hrvaški jezik: razumevanje osnovno, govorjenje osnovno, pisanje osnovno;slovenski jezik: razumevanje",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-sales",
+        "sk-croatian-language"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-brezice-lower-sava",
+      "datePosted": "2026-04-09",
+      "sourceWebsite": "https://jobviewtrack.com/v2/2N40EUuw2pVuGz-P1QTTtzL41_0TtrUom90wLdw0jhStoWi0wzalixLiVN04dDW9uSekEfuAfjETpR-Or7t2lbYJAE_o0kotWADgKR9vLveKs8OgCTFsFHbXg2N5CA4RwpxTP3yirM4Klt8Iz82wvnHEeIWCcXub_USQIJfrfy7v3xWqrxvHAU8FbJhx3kqed72yDdJbzcHuWyfDDnw74kR5rCbsOMw55-vHdvw_iNo",
+      "educationLevelId": "edu-secondary-vocational",
+      "jobname": "Prodajalec",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|prodajalec - m/ž|cerknica, inner carniola-karst",
+      "warnings": [],
+      "description": "PRODAJA BLAGA, SVETOVANJE IN POMOČ KUPCEM PRI IZBIRI BLAGA IN MOŽNIH NAČINIH PLAČILA, PREVZEM BLAGA IN POLNJENJE POLIC, IZPOLNJEVANJE POTREBNIH LISTIN, OZNAČEVANJE BLAGA Z MALOPRODAJNIMI CENAMI, SKRB ",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-sales"],
+      "companyname": "Unknown company",
+      "locationId": "loc-cerknica-inner-carniola-karst",
+      "datePosted": "2026-05-16",
+      "sourceWebsite": "https://jobviewtrack.com/v2/o-gFjg31n_dKHwVjsMjGoxvSXOJ7XcG3WyGdH4sJOSiBjoDC5N3WVkDZHJAutq3GLpDpgvS3J68iDqxvgxrTNLCXlaZTL3rW1k6mqbJtZrftL4L4QhHIY-6eILg6vNr5Fn99rSOD2DTt_TAHvN2pbAMH9h8pXwWDYOTaQWF-rbIfFSqGG_wqHta1HOzsv4aguTfR8OvkbzIj97z5lgCR3lOMvODcJKGTPhZRsTK6dYU",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Prodajalec",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|prodajalec drobne kmetijske mehanizacije - m/ž|murska sobota, mura",
+      "warnings": [],
+      "description": "PRODAJA MOTORNIH ŽAG, MOTORNIH KOSILNIC, VRTNIH TREKTORJEV, MOTORNIH KOS, ŠKROPILNIC, REZERVNIH DELOV, MOTORNA OLJA,.... Izobrazba: srednja poklicna Znanje jezikov: slovenski jezik: razumevanje te",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-sales",
+        "sk-agricultural-machinery"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-murska-sobota-mura",
+      "datePosted": "2026-05-08",
+      "sourceWebsite": "https://jobviewtrack.com/v2/PRA9GnzBiR5g3gyDKuKcxzi59U4aFG046uId9Ru9NTk8BDr0eV9ml_ecGe186szvj9o1LstANWYw3N4J5lTe_W15FlUnL0vrxv0nWJuMPKft6G4kpEJM2jmlRrKpcrYxXmhc_wGR9FMxxRVRGqOxl07unXQ8RTEg9-j7jHKarv_43ofREN5FO6lEDiA-2JGkQpwGLbiQZ0xPil5t94eGRWkYNXYkG5WyeTbBTAmtMVY",
+      "educationLevelId": "edu-secondary-vocational",
+      "jobname": "Prodajalec drobnih kmetijskih mehanizacij",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|prodajalec v agromarketu - m/ž|sežana, coastal-karst",
+      "warnings": [],
+      "description": "POMOČ PRI PRODAJI IN SVETOVANJE KUPCEM, PREVZEMANJE IN OZNAČEVANJE ARTIKLOV, SKRB ZA RED, UREJENOST IN ČISTOČO PROSTOROV V TRGOVINI TER POMOČ PRI VSAKODNEVNI ORGANIZACIJI DELA V TRGOVINI Z MEŠANIM BLA",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-sales"],
+      "companyname": "Unknown company",
+      "locationId": "loc-sezana-coastal-karst",
+      "datePosted": "2026-05-13",
+      "sourceWebsite": "https://jobviewtrack.com/v2/yMg47aW3ngbM5gqq3ByP1XMk9YfhnPaUBWsm7tnJ2iOFMCqVtts38awyPB74SLI0C53isE9t5sE1SC3H7PWs_2y4GNroBOTp1UTP0wfn8u6jKckle4EQJrWDozG1joD8DP0Y75qcmfG6UVpPGfVuN0yIbQzA8KCplXnJG3nzdrRY9IdOxyQ1oAQ86MSnikEa8n9_VunonTcjUV_88y8lxVJyeqr4ZOLYJ47J5sxdKv0",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Prodajalec v agromarketu",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "darko|voznik c in e|ljubljana, central slovenia",
+      "warnings": [],
+      "description": "Zaposlitev za nedoločen čas. Urejen delovni čas: <b>Delo<\/b> poteka od ponedeljka do petka, med 7:00 in 16:00 uro",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": ["sk-driving"],
+      "companyname": "Darko",
+      "locationId": "loc-ljubljana-central-slovenia",
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/KuJCoyJuubyIc-_rmcyCGnRzzYpxm7XVwLcnXBlrfhAD42X9v8vwvgirnMrB93JE6uukQt1fToLoLCKTP0DiSUCau-B_903xmOlPtb-m9Vc-VAwBNSsniYBrVJehxnaObvKyOZSDRGEBAF3Um0GkBqbHqi8u7mPN_MzdVT-lXJOvIiYv5cWXcltYgyLXwVyZJr95d0JABvdy-L3QzouP6lHhnO15Djts99asRLFFvTE",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Voznik c in e",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "zdravstveni dom ljubljana|e035036 srednja medicinska sestra v primarni dejavnosti - m/ž|ljubljana, central slovenia",
+      "warnings": [],
+      "description": "Ljubljana, skoraj dvajset odstotkov vseh naših pacientov pa prebiva zunaj občinskih meja. Naše <b>delo<\/b> je veliko več kot le osnovno...: komunikativnost, odgovornost in pozitivnost predanost in prilagoditev timskemu delu želja po kontinuiranem izobraževanju <b>delo<\/b>",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-nursing",
+        "sk-patient-care"
+      ],
+      "companyname": "Zdravstveni dom Ljubljana",
+      "locationId": "loc-ljubljana-central-slovenia",
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/kVhpqKMddRC2ymY6D_XQ-Im2f2_XYrFO2-t3YDoR-fZZmTb_Cm-TzQgIPPsmH6NdA5l7e6VSbI39gESYEL_S_QQu-taw13wsUqdVu9Ahk5gQl8K534AI-aXPZk5nmX6M4VBmJkE4xeQaSTAA0Dv7uFQKEaI8yH1bQKywTbxCuQxfXhpgRna-_FLZZuZaYODhUKiAM64CYXZ9mwBmCR-4zWxcio5wsAu3cByoYngX5A0",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "E035036 Srednja medicinska sestra v primarni dejavnosti",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "center za sluh in govor maribor|logoped ii (v zdravstveni dejavnosti) - m/ž|maribor, drava",
+      "warnings": [],
+      "description": ", govorjenje tekoče, pisanje tekoče Računalniška znanja: urejevalniki besedil - zahtevno;<b>delo<\/b> s preglednicami - zahtevno;<b>delo<\/b>",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-speech-therapy",
+        "sk-information-systems"
+      ],
+      "companyname": "CENTER ZA SLUH IN GOVOR MARIBOR",
+      "locationId": "loc-maribor-drava",
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/_JqAu6YH-_DY7GVswns_7ymeTfPazqroepyd4R1yDWdyLWq7sseWJ-VBvP4ZvhdPnjmbRdyXjCbMSN7I0Tk576-3gAhRjvr7C1BV-ZlmvCUq3kA7hySLMKKbAX6G0SaPWLfsasc4dvCY6qpdF2NqZKYRBgjoMT2oRE0JuczR5VtuQjIRknllhuRBDMpK--49QKg7NQrciG1zg99GsYiy8EUJy9VX1Hc3LyXhP48RF3g",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "LOGOPED II (V ZDRAVSTVENI DEJAVNOSTI)",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|učitelj - m/ž|ljubljana, central slovenia",
+      "warnings": [],
+      "description": "NEPOSREDNO <b>DELO<\/b> Z OTROKI, POUČEVANJE TER OSTALA DELA IN NALOGE SKLADNO Z AKTOM O SISTEMIZACIJI DELOVNIH MEST ZAVODA...: urejevalniki besedil - osnovno;<b>delo<\/b> s preglednicami - osnovno Drugo: Primerna izobrazba kandidatov za zaposlitev je magister",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-teaching",
+        "sk-microsoft-office"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-ljubljana-central-slovenia",
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/1e2JMpUxqADO7A44xiXAFLCNE-L6ccj3KV4wzRyv1NquPBVA-_xE2yD6iHwbLmU-CbxsSZVUwa9BLy0_76d61q6WurmyZYexMOeNdKDMenXLWBvRENfspVvCBRmbrfKZzScZ9dU5Ps1ld4XimX-zU142Aw2p9YgOXaarmt9mw-Gn485sr-Q4djXY9K2HjL6WWiH1FzWMmTeY61PwnS6cSZJbk0i6lyt1dcttSmP3vhQ",
+      "educationLevelId": "edu-master",
+      "jobname": "UČITELJ",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "mapri proasfalt|strojnik/voznik (m/ž)|ljubljana, central slovenia",
+      "description": " dolgoročnega sodelovanja redno plačilo <b>delo<\/b> v stimulativnem, dinamičnem in urejenem delovnem okolju možnost strokovnega",
+      "newLocation": null,
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-machine-operation",
+        "sk-driving"
+      ],
+      "companyname": "Mapri Proasfalt",
+      "locationId": "loc-ljubljana-central-slovenia",
+      "datePosted": "2026-05-25",
+      "sourceWebsite": "https://jobviewtrack.com/v2/2oZ0tuozRW22OLVvgjs-Cf8z6GrJwHbSxMnwD7Tz7FOYBOTMNec6sLNvN9tE6OHTZKwrQqtySBQjlec7L5cXjj7I8zpoR8SakTAOKa9jMiuwfwIQsze_4g755TJgA0C3jbrsvTRX1vf3c-9nbzzwEe1YQlmX5Mbmf-9xbr_Ms2lBEck0t2HUv4ERit-y7LhSMgxeu2xe4uvmUlPh7vKpNL8B6zTlwTUn853QyeSE35E",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Strojnik/voznik"
+    }
+  ],
+  "newSkills": [
+    {
+      "name": "Croatian Language",
+      "SkillTypeId": "skill-language",
+      "id": "sk-croatian-language"
+    },
+    {
+      "name": "Agricultural Machinery",
+      "SkillTypeId": "skill-technical",
+      "id": "sk-agricultural-machinery"
+    }
+  ],
+  "batchErrors": []
+}

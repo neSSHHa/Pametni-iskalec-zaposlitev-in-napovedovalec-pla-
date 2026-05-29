@@ -1,0 +1,11 @@
+{
+  "maxDaysOld": 7,
+  "csvFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\data-ingestion\\data\\weekly-scrape-preview\\weekly_jobs_last_7_days.csv",
+  "jsonFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\data-ingestion\\data\\weekly-scrape-preview\\weekly_jobs_last_7_days.json",
+  "duplicateSourceJobKeysSkipped": 2497,
+  "oldJobsSkipped": 1945,
+  "authorizationErrors": 0,
+  "stoppedBecauseOfAuthorizationErrors": false,
+  "requestErrors": 0,
+  "totalUniqueRecentJobs": 1872
+}

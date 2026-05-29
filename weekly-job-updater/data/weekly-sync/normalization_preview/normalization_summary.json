@@ -1,0 +1,13 @@
+{
+  "successfulBatches": 47,
+  "jobsForNormalization": 945,
+  "normalizedJobs": 466,
+  "skillsToAdd": 19,
+  "model": "poolside/laguna-xs.2:free",
+  "skillRelationshipsToAdd": 4,
+  "runId": "2026-05-27T15-05-30.567469600Z",
+  "batchSize": 10,
+  "locationsToAdd": 9,
+  "failedBatches": 48,
+  "errors": 48
+}

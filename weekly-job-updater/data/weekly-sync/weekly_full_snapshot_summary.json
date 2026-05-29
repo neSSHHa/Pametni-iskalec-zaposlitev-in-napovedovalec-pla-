@@ -1,0 +1,14 @@
+{
+  "mode": "full-snapshot",
+  "maxPagesPerSearch": 10,
+  "maxDuplicateOnlyPages": 3,
+  "csvFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\weekly_jobs_full_snapshot.csv",
+  "jsonFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-sync\\weekly_jobs_full_snapshot.json",
+  "duplicateSourceJobKeysSkipped": 4861,
+  "authorizationErrors": 0,
+  "runId": "2026-05-26T11-44-52.774816100Z",
+  "stoppedBecauseOfAuthorizationErrors": false,
+  "totalUniqueSnapshotJobs": 4307,
+  "requestErrors": 0,
+  "duplicateOnlySearchStops": 10
+}

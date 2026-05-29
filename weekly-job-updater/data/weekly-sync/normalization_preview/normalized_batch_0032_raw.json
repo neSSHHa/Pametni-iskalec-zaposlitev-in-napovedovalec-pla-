@@ -1,0 +1,239 @@
+{
+  "jobs": [
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "|avtomehanik - m/ž|kranj, upper carniola",
+      "warnings": [],
+      "description": "v stabilnem in uveljavljenem podjetju - urejeno in prijetno delovno okolje v rastočem podjetju - delo na najnovejših napravah... - timsko dvoizmensko delo - redno in stimulativno plačilo - dolgoročno sodelovanje - možnost dodatnega izobraževanja",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-mechanical-repair",
+        "sk-management"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-kranj-upper-carniola",
+      "newSkills": [],
+      "datePosted": "2026-05-23",
+      "sourceWebsite": "https://jobviewtrack.com/v2/RbLj6Buvgtgjl8rqhgW5X-F8Oj1neKF0XHCBZNTjnk8uJF64DfTskRxN15iifkyf3yXWst8gzvkQJ2HcnmcODAQbCqwPAMFdFvKnAJo5ekyZlVyLlrfjacEEYI1FmZfHf0PgpI_gyIhU9DSUukzGj9AfNv9PDaIO6VNThn1XAwC_LQ_51CYKkTynONScX2uRqH7vIKafwIS7LPKSdcQOVMIRR9XCAFOGWFgJ3RZXaf0",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "AVTOMEHANIK - M/Ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "|organizator prevozov v mednarodnem prometu / disponent - m/ž|kranj, upper carniola",
+      "warnings": [],
+      "description": "ali transporta (niso pa pogoj) Nudimo: - možnost zaposlitve za nedoločen čas - dinamično delo v uspešnem in rastočem podjetju... - možnost strokovnega in osebnega razvoja - stimulativno in redno plačilo - delo v mednarodnem okolju - redna druženja ob",
+      "newLocation": null,
+      "workTypeIds": ["work-hybrid"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-logistics",
+        "sk-international-trade"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-kranj-upper-carniola",
+      "newSkills": [],
+      "datePosted": "2026-05-23",
+      "sourceWebsite": "https://jobviewtrack.com/v2/hiLHUwdM5gXHTtgK4svX08es4NLvmpVIUC-wDuFQeViJf9w4fhGMS1KYxagp61U72Xd6EgHcdAxtkR2YpdI_FNoPGtXwX3v2g54GmCwzhGF1JcGL1aoMUzIiEPAcWqvEQZSiVb9BuZj5uZHhVPvj25yVEsw5qSQeCZcrFHo7kZ-TU5pjNy6tk1Knm3VbGQA1qjv_DdRMr08H6xjSrybTSknY1BZPgB20S0D-se5iqn8",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "ORGANIZATOR PREVOZOV V MEDNAROSTNEM PROMETU / DISPONENT - M/Ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "|radiološki inženir i - m/ž|kranj, upper carniola",
+      "warnings": [],
+      "description": "govorjenje tekoče, pisanje tekoče Računalniška znanja: urejevalniki besedil - osnovno; delo s preglednicami - osnovno; delo...-a v Teleradiologiji, znanje vsaj enega svetovnega jezika, natančnost in zanesljivost, delo v timu. Delo je dvoizmensko. Podrobnejše",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-computer-science",
+        "sk-radiology-engineer"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-kranj-upper-carniola",
+      "newSkills": [{
+        "name": "Radiology Engineer",
+        "SkillTypeId": "skill-technical",
+        "id": "sk-radiology-engineer"
+      }],
+      "datePosted": "2026-05-23",
+      "sourceWebsite": "https://jobviewtrack.com/v2/suUG0P9LqcSTH-qq2CzQsaXOTEdSKkyNSajlrBoGjWbeqwAgO8Gtu8PAP2CP9bDIw4v4bb-xB9dPOgoTzFt82r93xxpFw8sW97d80yDdZetK_qFzsemWxH_uaPxEgPfxAhm9hKdM8-rMBbq0I6Ka7DceS0j8mQ2S0Xv9tT9LCYKdHeVJw5XQZUmrpZNdFuf2_VCFn_keUUkMl2jCWxVWdajMuY1jTLn8C2eTLNehPwk",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "RADIOLOŠKI INŽENIR I - M/Ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "|svetovalec direktorja - m/ž|radovljica, upper carniola",
+      "warnings": [],
+      "description": "visokošolska univerzitetna (prejšnja) ipd. Računalniška znanja: urejevalniki besedil - zahtevno; delo s preglednicami - zahtevno; delo z bazami podatkov - zahtevno Drugo: Organizacijske in vodstvene sposobnosti. Pošlјete življenjepis na: petra",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-administration",
+        "sk-management"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-radovljica-upper-carniola",
+      "newSkills": [],
+      "datePosted": "2026-05-21",
+      "sourceWebsite": "https://jobviewtrack.com/v2/5v5fuHX59MMgm4PWHplwr24V3JP0MIqPT_94OKmYO9T653wIQhpoKyR3YrfALo77cPdM_32QpBiinVvn3rLahXtn8V8jtaaPq6NcryDLBlZ4YnLfdAM_1Y2Yc9VQG736LRl-N005Tu5gP8yP2YRg53ca6eVi_qtmHIwz8UfYyEYiuv50xpLJOlc5pLsrBQwYyjvrXiHzIWUo4pZV6CZC80IFPNEXJItGM49Pv6pFzr0",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "SVETOVALEC DIREKTORJA - M/Ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "|knjigovodja - m/ž|kranj, upper carniola",
+      "warnings": [],
+      "description": ": delo z bazami podatkov - zahtevno Drugo: POZNAVANJE SRS-jev, osnov davčnih predpisov Pošlјete življenjepis na: bernarda",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-accounting",
+        "sk-auditing"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-kranj-upper-carniola",
+      "newSkills": [],
+      "datePosted": "2026-05-20",
+      "sourceWebsite": "https://jobviewtrack.com/v2/qQ-ngmMtKsea5SWhVLa4MX_JUdptJSKKeNK-qCmjWtn4QvLm1fibWDbTLI2FeKxNl15aJXglPKnygnpcXU0T72G8Z7rmpA0lgkMwCK-dmccJrNy1DXMVv6zg2zec667GA1l8MwGfnJOyrzl54IHcb37bmaTh-F-hvRHQSgu1s9JVC0Q3o-4lnZxmFAiYiZUCelogpa5Pd3AqXKbvqTZuntGD25D9LNAP8SxlGBuMdeQ",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "KNJIGOVODJA - M/Ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "merkur|koordinator (m/ž) podporni procesi naklo|naklo, upper carniola",
+      "warnings": [],
+      "description": "in vzdrževanju procesov Delo s strankami, poslovnimi partnerji in institucijami VI. stopnjo izobrazbe ekonomske, organizacijske",
+      "newLocation": null,
+      "workTypeIds": ["work-hybrid"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-management",
+        "sk-business-management"
+      ],
+      "companyname": "Merkur",
+      "locationId": "loc-naklo-upper-carniola",
+      "newSkills": [],
+      "datePosted": "2026-05-20",
+      "sourceWebsite": "https://jobviewtrack.com/v2/fCx8yidxL9fzzCAQc3ACwGi9KhPkW58V8_My9KqIR0cQ_PPdPz3IbjBKBlcINXaC4wATG-wHKKWyXC58usGesAjAfkrL7Ozri8r6Yk9rH2cY4gKJ-E0vIP_uTDuF32dcmsapCuICKyzFnabeveqKlG1dly8zfqPGDM07fTRFoqRg4hNi0N5e-X70usoOa05BNQAfLzZ689LSHlFPreOorOs4siFTwRSnRXqUfnz5y70",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Koordinator (m/ž) Podporni procesi Naklo",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-intern",
+      "sourceJobKey": "zavarovalnica sava|zastopnik začetnik (m/ž)|kranj, upper carniola",
+      "warnings": [],
+      "description": "oprvljanje v delo ob podpori mentorja (usposabljanje in postopno prevzemanje na terensko delo, pripravljenost na učenje in redno izpopolnjevanje, organizacijske veščine. prilagodljiv delovni čas",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-sales",
+        "sk-customer-service"
+      ],
+      "companyname": "Zavarovalnica Sava",
+      "locationId": "loc-kranj-upper-carniola",
+      "newSkills": [],
+      "datePosted": "2026-05-20",
+      "sourceWebsite": "https://jobviewtrack.com/v2/NlV3tOUrDnc8aEzGoGJlYMtiQDBxZUYTywQmZdasXpw3cRYNTcdG8-wS7zJhl0tznod6nO2OnqXMIGKMZmnj5boQKErZWVmFITqhDTI6EPz-Z-lVVNlZfBkj4swGhj8GawcAAQF0vYMjbARrdifc96YsowFgZSh5sAN_A1zR7mGFgOQXPLBKfE2U7fOhkoHJZ2SGX9b-vpOEoy-mthnIJW--XTsp4DuwDxhyjoglkXA",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Zastopnik začetnik (m/ž)",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "|varuhinja institucionalno varstvo - m/ž|radovljica, upper carniola",
+      "warnings": [],
+      "description": "osnovno; delo s preglednicami - osnovno; delo z bazami podatkov - osnovno; poznavanje računalniških omrežij - osnovno Drugo.... družboslovne smeri, poznavanje osnov higienskega ravnanja z živili, HACCAP, poznavanje računalniških orodij in smisel za delo",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-food-safety",
+        "sk-information-technology"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-radovljica-upper-carniola",
+      "newSkills": [],
+      "datePosted": "2026-05-20",
+      "sourceWebsite": "https://jobviewtrack.com/v2/ckeZ5h91mN3V_n31jgdxpIC9gvMNu1L1pCWlUf8BVFg4WpgB72gUxRN3Y1gJHY2avX8ySJST1rJzHrtsfPX4DJQBpsNBMvdNs2FxxR5HfFLYlB1En38h4HHzQ4kyxIZNkih7QsVDh0RMBd0DzHci7JYxfnLvtfiFpfcYbxuDovuYGWuokLrv4HbU2Ax8V2Hh4Vv30avNxgG0I5RcMm8pP7w2KLylBEA_VyWhvHX4W1o",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "VARUHINJA INSTITUCIONALNO VARSTVO - M/Ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "sibo g|samostojni operativni tehnolog (m/ž/d)|škofja loka, upper carniola",
+      "warnings": [],
+      "description": "dolgoročnega sodelovanja, delo v dinamičnem in prijetnem kolektivu, možnost osebnega, strokovnega in kariernega razvoja..., možnost izobraževanja in dodatnega usposabljanja, delo v stabilnem podjetju, kjer se redno izplačujejo plače, prispevki",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-production-work",
+        "sk-machine-operation"
+      ],
+      "companyname": "Sibo G",
+      "locationId": "loc-skofja-loka-upper-carniola",
+      "newSkills": [],
+      "datePosted": "2026-05-20",
+      "sourceWebsite": "https://jobviewtrack.com/v2/U9njxS7UndBlD5KytAvIyOyNnCYB20LJidBFHhh_z1ZIFk7Hfo6dQPSa5FYevLaEMciPvTKA4G2gvJp9j3p1yBjrv0urWIYIwmVUyszEPdO6Czc5mHRNgJLpj6lBB25scP_pjiSKhpLaieTus1VB_eS0NwrDN7czx2dnQDDdldBHX_UEwT6ZqnTUMYeGn7sgQ9M8L2THTkwnt6mizv7hTkd15Owus4-eV2o3uKsv_2k",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Samostojni operativni tehnolog (m/ž/d)",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-mid",
+      "sourceJobKey": "|učitelj razrednega pouka - m/ž|radovljica, upper carniola",
+      "warnings": [],
+      "description": "razumevanje tekoče, govorjenje tekoče, pisanje tekoče Računalniška znanja: urejevalniki besedil - osnovno; delo s preglednicami",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "predictedMaxSalary": null,
+      "predictedMinSalary": null,
+      "skillIds": [
+        "sk-teaching",
+        "sk-primary-education"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-radovljica-upper-carniola",
+      "newSkills": [],
+      "datePosted": "2026-05-20",
+      "sourceWebsite": "https://jobviewtrack.com/v2/CUTOFEO7bIYbcoiLs3lNG-gLI7tv7rTKMjmmtEPhv1ip5PwZoj69nN1N6U5JBSIoX0xrv2BOqnZvVwJM1psKq-eZFBoK9DDUXMB92P8Hf2mdETyZdAl-U3TX6gBg8BmxSgCTBv_Ycnph30UiR5T4oxBLKwEAMBwUSmc_OIHZSlpJTL3a5iXnxy3BF8iU_4v_0qlVC9k2myTLGW9zH_yPQpsB_AYLQd6CCRH4WBmHQYQ",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "UČITELJ RAZREDNEGA POUKA - M/Ž",
+      "status": "ACTIVE"
+    }
+  ],
+  "batchErrors": []
+}

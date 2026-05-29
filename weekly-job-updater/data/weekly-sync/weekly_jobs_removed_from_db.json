@@ -1,0 +1,5134 @@
+[
+  {
+    "jobId": "job-00003",
+    "sourceJobKey": "null|kuhar, ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00008",
+    "sourceJobKey": "adecco|kuhar (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00017",
+    "sourceJobKey": "null|dietni kuhar iv v zsv, šifra dm: f094075 - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-00020",
+    "sourceJobKey": "null|kuhar/kuharica - priložnost za upokojence, ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00023",
+    "sourceJobKey": "null|kuhar iv - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00030",
+    "sourceJobKey": "gostilna turk izidor zelenc s.p.|kuhar - m/ž|logatec, central slovenia"
+  },
+  {
+    "jobId": "job-00031",
+    "sourceJobKey": "null|glavni kuhar - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00032",
+    "sourceJobKey": "daneks storitve in trgovina d.o.o. ljubljana|kuhar - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00034",
+    "sourceJobKey": "null|kuhar v gostišču jezero ob planšarskem jezeru na jezerskem - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-00040",
+    "sourceJobKey": "jezersek gostinstvo d.o.o.|kuhar - m/ž|radovljica, upper carniola"
+  },
+  {
+    "jobId": "job-00043",
+    "sourceJobKey": "null|dietni kuhar iv v zsv - m/ž|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-00053",
+    "sourceJobKey": "null|dietni kuhar iv v zsv - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-00055",
+    "sourceJobKey": "null|kuhar - terme zreče - m/ž|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-00056",
+    "sourceJobKey": "null|kuhar specialist - terme zreče - m/ž|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-00057",
+    "sourceJobKey": "null|dietni kuhar - m/ž|mozirje, savinja"
+  },
+  {
+    "jobId": "job-00058",
+    "sourceJobKey": "null|kuhar - m/ž|mozirje, savinja"
+  },
+  {
+    "jobId": "job-00060",
+    "sourceJobKey": "thermana|kuhar (m/ž)|laško, savinja"
+  },
+  {
+    "jobId": "job-00061",
+    "sourceJobKey": "null|kuhar - hotel planja - m/ž|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-00062",
+    "sourceJobKey": "null|kuhar specialist - hotel natura - m/ž|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-00063",
+    "sourceJobKey": "null|kuhar specialist - hotel planja - m/ž|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-00064",
+    "sourceJobKey": "null|kuhar ( mesar)- hotel planja - m/ž|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-00065",
+    "sourceJobKey": "null|kuhar iv (šifra dm 2237) v zpkz dob, sektorju za splošne in pravne zadeve, oddelku hišnih del, referatu za prehrano obsojencev. - m/ž|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-00066",
+    "sourceJobKey": "slorest|samostojni kuhar (m/ž), novo mesto|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-00067",
+    "sourceJobKey": "null|kuhar iv v zavodu za prestajanje kazni zapora dob|mirna, southeast slovenia"
+  },
+  {
+    "jobId": "job-00070",
+    "sourceJobKey": "kmetijska zadruga trebnje-krka z.o.o.|kuhar m/ž - m/ž|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-00073",
+    "sourceJobKey": "null|kuhar - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-00083",
+    "sourceJobKey": "null|dietni kuhar - m/ž|idrija, gorizia"
+  },
+  {
+    "jobId": "job-00084",
+    "sourceJobKey": "null|kuhar-picopek - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-00086",
+    "sourceJobKey": "terme čatež|kuhar - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-00087",
+    "sourceJobKey": "terme čatež|pomožni kuhar - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-00097",
+    "sourceJobKey": "null|kuhar m/ž - m/ž|lendava, mura"
+  },
+  {
+    "jobId": "job-00098",
+    "sourceJobKey": "null|kuhar m/ž - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-00099",
+    "sourceJobKey": "gostilna picerija kostanj, matej znuderl, s.p.|kuhar - m/ž|gornja radgona, mura"
+  },
+  {
+    "jobId": "job-00102",
+    "sourceJobKey": "null|kuharica/kuhar - m/ž|gornja radgona, mura"
+  },
+  {
+    "jobId": "job-00113",
+    "sourceJobKey": "sovita|kuhar - delilec, m/ž, šentjanž pri dravogradu|dravograd, carinthia"
+  },
+  {
+    "jobId": "job-00120",
+    "sourceJobKey": "jata emona|proizvodni delavec na farmi ali v sortirnici na duplici pri kamniku|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-00139",
+    "sourceJobKey": "iskra, elektro in sistemske resitve, d.o.o.|proizvodni delavec - šentvid pri stični - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-00143",
+    "sourceJobKey": "null|pomožni proizvodni delavec - m/ž|radovljica, upper carniola"
+  },
+  {
+    "jobId": "job-00145",
+    "sourceJobKey": "null|višji proizvodni delavec - m/ž|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-00146",
+    "sourceJobKey": "null|proizvodni delavec - m/ž|radovljica, upper carniola"
+  },
+  {
+    "jobId": "job-00154",
+    "sourceJobKey": "null|proizvodni delavec (m/ž)|železniki, upper carniola - škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-00163",
+    "sourceJobKey": "null|proizvodni delavec - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-00176",
+    "sourceJobKey": "null|proizvodni delavec - m/ž|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-00177",
+    "sourceJobKey": "null|proizvodni delavec - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-00178",
+    "sourceJobKey": "null|terenski proizvodni delavec - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-00182",
+    "sourceJobKey": "null|proizvodni delavec - m/ž|metlika, southeast slovenia"
+  },
+  {
+    "jobId": "job-00187",
+    "sourceJobKey": "null|proizvodni delavec za srednje zahtevna dela (m/ž) - m/ž|tolmin, gorizia"
+  },
+  {
+    "jobId": "job-00189",
+    "sourceJobKey": "null|terenski proizvodni delavec v pe dobova - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-00191",
+    "sourceJobKey": "null|proizvodni delavec - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-00194",
+    "sourceJobKey": "null|proizvodni delavec - m/ž|cerknica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-00197",
+    "sourceJobKey": "cimos d.d. avtomobilska industrija|proizvodni delavec v livarni - m/ž|radlje ob dravi, carinthia"
+  },
+  {
+    "jobId": "job-00198",
+    "sourceJobKey": "null|proizvodni delavec - m/ž|sežana, coastal-karst"
+  },
+  {
+    "jobId": "job-00201",
+    "sourceJobKey": "null|diplomirana medicinska sestra (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00203",
+    "sourceJobKey": "null|diplomirana medicinska sestra - dragomer - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00207",
+    "sourceJobKey": "univerzitetna psihiatrična klinika ljubljana|diplomirana medicinska sestra v psihiatriji v bolnišnični dejavnosti|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00213",
+    "sourceJobKey": "univerzitetna psihiatrična klinika ljubljana|diplomirana medicinska sestra v intenzivnih oddelkih psihiatrije|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00214",
+    "sourceJobKey": "null|diplomirana medicinska sestra (m/ž) - lj. črnuče - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00229",
+    "sourceJobKey": "null|diplomirana medicinska sestra - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00234",
+    "sourceJobKey": "univerzitetna psihiatrična klinika ljubljana|diplomirana medicinska sestra v intenzivnih oddelkih oddelkih psihiatrije - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00235",
+    "sourceJobKey": "univerzitetna psihiatrična klinika ljubljana|diplomirana medicinska sestra v psihiatriji v bolnišnični dejavnosti - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00243",
+    "sourceJobKey": "null|diplomirana medicinska sestra / zdravstvenik ali diplomirana babica|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00248",
+    "sourceJobKey": "onkološki inštitut ljubljana|dipl. medicinska sestra v intenzivni terapiji i, ii, e037019, oddelek zn za podporo skupni zdravstveni dejavnosti in oddelek za odpoved prebavil in paliativne oskrbe m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00249",
+    "sourceJobKey": "onkološki inštitut ljubljana|dipl. medicinska sestra v intenzivni terapiji i, ii, e037019, oddelek bolnišnične zn sektorja operativnih dejavnosti, m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00250",
+    "sourceJobKey": "onkološki inštitut ljubljana|dipl. medicinska sestra - delo s citostatiki, e037008, oddelek zn sektorja internistične onkologije, m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00251",
+    "sourceJobKey": "onkološki inštitut ljubljana|dipl. medicinska sestra - operacijska medicinska sestra, e037010, oddelek zn operacijskega bloka sektorja operativnih dejavnosti, m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00252",
+    "sourceJobKey": "onkološki inštitut ljubljana|dipl. medicinska sestra v anesteziji, e037015, oddelek zn operacijskega bloka sektorja operativnih dejavnosti, anestezija, m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00255",
+    "sourceJobKey": "onkološki inštitut ljubljana|dipl. medicinska sestra v specialistični ambulanti, e037026, oddelek zn v specialističnih ambulantah, m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00256",
+    "sourceJobKey": "onkološki inštitut ljubljana|dipl. medicinska sestra v intenzivni terapiji i, ii, e037019, oddelek zn za podporo skupni zdravstveni dejavnosti - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00257",
+    "sourceJobKey": "onkološki inštitut ljubljana|dipl. medicinska sestra - operacijska medicinska sestra, e037010, oddelek zn operacijskega bloka sektorja operativnih dejavnosti - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00258",
+    "sourceJobKey": "onkološki inštitut ljubljana|dipl. medicinska sestra v intenzivni terapiji i, ii, e037019, oddelek bolnišnične zn sektorja operativnih dejavnosti - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00259",
+    "sourceJobKey": "onkološki inštitut ljubljana|dipl. medicinska sestra v anesteziji, e037015, oddelek zn operacijskega bloka sektorja operativnih dejavnosti - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00260",
+    "sourceJobKey": "onkološki inštitut ljubljana|koordinator v zdravstveni negi, e037034, urad strokovnega direktorja - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00261",
+    "sourceJobKey": "onkološki inštitut ljubljana|dipl. medicinska sestra v specialistični ambulanti, e037026, oddelek zn v specialističnih ambulantah - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00264",
+    "sourceJobKey": "onkološki inštitut ljubljana|dipl. medicinska sestra v intenzivni terapiji iii, e037020, oddelek intenzivne zn sektorja operativnih dejavnosti - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00265",
+    "sourceJobKey": "onkološki inštitut ljubljana|dipl. medicinska sestra - delo s citostatiki, e037008, oddelek zn sektorja internistične onkologije - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00299",
+    "sourceJobKey": "null|diplomirana medicinska sestra v negovalni enoti - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-00300",
+    "sourceJobKey": "null|diplomirana medicinska sestra v intenzivni terapiji iii - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-00301",
+    "sourceJobKey": "null|diplomirana medicinska sestra v triaži urgentne dejavnosti - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-00302",
+    "sourceJobKey": "null|diplomirana medicinska sestra v intenzivni terapiji i, ii - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-00303",
+    "sourceJobKey": "null|diplomirana medicinska sestra v specialistični ambulanti - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-00312",
+    "sourceJobKey": "null|diplomirana medicinska sestra - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-00313",
+    "sourceJobKey": "null|diplomirana medicinska sestra - m/ž|radovljica, upper carniola"
+  },
+  {
+    "jobId": "job-00314",
+    "sourceJobKey": "null|diplomirana medicinska sestra - m/ž|jesenice, upper carniola"
+  },
+  {
+    "jobId": "job-00324",
+    "sourceJobKey": "null|diplomirana medicinska sestra - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-00328",
+    "sourceJobKey": "splošna bolnišnica ptuj|diplomirana medicinska sestra v specialistični ambulanti - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-00356",
+    "sourceJobKey": "vitadom, pe dom starejsih crni vrh|diplomirana medicinska sestra - m/ž|idrija, gorizia"
+  },
+  {
+    "jobId": "job-00358",
+    "sourceJobKey": "null|diplomirana medicinska sestra - m/ž|idrija, gorizia"
+  },
+  {
+    "jobId": "job-00361",
+    "sourceJobKey": "zdravstveni dom krsko|diplomirana medicinska sestra v otroško šolskem dipanezrju - m/ž|krško, lower sava"
+  },
+  {
+    "jobId": "job-00367",
+    "sourceJobKey": "null|diplomirana medicinska sestra - operacijska medicinska sestra - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-00374",
+    "sourceJobKey": "null|diplomirana medicinska sestra v dializi - vodja zn na hemodializi - m/ž|sežana, coastal-karst"
+  },
+  {
+    "jobId": "job-00375",
+    "sourceJobKey": "null|diplomirana medicinska sestra v negovalni enoti - delo na oddelku za geriatrično rehabilitacijo in podaljšano bolnišnično zdravljenje - m/ž|sežana, coastal-karst"
+  },
+  {
+    "jobId": "job-00377",
+    "sourceJobKey": "splošna bolnišnica izola|e037049 diplomirana medicinska sestra v urgentni dejavnosti (uc) - m/ž|izola, coastal-karst"
+  },
+  {
+    "jobId": "job-00386",
+    "sourceJobKey": "zdravstveni dom zagorje ob savi cesta zmage 1|diplomirana medicinska sestra v patronažni zdravstveni negi - m/ž|zagorje ob savi, central sava"
+  },
+  {
+    "jobId": "job-00389",
+    "sourceJobKey": "kansai helios slovenija d.o.o|delavec v proizvodnji (m/ž)|medvode, central slovenia"
+  },
+  {
+    "jobId": "job-00398",
+    "sourceJobKey": "grelci maras, proizvodnja in trgovina, d.o.o.|delavec v proizvodnji - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00401",
+    "sourceJobKey": "null|nk delavec v proizvodnji plastičnih mas - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00404",
+    "sourceJobKey": "null|delavec v proizvodnji - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00406",
+    "sourceJobKey": "null|delavec v proizvodnji - m/ž|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-00408",
+    "sourceJobKey": "null|delavec v proizvodnji - m/ž|vrhnika, central slovenia"
+  },
+  {
+    "jobId": "job-00410",
+    "sourceJobKey": "null|delavec v proizvodnji - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-00414",
+    "sourceJobKey": "hoja zaga rob podjetje za predelavo lesa, d.o.o.|delavec v proizvodnji na žagarskem obratu - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00415",
+    "sourceJobKey": "null|pomožni delavec v proizvodnji - m/ž|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-00418",
+    "sourceJobKey": "null|delavec za druga preprosta ročna dela - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00421",
+    "sourceJobKey": "null|pomožni delavec v proizvodnji in predelavi mesa - m/ž|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-00423",
+    "sourceJobKey": "null|delavec v proizvodnji - m/ž|tržič, upper carniola"
+  },
+  {
+    "jobId": "job-00424",
+    "sourceJobKey": "null|pomožni delavec v proizvodnji - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-00426",
+    "sourceJobKey": "null|delavec v proizvodnji - m/ž|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-00431",
+    "sourceJobKey": "null|delavec v proizvodnji - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-00452",
+    "sourceJobKey": "null|delavec v proizvodnji - klepar - m/ž|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-00468",
+    "sourceJobKey": "null|delavec v proizvodnji kovinskih izd - m/ž|črnomelj, southeast slovenia"
+  },
+  {
+    "jobId": "job-00471",
+    "sourceJobKey": "null|delavec v proizvodnji - m/ž|ribnica, southeast slovenia"
+  },
+  {
+    "jobId": "job-00489",
+    "sourceJobKey": "montaza modelarstvo danijel rakusa s.p.|delavec v proizvodnji poliestra - m/ž|ljutomer, mura"
+  },
+  {
+    "jobId": "job-00520",
+    "sourceJobKey": "null|koordinator iii« koordinator iii za gostinstvo in turizem šifra delovnega mesta: i015077 - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-00532",
+    "sourceJobKey": "goldi trgovina, gostinstvo in storitve, d.o.o.|natakar - m/ž|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-00533",
+    "sourceJobKey": "null|natakar - m/ž|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-00549",
+    "sourceJobKey": "kodila d.o.o.|prodajalec v trgovini gourmet & bistro btc ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00551",
+    "sourceJobKey": "adecco|vodja restavracije (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00557",
+    "sourceJobKey": "mjob|delo v strežbi|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00578",
+    "sourceJobKey": "null|strežnik/ca - socialno varstvo - m/ž|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-00612",
+    "sourceJobKey": "null|natakar - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-00619",
+    "sourceJobKey": "null|natakar/ica - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-00621",
+    "sourceJobKey": "null|pomočnik dietnega kuharja - m/ž|pesnica, drava"
+  },
+  {
+    "jobId": "job-00623",
+    "sourceJobKey": "dom dr. jozeta potrca poljcane|f094069 natakar iv v zsv (cido majšperk) - m/ž|slovenska bistrica, drava"
+  },
+  {
+    "jobId": "job-00624",
+    "sourceJobKey": "brahaj pekarstvo, peka kruha in peciva, d.o.o.|prodajalec - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-00626",
+    "sourceJobKey": "mol & ina d.o.o.|prodajalec / natakar na bencinskem servisu (m/ž)|maribor, drava"
+  },
+  {
+    "jobId": "job-00633",
+    "sourceJobKey": "null|delavec v strežbi - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-00636",
+    "sourceJobKey": "null|delavec v restavraciji|maribor, drava - pesnica, drava"
+  },
+  {
+    "jobId": "job-00664",
+    "sourceJobKey": "null|natakar - m/ž|šentjur pri celju, savinja"
+  },
+  {
+    "jobId": "job-00667",
+    "sourceJobKey": "null|servirec/ka - m/ž|mozirje, savinja"
+  },
+  {
+    "jobId": "job-00672",
+    "sourceJobKey": "null|natakar - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-00679",
+    "sourceJobKey": "null|natakar - m/ž|šmarje pri jelšah, savinja"
+  },
+  {
+    "jobId": "job-00681",
+    "sourceJobKey": "bar am am, klavdija kovacic s.p.|natakar - m/ž|šmarje pri jelšah, savinja"
+  },
+  {
+    "jobId": "job-00682",
+    "sourceJobKey": "thermana|vodja slaščičarne (m/ž)|laško, savinja"
+  },
+  {
+    "jobId": "job-00683",
+    "sourceJobKey": "thermana|natakar (m/ž)|laško, savinja"
+  },
+  {
+    "jobId": "job-00684",
+    "sourceJobKey": "trendas, gostinske storitve, d.o.o.|natakar - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-00685",
+    "sourceJobKey": "null|natakar - hotel planja - m/ž|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-00686",
+    "sourceJobKey": "null|natakar / receptor - hotel natura - m/ž|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-00687",
+    "sourceJobKey": "null|natakar - hotel natura - m/ž|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-00688",
+    "sourceJobKey": "null|natakar - terme zreče - m/ž|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-00705",
+    "sourceJobKey": "gostilna meglic martin meglic s.p.|natakar-ica - m/ž|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-00706",
+    "sourceJobKey": "kmetijska zadruga trebnje-krka z.o.o.|natakar m/ž - m/ž|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-00750",
+    "sourceJobKey": "null|natakar v restavraciji ajda - m/ž|sevnica, lower sava"
+  },
+  {
+    "jobId": "job-00751",
+    "sourceJobKey": "null|delo na recepciji relive centra športa in zdravja, brežice - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-00753",
+    "sourceJobKey": "terme čatež|natakar - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-00755",
+    "sourceJobKey": "green bar, posrednistvo cvek branka s.p.|natakar - m/ž|krško, lower sava"
+  },
+  {
+    "jobId": "job-00761",
+    "sourceJobKey": "null|prodajalec hrane in pijače v lokalu chuty''s - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-00785",
+    "sourceJobKey": "null|prodajalec računalniške opreme - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-00795",
+    "sourceJobKey": "jysk|prodajalec za krajši delovni čas- 30 ur (m/ž), domžale|domžale, central slovenia"
+  },
+  {
+    "jobId": "job-00796",
+    "sourceJobKey": "jysk|prodajalec (m/ž), šentvid, ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00797",
+    "sourceJobKey": "jysk|prodajalec za krajši delovni čas - 30 ur (m/ž), šentvid, ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00798",
+    "sourceJobKey": "tc moto shop d.o.o.|prodajalec (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00800",
+    "sourceJobKey": "pepco|blagajnik-prodajalec ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00804",
+    "sourceJobKey": "null|prodajalec v živilski trgovini - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00809",
+    "sourceJobKey": "null|prodajalec električnih polnilnic za ev in videonadzornih sistemov - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-00812",
+    "sourceJobKey": "null|prodajalec ljubljana dolgi most - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00815",
+    "sourceJobKey": "null|prodajalec ljubljana masarykova - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00816",
+    "sourceJobKey": "null|prodajalec grosuplje - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-00822",
+    "sourceJobKey": "null|trgovec - prodajalec avtomobilskih rezervnih delov - m/ž|vrhnika, central slovenia"
+  },
+  {
+    "jobId": "job-00829",
+    "sourceJobKey": "davidov hram d.o.o. ljubno|prodajalec/ka v poslovni enoti ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00832",
+    "sourceJobKey": "lelosi|prodajalec v lelosi trgovini ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00833",
+    "sourceJobKey": "tekstilna hisa|prodajalec (m/ž), ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00834",
+    "sourceJobKey": "spar|prodajalec na oddelku delikatese (m/ž) interspar aleja|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00835",
+    "sourceJobKey": "btc|prodajalec gostinskih artiklov v atlantisu (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00836",
+    "sourceJobKey": "metro trgovska druzba d.d.|prodajalec (m/ž), ljubljana rudnik|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00837",
+    "sourceJobKey": "pet network si|prodajalec/svetovalec (m/ž) - pe kamnik supernova|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-00838",
+    "sourceJobKey": "alpina, tovarna obutve, d.o.o.|prodajalec - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00839",
+    "sourceJobKey": "petrol group|prodajalec na prodajnem mestu celovška cesta 226, ljubljana (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00840",
+    "sourceJobKey": "lidl|prodajalec (m/ž) domžale (36 ur, polni delovni čas)|domžale, central slovenia"
+  },
+  {
+    "jobId": "job-00842",
+    "sourceJobKey": "agencija agado|prodajalec v trgovini z živili (m/ž) - ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00843",
+    "sourceJobKey": "metro trgovska druzba d.d.|prodajalec - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00844",
+    "sourceJobKey": "spar|prodajalec na oddelku sadja in zelenjave (m/ž), ljubljana brod|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00845",
+    "sourceJobKey": "nkd|1 x prodajalec (m/ž) v poslovni enoti nkd d.o.o. - grosuplje, za polni delovni 40 ur tedensko|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-00846",
+    "sourceJobKey": "spar|mesar - prodajalec (m/ž), interspar ljubljana vič|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00847",
+    "sourceJobKey": "žito|prodajalec m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00848",
+    "sourceJobKey": "lidl|prodajalec (m/ž) ljubljana vižmarje (36 ur, polni delovni čas)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00849",
+    "sourceJobKey": "lidl|prodajalec (m/ž) ljubljana rudnik (36 ur, polni delovni čas)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00850",
+    "sourceJobKey": "lidl|prodajalec (m/ž) ljubljana zaloška (36 ur, polni delovni čas)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00851",
+    "sourceJobKey": "lidl|prodajalec (m/ž) ljubljana tivoli (36 ur, polni delovni čas)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00852",
+    "sourceJobKey": "lidl|prodajalec (m/ž) ljubljana slovenčeva (36 ur, polni delovni čas)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00853",
+    "sourceJobKey": "spar|spletni prodajalec - komisionar (m/ž) več prostih delovnih mest|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00854",
+    "sourceJobKey": "takko fashion|prodajalka / prodajalec (m/ž) ljubljana (30 ur)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00855",
+    "sourceJobKey": "spar|prodajalec (m/ž), ljubljana slovenčeva|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00856",
+    "sourceJobKey": "plan-net avto d.o.o.|prodajalec vozil|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-00857",
+    "sourceJobKey": "takko fashion|prodajalka / prodajalec (m/ž), domžale (30 ur)|domžale, central slovenia"
+  },
+  {
+    "jobId": "job-00858",
+    "sourceJobKey": "rutar marketing|prodajalec na oddelku butika (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00859",
+    "sourceJobKey": "kariera|prodajalec v trgovini z živili m/ž/d|central slovenia"
+  },
+  {
+    "jobId": "job-00860",
+    "sourceJobKey": "rutar marketing|prodajalec na oddelku svetil (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00862",
+    "sourceJobKey": "e.leclerc|prodajalec na oddelku slaščičarne (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00863",
+    "sourceJobKey": "rutar marketing, trgovska d.o.o.|prodajalec na oddelku tekstila - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00864",
+    "sourceJobKey": "hartis d.o.o.; papirnica hartis ljubljana siska|prodajalec / prodajni svetovalec v papirnici (ljubljana supernova mc šiška) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00865",
+    "sourceJobKey": "rutar marketing|prodajalec na oddelku tekstila m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00866",
+    "sourceJobKey": "eurospin|prodajalec-blagajničar (m/ž), za pe logatec|logatec, central slovenia"
+  },
+  {
+    "jobId": "job-00867",
+    "sourceJobKey": "slowatch|prodajalec/ka v ljubljani|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00868",
+    "sourceJobKey": "spar|prodajalec na oddelku kruha (m/ž) spar lj kapitelj|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00869",
+    "sourceJobKey": "trgovski center tivoli - moto shop d.o.o.|prodajalec/ka champion, ljubljana citypark|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00870",
+    "sourceJobKey": "sbs trgovina|prodajalec/prodajalka v salonu keramike - sbs grosuplje|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-00871",
+    "sourceJobKey": "sbs trgovina|prodajalec/prodajalka v salonu keramike - sbs škofljica|škofljica, central slovenia"
+  },
+  {
+    "jobId": "job-00872",
+    "sourceJobKey": "spar|mesar - prodajalec (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00873",
+    "sourceJobKey": "prigo|prodajalec nadomestnih delov (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00874",
+    "sourceJobKey": "eurospin|mesar - prodajalec (m/ž) za pe logatec|logatec, central slovenia"
+  },
+  {
+    "jobId": "job-00875",
+    "sourceJobKey": "trenkwalder group|prodajalec v pekarni (m/ž) v ljubljani|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00876",
+    "sourceJobKey": "iustitia|prodajalec/ka v snailshop trgovinah 🔥|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00877",
+    "sourceJobKey": "e.leclerc|prodajalec/svetovalec na oddelku tehnike (m/ž), e.leclerc ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00878",
+    "sourceJobKey": "zelinka|prodajalec računalniške opreme|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00879",
+    "sourceJobKey": "spar|mesar - prodajalec (m/ž) spar vrhovci|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00880",
+    "sourceJobKey": "mercator|prodajalec v internet trgovini (m/ž) v ljubljani|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00881",
+    "sourceJobKey": "mercator|prodajalec v ribarnici (m/ž) v hipermarketu šiška|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00882",
+    "sourceJobKey": "salax|prodajalec v drevesnici (m/ž)|dobrova-polhov gradec, central slovenia"
+  },
+  {
+    "jobId": "job-00883",
+    "sourceJobKey": "leather & shoe international d.o.o.|prodajalec (z možnostjo napredovanja) za našo trgovino humanic citypark ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00884",
+    "sourceJobKey": "pepco|blagajnik-prodajalec - ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00885",
+    "sourceJobKey": "verudela|prodajalec (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00886",
+    "sourceJobKey": "adecco|prodajalec (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00887",
+    "sourceJobKey": "whc d.o.o.|prodajalec (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00888",
+    "sourceJobKey": "adecco|prodajalec v moravčah (m/ž)|moravče, central slovenia"
+  },
+  {
+    "jobId": "job-00889",
+    "sourceJobKey": "kmetijska zadruga velike lasce, z.o.o.|prodajalec/ka - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00891",
+    "sourceJobKey": "kariera|prodajalec pekovskih izdelkov|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00894",
+    "sourceJobKey": "mass|modna/-i svetovalka/-ec in prodajalka/-ec (m/ž) v mass ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00895",
+    "sourceJobKey": "avtotehna vis|servisni svetovalec za kleparsko-ličarska popravila|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00896",
+    "sourceJobKey": "avtotehna vis|servisni svetovalec - tehnik (m/ž) (sprejemnik vozil v servis)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-00904",
+    "sourceJobKey": "null|prodajalec/ka v trgovini sariko - v supernova kranj - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-00910",
+    "sourceJobKey": "null|prodajalec - m/ž|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-00919",
+    "sourceJobKey": "eurospin|prodajalec-blagajničar (m/ž) za pe lesce|lesce, upper carniola"
+  },
+  {
+    "jobId": "job-00920",
+    "sourceJobKey": "lidl|prodajalec (m/ž) lesce (36 ur, polni delovni čas)|lesce, upper carniola"
+  },
+  {
+    "jobId": "job-00921",
+    "sourceJobKey": "lidl|prodajalec (m/ž) jesenice (36 ur, polni delovni čas)|jesenice, upper carniola"
+  },
+  {
+    "jobId": "job-00922",
+    "sourceJobKey": "null|prodajalec/zastopnik - m/ž|radovljica, upper carniola"
+  },
+  {
+    "jobId": "job-00924",
+    "sourceJobKey": "lidl|prodajalec (m/ž) tržič (36 ur, polni delovni čas)|tržič, upper carniola"
+  },
+  {
+    "jobId": "job-00931",
+    "sourceJobKey": "eurospin|mesar - prodajalec (m/ž) za pe kranj|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-00932",
+    "sourceJobKey": "null|sprejemnik/prodajalec rezervnih delov - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-00933",
+    "sourceJobKey": "jurčič & co.|prodajalec rezervnih delov / sprejemnik (m/ž)|šenčur, upper carniola"
+  },
+  {
+    "jobId": "job-00947",
+    "sourceJobKey": "null|prodajalec - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-00948",
+    "sourceJobKey": "null|prodajalec - slovenska bistrica - m/ž|slovenska bistrica, drava"
+  },
+  {
+    "jobId": "job-00951",
+    "sourceJobKey": "null|prodajalec tekstila - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-00955",
+    "sourceJobKey": "null|prodajalec - pripravljalec barve - m/ž|slovenska bistrica, drava"
+  },
+  {
+    "jobId": "job-00956",
+    "sourceJobKey": "null|prodajalec na bencinskem servisu mol dravsko polje jug - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-00957",
+    "sourceJobKey": "dm-drogerie markt|prodajalec (m/ž) - maribor|maribor, drava"
+  },
+  {
+    "jobId": "job-00960",
+    "sourceJobKey": "null|prodajalec-skladiščnik v sam ormož - m/ž|ormož, drava"
+  },
+  {
+    "jobId": "job-00961",
+    "sourceJobKey": "spar|prodajalec na oddelku sadja in zelenjave (m/ž) interspar ptuj|ptuj, drava"
+  },
+  {
+    "jobId": "job-00966",
+    "sourceJobKey": "inpos|prodajalec na gradbenem oddelku tpc slovenska bistrica|slovenska bistrica, drava"
+  },
+  {
+    "jobId": "job-00988",
+    "sourceJobKey": "null|prodajalec v sam nazarje - m/ž|mozirje, savinja"
+  },
+  {
+    "jobId": "job-00990",
+    "sourceJobKey": "null|prodajalec - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-00997",
+    "sourceJobKey": "mass|modna/-i svetovalka/-ec in prodajalka/-ec (m/ž) v mass city celje|celje, savinja"
+  },
+  {
+    "jobId": "job-01007",
+    "sourceJobKey": "null|prodajalec/prodajalka - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01008",
+    "sourceJobKey": "null|prodajalec trebnje - m/ž|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-01014",
+    "sourceJobKey": "null|prodajalec - m/ž|ribnica, southeast slovenia"
+  },
+  {
+    "jobId": "job-01016",
+    "sourceJobKey": "kmetijska zadruga trebnje-krka z.o.o.|prodajalec v tehnični trgovini m/ž - m/ž|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-01017",
+    "sourceJobKey": "kmetijska zadruga trebnje-krka z.o.o.|prodajalec m/ž (živilska prodajalna) - m/ž|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-01030",
+    "sourceJobKey": "null|prodajalec - skladiščnik - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-01033",
+    "sourceJobKey": "null|prodajalec - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-01036",
+    "sourceJobKey": "eurospin|mesar - prodajalec (m/ž) za pe idrija|idrija, gorizia"
+  },
+  {
+    "jobId": "job-01037",
+    "sourceJobKey": "null|prodajalec na bencinskem servisu mol-ina - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-01061",
+    "sourceJobKey": "null|prodajalec - m/ž|krško, lower sava"
+  },
+  {
+    "jobId": "job-01063",
+    "sourceJobKey": "null|prodajalec - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-01070",
+    "sourceJobKey": "null|prodajalka /prodajalec - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-01073",
+    "sourceJobKey": "null|prodajalec - m/ž|cerknica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-01076",
+    "sourceJobKey": "eurospin|prodajalec-blagajničar (m/ž), za pe postojna|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-01077",
+    "sourceJobKey": "eurospin|prodajalec-blagajničar (m/ž), za pe ilirska bistrica|ilirska bistrica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-01097",
+    "sourceJobKey": "null|prodajalec drobne kmetijske mehanizacije - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-01111",
+    "sourceJobKey": "null|prodajalec - lucija - m/ž|piran, coastal-karst"
+  },
+  {
+    "jobId": "job-01112",
+    "sourceJobKey": "null|prodajalec sežana - m/ž|sežana, coastal-karst"
+  },
+  {
+    "jobId": "job-01115",
+    "sourceJobKey": "null|prodajalec v agromarketu - m/ž|sežana, coastal-karst"
+  },
+  {
+    "jobId": "job-01121",
+    "sourceJobKey": "slowatch|prodajalec/ka v portorožu/kopru|koper, coastal-karst"
+  },
+  {
+    "jobId": "job-01125",
+    "sourceJobKey": "null|prodajalec - litija - m/ž|litija, central sava"
+  },
+  {
+    "jobId": "job-01129",
+    "sourceJobKey": "danfoss|delo v proizvodnji - kamnik (m/ž)|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-01131",
+    "sourceJobKey": "zdravstveni dom ljubljana|e047050 psiholog - delo z osebami s psihično motnjo - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01133",
+    "sourceJobKey": "adecco|študentsko delo v laboratoriju (m/ž)|mengeš, central slovenia"
+  },
+  {
+    "jobId": "job-01134",
+    "sourceJobKey": "adecco|študentsko delo v laboratoriju (m7ž)|mengeš, central slovenia"
+  },
+  {
+    "jobId": "job-01135",
+    "sourceJobKey": "firstclass|marketing & ai asistent (m/ž) - študentsko delo|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01136",
+    "sourceJobKey": "yhd - drustvo za teorijo in kulturo hendikepa|osebni asistent hendikepirane osebe (delo v ljubljani) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01137",
+    "sourceJobKey": "mjob|študentsko delo v enoti podpora financiranju pravnih in fizičnih oseb|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01138",
+    "sourceJobKey": "itclass|marketing & ai asistent (m/ž) - študentsko delo|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01139",
+    "sourceJobKey": "e.leclerc|hostesa za delo na blagajni (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01140",
+    "sourceJobKey": "mjob|delo na bencinskem servisu|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01141",
+    "sourceJobKey": "mjob|delo na kmetijskem objektu|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01144",
+    "sourceJobKey": "onkološki inštitut ljubljana|farmacevt specialist - delo v posebnih pogojih, e028002, bolnišnična lekarna, m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01145",
+    "sourceJobKey": "adecco|študentsko delo - podpora kliničnim proizvodnim operacijam (m/ž)|mengeš, central slovenia"
+  },
+  {
+    "jobId": "job-01146",
+    "sourceJobKey": "orbico|asistent v prodaji (študentsko delo)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01147",
+    "sourceJobKey": "onkološki inštitut ljubljana|farmacevt - delo v posebnih pogojih e027001, bolnišnična lekarna, m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01148",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|zdr. administrativni sodelavec - delo v urgentni dejavnosti (e045022), kirurška klinika, urgentni kirurški blok - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01149",
+    "sourceJobKey": "skofijska karitas ljubljana|762 socialno delo in svetovanje - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01150",
+    "sourceJobKey": "onkološki inštitut ljubljana|farmacevt - delo v posebnih pogojih (e027001) za potrebe onkološkega inštituta, bolnišnična lekarna - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01151",
+    "sourceJobKey": "onkološki inštitut ljubljana|farmacevt specialist - delo v posebnih pogojih (e028002) za potrebe onkološkega inštituta, bolnišnična lekarna - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01152",
+    "sourceJobKey": "whc|delo v proizvodnji (m/ž)|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-01153",
+    "sourceJobKey": "whc d.o.o.|delo v proizvodnji (m/ž)|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-01155",
+    "sourceJobKey": "mjob|delo v klicnem centru|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01156",
+    "sourceJobKey": "zdravstveni dom ljubljana|e047081 logoped i - delo z osebami s psihično motnjo m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01157",
+    "sourceJobKey": "mjob|delo v kuhinji|upper carniola - medvode, central slovenia"
+  },
+  {
+    "jobId": "job-01159",
+    "sourceJobKey": "onkološki inštitut ljubljana|srednja medicinska sestra - delo s citostatiki, e035003, za potrebe oddelka zn sektorja internistične onkologije, m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01160",
+    "sourceJobKey": "null|uvajanje v delo v. stopnja - teoretični del - za opravljanje dela na delovnem mestu tehnik vzdrževanja v železniški operativi tk - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01161",
+    "sourceJobKey": "null|uvajanje v delo v. stopnja - teoretični del (m/ž) - za opravljanje dela na delovnem mestu tehnik vzdrževanja v železniški operativi sv (signalna varnost; elektronski in relejni krmilni sistemi) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01162",
+    "sourceJobKey": "mjob|študentsko delo v enoti it digitalna implementacija|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01163",
+    "sourceJobKey": "rls|pomoč v proizvodnji (m/ž) študentsko delo|komenda, central slovenia"
+  },
+  {
+    "jobId": "job-01164",
+    "sourceJobKey": "medicinska fakulteta|raziskovalec za delo v okviru projekta esfri elixir na inštitutu za biokemijo in molekularno genetiko na ul medicinski fakulteti|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01165",
+    "sourceJobKey": "mjob|študentsko delo v poslovni enoti ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01166",
+    "sourceJobKey": "onkološki inštitut ljubljana|srednja medicinska sestra - delo s citostatiki, e035003, oddelek zn sektorja internistične onkologije - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01167",
+    "sourceJobKey": "mjob|delo na recepciji|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01168",
+    "sourceJobKey": "mjob|delo na blagajni - vrhovci|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01169",
+    "sourceJobKey": "medicinska fakulteta|raziskovalec za delo v okviru projekta esfri elixir na inštitutu za biokemijo in molekularno genetiko na ul medicinski fakulteti - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01170",
+    "sourceJobKey": "mjob|delo na blagajni|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01171",
+    "sourceJobKey": "mjob|delo na bencinskem servisu|upper carniola - medvode, central slovenia"
+  },
+  {
+    "jobId": "job-01172",
+    "sourceJobKey": "ps invest d.o.o|delo v strežbi / delo v šanku (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01175",
+    "sourceJobKey": "prva osebna zavarovalnica, d. d.|strokovnjak za delo in razvoj na področju kontrolinga (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01177",
+    "sourceJobKey": "mimovrste|skladiščni delavec - začasno in občasno delo|komenda, central slovenia"
+  },
+  {
+    "jobId": "job-01178",
+    "sourceJobKey": "adecco|študensko delo v logistiki (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01179",
+    "sourceJobKey": "adecco|delo v proizvodnji pekovskih izdelkov (m/ž)|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-01180",
+    "sourceJobKey": "mjob|delo v pralnici|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01181",
+    "sourceJobKey": "atama|delo v proizvodnji (m/ž) - grosuplje|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-01182",
+    "sourceJobKey": "mjob|delo na blagajni|ljubljana, central slovenia - medvode, central slovenia"
+  },
+  {
+    "jobId": "job-01183",
+    "sourceJobKey": "ljubljana international school, vrtec in sola|vzgojiteljica predšolskih otrok - delo v jaslih - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01184",
+    "sourceJobKey": "mjob|študentsko delo v enoti zaposleni in korporativna kultura|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01185",
+    "sourceJobKey": "zdravstveni dom ljubljana|e047081 logoped - delo z osebami s psihično motnjo - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01186",
+    "sourceJobKey": "mjob|delo v laboratoriju|lukovica, central slovenia - ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01188",
+    "sourceJobKey": "dom upokojencev vrhnika|srednja medicinska sestra i za delo s stanovalci z demenco - m/ž|vrhnika, central slovenia"
+  },
+  {
+    "jobId": "job-01189",
+    "sourceJobKey": "mjob|administrativno delo|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01190",
+    "sourceJobKey": "mjob|delo na stojnici|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01191",
+    "sourceJobKey": "agencija agado|delo v proizvodnji (m/ž)|moravče, central slovenia"
+  },
+  {
+    "jobId": "job-01192",
+    "sourceJobKey": "mjob|delo v skladišču|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01193",
+    "sourceJobKey": "null|natakar - delo v strežbi - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01194",
+    "sourceJobKey": "mjob|delo v kuhinji|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01195",
+    "sourceJobKey": "mjob|delo v turizmu|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01196",
+    "sourceJobKey": "null|sodelavec za delo v klicnem centru (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01197",
+    "sourceJobKey": "mjob|delo v proizvodnji|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01198",
+    "sourceJobKey": "plutal 2000 industrija zapiralne embalaze, d.o.o.|tiskar - priučitev za delo tiskarja - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01199",
+    "sourceJobKey": "mjob|delo na cnc krivilnem stroju|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01200",
+    "sourceJobKey": "mjob|delo na cnc prebijalnem stroju|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01201",
+    "sourceJobKey": "mjob|delo v strežbi in na recepciji|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01202",
+    "sourceJobKey": "agencija agado|eu projektni vodja (m/ž) - delo na daljavo|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01203",
+    "sourceJobKey": "mjob|razvoz in delo v skladišču|ljubljana, central slovenia - logatec, central slovenia"
+  },
+  {
+    "jobId": "job-01204",
+    "sourceJobKey": "mjob|delo z fotoavtomatom|ljubljana, central slovenia - medvode, central slovenia"
+  },
+  {
+    "jobId": "job-01205",
+    "sourceJobKey": "mjob|delo z fotoavtomatom|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01206",
+    "sourceJobKey": "mjob|delo z fotoavtomatom|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-01207",
+    "sourceJobKey": "mjob|delo v brivnici|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01208",
+    "sourceJobKey": "mjob|delo v strežbi|kamnik, central slovenia - ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01209",
+    "sourceJobKey": "univerza v ljubljani|fmf, strokovni delavec v visokošolski dejavnosti vii/2-ii, služba za raziskovalno delo in projektni pisarni|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01210",
+    "sourceJobKey": "mjob|delo v trgovini|ljubljana, central slovenia - domžale, central slovenia"
+  },
+  {
+    "jobId": "job-01211",
+    "sourceJobKey": "mjob|delo v zdravstvu (ko za urologijo ter hospitalni oddelek)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01212",
+    "sourceJobKey": "univerza v ljubljani, teoloska fakulteta|visokošolski učitelj - docent (d019008), delo na katedri za osnovno bogoslovje in dialog - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01213",
+    "sourceJobKey": "mjob|delo na blagajni|ivančna gorica, central slovenia"
+  },
+  {
+    "jobId": "job-01214",
+    "sourceJobKey": "mjob|delo na bencinskem servisu|ljubljana, central slovenia - domžale, central slovenia"
+  },
+  {
+    "jobId": "job-01215",
+    "sourceJobKey": "mjob|delo na bencinskem servisu|komenda, central slovenia - ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01216",
+    "sourceJobKey": "mjob|delo v proizvodnji|mengeš, central slovenia - ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01217",
+    "sourceJobKey": "mjob|hostesno delo|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01218",
+    "sourceJobKey": "mjob|delo v proizvodnji|ljubljana, central slovenia - ivančna gorica, central slovenia"
+  },
+  {
+    "jobId": "job-01219",
+    "sourceJobKey": "mjob|delo v muzeju|kamnik, central slovenia - ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01220",
+    "sourceJobKey": "mjob|delo na blagajni|kamnik, central slovenia - ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01221",
+    "sourceJobKey": "mjob|delo v avtopralnici|ljubljana, central slovenia - grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-01222",
+    "sourceJobKey": "decathlon hr/si/sr|prijavi se za delo v decathlon slovenija|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01223",
+    "sourceJobKey": "mjob|delo v strežbi|velike lašče, central slovenia"
+  },
+  {
+    "jobId": "job-01225",
+    "sourceJobKey": "bolnišnica za otroke šentvid pri stični|logoped - delo z osebami s psihično motnjo - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-01226",
+    "sourceJobKey": "mjob|delo v zdravstvu|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01227",
+    "sourceJobKey": "mjob|delo v lokalu|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01228",
+    "sourceJobKey": "mjob|delo v strežbi|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-01229",
+    "sourceJobKey": "mjob|projektno delo|ljubljana, central slovenia - grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-01230",
+    "sourceJobKey": "mjob|delo v strežbi|ivančna gorica, central slovenia"
+  },
+  {
+    "jobId": "job-01231",
+    "sourceJobKey": "mjob|delo v laboratoriju|logatec, central slovenia - ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01232",
+    "sourceJobKey": "troja tim d.o.o.|delo v klicnem centru|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01233",
+    "sourceJobKey": "mjob|študentsko delo v enoti skrbniške storitve|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01234",
+    "sourceJobKey": "mjob|delo na področju kliničnih raziskav v strateškem marketingu|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01235",
+    "sourceJobKey": "null|delo v proizvodnji - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01236",
+    "sourceJobKey": "adecco|vodja prodajnih enot in prodaje (m/ž) - terensko delo|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01237",
+    "sourceJobKey": "mjob|delo na področju robotike|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01238",
+    "sourceJobKey": "center za socialno delo ljubljana|koordinator obravnave v skupnosti (socialni delavec) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01239",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd i - enota ljubljana moste - polje - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01240",
+    "sourceJobKey": "center za socialno delo ljubljana|koordinator invalidskega varstva - (socialni delavec) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01241",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd i - enota vič-rudnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01242",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd - pdi - enota bežigrad - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01243",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd i - enota ljubljana šiška - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01244",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd iii - pripravnik (sistem pripravništva) - enota vič-rudnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01245",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd ii - enota vič-rudnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01246",
+    "sourceJobKey": "center za socialno delo osrednja slovenija - vzhod|strokovni delavec na csd iii - pripravnik - m/ž|domžale, central slovenia"
+  },
+  {
+    "jobId": "job-01247",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd ii - enota ljubljana šiška - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01248",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd iii - pripravnik - enota ljubljana moste-polje - sistem pripravništva - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01249",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd ii - enota ljubljana moste-polje - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01250",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd ii - pripravnik - enota ljubljana moste -polje - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01251",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd i - enota ljubljana moste polje - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01252",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec v programu - skupnostni programi za mlade - pripravnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01253",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec v programu - skupnostni programi za mlade - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01254",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd i - služba za podporo strokovnim delavcem pri delu z družino - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01255",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd ii - pripravnik - enota ljubljana šiška - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01256",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd ii - enota ljubljana bežigrad - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01257",
+    "sourceJobKey": "center za socialno delo ljubljana|svetovalec za dolgotrajno oskrbo - služba za dolgotrajno oskrbo - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01260",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd i - enota ljubljana bežigrad - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01261",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd i - enota grosuplje - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-01262",
+    "sourceJobKey": "center za socialno delo ljubljana|strokovni delavec na csd iii - pripravnik (sistem pripravništva) - enota ljubljana bežigrad - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01263",
+    "sourceJobKey": "null|osebni asistent - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01270",
+    "sourceJobKey": "okrožno sodišče v ljubljani|sodelavec za sodne zadeve v za administrativne zadeve (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01273",
+    "sourceJobKey": "zdravstveni dom ljubljana|e097170 strokovni sodelavec vii/2 (i) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01274",
+    "sourceJobKey": "obi|sodelavec v svetovalnem centru (vsi spoli)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-01281",
+    "sourceJobKey": "css škofja loka|strežnica - socialno varstvo (m/ž) za delo v čajni kuhinji|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-01282",
+    "sourceJobKey": "mjob|študentsko delo v poslovni enoti kranj|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-01283",
+    "sourceJobKey": "mjob|delo na blagajni|tržič, upper carniola"
+  },
+  {
+    "jobId": "job-01284",
+    "sourceJobKey": "mjob|delo v zabaviščnem parku|upper carniola"
+  },
+  {
+    "jobId": "job-01286",
+    "sourceJobKey": "adecco|delo v proizvodnji pekovskih izdelkov (m/ž)|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-01287",
+    "sourceJobKey": "mjob|delo na recepciji|lesce, upper carniola"
+  },
+  {
+    "jobId": "job-01288",
+    "sourceJobKey": "mjob|delo v kuhinji|kranjska gora, upper carniola"
+  },
+  {
+    "jobId": "job-01289",
+    "sourceJobKey": "mjob|delo v turizmu|upper carniola"
+  },
+  {
+    "jobId": "job-01290",
+    "sourceJobKey": "mjob|čiščenje - delo na bazenu|upper carniola"
+  },
+  {
+    "jobId": "job-01291",
+    "sourceJobKey": "null|farmacevtski tehnik - delo v posebnih pogojih dela - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-01292",
+    "sourceJobKey": "mjob|delo v prodaji|jesenice, upper carniola"
+  },
+  {
+    "jobId": "job-01293",
+    "sourceJobKey": "mjob|delo v proizvodnji|upper carniola"
+  },
+  {
+    "jobId": "job-01294",
+    "sourceJobKey": "mjob|delo v trafiki|upper carniola"
+  },
+  {
+    "jobId": "job-01295",
+    "sourceJobKey": "mjob|delo v skladišču|upper carniola"
+  },
+  {
+    "jobId": "job-01296",
+    "sourceJobKey": "mjob|delo na bencinskem servisu|radovljica, upper carniola"
+  },
+  {
+    "jobId": "job-01297",
+    "sourceJobKey": "agencija agado|delo v proizvodnji - livar (m/ž) - jesenice|jesenice, upper carniola"
+  },
+  {
+    "jobId": "job-01299",
+    "sourceJobKey": "mjob|delo v avtopralnici|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-01300",
+    "sourceJobKey": "mjob|delo v skladišču|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-01301",
+    "sourceJobKey": "mjob|delo v skladišču - distribucijski center naklo|naklo, upper carniola"
+  },
+  {
+    "jobId": "job-01302",
+    "sourceJobKey": "mjob|delo v proizvodnji|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-01303",
+    "sourceJobKey": "mjob|delo na bencinskem servisu|upper carniola"
+  },
+  {
+    "jobId": "job-01304",
+    "sourceJobKey": "mjob|dinamično delo v gostilni rekar - pekarna|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-01305",
+    "sourceJobKey": "mjob|delo v proizvodnji|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-01306",
+    "sourceJobKey": "mjob|delo na bencinskem servisu|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-01307",
+    "sourceJobKey": "mjob|delo na cnc stroju|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-01308",
+    "sourceJobKey": "mjob|delo na recepciji|upper carniola"
+  },
+  {
+    "jobId": "job-01309",
+    "sourceJobKey": "mjob|delo na recepciji|kranjska gora, upper carniola"
+  },
+  {
+    "jobId": "job-01311",
+    "sourceJobKey": "egp|vzdrževalec - enoizmensko delo (ž/m)|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-01312",
+    "sourceJobKey": "mjob|delo v skladišču|naklo, upper carniola"
+  },
+  {
+    "jobId": "job-01315",
+    "sourceJobKey": "center za socialno delo gorenjska|strokovni delavec na csd iii-pripravnik - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-01316",
+    "sourceJobKey": "center za socialno delo gorenjska|strokovni sodelavec na csd - materialne pravice ii - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-01317",
+    "sourceJobKey": "center za socialno delo gorenjska|strokovni delavec na csd iii-pripravnik - m/ž|radovljica, upper carniola"
+  },
+  {
+    "jobId": "job-01318",
+    "sourceJobKey": "center za socialno delo gorenjska|strokovni delavec na csd iii-pripravnik - m/ž|tržič, upper carniola"
+  },
+  {
+    "jobId": "job-01319",
+    "sourceJobKey": "center za socialno delo gorenjska|strokovni delavec na csd ii - m/ž|tržič, upper carniola"
+  },
+  {
+    "jobId": "job-01321",
+    "sourceJobKey": "null|avtomehanik - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-01328",
+    "sourceJobKey": "null|organizator prevozov v mednarodnem prometu / disponent - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-01340",
+    "sourceJobKey": "null|radiološki inženir i - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-01350",
+    "sourceJobKey": "null|svetovalec direktorja - m/ž|radovljica, upper carniola"
+  },
+  {
+    "jobId": "job-01358",
+    "sourceJobKey": "merkur|prodajni svetovalec (m/ž) tc merkur jesenice|jesenice, upper carniola"
+  },
+  {
+    "jobId": "job-01375",
+    "sourceJobKey": "null|knjigovodja - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-01424",
+    "sourceJobKey": "osnovna sola cvetka golarja|učitelj razrednega pouka - m/ž|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-01426",
+    "sourceJobKey": "null|varuhinja institucionalno varstvo - m/ž|radovljica, upper carniola"
+  },
+  {
+    "jobId": "job-01428",
+    "sourceJobKey": "null|učitelj razrednega pouka - m/ž|radovljica, upper carniola"
+  },
+  {
+    "jobId": "job-01439",
+    "sourceJobKey": "null|delo v proizvodnji za strojem - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-01440",
+    "sourceJobKey": "mjob|delo na blagajni: market breg ptuj|maribor, drava - ptuj, drava"
+  },
+  {
+    "jobId": "job-01441",
+    "sourceJobKey": "whc|delo v klicnem centru (m/ž)|maribor, drava"
+  },
+  {
+    "jobId": "job-01442",
+    "sourceJobKey": "mjob|delo na smetarskem vozilu|maribor, drava"
+  },
+  {
+    "jobId": "job-01444",
+    "sourceJobKey": "mjob|delo in pomoč v kuhinji|maribor, drava"
+  },
+  {
+    "jobId": "job-01445",
+    "sourceJobKey": "mjob|delo v mcdonald's studenci|maribor, drava"
+  },
+  {
+    "jobId": "job-01446",
+    "sourceJobKey": "mjob|delo v marketingu|maribor, drava"
+  },
+  {
+    "jobId": "job-01447",
+    "sourceJobKey": "mjob|delo v strežbi|maribor, drava"
+  },
+  {
+    "jobId": "job-01448",
+    "sourceJobKey": "mjob|delo v skladišču vulkanizerske delavnice|maribor, drava - ptuj, drava"
+  },
+  {
+    "jobId": "job-01449",
+    "sourceJobKey": "mjob|delo s konji|maribor, drava"
+  },
+  {
+    "jobId": "job-01450",
+    "sourceJobKey": "mjob|delo v kavarni|maribor, drava"
+  },
+  {
+    "jobId": "job-01452",
+    "sourceJobKey": "mjob|delo v skladišču|maribor, drava"
+  },
+  {
+    "jobId": "job-01453",
+    "sourceJobKey": "jagros|pek - mešalec - za delo v pekarni ptuj|ptuj, drava"
+  },
+  {
+    "jobId": "job-01454",
+    "sourceJobKey": "mjob|delo v casinoju|maribor, drava - šentilj, drava"
+  },
+  {
+    "jobId": "job-01462",
+    "sourceJobKey": "center za socialno delo maribor|strokovni delavec na csd i, v enoti maribor tezno - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-01464",
+    "sourceJobKey": "center za socialno delo maribor|strokovni delavec na csd iii - pripravnik, v enoti maribor tezno - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-01465",
+    "sourceJobKey": "center za socialno delo spodnje podravje|strokovni delavec na csd ii - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-01466",
+    "sourceJobKey": "center za socialno delo spodnje podravje|strokovni delavec na csd iii-pripravnik - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-01478",
+    "sourceJobKey": "null|monter ogrevalnih naprav na lesno biomaso - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-01479",
+    "sourceJobKey": "null|skupinski habilitator v svz - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-01482",
+    "sourceJobKey": "null|pomoč prodaji (veleprodaja na mednarodnih trgih) - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-01489",
+    "sourceJobKey": "null|pomožni gradbeni delavec - m/ž|lenart, drava"
+  },
+  {
+    "jobId": "job-01497",
+    "sourceJobKey": "null|strokovni vodja za osebno asistenco - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-01502",
+    "sourceJobKey": "null|sestavljalec testne opreme - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-01507",
+    "sourceJobKey": "null|višji referent - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-01509",
+    "sourceJobKey": "null|krovec / klepar - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-01515",
+    "sourceJobKey": "null|čistilec prostorov - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-01517",
+    "sourceJobKey": "null|direktor javnega zavoda svetovalni center za otroke, mladostnike in starše istre - m/ž|starše, drava"
+  },
+  {
+    "jobId": "job-01529",
+    "sourceJobKey": "null|osebni asistent - m/ž|lenart, drava"
+  },
+  {
+    "jobId": "job-01533",
+    "sourceJobKey": "null|vzgojitelj predšolskih otrok - m/ž|lenart, drava"
+  },
+  {
+    "jobId": "job-01540",
+    "sourceJobKey": "null|obračunski referent - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-01542",
+    "sourceJobKey": "null|direktor - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-01562",
+    "sourceJobKey": "null|avtomehanik/avtoserviser - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-01570",
+    "sourceJobKey": "null|referent izterjave na terenu - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-01571",
+    "sourceJobKey": "null|računovodja - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-01572",
+    "sourceJobKey": "null|električar - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-01584",
+    "sourceJobKey": "null|osebni asistent - m/ž|ormož, drava"
+  },
+  {
+    "jobId": "job-01585",
+    "sourceJobKey": "null|strokovni sodelavec/ka za kadre - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-01587",
+    "sourceJobKey": "osnovna šola dr. ljudevita pivka|svetovalni delavec vii/2 - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-01588",
+    "sourceJobKey": "agrolit|pomočnik poslovodja m/ž, maribor|maribor, drava"
+  },
+  {
+    "jobId": "job-01589",
+    "sourceJobKey": "null|novinar za tisk in/ali spletni novinar (m/ž) honorarno ali študentsko delo|celje, savinja"
+  },
+  {
+    "jobId": "job-01592",
+    "sourceJobKey": "null|področni svetovalec ii. na programu terensko delo z odvisniki od prepovedanih drog - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-01593",
+    "sourceJobKey": "null|uvajanje v delo v. stopnja - teoretični del (m/ž) - za opravljanje dela na delovnem mestu tehnik vzdrževanja v železniški operativi sv (signalna varnost; elektronski in relejni krmilni sistemi) - m/ž|laško, savinja"
+  },
+  {
+    "jobId": "job-01594",
+    "sourceJobKey": "null|uvajanje v delo v.stopnja - teoretični del (m/ž) - za opravljanje dela na delovnem mestu tehnik vzdrževanja v železniški operativi tk - m/ž|laško, savinja"
+  },
+  {
+    "jobId": "job-01595",
+    "sourceJobKey": "mjob|delo v točilnici|ljubno, savinja"
+  },
+  {
+    "jobId": "job-01596",
+    "sourceJobKey": "null|delo v proizvodnji obnovljenih pnevmatik - m/ž|šentjur pri celju, savinja"
+  },
+  {
+    "jobId": "job-01598",
+    "sourceJobKey": "mjob|administrativno delo|savinja"
+  },
+  {
+    "jobId": "job-01599",
+    "sourceJobKey": "gorenje|višji specialist za varno in zdravo delo|velenje, savinja"
+  },
+  {
+    "jobId": "job-01600",
+    "sourceJobKey": "mjob|delo na blagajni: market pesje velenje|velenje, savinja"
+  },
+  {
+    "jobId": "job-01601",
+    "sourceJobKey": "mjob|delo v kavarni|celje, savinja"
+  },
+  {
+    "jobId": "job-01602",
+    "sourceJobKey": "mjob|delo na stojnici|celje, savinja"
+  },
+  {
+    "jobId": "job-01603",
+    "sourceJobKey": "mjob|delo v skladišču|celje, savinja"
+  },
+  {
+    "jobId": "job-01604",
+    "sourceJobKey": "mjob|delo v proizvodnji|prebold, savinja"
+  },
+  {
+    "jobId": "job-01605",
+    "sourceJobKey": "mjob|delo v trgovini|celje, savinja"
+  },
+  {
+    "jobId": "job-01606",
+    "sourceJobKey": "mjob|delo v strežbi|žalec, savinja"
+  },
+  {
+    "jobId": "job-01607",
+    "sourceJobKey": "mjob|delo v proizvodnji|velenje, savinja"
+  },
+  {
+    "jobId": "job-01608",
+    "sourceJobKey": "mjob|delo v strežbi|vojnik, savinja"
+  },
+  {
+    "jobId": "job-01609",
+    "sourceJobKey": "mjob|delo na loteriji|celje, savinja"
+  },
+  {
+    "jobId": "job-01611",
+    "sourceJobKey": "mjob|delo v skladišču|prebold, savinja"
+  },
+  {
+    "jobId": "job-01612",
+    "sourceJobKey": "mjob|delo v marketingu|velenje, savinja"
+  },
+  {
+    "jobId": "job-01614",
+    "sourceJobKey": "center za socialno delo celje|koordinator invalidskega varstva - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-01615",
+    "sourceJobKey": "center za usposabljanje, delo in varstvo dobrna|varuhinja institucionalno varstvo - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-01622",
+    "sourceJobKey": "null|strojnik - žerjavist (m/ž)|velenje, savinja"
+  },
+  {
+    "jobId": "job-01629",
+    "sourceJobKey": "kariera|samostojni računovodja m/ž/d|savinja"
+  },
+  {
+    "jobId": "job-01647",
+    "sourceJobKey": "null|tiskar ii - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-01672",
+    "sourceJobKey": "null|osebni asistent - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-01681",
+    "sourceJobKey": "null|strojevodja (dodelavni stroj) - m/ž|laško, savinja"
+  },
+  {
+    "jobId": "job-01684",
+    "sourceJobKey": "null|strokovni sodelavec vii/2 - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-01693",
+    "sourceJobKey": "null|mahanik tovornih, preklopnih vozil (m/ž) - m/ž|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-01695",
+    "sourceJobKey": "null|monter - m/ž|laško, savinja"
+  },
+  {
+    "jobId": "job-01698",
+    "sourceJobKey": "null|osebni asistent - m/ž|mozirje, savinja"
+  },
+  {
+    "jobId": "job-01710",
+    "sourceJobKey": "null|receptorka / trgovka - m/ž|šmarje pri jelšah, savinja"
+  },
+  {
+    "jobId": "job-01711",
+    "sourceJobKey": "null|psiholog - m/ž|mozirje, savinja"
+  },
+  {
+    "jobId": "job-01713",
+    "sourceJobKey": "null|računovodja - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-01724",
+    "sourceJobKey": "null|čistilec - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-01725",
+    "sourceJobKey": "null|docent - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-01727",
+    "sourceJobKey": "bds sport sl d.o.o.|sodelavec v prodaji m/ž, buzz celje|celje, savinja"
+  },
+  {
+    "jobId": "job-01734",
+    "sourceJobKey": "null|strokovni sodelavec na področju montaže - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-01738",
+    "sourceJobKey": "null|referent za logistiko in fakturiranje - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-01747",
+    "sourceJobKey": "null|uvajanje v delo v.stopnja - teoretični del (m/ž) - za opravljanje dela na delovnem mestu tehnik vzdrževanja v železniški operativi tk (7 izvajalcev) - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01749",
+    "sourceJobKey": "mjob|delo v restavraciji s hitro prehrano|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01751",
+    "sourceJobKey": "whc|delo na robotizirani liniji (m/ž)|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01752",
+    "sourceJobKey": "null|uvajanje v delo v. stopnja - teoretični del - za opravljanje dela na delovnem mestu tehnik vzdrževanja v železniški operativi svp - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01753",
+    "sourceJobKey": "zdravstveni dom novo mesto|psiholog (delo v cdzo) - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01754",
+    "sourceJobKey": "zdravstveni dom novo mesto|socialni delavec (delo v centru za duševno zdravje otrok in mladostnikov) - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01755",
+    "sourceJobKey": "zdravstveni dom novo mesto|psiholog (delo v spo) - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01756",
+    "sourceJobKey": "mjob|delo v proizvodnji|šentjernej, southeast slovenia"
+  },
+  {
+    "jobId": "job-01757",
+    "sourceJobKey": "mjob|delo v zdravstveni negi|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01758",
+    "sourceJobKey": "mjob|delo v strežbi|šentjernej, southeast slovenia"
+  },
+  {
+    "jobId": "job-01759",
+    "sourceJobKey": "mjob|delo v strežbi|kočevje, southeast slovenia"
+  },
+  {
+    "jobId": "job-01760",
+    "sourceJobKey": "mjob|delo v strežbi|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-01761",
+    "sourceJobKey": "revoz d.d.|delo v proizvodnji (m/ž)|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01762",
+    "sourceJobKey": "whc d.o.o.|delo na robotizirani liniji (m/ž)|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01763",
+    "sourceJobKey": "mjob|delo v strežbi|šmarješke toplice, southeast slovenia"
+  },
+  {
+    "jobId": "job-01764",
+    "sourceJobKey": "mjob|delo v proizvodnji|žužemberk, southeast slovenia"
+  },
+  {
+    "jobId": "job-01765",
+    "sourceJobKey": "mjob|delo na recepciji|metlika, southeast slovenia"
+  },
+  {
+    "jobId": "job-01766",
+    "sourceJobKey": "mjob|delo na blagajni|metlika, southeast slovenia"
+  },
+  {
+    "jobId": "job-01767",
+    "sourceJobKey": "mjob|delo v strežbi|črnomelj, southeast slovenia"
+  },
+  {
+    "jobId": "job-01768",
+    "sourceJobKey": "mjob|delo v proizvodnji|črnomelj, southeast slovenia"
+  },
+  {
+    "jobId": "job-01769",
+    "sourceJobKey": "krka|študentsko delo v proizvodnji zdravil|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01770",
+    "sourceJobKey": "mjob|delo v trafiki|ribnica, southeast slovenia"
+  },
+  {
+    "jobId": "job-01771",
+    "sourceJobKey": "mjob|delo na blagajni|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01772",
+    "sourceJobKey": "mjob|delo v strežbi|žužemberk, southeast slovenia"
+  },
+  {
+    "jobId": "job-01773",
+    "sourceJobKey": "mjob|delo na bencinskem servisu|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-01774",
+    "sourceJobKey": "mjob|delo v elektroniki|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01775",
+    "sourceJobKey": "mjob|delo v kontroli|šentrupert, southeast slovenia"
+  },
+  {
+    "jobId": "job-01776",
+    "sourceJobKey": "mjob|delo na blagajni|kočevje, southeast slovenia"
+  },
+  {
+    "jobId": "job-01778",
+    "sourceJobKey": "mjob|delo v proizvodnji kovinskih izdelkov|črnomelj, southeast slovenia"
+  },
+  {
+    "jobId": "job-01779",
+    "sourceJobKey": "mjob|delo na bencinskem servisu|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01780",
+    "sourceJobKey": "mjob|delo v proizvodnji|mirna peč, southeast slovenia"
+  },
+  {
+    "jobId": "job-01781",
+    "sourceJobKey": "center za socialno delo dolenjska in bela krajina|strokovni delavec na csd iii - pripravnik - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01782",
+    "sourceJobKey": "center za socialno delo dolenjska in bela krajina|strokovni delavec na csd ii - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01786",
+    "sourceJobKey": "null|samostojni nabavnik za podizvajalce in kooperante (m/ž)|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01790",
+    "sourceJobKey": "null|prodajni svetovalec, metlika - m/ž|metlika, southeast slovenia"
+  },
+  {
+    "jobId": "job-01796",
+    "sourceJobKey": "null|strojnik na področju vzdrževanja cest (m/ž)|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-01798",
+    "sourceJobKey": "null|vodja gradbišč na področju vzdrževanja cest (m/ž)|črnomelj, southeast slovenia"
+  },
+  {
+    "jobId": "job-01802",
+    "sourceJobKey": "null|asistent z doktoratom, h019001, m/ž - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01806",
+    "sourceJobKey": "null|voznik v oddelku vgp (m/ž)|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01807",
+    "sourceJobKey": "null|vodja gradbišč na področju vzdrževanja cest (m/ž)|kočevje, southeast slovenia"
+  },
+  {
+    "jobId": "job-01808",
+    "sourceJobKey": "null|delavec na prometni signalizaciji - pleskar (m/ž)|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01815",
+    "sourceJobKey": "null|dipl. medicinska sestra/dipl. zdravstvenik - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01817",
+    "sourceJobKey": "null|pomožni gradbeni delavec - m/ž|črnomelj, southeast slovenia"
+  },
+  {
+    "jobId": "job-01824",
+    "sourceJobKey": "null|zobozdravnik brez specializacije z licenco - m/ž|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-01825",
+    "sourceJobKey": "null|zobna asistentka / zobni asistent - m/ž|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-01846",
+    "sourceJobKey": "null|voznik tovornega vozila v mednarodnem cestnem prometu - ponjava m/ž - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01847",
+    "sourceJobKey": "null|voznik tovornega vozila v mednarodnem cestnem prometu, avtotransporter - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01860",
+    "sourceJobKey": "null|pralec vozil (nm) - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01881",
+    "sourceJobKey": "ekonomska sola novo mesto|učitelj fizike - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01886",
+    "sourceJobKey": "ekonomska sola novo mesto|učitelj ekonomskih predmetov - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01889",
+    "sourceJobKey": "null|pomočnik monterja dvigal - m/ž|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-01894",
+    "sourceJobKey": "center solskih in obsolskih dejavnosti|inštruktor praktičnih vsebin - lokacija dela je na cšod, oe fara, kostel - m/ž|kočevje, southeast slovenia"
+  },
+  {
+    "jobId": "job-01899",
+    "sourceJobKey": "ekonomska sola novo mesto|učitelj zgodovine / geografije / družboslovja - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-01901",
+    "sourceJobKey": "natures ways|delo na terenu|bovec, gorizia"
+  },
+  {
+    "jobId": "job-01908",
+    "sourceJobKey": "zavod republike slovenije za zaposlovanje|samostojni svetovalec i, območna služba nova gorica, urad za delo nova gorica, ajdovščina, tolmin, idrija - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-01909",
+    "sourceJobKey": "mjob|delo na blagajni restavracije|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-01910",
+    "sourceJobKey": "mjob|delo na terenu|bovec, gorizia"
+  },
+  {
+    "jobId": "job-01911",
+    "sourceJobKey": "mjob|delo v recepciji/pisarni|kobarid, gorizia"
+  },
+  {
+    "jobId": "job-01912",
+    "sourceJobKey": "mjob|delo v kuhinji|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-01913",
+    "sourceJobKey": "mjob|delo informatorja_ke|idrija, gorizia"
+  },
+  {
+    "jobId": "job-01914",
+    "sourceJobKey": "mjob|delo v arhitekturnem biroju|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-01915",
+    "sourceJobKey": "mjob|administrativna dela, delo s strankami, blagajniško delo|kobarid, gorizia"
+  },
+  {
+    "jobId": "job-01916",
+    "sourceJobKey": "mjob|samostojno delo v kuhinji|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-01917",
+    "sourceJobKey": "mjob|delo v trgovini in strežbi|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-01918",
+    "sourceJobKey": "mjob|delo na blagajni|idrija, gorizia"
+  },
+  {
+    "jobId": "job-01919",
+    "sourceJobKey": "mjob|delo v strežbi|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-01920",
+    "sourceJobKey": "mjob|samostojno delo v gostinstvu|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-01921",
+    "sourceJobKey": "mjob|delo v vrtcu|idrija, gorizia"
+  },
+  {
+    "jobId": "job-01922",
+    "sourceJobKey": "mjob|delo v kuhinji - fabrika|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-01923",
+    "sourceJobKey": "mjob|delo na bencinskem servisu|ajdovščina, gorizia"
+  },
+  {
+    "jobId": "job-01924",
+    "sourceJobKey": "mjob|delo v skladišču|šempeter-vrtojba, gorizia"
+  },
+  {
+    "jobId": "job-01925",
+    "sourceJobKey": "kolektor|študentsko delo v proizvodnji|idrija, gorizia"
+  },
+  {
+    "jobId": "job-01936",
+    "sourceJobKey": "null|pomocnik v kuhinji - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-01943",
+    "sourceJobKey": "null|zdravnik specialist ppd3, zobozdravnik specialist otroškega in preventivnega zobozdravstva ppd3, e018021 - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-01956",
+    "sourceJobKey": "null|samostojni strokovni delavec - m/ž|idrija, gorizia"
+  },
+  {
+    "jobId": "job-01964",
+    "sourceJobKey": "null|mig/mag-varilec tig-varilec - m/ž|ajdovščina, gorizia"
+  },
+  {
+    "jobId": "job-01974",
+    "sourceJobKey": "null|kuhinjski pomočnik - m/ž|ajdovščina, gorizia"
+  },
+  {
+    "jobId": "job-01986",
+    "sourceJobKey": "null|operater brezpilotnih letal - m/ž|ajdovščina, gorizia"
+  },
+  {
+    "jobId": "job-01987",
+    "sourceJobKey": "null|priprava zajtrkov - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-01998",
+    "sourceJobKey": "osnovna sola lucijana bratkovica bratusa rence|učitelj slovenskega jezika ali razrednega pouka - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-02012",
+    "sourceJobKey": "null|strugar - m/ž|ajdovščina, gorizia"
+  },
+  {
+    "jobId": "job-02026",
+    "sourceJobKey": "null|voznik dostavnega vozila - kombi - m/ž|idrija, gorizia"
+  },
+  {
+    "jobId": "job-02027",
+    "sourceJobKey": "null|sodelavec za sodne zadeve v - namestnik vodje pisarne - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-02032",
+    "sourceJobKey": "null|kakovost in laboratorij - m/ž|ajdovščina, gorizia"
+  },
+  {
+    "jobId": "job-02034",
+    "sourceJobKey": "null|vodja kakovosti - m/ž|ajdovščina, gorizia"
+  },
+  {
+    "jobId": "job-02035",
+    "sourceJobKey": "pokrajinski arhiv v novi gorici|arhivist - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-02036",
+    "sourceJobKey": "dom starejših občanov ajdovščina|vzdrževalec perila iii v zsv šifra dm: f093028 - m/ž|ajdovščina, gorizia"
+  },
+  {
+    "jobId": "job-02044",
+    "sourceJobKey": "911 vrs, varovanje in storitve, d.o.o.|varnostnik - nova gorica - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-02048",
+    "sourceJobKey": "mjob|pomoč v trgovini|šempeter-vrtojba, gorizia"
+  },
+  {
+    "jobId": "job-02069",
+    "sourceJobKey": "univerzal proizvodno in trgovsko podjetje d.o.o.|strojnik za delo na strojih - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-02070",
+    "sourceJobKey": "null|delo v strežbi - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-02073",
+    "sourceJobKey": "mjob|delo na blagajni|brežice, lower sava"
+  },
+  {
+    "jobId": "job-02074",
+    "sourceJobKey": "mjob|delo v strežbi|sevnica, lower sava"
+  },
+  {
+    "jobId": "job-02080",
+    "sourceJobKey": "null|organizator kulturnih programov ii na oi brežice - g026009 - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-02083",
+    "sourceJobKey": "null|organizator kulturnih programov i na oi brežice - g025028 - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-02087",
+    "sourceJobKey": "null|organizator kulturnih programov iii na oi brežice - g027009 - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-02088",
+    "sourceJobKey": "null|elektrovzdrževalec na farmi prašičjereje - m/ž|krško, lower sava"
+  },
+  {
+    "jobId": "job-02094",
+    "sourceJobKey": "null|kurir-ka v krškem|krško, lower sava"
+  },
+  {
+    "jobId": "job-02098",
+    "sourceJobKey": "null|prodajni predstavnik, komercialist na terenu - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-02117",
+    "sourceJobKey": "null|delovodja - področje proizvodnje (m/ž)|krško, lower sava"
+  },
+  {
+    "jobId": "job-02121",
+    "sourceJobKey": "osnovna sola podbocje|učitelj glasbe - m/ž|krško, lower sava"
+  },
+  {
+    "jobId": "job-02129",
+    "sourceJobKey": "911 vrs, varovanje in storitve, d.o.o.|varnostnik - krško - m/ž|krško, lower sava"
+  },
+  {
+    "jobId": "job-02130",
+    "sourceJobKey": "null|psiholog - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-02131",
+    "sourceJobKey": "null|sezonski vodja kampa - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-02153",
+    "sourceJobKey": "posavc storitve, trgovina in posredovanje d.o.o.|vzdrževalec tirnih vozil - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-02155",
+    "sourceJobKey": "null|strojnik - žerjavist (m/ž)|krško, lower sava"
+  },
+  {
+    "jobId": "job-02157",
+    "sourceJobKey": "null|voznik avtodvigala (m/ž)|krško, lower sava"
+  },
+  {
+    "jobId": "job-02160",
+    "sourceJobKey": "null|kontrolor kakovosti - proizvodnja betona (m/ž)|krško, lower sava"
+  },
+  {
+    "jobId": "job-02161",
+    "sourceJobKey": "null|viličarist (m/ž)|krško, lower sava"
+  },
+  {
+    "jobId": "job-02190",
+    "sourceJobKey": "tips d.o.o.|elektro konstruktor - m/ž|krško, lower sava"
+  },
+  {
+    "jobId": "job-02191",
+    "sourceJobKey": "lagardere travel retail slovenia d.o.o.|samostojni gostinski delavec - marche obrežje (m/ž)|brežice, lower sava"
+  },
+  {
+    "jobId": "job-02193",
+    "sourceJobKey": "tips d.o.o. proizvodno in trgovsko podjetje|računovodja - m/ž|krško, lower sava"
+  },
+  {
+    "jobId": "job-02197",
+    "sourceJobKey": "kolpa|samostojni operater v pe lipa|kostanjevica na krki, lower sava"
+  },
+  {
+    "jobId": "job-02210",
+    "sourceJobKey": "zdravstveni dom dr. franca ambrozica postojna|logoped - delo z osebami s psihično motnjo - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02213",
+    "sourceJobKey": "mjob|delo v kuhinji|coastal-karst - pivka, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02214",
+    "sourceJobKey": "null|pomivalec v mlečni proizvodnji - delo v okolici postojne - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02215",
+    "sourceJobKey": "obcina postojna|koordinator vii/1, šifra dm: c097032, za delo na projektih »milestone« in »adriamove« - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02216",
+    "sourceJobKey": "zdravstveni dom dr. franca ambrozica, postojna|logoped - delo z osebami s psihično motnjo (e047081) za potrebe zdravstvenega doma dr. franca ambrožiča postojna, center za duševno zdravje otrok in mladostnikov - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02219",
+    "sourceJobKey": "null|skladiščnik - m/ž|cerknica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02232",
+    "sourceJobKey": "null|tehnični strokovni sodelavec ii/1 - ustrezne smeri - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02238",
+    "sourceJobKey": "null|psiholog - m/ž|cerknica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02239",
+    "sourceJobKey": "null|zobozdravstveni asistent - m/ž|ilirska bistrica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02241",
+    "sourceJobKey": "null|strežnica v zdravstvu - m/ž|cerknica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02249",
+    "sourceJobKey": "null|komisionar - m/ž|pivka, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02252",
+    "sourceJobKey": "null|vodja gradbišča - m/ž|cerknica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02257",
+    "sourceJobKey": "null|svetovalec za dolgotrajno oskrbo - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02267",
+    "sourceJobKey": "null|komercialist za prodajo rol - m/ž|ilirska bistrica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02269",
+    "sourceJobKey": "null|knjigovodja - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02274",
+    "sourceJobKey": "null|oskrbovalka v pe pivka - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02282",
+    "sourceJobKey": "null|varnostnik - m/ž|ilirska bistrica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02284",
+    "sourceJobKey": "null|varnostnik - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02287",
+    "sourceJobKey": "null|diplomirani delovni terapevt - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02293",
+    "sourceJobKey": "zdravstveni dom dr. franca ambrozica postojna|zdravnik specialist ppd3 - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02294",
+    "sourceJobKey": "zdravstveni dom dr. franca ambrozica postojna|radiološki inženir iii (i) - pripravnik - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02295",
+    "sourceJobKey": "zdravstveni dom dr. franca ambrozica postojna|radiološki inženir iii (i) - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02297",
+    "sourceJobKey": "zdravstveni dom dr. franca ambrozica postojna|specialni pedagog iii - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02299",
+    "sourceJobKey": "null|oblikovalec plastike - m/ž|ilirska bistrica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02300",
+    "sourceJobKey": "null|bolničar negovalec - pripravnik v pe pivka- m/ž - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02302",
+    "sourceJobKey": "null|izmenovodja/skupinovodja (v enoti industrija mesa)|pivka, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02303",
+    "sourceJobKey": "null|vodja oddelka / delovodja v enoti industrija mesa|pivka, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02304",
+    "sourceJobKey": "null|vzdrževalec|pivka, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02308",
+    "sourceJobKey": "null|delavec za enostavna dela (m/ž)|pivka, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02314",
+    "sourceJobKey": "zdravstveni dom dr. franca ambrozica, postojna|logoped i (e047037) - razvojna ambulanta - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02315",
+    "sourceJobKey": "senecura|bolničar negovalec - pripravnik (m/ž/x)|pivka, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02317",
+    "sourceJobKey": "zdravstveni dom dr. franca ambrozica, postojna|zdravnik specialist interne medicine za potrebe zdravstvenega doma dr. franca ambrožiča postojna - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02320",
+    "sourceJobKey": "null|fizioterapevt pripravnik v pe žiri in pe pivka - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02321",
+    "sourceJobKey": "null|čistilka/čistilec - m/ž|cerknica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02323",
+    "sourceJobKey": "null|bolničar negovalec v pe pivka - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02326",
+    "sourceJobKey": "zdravstveni dom dr. franca ambrozica, postojna|zdravnik specialist ortopedije za potrebe zdravstvenega doma dr. franca ambrožiča postojna - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02327",
+    "sourceJobKey": "zdravstveni dom dr. franca ambrozica, postojna|zdravnik specialist ppd3 (e018021) - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02329",
+    "sourceJobKey": "zdravstveni dom dr. franca ambrozica, postojna|zdravnik specialist dermatovenerologije za potrebe zdravstvenega doma dr. franca ambrožiča postojna - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02330",
+    "sourceJobKey": "zdravstveni dom dr. franca ambrozica, postojna|zdravnik specialist kirurgije za potrebe zdravstvenega doma dr. franca ambrožiča postojna - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02331",
+    "sourceJobKey": "zdravstveni dom dr. franca ambrozica, postojna|radiološki inženir iii (i) - pripravnik (e047102) za potrebe zdravstvenega doma dr. franca ambrožiča postojna - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02332",
+    "sourceJobKey": "zdravstveni dom dr. franca ambrozica, postojna|radiološki inženir iii (i) (e047102) za potrebe zdravstvenega doma dr. franca ambrožiča postojna - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02333",
+    "sourceJobKey": "mjob|stržba hrane in pijače|coastal-karst - pivka, inner carniola-karst"
+  },
+  {
+    "jobId": "job-02336",
+    "sourceJobKey": "null|natakar/ica, delo v gostinskem lokalu v kramarovcih - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-02342",
+    "sourceJobKey": "null|delo v hlevu - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-02361",
+    "sourceJobKey": "null|osebni asistent - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-02375",
+    "sourceJobKey": "null|glavni knjigovodja - m/ž|lendava, mura"
+  },
+  {
+    "jobId": "job-02380",
+    "sourceJobKey": "null|preglednik omrežja - m/ž|lendava, mura"
+  },
+  {
+    "jobId": "job-02383",
+    "sourceJobKey": "null|izdelovalec pvc in alu oken in vrat - m/ž|gornja radgona, mura"
+  },
+  {
+    "jobId": "job-02388",
+    "sourceJobKey": "null|osebni asistent/osebna asistentka - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-02389",
+    "sourceJobKey": "null|delavec poliester - m/ž|ljutomer, mura"
+  },
+  {
+    "jobId": "job-02391",
+    "sourceJobKey": "null|prodajni referent - m/ž|lendava, mura"
+  },
+  {
+    "jobId": "job-02401",
+    "sourceJobKey": "null|čistilka ii, šifra delovnega mesta g092001-m/ž - m/ž|lendava, mura"
+  },
+  {
+    "jobId": "job-02404",
+    "sourceJobKey": "null|osebni asistent - m/ž|ljutomer, mura"
+  },
+  {
+    "jobId": "job-02405",
+    "sourceJobKey": "null|tehnični sodelavec v proizvodnji in skladišču - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-02406",
+    "sourceJobKey": "null|vodja prodaje in trženja - m/ž|ljutomer, mura"
+  },
+  {
+    "jobId": "job-02432",
+    "sourceJobKey": "null|skladiščnik - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-02436",
+    "sourceJobKey": "null|inšpektor za energijo (263), inšpekcija za energijo|murska sobota, mura - celje, savinja"
+  },
+  {
+    "jobId": "job-02437",
+    "sourceJobKey": "null|operater strojev v proizvodnji - m/ž|gornja radgona, mura"
+  },
+  {
+    "jobId": "job-02440",
+    "sourceJobKey": "null|skladiščnik - m/ž|gornja radgona, mura"
+  },
+  {
+    "jobId": "job-02441",
+    "sourceJobKey": "prostovoljno gasilsko drustvo murska sobota|gasilec-serviser - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-02444",
+    "sourceJobKey": "null|e047096 delovni terapevt i - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-02464",
+    "sourceJobKey": "null|pomožni delavec ii - udeleženec projekta poni - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-02466",
+    "sourceJobKey": "null|osebni asistent - ž - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-02467",
+    "sourceJobKey": "null|vzdrževalec - hišnik - m/ž|lendava, mura"
+  },
+  {
+    "jobId": "job-02489",
+    "sourceJobKey": "el-eks, varne instalacije d.o.o.|elektrotehnik - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-02491",
+    "sourceJobKey": "null|direktor - m/ž|ljutomer, mura"
+  },
+  {
+    "jobId": "job-02495",
+    "sourceJobKey": "null|serviser za delo v mehanični delavnici v ravnah na koroškem in na terenu - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-02496",
+    "sourceJobKey": "null|cnc operater za delo na horizontalno/vertikalnem, vrtalno-rezkalnem stroju - m/ž|radlje ob dravi, carinthia"
+  },
+  {
+    "jobId": "job-02497",
+    "sourceJobKey": "null|delo v proizvodnji - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-02498",
+    "sourceJobKey": "null|delo v proizvodnji konfekcioniranja ponjav - m/ž|radlje ob dravi, carinthia"
+  },
+  {
+    "jobId": "job-02502",
+    "sourceJobKey": "null|tehnolog - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-02503",
+    "sourceJobKey": "null|varuhinja institucionalno varstvo - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-02508",
+    "sourceJobKey": "null|fizioterapevt - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-02512",
+    "sourceJobKey": "null|varnostnik - koroška regija - m/ž|slovenj gradec, carinthia"
+  },
+  {
+    "jobId": "job-02513",
+    "sourceJobKey": "null|varuhinja ii - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-02514",
+    "sourceJobKey": "null|strugar - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-02531",
+    "sourceJobKey": "null|montažer - m/ž|slovenj gradec, carinthia"
+  },
+  {
+    "jobId": "job-02534",
+    "sourceJobKey": "null|operater cnc stroja 3d cevni later/laser za razrez pločevine - m/ž|slovenj gradec, carinthia"
+  },
+  {
+    "jobId": "job-02536",
+    "sourceJobKey": "null|srednja medicinska sestra i - m/ž|radlje ob dravi, carinthia"
+  },
+  {
+    "jobId": "job-02538",
+    "sourceJobKey": "null|gls kurir-ka v slovenj gradcu in okolici|slovenj gradec, carinthia"
+  },
+  {
+    "jobId": "job-02543",
+    "sourceJobKey": "null|sortirec in pakirec - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-02544",
+    "sourceJobKey": "null|operater strojnega oblikovanja kovin - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-02551",
+    "sourceJobKey": "null|osebni asistent m/ž - m/ž|slovenj gradec, carinthia"
+  },
+  {
+    "jobId": "job-02554",
+    "sourceJobKey": "null|osebna asistentka/osebni asistent - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-02555",
+    "sourceJobKey": "merkur|prodajni svetovalec (m/ž) tc merkur slovenj gradec|slovenj gradec, carinthia"
+  },
+  {
+    "jobId": "job-02557",
+    "sourceJobKey": "null|skladiščnik - m/ž|radlje ob dravi, carinthia"
+  },
+  {
+    "jobId": "job-02563",
+    "sourceJobKey": "tesnila gk|posluževalec strojev in naprav (posluževanje robotov)|prevalje, carinthia"
+  },
+  {
+    "jobId": "job-02565",
+    "sourceJobKey": "tesnila gk|sortirec in pakirec|prevalje, carinthia"
+  },
+  {
+    "jobId": "job-02579",
+    "sourceJobKey": "null|plastičar - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-02580",
+    "sourceJobKey": "null|elektrovzdrževalec - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-02582",
+    "sourceJobKey": "null|osebni asistent - m/ž|radlje ob dravi, carinthia"
+  },
+  {
+    "jobId": "job-02583",
+    "sourceJobKey": "fridro|sodelavec v skladišču (m/ž)|radlje ob dravi, carinthia"
+  },
+  {
+    "jobId": "job-02595",
+    "sourceJobKey": "gipo, montaza in servis, d.o.o.|administrator (delo v pisarni) - m/ž|sežana, coastal-karst"
+  },
+  {
+    "jobId": "job-02622",
+    "sourceJobKey": "null|ličar/brusilec - m/ž|sežana, coastal-karst"
+  },
+  {
+    "jobId": "job-02623",
+    "sourceJobKey": "null|drugi učitelj v prvem razredu - m/ž|izola, coastal-karst"
+  },
+  {
+    "jobId": "job-02624",
+    "sourceJobKey": "null|vzgojitelj predšolskih otrok - pomočnik vzgojitelja - m/ž|izola, coastal-karst"
+  },
+  {
+    "jobId": "job-02627",
+    "sourceJobKey": "null|knjigovodja - m/ž|sežana, coastal-karst"
+  },
+  {
+    "jobId": "job-02634",
+    "sourceJobKey": "null|tehnik zdravstvene nege ali diplomirani zdravstvenik 1 oseba (m/ž)|koper, coastal-karst"
+  },
+  {
+    "jobId": "job-02649",
+    "sourceJobKey": "null|predmetni učitelj - m/ž|izola, coastal-karst"
+  },
+  {
+    "jobId": "job-02650",
+    "sourceJobKey": "null|učitelj slovenščine z dopolnjevanjem v rapu - m/ž|izola, coastal-karst"
+  },
+  {
+    "jobId": "job-02651",
+    "sourceJobKey": "zdravstveni dom sezana|sms v primarni dejavnosti - m/ž|sežana, coastal-karst"
+  },
+  {
+    "jobId": "job-02654",
+    "sourceJobKey": "null|osebni asistent - m/ž|piran, coastal-karst"
+  },
+  {
+    "jobId": "job-02656",
+    "sourceJobKey": "kobilarna lipica d.o.o.|konjar iii - m/ž|sežana, coastal-karst"
+  },
+  {
+    "jobId": "job-02673",
+    "sourceJobKey": "null|osebni asistent / osebna asistentka - m/ž|sežana, coastal-karst"
+  },
+  {
+    "jobId": "job-02675",
+    "sourceJobKey": "null|orodjar - m/ž|izola, coastal-karst"
+  },
+  {
+    "jobId": "job-02678",
+    "sourceJobKey": "null|varnostnik - m/ž|sežana, coastal-karst"
+  },
+  {
+    "jobId": "job-02683",
+    "sourceJobKey": "osnovna šola srečka kosovela|učitelj italijanščine - m/ž|sežana, coastal-karst"
+  },
+  {
+    "jobId": "job-02695",
+    "sourceJobKey": "null|varnostnik/varnostnica - m/ž|izola, coastal-karst"
+  },
+  {
+    "jobId": "job-02698",
+    "sourceJobKey": "pivovarna & gostilna mahnič|natakar - pivovarna & gostilna mahnič, kozina|hrpelje-kozina, coastal-karst"
+  },
+  {
+    "jobId": "job-02729",
+    "sourceJobKey": "null|operater na cnc stroju - m/ž|litija, central sava"
+  },
+  {
+    "jobId": "job-02735",
+    "sourceJobKey": "null|skladiščnik - m/ž|zagorje ob savi, central sava"
+  },
+  {
+    "jobId": "job-02751",
+    "sourceJobKey": "splošna bolnišnica trbovlje|srednja medicinska sestra v negovalni enoti v bolnišnični dejavnosti na internem oddelku - m/ž|trbovlje, central sava"
+  },
+  {
+    "jobId": "job-02755",
+    "sourceJobKey": "zdravstveni dom zagorje ob savi cesta zmage 1|e037023 dipl. medicinska sestra v promociji zdravja in zdravstveni vzgoji - m/ž|zagorje ob savi, central sava"
+  },
+  {
+    "jobId": "job-02765",
+    "sourceJobKey": "null|tehnični sodelavec - m/ž|trbovlje, central sava"
+  },
+  {
+    "jobId": "job-02766",
+    "sourceJobKey": "null|sodelavec na pošti i, litija z okoliškimi poštami - m/ž|litija, central sava"
+  },
+  {
+    "jobId": "job-02787",
+    "sourceJobKey": "null|dimnikar - m/ž|zagorje ob savi, central sava"
+  },
+  {
+    "jobId": "job-02791",
+    "sourceJobKey": "steklarna hrastnik|kontrolor v merilnem laboratoriju (m/ž)|hrastnik, central sava"
+  },
+  {
+    "jobId": "job-02792",
+    "sourceJobKey": "steklarna hrastnik|skrbnik varstva okolja (m/ž)|hrastnik, central sava"
+  },
+  {
+    "jobId": "job-02793",
+    "sourceJobKey": "null|osebni asistent - m/ž|hrastnik, central sava"
+  },
+  {
+    "jobId": "job-02828",
+    "sourceJobKey": "null|zdravnik specialist družinske medicine ppd1 - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-02847",
+    "sourceJobKey": "zdravstveni dom dr. julija polca kamnik|e018020 - zdravnik specialist ppd2 - m/ž|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-02849",
+    "sourceJobKey": "null|zdravnik specialist abdominalne kirurgije - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-02874",
+    "sourceJobKey": "null|zdravnik specialist ppd3 - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-02876",
+    "sourceJobKey": "null|zdravnik specialist ppd1 - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-02877",
+    "sourceJobKey": "null|zdravnik specialist - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-02880",
+    "sourceJobKey": "null|zdravnik specialist družinske medicine - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-02882",
+    "sourceJobKey": "thermana|zdravnik specialist (m/ž)|laško, savinja"
+  },
+  {
+    "jobId": "job-02885",
+    "sourceJobKey": "zdravstveni dom sentjur|zdravnik specialist družinske ali splošne medicine - m/ž|šentjur pri celju, savinja"
+  },
+  {
+    "jobId": "job-02899",
+    "sourceJobKey": "null|zdravnik specialist fizikalne in rehabilitacijske medicine - m/ž|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-02901",
+    "sourceJobKey": "zdravstveni dom celje|zdravnik specialist - kardiolog - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-02902",
+    "sourceJobKey": "zdravstveni dom celje|zdravnik specialist pulmologije - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-02903",
+    "sourceJobKey": "zdravstveni dom celje|zdravnik specialist - nevrolog - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-02904",
+    "sourceJobKey": "zdravstveni dom sentjur|zdravnik specialist urgentne medicine - m/ž|šentjur pri celju, savinja"
+  },
+  {
+    "jobId": "job-02934",
+    "sourceJobKey": "zdravstveni dom lendava - egeszseghaz lendva|e018018 zdravnik specialist (zobozdravnik specialist čeljustne in zobne ortopedije- ortodont) - m/ž|lendava, mura"
+  },
+  {
+    "jobId": "job-02935",
+    "sourceJobKey": "zdravstveni dom lendava - egeszseghaz lendva|e018018 zdravnik specialist (pediater) - m/ž|lendava, mura"
+  },
+  {
+    "jobId": "job-02942",
+    "sourceJobKey": "null|full stack razvijalec/programer (intermediate)|vrhnika, central slovenia"
+  },
+  {
+    "jobId": "job-02948",
+    "sourceJobKey": "blubit|samostojni plc programer m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-02955",
+    "sourceJobKey": "null|programer cnc strojev - m/ž|metlika, southeast slovenia"
+  },
+  {
+    "jobId": "job-02958",
+    "sourceJobKey": "null|programer - operater cnc stružnice - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-02959",
+    "sourceJobKey": "null|programer - operater cnc rezkalnega stroja - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-02967",
+    "sourceJobKey": "kansai helios slovenija d.o.o|skladiščnik - komisioner viličarist (m/ž)|domžale, central slovenia"
+  },
+  {
+    "jobId": "job-02973",
+    "sourceJobKey": "null|skladiščnik - m/ž|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-02975",
+    "sourceJobKey": "null|monter - skladiščnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-02979",
+    "sourceJobKey": "null|skladiščnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-02981",
+    "sourceJobKey": "orbico|voznik/skladiščnik (m/ž) - ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-02982",
+    "sourceJobKey": "null|skladiščnik v sam kamnik - m/ž|domžale, central slovenia"
+  },
+  {
+    "jobId": "job-02984",
+    "sourceJobKey": "orbico|skladiščnik|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-02987",
+    "sourceJobKey": "null|skladiščnik - voznik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-02988",
+    "sourceJobKey": "ziggi proizvodnja in trgovina d.o.o.|skladiščnik, knjigovez in operater strojev - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-02990",
+    "sourceJobKey": "merkur|skladiščnik (m/ž) tc merkur ljubljana vižmarje|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03007",
+    "sourceJobKey": "gabrijel aluminium|skladiščnik (m/ž)|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-03008",
+    "sourceJobKey": "zaposlitveni center zarja 2|skladiščnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03017",
+    "sourceJobKey": "null|skladiščnik (m/ž)|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-03035",
+    "sourceJobKey": "null|skladiščnik m/ž - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-03043",
+    "sourceJobKey": "inter cars|skladiščnik/ca - centralno skladišče maribor|maribor, drava"
+  },
+  {
+    "jobId": "job-03053",
+    "sourceJobKey": "null|skladiščnik v sam latkova vas - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-03055",
+    "sourceJobKey": "null|skladiščnik - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-03059",
+    "sourceJobKey": "null|viličarist - skladiščnik (m/ž) - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-03076",
+    "sourceJobKey": "merkur|skladiščnik (m/ž) tc merkur mojster nova gorica|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-03078",
+    "sourceJobKey": "null|skladiščnik (m/ž) - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-03079",
+    "sourceJobKey": "null|skladiščnik viličarist - m/ž|dravograd, carinthia"
+  },
+  {
+    "jobId": "job-03080",
+    "sourceJobKey": "null|skladiščnik ii. - m/ž|litija, central sava"
+  },
+  {
+    "jobId": "job-03093",
+    "sourceJobKey": "dom dr. jozeta potrca poljcane|f094071 telefonist - receptor iv v zsv (cido majšperk) - m/ž|slovenska bistrica, drava"
+  },
+  {
+    "jobId": "job-03095",
+    "sourceJobKey": "null|natakar - m/ž|mozirje, savinja"
+  },
+  {
+    "jobId": "job-03103",
+    "sourceJobKey": "sovita|pomočnik v kuhinji - natakar, m/ž, gornja radgona|gornja radgona, mura"
+  },
+  {
+    "jobId": "job-03106",
+    "sourceJobKey": "transport starin|voznik c kategorije / domači promet|central slovenia"
+  },
+  {
+    "jobId": "job-03108",
+    "sourceJobKey": "gvrc gradnje|gradbeni delavec strojnik voznik|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03109",
+    "sourceJobKey": "darko|voznik c in e kategorije|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03117",
+    "sourceJobKey": "null|voznik hruške (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03124",
+    "sourceJobKey": "petrans, druzba za transport in storitve d.o.o.|voznik tovornega vozila v mednarodnem transportu - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03127",
+    "sourceJobKey": "null|voznik tovornega vozila - m/ž|vrhnika, central slovenia"
+  },
+  {
+    "jobId": "job-03128",
+    "sourceJobKey": "null|voznik dostavnega vozila - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03133",
+    "sourceJobKey": "null|voznik tovornega vozila & upravljalec betonske črpalke - m/ž|vrhnika, central slovenia"
+  },
+  {
+    "jobId": "job-03145",
+    "sourceJobKey": "alcu skupina investicijsko podjetje d.o.o.|voznik težkih tovornih vozil - m/ž|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-03146",
+    "sourceJobKey": "null|voznik - manipulant - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03151",
+    "sourceJobKey": "null|voznik kamiona - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03158",
+    "sourceJobKey": "null|voznik tovornega vozila z dvigalom - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03161",
+    "sourceJobKey": "null|voznik tovornega vozila - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03163",
+    "sourceJobKey": "null|reševalec/spremljevalec - voznik reševalnega vozila - zdravstveni tehnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03164",
+    "sourceJobKey": "avtoprevoz dejan hrovat s.p.|voznik tovornega vozila - m/ž|domžale, central slovenia"
+  },
+  {
+    "jobId": "job-03165",
+    "sourceJobKey": "kbg, organizacija dogodkov d.o.o.|voznik/vzdrževalec wc kabin - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-03167",
+    "sourceJobKey": "null|voznik tovornega vozila - m/ž|logatec, central slovenia"
+  },
+  {
+    "jobId": "job-03168",
+    "sourceJobKey": "null|voznik tovornjaka v domačem prometu - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03169",
+    "sourceJobKey": "vegi transport, prevoznistvo in logistika, d.o.o.|voznik tovornega vozila v mednarodnem prometu - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03171",
+    "sourceJobKey": "null|voznk kamiona v gradbeništvu - m/ž|vrhnika, central slovenia"
+  },
+  {
+    "jobId": "job-03173",
+    "sourceJobKey": "null|cgp talent akademija|novo mesto, southeast slovenia - ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03176",
+    "sourceJobKey": "null|voznik snage - m/ž|radovljica, upper carniola"
+  },
+  {
+    "jobId": "job-03179",
+    "sourceJobKey": "null|voznik, 4102 kranj - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-03180",
+    "sourceJobKey": "null|voznik tovornjaka - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-03192",
+    "sourceJobKey": "null|voznik - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-03194",
+    "sourceJobKey": "null|voznik tovornega vozila v mednarodnem prometu - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-03197",
+    "sourceJobKey": "null|voznik hiab dvigala / šoferja tovornega vozila - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-03202",
+    "sourceJobKey": "null|voznik kombija - dostavljalec - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-03205",
+    "sourceJobKey": "null|voznik iii. - m/ž|lenart, drava"
+  },
+  {
+    "jobId": "job-03208",
+    "sourceJobKey": "null|voznik vlečnega vozila - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-03210",
+    "sourceJobKey": "null|voznik tovornega vozila v mednarodnem prometu - m/ž|šentjur pri celju, savinja"
+  },
+  {
+    "jobId": "job-03213",
+    "sourceJobKey": "za topel dom, trgovina, d.o.o.|voznik kamiona s hiab dvigalom - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-03214",
+    "sourceJobKey": "enles, proizvodnja, trgovina in storitve, d.o.o.|voznik težkega tovornega vozila - vlačilca - m/ž|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-03215",
+    "sourceJobKey": "enles, proizvodnja, trgovina in storitve, d.o.o.|voznik hiab vozila - m/ž|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-03216",
+    "sourceJobKey": "null|voznik tovornega vozila - kiper - m/ž|laško, savinja"
+  },
+  {
+    "jobId": "job-03217",
+    "sourceJobKey": "null|voznik tovornega vozila - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-03218",
+    "sourceJobKey": "transport zvir prevoznistvo in transport d.o.o.|voznik tovornjaka - m/ž|mozirje, savinja"
+  },
+  {
+    "jobId": "job-03225",
+    "sourceJobKey": "null|voznik črpalke (m/ž)|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-03226",
+    "sourceJobKey": "null|voznik hruške (m/ž)|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-03236",
+    "sourceJobKey": "klaut egon transport, trgovina d.o.o.|voznik tovornjaka v mednarodnem prometu blaga - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-03237",
+    "sourceJobKey": "null|voznik tovornega vozila v mednarodnem prometu - m/ž|tolmin, gorizia"
+  },
+  {
+    "jobId": "job-03238",
+    "sourceJobKey": "null|voznik tovornega vozila - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-03240",
+    "sourceJobKey": "null|voznik tovornega vozila c kategorije za lastne potrebe (brez kode 95) za prevoz materiala na gradbišče ter prevzem materiala pri dobaviteljih in trgovcih. - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-03241",
+    "sourceJobKey": "null|voznik kombija, avtomobila, kurir, vzdrževalec vozil in garaže - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-03242",
+    "sourceJobKey": "brus d.o.o. transport|voznik c kategorije - m/ž|idrija, gorizia"
+  },
+  {
+    "jobId": "job-03248",
+    "sourceJobKey": "null|voznik tovornjaka - m/ž|krško, lower sava"
+  },
+  {
+    "jobId": "job-03255",
+    "sourceJobKey": "null|voznik tovornjaka - m/ž|cerknica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-03257",
+    "sourceJobKey": "null|voznik tovornih vozil - m/ž|cerknica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-03258",
+    "sourceJobKey": "null|voznik tovornega vozila v domačem in tujem prometu - m/ž|cerknica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-03259",
+    "sourceJobKey": "null|voznik - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-03260",
+    "sourceJobKey": "null|voznik kombija - m/ž|ljutomer, mura"
+  },
+  {
+    "jobId": "job-03261",
+    "sourceJobKey": "null|voznik tovornega vozila - mixer - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-03263",
+    "sourceJobKey": "prevozi in gradbene storitve, rok brezovnik s.p.|voznik - m/ž|slovenj gradec, carinthia"
+  },
+  {
+    "jobId": "job-03267",
+    "sourceJobKey": "null|voznik tovornega vozila - m/ž|dravograd, carinthia"
+  },
+  {
+    "jobId": "job-03268",
+    "sourceJobKey": "null|voznik tovornega vozila v mednarodnem prometu - m/ž|slovenj gradec, carinthia"
+  },
+  {
+    "jobId": "job-03272",
+    "sourceJobKey": "null|voznik tovornega vozila, prekucnika, vlačilca - m/ž|trbovlje, central sava"
+  },
+  {
+    "jobId": "job-03275",
+    "sourceJobKey": "ministrstvo za notranje zadeve|računovodja vii/2-iii (šifra dm 26318) v ministrstvu za notranje zadeve, sekretariatu, uradu za finance in računovodstvo, službi za računovodstvo, oddelku stroški dela - pripravnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03283",
+    "sourceJobKey": "null|e097167 računovodja vii/2 (i) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03294",
+    "sourceJobKey": "null|samostojni računovodja - m/ž|domžale, central slovenia"
+  },
+  {
+    "jobId": "job-03302",
+    "sourceJobKey": "tekom-dodig, storitve, d.o.o.|računovodja - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03304",
+    "sourceJobKey": "grant thornton|bilančni računovodja (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03307",
+    "sourceJobKey": "katalea consulting|glavni računovodja|upper carniola"
+  },
+  {
+    "jobId": "job-03308",
+    "sourceJobKey": "null|računovodja - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-03312",
+    "sourceJobKey": "null|računovodja - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-03318",
+    "sourceJobKey": "null|računovodja - m/ž|črnomelj, southeast slovenia"
+  },
+  {
+    "jobId": "job-03321",
+    "sourceJobKey": "gimnazija nova gorica|računovodja vii/1 oz. vii/2 - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-03323",
+    "sourceJobKey": "smarteh raziskave in razvoj procesne opreme d.o.o.|računovodstvo i - m/ž|tolmin, gorizia"
+  },
+  {
+    "jobId": "job-03326",
+    "sourceJobKey": "kop brežice|samostojni računovodja - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-03330",
+    "sourceJobKey": "nlb group|samostojni sistemski administrator (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03350",
+    "sourceJobKey": "null|knjigovodja in administrator - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-03353",
+    "sourceJobKey": "null|administrator - m/ž|tržič, upper carniola"
+  },
+  {
+    "jobId": "job-03354",
+    "sourceJobKey": "null|bolničar negovalec - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-03355",
+    "sourceJobKey": "null|srednja medicinska sestra i - m/ž|jesenice, upper carniola"
+  },
+  {
+    "jobId": "job-03356",
+    "sourceJobKey": "null|gospodinja oskrbovalka - m/ž|jesenice, upper carniola"
+  },
+  {
+    "jobId": "job-03357",
+    "sourceJobKey": "null|delovni terapevt v svz - m/ž|jesenice, upper carniola"
+  },
+  {
+    "jobId": "job-03358",
+    "sourceJobKey": "null|bolničar negovalec ii - m/ž|jesenice, upper carniola"
+  },
+  {
+    "jobId": "job-03359",
+    "sourceJobKey": "null|srednja medicinska sestra i - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-03363",
+    "sourceJobKey": "null|administrator v knjigovodstvu - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-03365",
+    "sourceJobKey": "null|administrator - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-03368",
+    "sourceJobKey": "null|administrator - m/ž|cerknica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-03377",
+    "sourceJobKey": "adecco|operater v proizvodnji (m/ž) - napredna proizvodnja|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03378",
+    "sourceJobKey": "manpower|operater v proizvodnji m/ž|komenda, central slovenia"
+  },
+  {
+    "jobId": "job-03380",
+    "sourceJobKey": "ts lab|operater tabletirnega stroja za prehranska dopolnila (m/ž)|komenda, central slovenia"
+  },
+  {
+    "jobId": "job-03381",
+    "sourceJobKey": "kele & kele d.o.o., mlekarna krepko|operater v živilskem obratu (m/ž)|logatec, central slovenia"
+  },
+  {
+    "jobId": "job-03382",
+    "sourceJobKey": "agencija agado|operater v proizvodnji (m/ž) - ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03383",
+    "sourceJobKey": "manpower|operater v farmacevtski proizvodnji m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03408",
+    "sourceJobKey": "san.ko.m. d.o.o.|operater v proizvodnji|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03411",
+    "sourceJobKey": "herz|operater na stroju - topla predelava (m/ž)|šmartno pri litiji, central slovenia"
+  },
+  {
+    "jobId": "job-03412",
+    "sourceJobKey": "gorenc metal|operater cnc krivilnega stroja|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03413",
+    "sourceJobKey": "herz|operater na stroju (m/ž)|šmartno pri litiji, central slovenia"
+  },
+  {
+    "jobId": "job-03414",
+    "sourceJobKey": "herz|operater cnc strojev (m/ž)|šmartno pri litiji, central slovenia"
+  },
+  {
+    "jobId": "job-03415",
+    "sourceJobKey": "tosama|cnc operater - m/ž|domžale, central slovenia"
+  },
+  {
+    "jobId": "job-03416",
+    "sourceJobKey": "kariera|operater na stroju m/ž/d|central slovenia"
+  },
+  {
+    "jobId": "job-03417",
+    "sourceJobKey": "lth castings|operater livarskega stroja (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03418",
+    "sourceJobKey": "atama|operater hex (m/ž) - kamnik|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-03419",
+    "sourceJobKey": "litostroj power|cnc operater za struženje|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03420",
+    "sourceJobKey": "litostroj power|cnc operater za rezkanje|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03421",
+    "sourceJobKey": "f. dvor, storitve in trgovina d.o.o.|operater na grafičnih strojih - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03422",
+    "sourceJobKey": "omc, trgovina in inzeniring, d.o.o.|cnc operater - m/ž|vrhnika, central slovenia"
+  },
+  {
+    "jobId": "job-03423",
+    "sourceJobKey": "rls|operater v mehanski delavnici (m/ž/d)|komenda, central slovenia"
+  },
+  {
+    "jobId": "job-03424",
+    "sourceJobKey": "gmm proizvodnja|operater na strojih za laserski razrez (m/ž)|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-03425",
+    "sourceJobKey": "varnost vic varovanje premozenja d.d.|operater vnc - varnostnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03426",
+    "sourceJobKey": "biplast d.o.o.|operater (m/ž)|mengeš, central slovenia"
+  },
+  {
+    "jobId": "job-03427",
+    "sourceJobKey": "iustitia|strojni operater v podjetju za izdelavo papirčkov za zvijanje 🔥|medvode, central slovenia"
+  },
+  {
+    "jobId": "job-03428",
+    "sourceJobKey": "whc d.o.o.|operater v proizvodnji (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03429",
+    "sourceJobKey": "whc d.o.o.|operater v logistiki (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03430",
+    "sourceJobKey": "vg group d.o.o.|operater kapsulirnega stroja (m/ž)|logatec, central slovenia"
+  },
+  {
+    "jobId": "job-03431",
+    "sourceJobKey": "danfoss|operater cnc (m/ž) - ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03432",
+    "sourceJobKey": "null|operater na rezalnem stroju - m/ž|logatec, central slovenia"
+  },
+  {
+    "jobId": "job-03455",
+    "sourceJobKey": "null|komunalni delavec - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03456",
+    "sourceJobKey": "dekra|referent v skladišču (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03472",
+    "sourceJobKey": "null|operater na galvanski liniji - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-03475",
+    "sourceJobKey": "whc d.o.o.|operater v proizvodnji (m/ž)|upper carniola"
+  },
+  {
+    "jobId": "job-03478",
+    "sourceJobKey": "kariera|operater polnilne linije - m/ž|laško, savinja"
+  },
+  {
+    "jobId": "job-03493",
+    "sourceJobKey": "null|operater tgm - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-03494",
+    "sourceJobKey": "null|cnc in waterjet operater za obdelavo stekla - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-03503",
+    "sourceJobKey": "pošta slovenije|usmerjevalec pošiljk ii, slovenske konjice (m/ž)|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-03504",
+    "sourceJobKey": "pošta slovenije|usmerjevalec pošiljk ii, celje (m/ž)|celje, savinja"
+  },
+  {
+    "jobId": "job-03506",
+    "sourceJobKey": "null|operater cnc strojev - m/ž|metlika, southeast slovenia"
+  },
+  {
+    "jobId": "job-03510",
+    "sourceJobKey": "null|cnc operater na rezkalnem stroju in cnc stružnici -m/ž - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-03515",
+    "sourceJobKey": "l-tek|operater smt m/ž|šentjernej, southeast slovenia"
+  },
+  {
+    "jobId": "job-03516",
+    "sourceJobKey": "kolpa|samostojni operater v proizvodnji kerrock|metlika, southeast slovenia"
+  },
+  {
+    "jobId": "job-03518",
+    "sourceJobKey": "kariera|operater v lesni proizvodnji - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-03519",
+    "sourceJobKey": "kariera|operater v proizvodnji - m/ž|črnomelj, southeast slovenia"
+  },
+  {
+    "jobId": "job-03520",
+    "sourceJobKey": "kariera|operater v proizvodnji - m/ž|metlika, southeast slovenia"
+  },
+  {
+    "jobId": "job-03521",
+    "sourceJobKey": "mahle|operater (m/ž/d)|bovec, gorizia"
+  },
+  {
+    "jobId": "job-03531",
+    "sourceJobKey": "null|operater na cnc stroju in vzdrževalec v proizvodnji - m/ž|cerknica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-03534",
+    "sourceJobKey": "null|operater na stroju - m/ž|cerknica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-03535",
+    "sourceJobKey": "cleangrad|operater v proizvodnji|ljutomer, mura"
+  },
+  {
+    "jobId": "job-03537",
+    "sourceJobKey": "null|operater na varilnem robotu - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-03538",
+    "sourceJobKey": "null|operater na razrezu pločevin - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-03539",
+    "sourceJobKey": "null|operater na cnc stroju - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-03540",
+    "sourceJobKey": "null|operater na upogibnem stroju - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-03541",
+    "sourceJobKey": "veterinarski center miklavžin|veterinarski tehnik/ca|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03547",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|farmacevtski tehnik i, (e025003), za potrebe supas, področje za nabavno dejavnost in trženje, služba skladiščnega poslovanja, enota medicinskega blaga - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03548",
+    "sourceJobKey": "zdravstveni dom za studente univerze v ljubljani|e045028 - laboratorijski tehnik s posebnimi znanji - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03549",
+    "sourceJobKey": "varnost vič|varnostni tehnik m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03550",
+    "sourceJobKey": "whc|farmacevtski tehnik v specializirani prodajalni (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03551",
+    "sourceJobKey": "zdravstveni dom dr. julija polca kamnik|e045006 - laboratorijski tehnik ii - pripravnik - m/ž|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-03552",
+    "sourceJobKey": "varnost vic varovanje premozenja d.d.|varnostni tehnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03553",
+    "sourceJobKey": "team7|varnostni tehnik (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03554",
+    "sourceJobKey": "zdravstveni dom za studente univerze v ljubljani|laboratorijski tehnik - pripravnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03555",
+    "sourceJobKey": "javno podjetje energetika ljubljana d.o.o.|upravljalec distribucijskega omrežja - tehnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03556",
+    "sourceJobKey": "vet.am.jata d.o.o.|veterinarski tehnik (m/ž)|domžale, central slovenia"
+  },
+  {
+    "jobId": "job-03557",
+    "sourceJobKey": "vet.am.jata d.o.o., domzale|veterinarski tehnik (m/ž)|domžale, central slovenia"
+  },
+  {
+    "jobId": "job-03558",
+    "sourceJobKey": "dars|tehnik ikt (m/ž), v področju za informacijsko komunikacijske tehnologije, v službi za telekomunikacije|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03559",
+    "sourceJobKey": "urmet trgovina na debelo d.o.o.|serviser ii., tehnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03560",
+    "sourceJobKey": "null|srednja medicinska sestra / zdravstveni tehnik v ginekološki ambulanti (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03561",
+    "sourceJobKey": "univerza v ljubljani|vf, sodelavec v veterinarstvu - višji tehnik vi, tehnično vzdrževalna služba in upravljanje nepremičnin, tajništvo|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03562",
+    "sourceJobKey": "univerza v ljubljani|vf, sodelavec v veterinarstvu - tehnik v na inštitutu za mikrobiologijo in parazitologijo (enota za bakteriologijo in mikologijo)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03563",
+    "sourceJobKey": "mjob|bioprocesni tehnik_ca|kamnik, central slovenia - ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03572",
+    "sourceJobKey": "null|vzdrževalec tehnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03573",
+    "sourceJobKey": "null|vzdrževalec tehnik v sektorju prometne opreme in signalizacije - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03579",
+    "sourceJobKey": "null|laboratorijski tehnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03581",
+    "sourceJobKey": "null|it servisni tehnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03586",
+    "sourceJobKey": "null|tehnik varnostnih sistemov -elektromonter - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03587",
+    "sourceJobKey": "novartis|tehnik v proizvodnji farmacevtskih učinkovin (m/ž/d)|mengeš, central slovenia"
+  },
+  {
+    "jobId": "job-03588",
+    "sourceJobKey": "zdravstveni dom vrhnika|laboratorijski tehnik s posebnimi znanji - m/ž|vrhnika, central slovenia"
+  },
+  {
+    "jobId": "job-03589",
+    "sourceJobKey": "kaza sistemi|servisni tehnik za hladilništvo (m/ž)|ljubljana, central slovenia - ivančna gorica, central slovenia"
+  },
+  {
+    "jobId": "job-03590",
+    "sourceJobKey": "zdravstveni dom vrhnika|laboratorijski tehnik ii - m/ž|vrhnika, central slovenia"
+  },
+  {
+    "jobId": "job-03591",
+    "sourceJobKey": "istyle|apple servisni tehnik - kristalna palača|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03592",
+    "sourceJobKey": "odmasi.si d.o.o.|servisni tehnik odtokov|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03593",
+    "sourceJobKey": "k-servis|servisni tehnik v delavnici (m/ž)|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-03594",
+    "sourceJobKey": "litostroj power|strojni tehnik v nastavljalnici orodij|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03595",
+    "sourceJobKey": "k-servis|servisni tehnik (m/ž)|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-03596",
+    "sourceJobKey": "valina|hišni tehnik m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03597",
+    "sourceJobKey": "kia|it tehnik m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03598",
+    "sourceJobKey": "energetika ljubljana|upravljalec distribucijskega omrežja - tehnik (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03599",
+    "sourceJobKey": "novartis|tehnik v proizvodnji bioloških učinkovin (m/ž/d)|mengeš, central slovenia"
+  },
+  {
+    "jobId": "job-03600",
+    "sourceJobKey": "adrial d.o.o.|tehnik optik - svetovalec (m/ž)|komenda, central slovenia"
+  },
+  {
+    "jobId": "job-03601",
+    "sourceJobKey": "btc|tehnik - receptor (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03602",
+    "sourceJobKey": "setnicar, servis in trgovina, d.o.o.|tehnik v prodajalni in izdelovalnici ključev - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03603",
+    "sourceJobKey": "dars|tehnik ikt, v področju za informacijsko komunikacijske tehnologije, v službi za telekomunikacije - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03604",
+    "sourceJobKey": "gabrijel aluminium|laborant - tehnik v proizvodnji m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-03605",
+    "sourceJobKey": "dekra|tehnik za video nadzorne sisteme (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03622",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|finančno računovodski delavec v (m/ž) (šifra delovnega mesta: e095082)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03624",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|finančno računovodski delavec v, (e095082), za potrebe supas, področje za nabavno dejavnost in trženje, služba za javna naročila - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03625",
+    "sourceJobKey": "nacionalni laboratorij za zdravje, okolje in hrano|e047104-analitik v laboratorijski medicini s posebnimi znanji; cmm lj - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03626",
+    "sourceJobKey": "onkološki inštitut ljubljana|srednja medicinska sestra v intenzivni terapiji ii, ii, e035013, oddelek zn za podporo skupni zdravstveni dejavnosti in oddelek za odpoved prebavil in paliativne oskrbe, m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03627",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|tehnični delavec v (i) (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03629",
+    "sourceJobKey": "onkološki inštitut ljubljana|srednja medicinska sestra v intenzivni terapiji i, ii, e035013, oddelek bolnišnične zn sektorja operativnih dejavnosti, m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03630",
+    "sourceJobKey": "onkološki inštitut ljubljana|srednja medicinska sestra v negovalni enoti v bolnišnični dejavnosti - pripravnik, e035037, za potrebe zdravstvene nege onkološkega inštituta, m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03632",
+    "sourceJobKey": "univerza v ljubljani|ntf, strokovni delavec pri pedagoškem procesu na univerzi vii/1, katedra za oblikovanje tekstilij in oblačil|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03633",
+    "sourceJobKey": "onkološki inštitut ljubljana|srednja medicinska sestra v intenzivni terapiji i, ii, e035013, oddelek zn za podporo skupni zdravstveni dejavnosti - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03634",
+    "sourceJobKey": "null|sodelavec na pošti i, ljubljana z okoliškimi poštami - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03635",
+    "sourceJobKey": "onkološki inštitut ljubljana|srednja medicinska sestra v negovalni enoti v bolnišnični dejavnosti - pripravnik, e035037, za potrebe zdravstvene nege - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03636",
+    "sourceJobKey": "null|sodelavec na pošti i, domžale z okoliškimi poštami - m/ž|domžale, central slovenia"
+  },
+  {
+    "jobId": "job-03637",
+    "sourceJobKey": "null|sodelavec na pošti i, 1102 ljubljana - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03638",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|srednja medicinska sestra v intenzivni negi (e035012), interna klinika-klinični oddelek za endokrinologijo, diabetes in presnovne bolezni - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03639",
+    "sourceJobKey": "onkološki inštitut ljubljana|srednja medicinska sestra v intenzivni terapiji i, ii, e035013, oddelek bolnišnične zn sektorja operativnih dejavnosti - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03644",
+    "sourceJobKey": "null|sodelavec na pošti i, grosuplje z okoliškimi poštami - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-03645",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|srednja medicinska sestra v intenzivni negi (e035012), interna klinika-center za geriatrično medicino - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03646",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|tehnični delavec v (i), (e095086), za potrebe supas, področje za nabavno dejavnost in trženje, služba skladiščnega poslovanja - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03647",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|finančno računovodski delavec v (m/ž) supas, področje za nabavno dejavnost in trženje|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03648",
+    "sourceJobKey": "mercator|specialist (m/ž) na področju izvedbe investicij|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03649",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|srednja medicinska sestra v intenzivni negi (šifra dm: e035012) klinika za infekcijske bolezni in vročinska stanja, oddelek za otroke ukc ljubljana, m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03650",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|zdr. administrativni sodelavec v (ii), interna klinika, klinični oddelek za gastroenterologijo - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03651",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|srednja medicinska sestra v intenzivni negi, za potrebe klinike za infekcijske bolezni in vročinska stanja - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03652",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|zdr. administrativni sodelavec v (ii) (m/ž), (1 delovno mesto) interna klinika, klinični oddelek za gastroenterologijo|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03653",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|srednja medicinska sestra v intenzivni negi, za potebe klinike za infekcijske bolezni in vročinska stanja, oddelek za otroke - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03654",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|srednja medicinska sestra v intenzivni negi, za potrebe klinike za infekcijske bolezni in vročinska stanja, oddelek za otroke - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03655",
+    "sourceJobKey": "null|klinični psiholog specialist ii - m/ž|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-03656",
+    "sourceJobKey": "fng property si d.o.o.|specialist (m/ž) na področju izvedbe investicij|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03657",
+    "sourceJobKey": "pek automotive|hr manager - strokovnjak za kadre|logatec, central slovenia"
+  },
+  {
+    "jobId": "job-03658",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|srednja medicinska sestra v intenzivni negi, za potrebe klinike za infekcijske bolezni in vročinska stanja, oddelke za otroke - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03659",
+    "sourceJobKey": "null|kontrolor tehničnih pregledov - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03660",
+    "sourceJobKey": "rekruter|samostojni tiskar - vodice|vodice, central slovenia"
+  },
+  {
+    "jobId": "job-03661",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|srednja medicinska sestra v intenzivni negi, interna klinika, ko za kardiologijo - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03662",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|srednja medicinska sestra v negovalni enoti v bolnišnični dejavnosti za potrebe interne klinike, ko za žilne bolezni - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03663",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|srednja medicinska sestra v intenzivni terapiji i,ii za potrebe interne klinike, kliničnega oddelka za žilne bolezni - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03664",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|srednja medicinska sestra v negovalni enoti v bolnišnični dejavnosti, za potrebe interne klinike, ko za žilne bolezni - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03665",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|srednja medicinska sestra v negovalni enoti v bolnišnični dejavnosti, za potrebe interne klinike, klinični oddelek za žilne bolezni - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03666",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|srednja medicinska sestra v intenzivni terapiji i, ii, oddelek intenzivne terapije (it i, ii), klinični oddelek za žilne bolezni - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03669",
+    "sourceJobKey": "null|farmacevtski tehnik ii - pripravnik - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-03675",
+    "sourceJobKey": "null|proizvodni tehnik na cnc avtomatih (m/ž)|železniki, upper carniola"
+  },
+  {
+    "jobId": "job-03678",
+    "sourceJobKey": "null|sr. med. sestra/zdr. tehnik - m/ž|radovljica, upper carniola"
+  },
+  {
+    "jobId": "job-03679",
+    "sourceJobKey": "null|sr. med. sestra / zdr. tehnik pripravnik - m/ž|radovljica, upper carniola"
+  },
+  {
+    "jobId": "job-03686",
+    "sourceJobKey": "gorenjska gradbena družba|vodja strojnega in avto parka|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-03687",
+    "sourceJobKey": "null|srednja medicinska sestra v negovalni enoti v bolnišnični dejavnosti - pripravnik - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-03688",
+    "sourceJobKey": "null|varnostni tehnik - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-03690",
+    "sourceJobKey": "null|tehnik pralnih sistemov - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-03692",
+    "sourceJobKey": "lekarne ptuj|farmacevtski tehnik ii pripravnik m/ž-m/ž - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-03693",
+    "sourceJobKey": "null|varnostni tehnik / serviser - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-03694",
+    "sourceJobKey": "null|tehnik zdravstvene nege - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-03706",
+    "sourceJobKey": "null|monter - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-03707",
+    "sourceJobKey": "null|elektromonter - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-03709",
+    "sourceJobKey": "dom dr. jozeta potrca poljcane|f025009 srednja medicinska sestra i - m/ž|slovenska bistrica, drava"
+  },
+  {
+    "jobId": "job-03710",
+    "sourceJobKey": "dom dr. jozeta potrca poljcane|f025009 srednja medicinska sestra i - pripravnik - m/ž|slovenska bistrica, drava"
+  },
+  {
+    "jobId": "job-03715",
+    "sourceJobKey": "null|veterinarski tehnik (št. dm 391) v oddelku za veterinarstvo, območnem uradu celje, inšpekciji za varno hrano, veterinarstvo in varstvo rastlin|celje, savinja"
+  },
+  {
+    "jobId": "job-03716",
+    "sourceJobKey": "null|veterinarski tehnik (št. dm 391) v oddelku za veterinarstvo, območnem uradu celje, inšpekciji za varno hrano, veterinarstvo in varstvo rastlin, za nedoločen čas, s polnim delovnim časom, s trimesečnim poskusnim delom - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-03717",
+    "sourceJobKey": "thermana|zdravstveni tehnik (m/ž)|laško, savinja"
+  },
+  {
+    "jobId": "job-03730",
+    "sourceJobKey": "null|medicinska sestra/zdravstveni tehnik - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-03738",
+    "sourceJobKey": "null|tehnik zdravstvene nege - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-03745",
+    "sourceJobKey": "iskra d.o.o.|varilec - semič m/ž|semič, southeast slovenia"
+  },
+  {
+    "jobId": "job-03748",
+    "sourceJobKey": "null|zdravstveni tehnik - m/ž|idrija, gorizia"
+  },
+  {
+    "jobId": "job-03752",
+    "sourceJobKey": "zdravstveni dom krsko|zdravstveni tehnik pripravnik - m/ž|krško, lower sava"
+  },
+  {
+    "jobId": "job-03762",
+    "sourceJobKey": "siemens|servisni inženir/ servisna inženirka|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03773",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|inženir laboratorijske biomedicine iii (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03774",
+    "sourceJobKey": "univerzitetni klinični center ljubljana|inženir laboratorijske biomedicine iii, za potrebe klinike za nuklearno medicino - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03793",
+    "sourceJobKey": "zdravstveni dom ljubljana|e047054 radiološki inženir i - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03803",
+    "sourceJobKey": "null|e097163 inženir tehničnih strok vii/2 (i) področje dela aplikativna oprema in produkcija - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03804",
+    "sourceJobKey": "null|bdt kontrolor / inženir varilstva - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-03819",
+    "sourceJobKey": "bureau veritas hse, d.o.o.|varnostni inženir (m/ž) / samostojni varnostni inženir|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03820",
+    "sourceJobKey": "blubit|razvojni inženir za konstrukcijo naprav in orodij|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-03823",
+    "sourceJobKey": "null|diplomirani varnostni inženir - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03828",
+    "sourceJobKey": "null|tehnolog (m/ž)|vrhnika, central slovenia"
+  },
+  {
+    "jobId": "job-03830",
+    "sourceJobKey": "null|strokovni sodelavec za varnost in zdravje pri delu - m/ž|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-03833",
+    "sourceJobKey": "strabag|tehnični vodja rudarskih del|lukovica, central slovenia - domžale, central slovenia"
+  },
+  {
+    "jobId": "job-03848",
+    "sourceJobKey": "null|vodja projektov / inženir elektrotehnike (m/ž)|jesenice, upper carniola"
+  },
+  {
+    "jobId": "job-03850",
+    "sourceJobKey": "jelovica hise d.o.o.|vodja gradbišča m/ž|preddvor, upper carniola"
+  },
+  {
+    "jobId": "job-03861",
+    "sourceJobKey": "null|gradbeni inženir - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-03862",
+    "sourceJobKey": "null|inženir cnc programiranja in konstruiranja - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-03868",
+    "sourceJobKey": "gorenje|vodilni inženir za tehnično podporo m/ž|velenje, savinja"
+  },
+  {
+    "jobId": "job-03870",
+    "sourceJobKey": "null|prodajni inženir - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-03871",
+    "sourceJobKey": "proghres|projektni inženir za področje ove in energetskih rešitev - elektroenergetika (m/ž)|braslovče, savinja"
+  },
+  {
+    "jobId": "job-03874",
+    "sourceJobKey": "null|prodajni svetovalec - inženir - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-03875",
+    "sourceJobKey": "revoz d.d.|tehnolog v vzdrževanju (m/ž)|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-03895",
+    "sourceJobKey": "null|komercialist - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03901",
+    "sourceJobKey": "null|komercialist (gradbeni kalkulant) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03913",
+    "sourceJobKey": "rotis|kariera v rotisu - samostojni komercialist za tuje trge (m/ž)|trzin, central slovenia"
+  },
+  {
+    "jobId": "job-03919",
+    "sourceJobKey": "null|tehnični komercialist - strojništvo - m/ž|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-03921",
+    "sourceJobKey": "null|nabavni referent - komercialist - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-03925",
+    "sourceJobKey": "null|komercialist elektroenergetike - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-03929",
+    "sourceJobKey": "null|samostojni komercialist (m/ž)|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-03930",
+    "sourceJobKey": "null|komercialist - m/ž|ribnica, southeast slovenia"
+  },
+  {
+    "jobId": "job-03931",
+    "sourceJobKey": "null|komercialist za prodajo elektroagregatov - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-03933",
+    "sourceJobKey": "melamin kemicna tovarna d.d. kocevje|komercialist v logistiki - m/ž|kočevje, southeast slovenia"
+  },
+  {
+    "jobId": "job-03935",
+    "sourceJobKey": "mjob|računalničar / komercialist|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-03937",
+    "sourceJobKey": "null|vzdrževalec - električar (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03938",
+    "sourceJobKey": "null|električar - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03939",
+    "sourceJobKey": "null|procesni avtomatik električar - m/ž|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-03940",
+    "sourceJobKey": "null|električar - bakrokrivec - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03946",
+    "sourceJobKey": "null|električar vzdrževalec (m/ž)|jesenice, upper carniola"
+  },
+  {
+    "jobId": "job-03953",
+    "sourceJobKey": "null|električar vzdrževalec - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-03954",
+    "sourceJobKey": "elektro unimont proizvodnja, montaza d.d.|električar - m/ž|slovenske konjice, savinja"
+  },
+  {
+    "jobId": "job-03955",
+    "sourceJobKey": "null|električar|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-03958",
+    "sourceJobKey": "null|čistilec čistilka|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-03959",
+    "sourceJobKey": "null|čistilka/čistilec - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03960",
+    "sourceJobKey": "null|čistilec - urejevalec notranjih prostorov - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03961",
+    "sourceJobKey": "null|čistilec - urejevalec notranjih prostorov (m/ž) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03962",
+    "sourceJobKey": "null|čistilec laboratorija - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03970",
+    "sourceJobKey": "null|čistilec - m/ž|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-03973",
+    "sourceJobKey": "null|sobar/čistilec - m/ž|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-03977",
+    "sourceJobKey": "null|čistilec - specialist - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03979",
+    "sourceJobKey": "null|čistilec - ukc ljubljana - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03989",
+    "sourceJobKey": "ees sistemi d.o.o.|čistilec/ka (m/ž) - ilirska bistrica in logatec|logatec, central slovenia - ilirska bistrica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-03990",
+    "sourceJobKey": "null|čistilec prostorov - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-03993",
+    "sourceJobKey": "null|čistilec - m/ž|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-03997",
+    "sourceJobKey": "null|čistilec/ka - m/ž|jesenice, upper carniola"
+  },
+  {
+    "jobId": "job-03998",
+    "sourceJobKey": "null|čistilec - urejevalec notranjih prostorov - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-04002",
+    "sourceJobKey": "null|čistilec/čistilka poslovnih objektov, nepremičnin, premičnin - m/ž|slovenska bistrica, drava"
+  },
+  {
+    "jobId": "job-04003",
+    "sourceJobKey": "null|čistilka/čistilec (m/ž) - m/ž|ptuj, drava"
+  },
+  {
+    "jobId": "job-04004",
+    "sourceJobKey": "null|čistilec v restavraciji - m/ž|pesnica, drava"
+  },
+  {
+    "jobId": "job-04005",
+    "sourceJobKey": "null|čistilec prostorov - m/ž|šentjur pri celju, savinja"
+  },
+  {
+    "jobId": "job-04006",
+    "sourceJobKey": "null|čistilec - m/ž|šmarje pri jelšah, savinja"
+  },
+  {
+    "jobId": "job-04010",
+    "sourceJobKey": "null|čistilec - novo mesto - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-04011",
+    "sourceJobKey": "pelini, ciscenje in vzdrzevanje objektov, d.o.o.|čistilec/čistilka - m/ž|kočevje, southeast slovenia"
+  },
+  {
+    "jobId": "job-04016",
+    "sourceJobKey": "null|čistilka/čistilec - m/ž|idrija, gorizia"
+  },
+  {
+    "jobId": "job-04019",
+    "sourceJobKey": "terme čatež|čistilec - sobar - m/ž|brežice, lower sava"
+  },
+  {
+    "jobId": "job-04023",
+    "sourceJobKey": "null|čistilec/čistilka - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-04027",
+    "sourceJobKey": "osnovna sola antona sibelja-stjenka komen|čistilec - m/ž|sežana, coastal-karst"
+  },
+  {
+    "jobId": "job-04029",
+    "sourceJobKey": "null|čistilec - m/ž|izola, coastal-karst"
+  },
+  {
+    "jobId": "job-04030",
+    "sourceJobKey": "gostinstvo in turizem robert grahor s.p.|čistilec - sobar - m/ž|sežana, coastal-karst"
+  },
+  {
+    "jobId": "job-04038",
+    "sourceJobKey": "null|monter vrtnih ograj - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04039",
+    "sourceJobKey": "null|vodja, monter - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04040",
+    "sourceJobKey": "null|monter - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04041",
+    "sourceJobKey": "null|krovec - klepar - monter - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04045",
+    "sourceJobKey": "null|monter stavbnega pohištva - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04051",
+    "sourceJobKey": "null|mizar/ka - monter/ka - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-04052",
+    "sourceJobKey": "null|monter alu stavbnega pohištva - m/ž|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-04054",
+    "sourceJobKey": "null|pomožni monter energetskih strojev in naprav - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04057",
+    "sourceJobKey": "null|monter stavbnega pohištva - m/ž|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-04061",
+    "sourceJobKey": "null|monter in serviser klima naprav in hladilnih sistemov|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-04068",
+    "sourceJobKey": "null|monter (m/ž) - m/ž|šmarje pri jelšah, savinja"
+  },
+  {
+    "jobId": "job-04069",
+    "sourceJobKey": "null|vodovodar/monter strojnih inštalacij - m/ž|šmarje pri jelšah, savinja"
+  },
+  {
+    "jobId": "job-04072",
+    "sourceJobKey": "null|monter vodovodnih inštalacij - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-04076",
+    "sourceJobKey": "null|strojni monter i - m/ž|velenje, savinja"
+  },
+  {
+    "jobId": "job-04077",
+    "sourceJobKey": "null|elektro monter i - m/ž|velenje, savinja"
+  },
+  {
+    "jobId": "job-04086",
+    "sourceJobKey": "tips d.o.o. proizvodno in trgovsko podjetje|strojni monter strojev in naprav - m/ž|krško, lower sava"
+  },
+  {
+    "jobId": "job-04087",
+    "sourceJobKey": "tips d.o.o. proizvodno in trgovsko podjetje|elektro monter strojev in naprav - m/ž|krško, lower sava"
+  },
+  {
+    "jobId": "job-04089",
+    "sourceJobKey": "null|obdelovalec kovin-ključavničar-monter - m/ž|postojna, inner carniola-karst"
+  },
+  {
+    "jobId": "job-04097",
+    "sourceJobKey": "null|serviser-monter gostinske opreme, serviser-monter klima naprav - m/ž|izola, coastal-karst"
+  },
+  {
+    "jobId": "job-04103",
+    "sourceJobKey": "null|svetovalec v sektorju za demografske in socialne statistike, oddelek za demografske statistike in življenjsko raven, določen čas - projekt »eu-silc 2026 modules and preparation of 2027 ad hoc subject«. - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04113",
+    "sourceJobKey": "emil frey fuso import d.o.o.|tehnični svetovalec (m\u2060/\u2060ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04115",
+    "sourceJobKey": "avto aktiv slo d.o.o.|servisni svetovalec (m/ž) - pe trzin|trzin, central slovenia"
+  },
+  {
+    "jobId": "job-04116",
+    "sourceJobKey": "unicredit|višji svetovalec (m/ž) v poslovni enoti ljubljana|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04117",
+    "sourceJobKey": "gorenjska banka|svetovalec pravnim osebam za mikro segment (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04118",
+    "sourceJobKey": "axlhub d.o.o.|microsoft power platform svetovalec (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04119",
+    "sourceJobKey": "inditex|svetovalec za prodajo in blagajnik (m/ž) pull & bear|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04121",
+    "sourceJobKey": "ey|davčni svetovalec začetnik (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04122",
+    "sourceJobKey": "inditex|svetovalec za prodajo in blagajnik (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04123",
+    "sourceJobKey": "obrtno-podjetniska zbornica slovenije|višji strokovni sodelavec - svetovalec s področja računovodstva in davkov - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04124",
+    "sourceJobKey": "obrtno-podjetniska zbornica slovenije|svetovalec - specialist za davčne zadeve - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04125",
+    "sourceJobKey": "univerza v ljubljani|rektorat, samostojni strokovni svetovalec področja v visokošolski dejavnosti vii/2-ii - za področje internacionalizacije in strateških partnerstev|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04126",
+    "sourceJobKey": "univerza v ljubljani|ef, podatkovni svetovalec vii/2, infrastrukturni program mric-icef (finančni laboratorij)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04142",
+    "sourceJobKey": "null|višji svetovalec področja iii - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04144",
+    "sourceJobKey": "null|področni svetovalec iii, tarifni razred vii/1, šifra delovnega mesta i017113, v noe vodstvo - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04155",
+    "sourceJobKey": "null|višji svetovalec področja i za področje regulative zdravil naravnega izvora v sektorju za preskrbo z zdravili in posebna dovoljenja - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04157",
+    "sourceJobKey": "null|področni svetovalec i - vodja pisarne in vodja tic - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04159",
+    "sourceJobKey": "null|višji svetovalec področja ii v sektorju za finance in računovodstvo, 2 prosti delovni mesti|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04163",
+    "sourceJobKey": "null|višji svetovalec področja i za področje določanja cen zdravil v sektorju za preskrbo z zdravili in posebna dovoljenja - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04165",
+    "sourceJobKey": "null|višji svetovalec področja ii v sektorju za finance in računovodstvo - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04171",
+    "sourceJobKey": "null|višji svetovalec področja i za področje določanja cen zdravil v sektorju za preskrbo z zdravili in posebna dovoljenja (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04172",
+    "sourceJobKey": "null|višji svetovalec področja i za regulativo zdravil naravnega izvora v sektorju za preskrbo z zdravili in posebna dovoljenja (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04174",
+    "sourceJobKey": "null|pomožni finančni svetovalec - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04180",
+    "sourceJobKey": "null|rehabilitacijski svetovalec na zaposlitveni in poklicni rehabilitaciji - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04186",
+    "sourceJobKey": "banka sparkasse|finančni svetovalec za poslovanje s podjetji|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04199",
+    "sourceJobKey": "ajpes; ajpes centrala ljubljana|področni sekretar, šifra i017080 - svetovalec direktorja za področje informatike - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04201",
+    "sourceJobKey": "bauhaus|svetovalec pri prodaji na oddelku ploščice (keramika, gradbene kemija) ljubljana btc|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04202",
+    "sourceJobKey": "drzavni svet republike slovenije|svetovalec za javne finance in proračunsko načrtovanje (šifra dm 122028, c017143) v splošni službi državnega sveta - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04203",
+    "sourceJobKey": "ministrstvo za obrambo|svetovalec v direktoratu za obrambno politiko, sektorju za sistemske obrambno politične zadeve (šifra dm 102611) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04204",
+    "sourceJobKey": "null|višji svetovalec področja i (i017159) v sektorju za razvoj, preventivo in vzgojo v cestnem prometu - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04205",
+    "sourceJobKey": "avtocenter trobec|prodajni svetovalec za nova vozila - omoda & jaecoo (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04206",
+    "sourceJobKey": "pirnar|prodajni svetovalec za dach regijo|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04207",
+    "sourceJobKey": "itclass|firstclass - svetovalec za iskanje& selekcijo it kadrov (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04208",
+    "sourceJobKey": "firstclass|firstclass - svetovalec za iskanje& selekcijo it kadrov (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04209",
+    "sourceJobKey": "plan-net avto d.o.o.|tehnični svetovalec za servisno mrežo|kamnik, central slovenia"
+  },
+  {
+    "jobId": "job-04210",
+    "sourceJobKey": "obcina dol pri ljubljani|svetovalec za gospodarske dejavnosti iii - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04212",
+    "sourceJobKey": "obcina dol pri ljubljani|višji svetovalec za javne službe in okolje iii - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04213",
+    "sourceJobKey": "bauhaus|svetovalec pri prodaji na sanitarnem oddelku (sanitarne inštalacije, sanitarna keramika) ljubljana rudnik|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04214",
+    "sourceJobKey": "obcina dol pri ljubljani|svetovalec pripravnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04215",
+    "sourceJobKey": "kariera|svetovalec za zavarovanja - 6 ur delavnik, polna zaposlitev in nič terenskih obveznosti m/ž/d|central slovenia"
+  },
+  {
+    "jobId": "job-04216",
+    "sourceJobKey": "whc d.o.o.|tehnično prodajni svetovalec (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04218",
+    "sourceJobKey": "brandstock|svetovalec oddelka za cenovne analize|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04219",
+    "sourceJobKey": "ey|svetovalec na področju obračuna plač (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04220",
+    "sourceJobKey": "bauhaus|svetovalec pri prodaji na sanitarnem oddelku ljubljana btc (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04221",
+    "sourceJobKey": "bauhaus|svetovalec pri prodaji na lesnem oddelku (m/ž) ljubljana btc|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04222",
+    "sourceJobKey": "null|pravni svetovalec - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04223",
+    "sourceJobKey": "coface|prodajni svetovalec (m/ž/d)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04224",
+    "sourceJobKey": "kompare|zavarovalniški svetovalec (m/ž) - licencirani agent|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04225",
+    "sourceJobKey": "kompare|prodajni svetovalec za avto zavarovanja (m/ž)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04228",
+    "sourceJobKey": "trenkwalder group|lažja proizvodna dela (m/ž) v logatcu|logatec, central slovenia"
+  },
+  {
+    "jobId": "job-04229",
+    "sourceJobKey": "trenkwalder group|strojnik - dvoizmensko (m/ž) v logatcu|logatec, central slovenia"
+  },
+  {
+    "jobId": "job-04230",
+    "sourceJobKey": "null|prodajni svetovalec na terenu|bohinj, upper carniola"
+  },
+  {
+    "jobId": "job-04231",
+    "sourceJobKey": "gorenjska banka|svetovalec (m/ž) - kranj|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-04234",
+    "sourceJobKey": "gorenjska banka|samostojni svetovalec (m/ž) - kranj|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-04235",
+    "sourceJobKey": "gorenjska banka|samostojni svetovalec v kontaktnem centru (m/ž)|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-04238",
+    "sourceJobKey": "null|višji pravni svetovalec i - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-04241",
+    "sourceJobKey": "merkur|prodajni svetovalec (m/ž) tc merkur škofja loka|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-04283",
+    "sourceJobKey": "merkur|prodajni svetovalec (m/ž) tc merkur črnomelj|črnomelj, southeast slovenia"
+  },
+  {
+    "jobId": "job-04285",
+    "sourceJobKey": "inpro d.o.o. novo mesto|prodajni svetovalec|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-04286",
+    "sourceJobKey": "null|prodajni svetovalec - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-04292",
+    "sourceJobKey": "zavod republike slovenije za zaposlovanje|samostojni svetovalec i, območna služba nova gorica, oddelek/delovno področje za apz - m/ž|nova gorica, gorizia"
+  },
+  {
+    "jobId": "job-04294",
+    "sourceJobKey": "trzni inspektorat republike slovenije|svetovalec - pripravnik, območna enota murska sobota|murska sobota, mura"
+  },
+  {
+    "jobId": "job-04295",
+    "sourceJobKey": "null|svetovalec (šifra dm 140) - m/ž|ravne na koroškem, carinthia"
+  },
+  {
+    "jobId": "job-04300",
+    "sourceJobKey": "onkološki inštitut ljubljana|bolničar negovalec, spremljevalec v bolnišnični dejavnosti, e034005, služba za oskrbovalne dejavnosti, m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04301",
+    "sourceJobKey": "onkološki inštitut ljubljana|bolničar negovalec, spremljevalec v bolnišnični dejavnosti,e034005, služba za oskrbovalne dejavnosti - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04310",
+    "sourceJobKey": "null|bolničar - negovalec - pripravnik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04321",
+    "sourceJobKey": "null|bolničar negovalec i - m/ž|domžale, central slovenia"
+  },
+  {
+    "jobId": "job-04322",
+    "sourceJobKey": "dom starejših občanov grosuplje|bolničar pripravnik - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-04323",
+    "sourceJobKey": "prizma ponikve, posebni socialno varstveni zavod|bolničar-negovalec i - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-04324",
+    "sourceJobKey": "dom starejših občanov grosuplje|bolničar negovalec - m/ž|grosuplje, central slovenia"
+  },
+  {
+    "jobId": "job-04327",
+    "sourceJobKey": "null|bolničar - negovalec - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04328",
+    "sourceJobKey": "null|socialna oskrbovalka na domu v občini brezovica - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04330",
+    "sourceJobKey": "css škofja loka|bolničar negovalec - dolgotrajna oskrba na domu (m/ž)|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-04333",
+    "sourceJobKey": "null|bolničar negovalec - pripravnik v pe žiri - m/ž|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-04334",
+    "sourceJobKey": "senecura|bolničar negovalec (m/ž/x)|žiri, upper carniola"
+  },
+  {
+    "jobId": "job-04335",
+    "sourceJobKey": "null|bolničar negovalec - pripravnik - m/ž|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-04336",
+    "sourceJobKey": "null|bolničar negovalec - m/ž|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-04338",
+    "sourceJobKey": "null|bolničar negovalec v pe žiri - m/ž|škofja loka, upper carniola"
+  },
+  {
+    "jobId": "job-04340",
+    "sourceJobKey": "null|bolničar - negovalec i - m/ž|radovljica, upper carniola"
+  },
+  {
+    "jobId": "job-04343",
+    "sourceJobKey": "null|socialna oskrbovalka ii (i) - m/ž|radovljica, upper carniola"
+  },
+  {
+    "jobId": "job-04344",
+    "sourceJobKey": "dom dr. jozeta potrca poljcane|f024001 bolničar - negovalec - pripravnik - m/ž|slovenska bistrica, drava"
+  },
+  {
+    "jobId": "job-04345",
+    "sourceJobKey": "dom dr. jozeta potrca poljcane|f024001 bolničar negovalec - m/ž|slovenska bistrica, drava"
+  },
+  {
+    "jobId": "job-04347",
+    "sourceJobKey": "null|bolničar negovalec - pripravnik - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-04350",
+    "sourceJobKey": "null|bolničar negovalec - pripravnik - delovno mesto štore - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-04351",
+    "sourceJobKey": "null|bolničar negovalec i - delovno mesto štore - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-04359",
+    "sourceJobKey": "null|bolničar-negovalec - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-04360",
+    "sourceJobKey": "vitadom, pe dom starejsih crni vrh|bolničar negovalec - m/ž|idrija, gorizia"
+  },
+  {
+    "jobId": "job-04362",
+    "sourceJobKey": "null|bolničar negovalec - m/ž|idrija, gorizia"
+  },
+  {
+    "jobId": "job-04367",
+    "sourceJobKey": "null|bolničar negovalec - m/ž|cerknica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-04368",
+    "sourceJobKey": "null|bolničar negovalec - m/ž|radlje ob dravi, carinthia"
+  },
+  {
+    "jobId": "job-04370",
+    "sourceJobKey": "koroski dom starostnikov|bolničar negovalec (pe slovenj gradec) - m/ž|slovenj gradec, carinthia"
+  },
+  {
+    "jobId": "job-04384",
+    "sourceJobKey": "null|vzgojitelj v domu za učence s posebnimi potrebami - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04390",
+    "sourceJobKey": "vrtec miskolin|vzgojitelj predšolskih otrok - pomočnik vzgojitelja - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04391",
+    "sourceJobKey": "null|vzgojitelj predšolskih otrok - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04400",
+    "sourceJobKey": "null|vzgojitelj predšolskih otrok - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-04414",
+    "sourceJobKey": "srednja ekonomska sola ljubljana|učitelj matematike - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04417",
+    "sourceJobKey": "null|učitelj (slovenščine) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04418",
+    "sourceJobKey": "null|učitelj (komunikacijskih veščin - logoped) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04419",
+    "sourceJobKey": "null|učitelj (matematike in računalništva) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04420",
+    "sourceJobKey": "null|učitelj (glasbe) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04421",
+    "sourceJobKey": "null|učitelj (matematike) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04422",
+    "sourceJobKey": "null|učitelj (razrednega pouka) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04423",
+    "sourceJobKey": "null|učitelj (specialno rehabilitacijski pedagog) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04431",
+    "sourceJobKey": "univerza v ljubljani|ef, visokošolski učitelj - docent za področje denarja in finance|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04432",
+    "sourceJobKey": "univerza v ljubljani|ff. visokošolski učitelj na oddelku za filozofijo|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04433",
+    "sourceJobKey": "univerza v ljubljani|ff, visokošolski učitelj na oddelku za bibliotekarstvo, informacijsko znanost in knjigarstvo|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04434",
+    "sourceJobKey": "univerza v ljubljani|ff, visokošolski učitelj na oddelku za psihologijo|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04435",
+    "sourceJobKey": "univerza v ljubljani|teof, visokošolski učitelj - docent, katedra za osnovno bogoslovje in dialog|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04436",
+    "sourceJobKey": "univerza v ljubljani|fu, visokošolski učitelj predavatelj - višji predavatelj (področje organizacija javnega sektorja)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04437",
+    "sourceJobKey": "univerza v ljubljani|preklic_aluo, visokošolski učitelj - docent, na oddelku za oblikovanje vizualnih komunikacij|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04438",
+    "sourceJobKey": "univerza v ljubljani|fmf, visokošolski učitelj za področje matematike na oddelku za matematiko|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04439",
+    "sourceJobKey": "univerza v ljubljani|mf, visokošolski učitelj, katedra za patologijo|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04440",
+    "sourceJobKey": "univerza v ljubljani|mf, visokošolski učitelj, katedra za ustne bolezni in parodontologijo|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04442",
+    "sourceJobKey": "null|učitelj razrednik - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04444",
+    "sourceJobKey": "null|učitelj ekonomije - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04445",
+    "sourceJobKey": "null|učitelj - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04449",
+    "sourceJobKey": "null|učitelj praktičnega pouka elektrotehniških modulov - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04452",
+    "sourceJobKey": "null|učitelj in organizator šolske prehrane - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04458",
+    "sourceJobKey": "null|učitelj gradbenih - arhitekturnih predmetov - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04468",
+    "sourceJobKey": "null|visokošolski/a učitelj/ica za področje gledališka in radijska režija na oddelku za gledališče in radio, katedra za gledališko in radijsko režijo - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04474",
+    "sourceJobKey": "null|učitelj fizike in matematike - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04476",
+    "sourceJobKey": "srednja ekonomska sola ljubljana|učitelj računovodstva - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04477",
+    "sourceJobKey": "null|učitelj angleščine - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04480",
+    "sourceJobKey": "osnovna šola trzin|učitelj podaljšanega bivanja - m/ž|domžale, central slovenia"
+  },
+  {
+    "jobId": "job-04482",
+    "sourceJobKey": "osnovna šola škofljica|učitelj angleščine in učitelj v oddelku podaljšanega bivanja - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04485",
+    "sourceJobKey": "null|učitelj matematike - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04493",
+    "sourceJobKey": "null|učitelj vožnje b kategorije in učitelj cpp predpisov - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04500",
+    "sourceJobKey": "null|visokošolski učitelj - docent (d019008) (m/ž), na oddelku za oblikovanje vizualnih komunikacij, na študijski smeri grafično oblikovanje - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04502",
+    "sourceJobKey": "univerza v ljubljani|visokošolski učitelj - docent za področje denarja in finance (šifra dm: d019008) - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04503",
+    "sourceJobKey": "univerza v ljubljani|visokošolski učitelj na oddelku za filozofijo na filozofski fakulteti - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04504",
+    "sourceJobKey": "univerza v ljubljani|visokošolski učitelj - docent (d019008) ali visokošolski učitelj - izredni profesor (d019007) ali visokošolski učitelj - redni profesor (d019006), katedra za ekologijo in varstvo okolja - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04505",
+    "sourceJobKey": "univerza v ljubljani|visokošolski učitelj na oddelku za bibliotekarstvo, informacijsko znanost in knjigarstvo na filozofski fakulteti - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04506",
+    "sourceJobKey": "univerza v ljubljani|visokošolski učitelj na oddelku za psihologijo na filozofski fakulteti - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04507",
+    "sourceJobKey": "osnovna sola toneta cufarja|učitelj/-ica predmetnega pouka matematike - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04508",
+    "sourceJobKey": "mjob|učitelj angleščine|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04510",
+    "sourceJobKey": "univerza v ljubljani|vf, asistent za področje veterinarske medicine na kliniki za reprodukcijo in velike živali (klinika za prežvekovalce in prašiče)|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04511",
+    "sourceJobKey": "univerza v ljubljani|fmf, znanstveni sodelavec|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04512",
+    "sourceJobKey": "univerza v ljubljani|fmf, znanstveni sodelavec_b|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04513",
+    "sourceJobKey": "univerza v ljubljani|fmf, višji znanstveni sodelavec|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04514",
+    "sourceJobKey": "univerza v ljubljani|fmf, asistent z doktoratom|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04527",
+    "sourceJobKey": "gimnazija kranj|učitelj geografije v srednji šoli - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-04535",
+    "sourceJobKey": "prometna sola maribor|učitelj slovenščine - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-04537",
+    "sourceJobKey": "srednja sola za trzenje in dizajn maribor|učitelj in učitelj praktičnega pouka - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-04539",
+    "sourceJobKey": "null|logoped ii in učitelj za dodatno strokovno pomoč (logoped) - m/ž|slovenska bistrica, drava"
+  },
+  {
+    "jobId": "job-04540",
+    "sourceJobKey": "osnovna sola rada robica limbus|specialni pedagog - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-04542",
+    "sourceJobKey": "osnovna sola antona askerca velenje|učitelj razrednega pouka - m/ž|velenje, savinja"
+  },
+  {
+    "jobId": "job-04548",
+    "sourceJobKey": "null|učitelj razrednega pouka (učitelj v razširjenem programu) - m/ž|šmarje pri jelšah, savinja"
+  },
+  {
+    "jobId": "job-04549",
+    "sourceJobKey": "null|učitelj predmetnega pouka (zgodovine in geografije) - m/ž|šmarje pri jelšah, savinja"
+  },
+  {
+    "jobId": "job-04550",
+    "sourceJobKey": "osnovna sola frana kocbeka gornji grad|mobilni učitelj za dodatno strokovno pomoč - m/ž|mozirje, savinja"
+  },
+  {
+    "jobId": "job-04552",
+    "sourceJobKey": "null|učitelj razrednega ali predmetnega pouka z opravljenim študijskim programom za izpopolnjevanje iz zgodnjega učenja angleščine - m/ž - m/ž|šmarje pri jelšah, savinja"
+  },
+  {
+    "jobId": "job-04553",
+    "sourceJobKey": "null|učitelj predmetnega pouka tehnike in tehnologije z dopolnjevanjem (matematika/rap) - m/ž - m/ž|šmarje pri jelšah, savinja"
+  },
+  {
+    "jobId": "job-04556",
+    "sourceJobKey": "ekonomska sola novo mesto|učitelj matematike - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-04560",
+    "sourceJobKey": "ekonomska sola novo mesto|učitelj naravoslovja - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-04561",
+    "sourceJobKey": "ekonomska sola novo mesto|učitelj angleškega jezika - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-04562",
+    "sourceJobKey": "ekonomska sola novo mesto|učitelj psihologije - m/ž|novo mesto, southeast slovenia"
+  },
+  {
+    "jobId": "job-04574",
+    "sourceJobKey": "osnovna sola podbocje|učitelj matematike - m/ž|krško, lower sava"
+  },
+  {
+    "jobId": "job-04578",
+    "sourceJobKey": "null|farmacevt iii (i) - m/ž|kranj, upper carniola"
+  },
+  {
+    "jobId": "job-04593",
+    "sourceJobKey": "null|varilec - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04602",
+    "sourceJobKey": "null|varilec - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-04604",
+    "sourceJobKey": "null|varilec tig/mag (141/135) za izdelavo in popravilo industrijskih rezervoarjev - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-04605",
+    "sourceJobKey": "null|varilec tig (141) za montažo cevovodov - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-04609",
+    "sourceJobKey": "null|varilec - m/ž|metlika, southeast slovenia"
+  },
+  {
+    "jobId": "job-04612",
+    "sourceJobKey": "kariera|varilec - m/ž|črnomelj, southeast slovenia"
+  },
+  {
+    "jobId": "job-04615",
+    "sourceJobKey": "tips d.o.o. proizvodno in trgovsko podjetje|varilec - m/ž|krško, lower sava"
+  },
+  {
+    "jobId": "job-04616",
+    "sourceJobKey": "null|varilec - m/ž|cerknica, inner carniola-karst"
+  },
+  {
+    "jobId": "job-04620",
+    "sourceJobKey": "strabag d.o.o.|mehanik/mehaničarka za gradbeno mehanizacijo|lukovica, central slovenia - domžale, central slovenia"
+  },
+  {
+    "jobId": "job-04623",
+    "sourceJobKey": "null|mehanik /avtoelektričar - m/ž|ljubljana, central slovenia"
+  },
+  {
+    "jobId": "job-04628",
+    "sourceJobKey": "null|mehanik - m/ž|maribor, drava"
+  },
+  {
+    "jobId": "job-04633",
+    "sourceJobKey": "null|mehanik - m/ž|celje, savinja"
+  },
+  {
+    "jobId": "job-04634",
+    "sourceJobKey": "fis, proizvodnja, trgovina, storitve, d.o.o.|mehanik - m/ž|žalec, savinja"
+  },
+  {
+    "jobId": "job-04638",
+    "sourceJobKey": "trimo|ključavničar vzdrževanja m/ž|trebnje, southeast slovenia"
+  },
+  {
+    "jobId": "job-04639",
+    "sourceJobKey": "brus d.o.o. transport|mehanik za tovornjake - m/ž|idrija, gorizia"
+  },
+  {
+    "jobId": "job-04640",
+    "sourceJobKey": "null|mehanik kmetijske mehanizacije - m/ž|murska sobota, mura"
+  },
+  {
+    "jobId": "job-04644",
+    "sourceJobKey": "null|frizer - m/ž|celje, savinja"
+  }
+]

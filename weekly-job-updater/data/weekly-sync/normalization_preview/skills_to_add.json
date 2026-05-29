@@ -1,0 +1,97 @@
+[
+  {
+    "name": "Card Business",
+    "SkillTypeId": "skill-finance",
+    "id": "sk-card-business"
+  },
+  {
+    "name": "Communication and Teamwork",
+    "SkillTypeId": "skill-soft-skill",
+    "id": "sk-communication-teamwork"
+  },
+  {
+    "name": "Control Activities",
+    "SkillTypeId": "skill-production",
+    "id": "sk-control-activities"
+  },
+  {
+    "name": "Dental Technology",
+    "SkillTypeId": "skill-technical",
+    "id": "sk-dental-technology"
+  },
+  {
+    "name": "Dentistry",
+    "SkillTypeId": "skill-healthcare",
+    "id": "sk-dentistry"
+  },
+  {
+    "name": "Dry Ice Cleaning",
+    "SkillTypeId": "skill-technical",
+    "id": "sk-dry-ice-cleaning"
+  },
+  {
+    "name": "Food Technology",
+    "SkillTypeId": "skill-technical",
+    "id": "sk-food-technology"
+  },
+  {
+    "name": "Funeral Services",
+    "SkillTypeId": "skill-other",
+    "id": "sk-funeral-services"
+  },
+  {
+    "name": "Internal Transport",
+    "SkillTypeId": "skill-logistics",
+    "id": "sk-internal-transport"
+  },
+  {
+    "name": "Laser Cleaning",
+    "SkillTypeId": "skill-technical",
+    "id": "sk-laser-cleaning"
+  },
+  {
+    "name": "Maintenance",
+    "SkillTypeId": "skill-technical",
+    "id": "sk-maintenance"
+  },
+  {
+    "name": "Product Marketing",
+    "SkillTypeId": "skill-sales",
+    "id": "sk-marketing"
+  },
+  {
+    "SkillTypeId": "skill-technical",
+    "name": "Meat Technology",
+    "id": "sk-meat-technology"
+  },
+  {
+    "name": "Packaging",
+    "SkillTypeId": "skill-production",
+    "id": "sk-packaging"
+  },
+  {
+    "name": "Quality Management",
+    "SkillTypeId": "skill-management",
+    "id": "sk-quality-management"
+  },
+  {
+    "name": "Radiology Engineer",
+    "SkillTypeId": "skill-technical",
+    "id": "sk-radiology-engineer"
+  },
+  {
+    "name": "Real Estate",
+    "SkillTypeId": "skill-sales",
+    "id": "sk-real-estate"
+  },
+  {
+    "name": "Security",
+    "SkillTypeId": "skill-safety",
+    "id": "sk-security"
+  },
+  {
+    "name": "Unmanned Aerial Vehicle Operator",
+    "SkillTypeId": "skill-technical",
+    "id": "sk-unmanned-aerial-vehicle-operator"
+  }
+]

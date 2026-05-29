@@ -1,0 +1,9 @@
+{
+  "newJobsJsonFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-scrape-preview\\weekly_jobs_new_for_db.json",
+  "newJobsCsvFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-scrape-preview\\weekly_jobs_new_for_db.csv",
+  "scrapedJobsAlreadyInDb": 1368,
+  "scrapedJobsNewForDb": 504,
+  "existingJobsJsonFile": "C:\\Users\\Nenad\\Documents\\praktikum2\\Pametni-iskalec-zaposlitev-in-napovedovalec-plac\\Pametni-iskalec-zaposlitev-in-napovedovalec-pla-\\weekly-job-updater\\data\\weekly-scrape-preview\\weekly_jobs_existing_in_db.json",
+  "scrapedUniqueRecentJobs": 1872,
+  "existingSourceJobKeysInDb": 4645
+}

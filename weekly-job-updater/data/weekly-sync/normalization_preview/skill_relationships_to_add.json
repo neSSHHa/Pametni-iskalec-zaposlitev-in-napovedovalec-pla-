@@ -1,0 +1,22 @@
+[
+  {
+    "sourceSkillId": "sk-food-preparation",
+    "relationshipType": "PART_OF",
+    "targetSkillId": "sk-cooking"
+  },
+  {
+    "sourceSkillId": "sk-food-safety",
+    "relationshipType": "PART_OF",
+    "targetSkillId": "sk-food-safety"
+  },
+  {
+    "sourceSkillId": "sk-haccp",
+    "relationshipType": "PART_OF",
+    "targetSkillId": "sk-food-safety"
+  },
+  {
+    "sourceSkillId": "sk-dietary-cooking",
+    "relationshipType": "RELATED_TO",
+    "targetSkillId": "sk-food-safety"
+  }
+]

@@ -1,0 +1,211 @@
+{
+  "jobs": [
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|kuhar v gostišču jezero ob planšarskem jezeru na jezerskem - m/ž|kranj, upper carniola",
+      "warnings": [],
+      "description": "KUHARJI/KUHARICE PRIPRAVLJAJO IN KUHAJO JEDI V GOSTIŠČU. Izobrazba: srednja poklicna; Gostinstvo in turizem, šport, osebne storitve, drugo. Pošlji življenjepis na: gosttus@gmail.com",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": ["sk-cooking"],
+      "companyname": "Unknown company",
+      "locationId": "loc-kranj-upper-carniola",
+      "newSkills": [],
+      "datePosted": "2026-05-22",
+      "sourceWebsite": "https://jobviewtrack.com/v2/C7eLv_UEbFVzSd_p9d-tYvU9bEFfNMnS60cOwC_7YEIGeiaax-rB3XEXeMSvbC2XuCKUDDvlzaNdeFjxckRA0n5wfqxVfO17l5kbQUVzbLxe7dtb3I4WPuE5utOYHHFcYTMIE73wqAQKPnB7f-doB99E-5y6x1vi1wNM8J5IRfFiq_NOhcxzeHPMouYnHCxyJPaR9jP4wf36OmqUdjlW7OGHLAvpeiBCFoU4IQiucMA",
+      "educationLevelId": "edu-secondary-vocational",
+      "jobname": "KUHAR V GOSTIŠČU JEZERO OB PLANŠARSKEM JEZERU NA JEZERSKEM - M/Ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|kuhar m/ž - m/ž|lendava, mura",
+      "warnings": [],
+      "description": "kuhanje in priprava različnih jedi ter ostala dela po navodilu nadrejenega. Izobrazba: srednja poklicna. Pošlji življenjepis na: bistronameji@gmail.com",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": ["sk-cooking"],
+      "companyname": "Unknown company",
+      "locationId": "loc-lendava-mura",
+      "newSkills": [],
+      "datePosted": "2026-05-22",
+      "sourceWebsite": "https://jobviewtrack.com/v2/7LnoEc-yAubCNP2G0V5Lm19iWB-rHPV8pYojSEAWROtHX5anSIUhGuureAz0R_dhYReDYwhwy9ite0KUDRhdcCyTZkUe1Y1-rbc-pJzUFZC7QH0bpxbAz3kiIWJ4FHafGq_VDnUw_g_KuJFdhrFnpEN6RaFKoM_V3FPdJmmlprN97wl0YgzGfqgYbRw-gFVKU3WAduassuuep5pTuyp_pxFB9ILDQgj7hW1UmU5uTs0",
+      "educationLevelId": "edu-secondary-vocational",
+      "jobname": "KUHAR M/Ž - M/Ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|kuhar iv v zavodu za prestajanje kazni zapora dob|mirna, southeast slovenia",
+      "warnings": [],
+      "description": "Datum objave 22. 5. 2026. Rok za prijavo 13. 6. 2026 do 23.59. Tip zaposlitve: Polni delovni čas. Institucija: Uprava Republike Slovenije za izvrševanje kazenskih sankcij. Način zaposlitve: Nedoločen čas.",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "skillIds": [
+        "sk-cooking",
+        "sk-food-safety"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-mirna-southeast-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-22",
+      "sourceWebsite": "https://jobviewtrack.com/v2/wXKFehM8Hg9aZOscewhOoB16rcE9y62nzhySb3woAUrS364FiwehN3981rTEevBlycu-i-TUp_LjV2QFrECwaj_5neVa5Hghbw-qwNQSJ8PFTRITGrGyjnTu26arpxciXC5lIjVBkEaYpcxLyrCpFuEY4Gqin8krefd_hShIWdnWH9RbW-nvAbU8ykpGaDxdJXfiU4Y-qM2KBo3aNfHdQ-fU3jMzWHO-ULf-CqKNqVU",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Kuhar IV v Zavodu za prestajanje kazni zapora Dob",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "adecco|kuhar / pomočnik kuharja / natakar (m/ž)|slovenia",
+      "warnings": [],
+      "description": "Priprava in pogrevanje jedi, priprava gobove omake, enolončnic in ostalih jedi, priprava mesnih, sirnih in paštetnih dilc, skrb za čistočo in pomivanje posode, delo v šanku in strežbi, pripr.",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": [
+        "sk-cooking",
+        "sk-food-preparation",
+        "sk-customer-service"
+      ],
+      "companyname": "Adecco",
+      "locationId": "loc-central-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-22",
+      "sourceWebsite": "https://jobviewtrack.com/v2/xExJ7IiM4uX0zaOX7jg9nJL5EOTfTXA68yPL_UQhTk5zWSyWwvUOnNqm62sKCU_PBDayQdxiDyZMaLuY-IccruKIbrvzN8qsBG0ukalXj5-9YrTZok6tyroQQXWnPqf9ghUvBWcaIuseQgoOohIHfOFhWxhkYEwcT0P8P1TUt-xB_z0Tt-YLYqd5fMr3DdMVRGdPD8DX-ojTeeXBQLghFo1MBnkNBEFwItDhCMayi28",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "Kuhar / Pomočnik kuharja / Natakar (m/ž)",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|kuhar specialist - terme zreče - m/ž|slovenske konjice, savinja",
+      "warnings": [],
+      "description": "PRIPRAVLJANJE ZAHTEVNEJŠIH JEDI PO NAROČILU, PO POTREBI PRED GOSTOM. Sooblikovanje kulinarične ponudbe. Spremljanje razvoja stroke, prenos znanja ter uvajanje novosti na svojem delovnem področju. Voden.",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": [
+        "sk-cooking",
+        "sk-menu-planning",
+        "sk-food-safety"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-slovenske-konjice-savinja",
+      "newSkills": [],
+      "datePosted": "2026-05-22",
+      "sourceWebsite": "https://jobviewtrack.com/v2/pWbwUDjy_8Rk36y4Hd3EhJEebx-ckOe8xe08VfU9g1MIEd5TB5DteD6-0MEAuv3Mp8n6_z8kRY324z7XY2dPw501Z6vcAaKniTc-ujvngLNbWdh3It-x1JUca_Ct7Nhk3gDFLBaCawSnHAu6PcRCFX-761FJtKblpTwlBkfBA_ZVvp8BAO6NR5t77y8LhKRRcdlMXm6pg-DKhgKaCJPLwKr-9uloKtXY2QUi8mmV9tw",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "KUHAR SPECIALIST - TERME ZREČE - M/Ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|kuhar m/ž - m/ž|murska sobota, mura",
+      "warnings": [],
+      "description": "SAMOSTOJNO KUHANJE JEDI PO JEDILNIKU, PREDPRIPRAVE, SKRB ZA ČISTOČO KUHINJSKIH POVRŠIN. Izobrazba: srednja strokovna, srednja splošna; Gostinstvo in turizem, šport, osebne storitve, drugo.",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": [
+        "sk-cooking",
+        "sk-food-preparation"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-murska-sobota-mura",
+      "newSkills": [],
+      "datePosted": "2026-05-22",
+      "sourceWebsite": "https://jobviewtrack.com/v2/Zpw6rpRnL009G0e02ZV_7p7Bbpbsr2GRLSaye6bbEiZ9-diqpTbyNnSA_qPo1hqI4LQLldr0Loppbfdmr-yQKTm1x7-xeGWUqGC7Bl37-2-zjrZ9YQa5690dANcs66ACHxm0hPHiIH8ZYshc07Rwa8w5yFubE8hytuAIA3XobVmgARnns2KQiDIo6RmS2PiPE-1Z46XAx2ZYIvwSxSRjEtSpDewz-0-eITT7sYPQhU8",
+      "educationLevelId": "edu-secondary-vocational",
+      "jobname": "KUHAR M/Ž - M/Ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|kuhar - terme zreče - m/ž|slovenske konjice, savinja",
+      "warnings": [],
+      "description": "PRIPRAVLJANJE JEDI PO VELJAVNI RECEPTURI TER VKLJUČEVANJE V VSE FAZE DELOVNega PROCESA. Izobrazba: srednja poklicna; Hotelirstvo in gostinstvo. Drugo: PO IZTEKU POGODBE ZA DOLOČEN ČAS, MOŽNOST DOLGO.",
+      "newLocation": null,
+      "workTypeIds": ["work-on-site"],
+      "skillIds": [
+        "sk-cooking",
+        "sk-food-preparation"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-slovenske-konjice-savinja",
+      "newSkills": [],
+      "datePosted": "2026-05-22",
+      "sourceWebsite": "https://jobviewtrack.com/v2/tyFbdk-YG7pw79C7XMZqTZ80gQatKI0p-UaxLJ_Xe-78bJCVT6B-BDWn7eBia-zpxAxiMttNzkp33QwBz9QLzvik2oRzmSED7SU0oPHjjUYPWuFkynyC-46W2gMWS7tFIqZd4soGcubzWDRF6tpaOKwWUAHSlBBWdxgXMRLSTE4s9Te0VlwbTWgi8M3Y8ANOyIdpTG2YF2N0tQ0tf3vzrWvytC40ouvEmBldnLJQcis",
+      "educationLevelId": "edu-secondary-vocational",
+      "jobname": "KUHAR - TERME ZREČE - M/Ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "dom upokojencev ptuj|dietni kuhar v v zsv - m/ž|ptuj, drava",
+      "warnings": [],
+      "description": "-PRIPRAVLJANJE ŽIVIL IN KUHANJE JEDI, DIET IN NAPITKOV ZA STANOVALCE IN DELITEV OBROKOV HRANE STANOVALCEM, VODENJE KUHINJE V ODSOTNOSTI VODJE KUHINJE; -SKRB ZA KAKOVOSTNO IN NEOPOREČNO PREHRANO STANOV.",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": [
+        "sk-cooking",
+        "sk-patient-care"
+      ],
+      "companyname": "DOM UPOKOJENCEV PTUJ",
+      "locationId": "loc-ptuj-drava",
+      "newSkills": [],
+      "datePosted": "2026-05-21",
+      "sourceWebsite": "https://jobviewtrack.com/v2/tqjrFDuNikJo0F4395F_ip02feocf6TK4AbsiztC6_sR0mWmAjvXTQcpN5YzMBArDTlo1tu27H9wTB4820w5ahkaTmE6766QmlC87bKie4sqqI-zH7NipiEpZ83D5b22CGJbxrIx3VoNooMsoHUQshW4Zy1sKrb4cauX5Eeh5VizSDBmeWY8hqAu2LRLHhsxZM2vWZOGLjkYtnjaKAwROMkwGhtVejN1Pfs4qjBdOTk",
+      "educationLevelId": "edu-not-specified",
+      "jobname": "DIETNI KUHAR V V ZSV - M/Ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-not-specified",
+      "sourceJobKey": "|kuhar - m/ž|mozirje, savinja",
+      "warnings": [],
+      "description": "POMOČ V KUHINJI. Izobrazba: srednja poklicna; Gostinstvo in turizem, šport, osebne storitve, podrobneje neopredeljeno.",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": [
+        "sk-cooking",
+        "sk-food-preparation"
+      ],
+      "companyname": "Unknown company",
+      "locationId": "loc-mozirje-savinja",
+      "newSkills": [],
+      "datePosted": "2026-05-20",
+      "sourceWebsite": "https://jobviewtrack.com/v2/-_VX5dop6wJg6WGtg0iVCXhzWiJsJZGFcNCrKrprXTCOH6oWFQNtzPgyuu8njRSopCx9TtfTPZuMMMXJxd4rcStGe7N7CNcp5urS2dXJ9orhjHmtaA06zEt3BbyAEswMzf1RDyCNnu8ntaSvc7ZvvJiwx6in1lg929GMoNCmo0jlOT8opD7ynNOXlkaNYcpsF02Dp716x3d6YYWNUn6B4-kujducbBT6eXldumwRMAw",
+      "educationLevelId": "edu-secondary-vocational",
+      "jobname": "KUHAR - M/Ž",
+      "status": "ACTIVE"
+    },
+    {
+      "newSkillRelations": [],
+      "experienceLevelId": "exp-junior",
+      "sourceJobKey": "sovita|kuhar, m/ž, golnik|slovenia",
+      "warnings": [],
+      "description": "hrane. Druga dela. Pričetek dela: Junij 2026. Ustrezna izobrazba: <b>Kuhar<\/b> ali gostinski/živilski tehnik. Vsaj dve leti.",
+      "newLocation": null,
+      "workTypeIds": ["work-not-specified"],
+      "skillIds": [
+        "sk-cooking",
+        "sk-food-preparation"
+      ],
+      "companyname": "Sovita",
+      "locationId": "loc-central-slovenia",
+      "newSkills": [],
+      "datePosted": "2026-05-22",
+      "sourceWebsite": "https://jobviewtrack.com/v2/P-vPQ_P87k3OVCHxIpLdS8h-jo6yEzreuq_lOneL_w9THxAmyJ1wW6e4Oirxoqxab8BkLH08ULHVNcK6E44d7U-_AYQG20PcFfp5JG2Zzn3TcC9_sVszrp2EkNZXLbfpQfzLdi2bFCl7k8_vAI3jIK6X9KXs_kOcZcIN8l3Ge9Ip8HycbyFeiMvw7YTHSFcxtE8XIyAlIiqSqAd7kd0_bGsW9gt8fDf0f6j6LV0q9XY",
+      "educationLevelId": "edu-secondary-vocational",
+      "jobname": "Kuhar, m/ž, Golnik",
+      "status": "ACTIVE"
+    }
+  ],
+  "batchErrors": []
+}
