@@ -26,7 +26,7 @@ public class ImportSloveniaData {
             conn.setAutoCommit(false);
 
             System.out.println("Connected to MySQL.");
-            System.out.println("Starting Slovenia import...");
+            System.out.println("Starting Slovenia + Austria import...");
 
             clearDatabase(conn);
             importAll(conn);
@@ -34,7 +34,7 @@ public class ImportSloveniaData {
             conn.commit();
 
             System.out.println("=======================================");
-            System.out.println("SLOVENIA IMPORT FINISHED SUCCESSFULLY");
+            System.out.println("SLOVENIA + AUSTRIA IMPORT FINISHED SUCCESSFULLY");
             System.out.println("=======================================");
 
         } catch (Exception e) {
@@ -324,13 +324,47 @@ private static Integer parseIntegerOrNull(String value) {
         try (BufferedReader br = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
 
             String line;
+            StringBuilder record = new StringBuilder();
 
             while ((line = br.readLine()) != null) {
-                rows.add(parseCsvLine(removeBom(line)));
+                if (record.length() > 0) {
+                    record.append("\n");
+                }
+
+                record.append(removeBom(line));
+
+                if (isCsvRecordComplete(record)) {
+                    rows.add(parseCsvLine(record.toString()));
+                    record.setLength(0);
+                }
+            }
+
+            if (record.length() > 0) {
+                rows.add(parseCsvLine(record.toString()));
             }
         }
 
         return rows;
+    }
+
+    private static boolean isCsvRecordComplete(CharSequence record) {
+
+        boolean insideQuotes = false;
+
+        for (int i = 0; i < record.length(); i++) {
+
+            char c = record.charAt(i);
+
+            if (c == '"') {
+                if (insideQuotes && i + 1 < record.length() && record.charAt(i + 1) == '"') {
+                    i++;
+                } else {
+                    insideQuotes = !insideQuotes;
+                }
+            }
+        }
+
+        return !insideQuotes;
     }
 
     private static String removeBom(String line) {
