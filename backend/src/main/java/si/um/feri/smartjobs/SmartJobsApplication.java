@@ -6,9 +6,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import si.um.feri.smartjobs.ai.config.AiProperties;
+import si.um.feri.smartjobs.salary.config.SalaryProperties;
 
 @SpringBootApplication
-@EnableConfigurationProperties(AiProperties.class)
+@EnableConfigurationProperties({AiProperties.class, SalaryProperties.class})
 @EnableScheduling
 public class SmartJobsApplication {
     public static void main(String[] args) {

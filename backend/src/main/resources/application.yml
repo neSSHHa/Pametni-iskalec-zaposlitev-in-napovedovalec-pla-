@@ -22,3 +22,5 @@ smartjobs:
   cors-allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000}
   ai:
     service-url: ${AI_SERVICE_URL:http://localhost:8090}
+  salary:
+    service-url: ${SALARY_SERVICE_URL:http://localhost:8091}

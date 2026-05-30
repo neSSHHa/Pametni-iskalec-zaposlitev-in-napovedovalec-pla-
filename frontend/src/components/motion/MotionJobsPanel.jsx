@@ -11,6 +11,7 @@ export default function MotionJobsPanel({
   jobs = [],
   totalCount,
   filterRequest,
+  salaryPrediction,
   query = "",
   cvName = "",
   hasMore = false,
@@ -56,6 +57,7 @@ export default function MotionJobsPanel({
       </div>
 
       <QuerySummaryCard mode={mode} query={query} cvName={cvName} chips={chips} />
+      <SalaryPredictionCard prediction={salaryPrediction} />
 
       {loading ? <p className="motion-status">Waiting for the API response...</p> : null}
       {error ? <p className="motion-error">{error}</p> : null}
@@ -120,6 +122,37 @@ export default function MotionJobsPanel({
       ) : null}
     </section>
   );
+}
+
+function SalaryPredictionCard({ prediction }) {
+  if (!prediction?.available) return null;
+
+  const min = formatEuro(prediction.predictedMinSalary, prediction.currency);
+  const max = formatEuro(prediction.predictedMaxSalary, prediction.currency);
+  const confidence = Number(prediction.confidence) || 0;
+  const modelMae = Number(prediction.modelMae);
+
+  return (
+    <article className="salary-prediction-card" aria-label="Predicted salary range">
+      <div>
+        <span>Expected salary range</span>
+        <strong>{min} - {max}</strong>
+        <p>Estimated from Austrian market data for the detected role, location, skills and experience.</p>
+      </div>
+      <aside>
+        <em>{confidence}%</em>
+        <span>Prediction confidence</span>
+        {Number.isFinite(modelMae) ? <small>Model MAE: {formatEuro(modelMae, prediction.currency)}</small> : null}
+      </aside>
+    </article>
+  );
+}
+
+function formatEuro(value, currency = "EUR") {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return "n/a";
+
+  return `${number.toLocaleString("sl-SI", { maximumFractionDigits: 0 })} ${currency || "EUR"}`;
 }
 
 function CompatibilitySummary({ score }) {

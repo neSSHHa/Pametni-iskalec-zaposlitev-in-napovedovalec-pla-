@@ -3,6 +3,7 @@ import { BarChart3, Brain, Database, FileText, Search, UserRound } from "lucide-
 import { getAnalyticsDashboard } from "../api/analyticsApi.js";
 import { uploadCv } from "../api/cvApi.js";
 import { getJobs, searchJobsByPrompt } from "../api/jobApi.js";
+import { predictSalary } from "../api/salaryApi.js";
 import MotionCityEqualizer from "../components/motion/MotionCityEqualizer.jsx";
 import MotionHero from "../components/motion/MotionHero.jsx";
 import MotionJobsPanel from "../components/motion/MotionJobsPanel.jsx";
@@ -445,6 +446,17 @@ function clearStoredResults() {
   }
 }
 
+async function loadSalaryPrediction(filterRequest) {
+  if (!filterRequest) return null;
+
+  try {
+    const prediction = await predictSalary(filterRequest);
+    return prediction?.available ? prediction : null;
+  } catch {
+    return null;
+  }
+}
+
 export default function MotionExperience({ initialMode = "idle", resultPage = false }) {
   const storedResult = resultPage ? readStoredResults(initialMode) : null;
   const [mode, setMode] = useState(storedResult?.mode || initialMode);
@@ -456,6 +468,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
   const [jobsPage, setJobsPage] = useState(storedResult?.jobsPage || 0);
   const [jobsHasMore, setJobsHasMore] = useState(Boolean(storedResult?.jobsHasMore));
   const [activeFilter, setActiveFilter] = useState(storedResult?.activeFilter || null);
+  const [salaryPrediction, setSalaryPrediction] = useState(storedResult?.salaryPrediction || null);
   const [analytics, setAnalytics] = useState(storedResult?.analytics || null);
   const [lastResultsMode, setLastResultsMode] = useState(storedResult?.lastResultsMode || (storedResult?.mode || ""));
   const [initialLoading, setInitialLoading] = useState(false);
@@ -602,6 +615,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
     setMode("search");
     setLoading(true);
     setError("");
+    setSalaryPrediction(null);
     setStatus(processingMode === "thinking"
       ? "AI is reading the prompt and filtering listings..."
       : "Fast mode detects clear criteria and ranks listings...");
@@ -613,10 +627,13 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       setJobs(mappedJobs);
       const totalCount = totalFromApiResponse(data, mappedJobs.length);
       const nextAnalytics = buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch });
+      const nextFilter = data?.filterRequest || null;
+      const nextSalaryPrediction = await loadSalaryPrediction(nextFilter);
       setJobsTotalCount(totalCount);
       setJobsPage(data?.page ?? 0);
       setJobsHasMore(false);
-      setActiveFilter(data?.filterRequest || null);
+      setActiveFilter(nextFilter);
+      setSalaryPrediction(nextSalaryPrediction);
       setAnalytics(nextAnalytics);
       setLastResultsMode("search");
       saveStoredResults({
@@ -627,7 +644,8 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
         jobsTotalCount: totalCount,
         jobsPage: data?.page ?? 0,
         jobsHasMore: false,
-        activeFilter: data?.filterRequest || null,
+        activeFilter: nextFilter,
+        salaryPrediction: nextSalaryPrediction,
         analytics: nextAnalytics,
         lastResultsMode: "search",
       });
@@ -646,6 +664,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
     setMode("cv");
     setLoading(true);
     setError("");
+    setSalaryPrediction(null);
     setStatus(processingMode === "thinking"
       ? "The CV is being read, AI is extracting the profile and matching listings..."
       : "The CV is being read, the fast parser is extracting skills and ranking listings...");
@@ -657,10 +676,13 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       setJobs(mappedJobs);
       const totalCount = totalFromApiResponse(data, mappedJobs.length);
       const nextAnalytics = buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch });
+      const nextFilter = data?.filterRequest || null;
+      const nextSalaryPrediction = await loadSalaryPrediction(nextFilter);
       setJobsTotalCount(totalCount);
       setJobsPage(data?.page ?? 0);
       setJobsHasMore(false);
-      setActiveFilter(data?.filterRequest || null);
+      setActiveFilter(nextFilter);
+      setSalaryPrediction(nextSalaryPrediction);
       setAnalytics(nextAnalytics);
       setLastResultsMode("cv");
       saveStoredResults({
@@ -671,7 +693,8 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
         jobsTotalCount: totalCount,
         jobsPage: data?.page ?? 0,
         jobsHasMore: false,
-        activeFilter: data?.filterRequest || null,
+        activeFilter: nextFilter,
+        salaryPrediction: nextSalaryPrediction,
         analytics: nextAnalytics,
         lastResultsMode: "cv",
       });
@@ -701,6 +724,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
     setQuery(fallbackQuery);
     setCvName("");
     setActiveFilter(null);
+    setSalaryPrediction(null);
     setLastResultsMode("");
     setInitialLoading(false);
     setLoading(false);
@@ -739,6 +763,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
             jobs={jobs}
             totalCount={jobsTotalCount || jobs.length}
             filterRequest={activeFilter}
+            salaryPrediction={salaryPrediction}
             query={query}
             cvName={cvName}
             hasMore={false}
