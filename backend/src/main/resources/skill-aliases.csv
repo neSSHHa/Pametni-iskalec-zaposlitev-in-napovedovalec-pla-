@@ -1,0 +1,328 @@
+# canonical skill; English, Slovenian and German aliases separated by |
+Teaching;teacher|teaching|educator|instructor|ucitelj|uciteljica|poucevanje|lehrer|lehrerin|unterricht
+Nursing;nurse|nursing|medicinska sestra|zdravstvenik|krankenpfleger|krankenschwester|pflegefachkraft
+Patient Care;patient care|nega pacientov|oskrba pacientov|patientenpflege
+Elderly Care;elderly care|senior care|oskrba starejsih|altenpflege
+Home Care;home care|nega na domu|hauspflege|hauskrankenpflege
+Childcare;childcare|varstvo otrok|kinderbetreuung
+Early Childhood Education;kindergarten teacher|preschool teacher|vzgojitelj|vzgojiteljica|kindergartenpaedagoge
+Special Education;special education|specialni pedagog|sonderpaedagogik
+Accounting;accountant|accounting|racunovodja|racunovodstvo|buchhalter|buchhaltung
+Bookkeeping;bookkeeper|bookkeeping|knjigovodja|knjigovodstvo|buchhaltung
+Sales;sales|salesperson|prodajalec|prodajalka|verkauf|verkaeufer|verkaeuferin
+Retail Sales;retail sales|prodaja na drobno|einzelhandel
+Retail Cashier;cashier|blagajnik|blagajnicarka|kassierer|kassiererin
+Customer Service;customer service|podpora strankam|delo s strankami|kundenservice
+Reception Work;receptionist|reception|receptor|receptorka|rezeptionist|rezeptionistin|empfang
+Hospitality;hospitality|gostinstvo|gastgewerbe|hotellerie
+Restaurant Service;waiter|waitress|natakar|natakarica|kellner|kellnerin|restaurant service
+Bar Service;bartender|barman|bar service|delo v baru|barservice
+Cooking;cook|chef|kuhar|kuharica|koch|koechin
+Baking;baker|peka|pek|pekovka|baecker|baeckerin
+Cleaning;cleaner|cleaning|cistilec|cistilka|reinigung|reinigungskraft
+Housekeeping;housekeeping|sobarka|zimmermaedchen|hauswirtschaft
+Warehouse Operations;warehouse|warehouse worker|skladisce|skladiscnik|lager|lagerarbeiter
+Order Picking;order picking|komisioniranje|komisionar|kommissionierung|kommissionierer
+Forklift Operation;forklift|vilicar|viličar|gabelstapler|staplerfahrer
+Packaging;packaging|pakiranje|pakirnica|verpackung
+Production Work;production worker|proizvodnja|proizvodni delavec|produktion|produktionsmitarbeiter
+Machine Operation;machine operator|strojnik|upravljalec stroja|maschinenbediener|maschinenfuehrer
+Assembly;assembly|montaza|montazer|montage|monteur
+Construction Work;construction|gradbenistvo|gradbeni delavec|bau|bauarbeiter
+Masonry;mason|zidar|zidarka|maurer|maurerin
+Carpentry;carpenter|mizar|mizarstvo|tischler|schreiner
+Electrical Work;electrician|elektricar|elektro dela|elektriker
+Plumbing;plumber|vodovodar|klempner|installateur
+Welding;welder|varilec|varilka|schweisser|schweisserin
+Mechanical Repair;mechanic|mehanik|mechaniker
+Automotive Repair;car mechanic|avtomehanik|kfz mechaniker
+Driving;driver|voznik|voznica|fahrer|fahrerin
+Truck Driving;truck driver|voznik tovornjaka|lkw fahrer|berufskraftfahrer
+Bus Driving;bus driver|voznik avtobusa|busfahrer
+Delivery Driving;delivery driver|dostavljalec|dostavljalka|lieferfahrer|zusteller
+Postal Delivery;postman|postal delivery|postar|postarka|brieftraeger|zusteller
+Security Work;security guard|varnostnik|varnostnica|sicherheitsmitarbeiter
+Administration;administrator|administration|administrator|administratorka|verwaltung|sachbearbeiter
+Human Resources;human resources|kadrovanje|personalwesen
+Management;manager|management|vodja|vodenje|manager|leitung
+Project Management;project manager|vodenje projektov|projektni vodja|projektmanagement|projektleiter
+Finance;finance|financnik|finance|finanzen
+Legal Work;lawyer|legal work|pravnik|pravnica|jurist|juristin
+Social Work;social worker|socialno delo|socialni delavec|sozialarbeit|sozialarbeiter
+Physiotherapy;physiotherapist|fizioterapija|fizioterapevt|physiotherapie|physiotherapeut
+Pharmacy;pharmacist|lekarna|farmacevt|apotheke|apotheker
+Laboratory Diagnostics;laboratory|lab technician|laboratorij|laborant|labordiagnostik|labormitarbeiter
+Agriculture;agriculture|kmetijstvo|kmet|landwirtschaft|landwirt
+Gardening;gardener|vrtnar|vrtnarjenje|gaertner|gartenbau
+Forestry;forestry|gozdarstvo|gozdar|forstwirtschaft|forstwirt
+Hairdressing;hairdresser|frizer|frizerka|friseur|friseurin
+Beauty Services;beautician|kozmeticarka|kozmetika|kosmetik|kosmetikerin
+Graphic Design;graphic designer|graficni oblikovalec|grafikdesign|grafikdesigner
+Information Technology;information technology|informatika|informationstechnik
+IT Support;it support|technical support|tehnicna podpora|it podpora|it support|technischer support
+Software Development;software developer|programmer|programer|razvijalec programske opreme|softwareentwickler
+API Development;api development|rest api|razvoj api|api entwicklung
+C#;c sharp
+.NET;dotnet
+ASP.NET Core;asp.net core|asp net core|asp.net
+Entity Framework;entity framework|ef core|entity framework core
+SQL Server;sql server
+REST API;rest api|rest apis|restful api
+Git;github
+Microsoft Azure;azure
+RabbitMQ;rabbitmq|rabbit mq
+Unit Testing;unit tests|unit testing|xunit
+Integration Testing;integration tests|integration testing
+German Language;german|nemscina|nemški jezik|deutsch|deutsche sprache
+Slovenian Language;slovenian|slovenscina|slovenski jezik|slowenisch
+English Language;english|anglescina|angleski jezik|englisch
+Active Directory;active directory|imeniska storitev|verzeichnisdienst
+Agile Working;agile working|agilno delo|agiles arbeiten
+Aircraft Maintenance;aircraft mechanic|aircraft maintenance|vzdrzevanje letal|flugzeugwartung
+Alarm Systems;alarm systems|alarmni sistemi|alarmanlagen
+Anesthesiology;anesthesiology|anesteziologija|anaesthesiologie
+Animal Care;animal care|oskrba zivali|tierpflege
+Ansible;ansible
+Aquaculture;aquaculture|ribogojstvo|aquakultur
+Art Education;art teacher|likovna vzgoja|kunsterziehung
+Asian Cuisine;asian cuisine|azijska kuhinja|asiatische kueche
+Audio Video Systems;audio video systems|av sistemi|av systeme
+Auditing;auditor|auditing|revizija|wirtschaftspruefung
+Autism Support;autism support|podpora osebam z avtizmom|autismusbegleitung
+Automation;automation|avtomatizacija|automatisierung
+Backup Administration;backup administration|upravljanje varnostnih kopij|backup administration
+Biology;biology|biologija|biologie
+Bodywork Repair;bodywork repair|kleparstvo|karosseriereparatur
+Business Education;business education|poslovno izobrazevanje|wirtschaftspaedagogik
+Business Management;business management|poslovno upravljanje|unternehmensfuehrung
+Call Center;call center|klicni center|callcenter
+Cardiology;cardiology|kardiologija|kardiologie
+Cargo Handling;cargo handling|ravnanje s tovorom|frachtumschlag
+Cash Handling;cash handling|delo z gotovino|bargeldabwicklung
+Chemistry;chemistry|kemija|chemie
+Chimney Sweeping;chimney sweep|dimnikar|rauchfangkehrer
+CI/CD;ci cd|continuous integration|continuous delivery
+Cloud Computing;cloud computing|racunalnistvo v oblaku|cloud computing
+CNC Machining;cnc machining|cnc obdelava|cnc bearbeitung
+Communication;communication|komunikacija|kommunikation
+Complaint Management;complaint management|upravljanje pritozb|beschwerdemanagement
+Computer Science;computer science|racunalnistvo|informatik
+Computer Science Education;computer science teacher|poucevanje racunalnistva|informatikunterricht
+Concrete Formwork;concrete formwork|opaz za beton|betonschalung
+Controlling;controlling|kontroling|controlling
+Counseling;counselor|counseling|svetovanje|beratung
+Crane Operation;crane operator|zerjavist|kranfuehrer
+CRM Systems;crm systems|crm sistemi|crm systeme
+Croatian Language;croatian|hrvascina|kroatisch
+Cultural Guiding;cultural guide|kulturno vodenje|kulturfuehrung
+Curation;curator|kuratorstvo|kuration
+Cybersecurity;cybersecurity|kibernetska varnost|cybersicherheit
+Cycling Delivery;bicycle courier|kolesarski dostavljalec|fahrradkurier
+Data Analysis;data analyst|data analysis|analiza podatkov|datenanalyse
+Debt Collection;debt collection|izterjava dolgov|inkasso
+Dental Care;dental care|zobozdravstvo|zahnpflege
+Dermatovenerology;dermatology|dermatovenerologija|dermatologie
+DevOps;devops
+DHCP;dhcp
+Dialysis Care;dialysis care|dializna nega|dialysepflege
+Dietary Cooking;dietary cooking|dietna kuhinja|diaetkueche
+Dietetics;dietitian|dietetics|dietetika|diaetetik
+Digital Archiving;digital archiving|digitalno arhiviranje|digitale archivierung
+Dispatching;dispatcher|dispecer|disponent
+DNS;dns
+Docker;docker
+Document Management;document management|upravljanje dokumentov|dokumentenmanagement
+Driving Instruction;driving instructor|ucitelj voznje|fahrlehrer
+Driving License Category B;category b driving license|voznisko dovoljenje kategorije b|fuehrerschein klasse b
+Driving License Category C;category c driving license|voznisko dovoljenje kategorije c|fuehrerschein klasse c
+Driving License Category CE;category ce driving license|voznisko dovoljenje kategorije ce|fuehrerschein klasse ce
+Driving License Category D;category d driving license|voznisko dovoljenje kategorije d|fuehrerschein klasse d
+Driving License Category E;category e driving license|voznisko dovoljenje kategorije e|fuehrerschein klasse e
+Driving License Category F;category f driving license|voznisko dovoljenje kategorije f|fuehrerschein klasse f
+Drywall Installation;drywall installer|suhomontaza|trockenbau
+Educational Programs;educational programs|izobrazevalni programi|bildungsprogramme
+Electrical Engineering;electrical engineer|elektrotehnika|elektrotechnik
+Emergency Medicine;emergency medicine|urgentna medicina|notfallmedizin
+E-Mobility;e mobility|elektromobilnost|elektromobilitaet
+Endoscopy;endoscopy|endoskopija|endoskopie
+Energy Systems;energy systems|energetski sistemi|energiesysteme
+Event Coordination;event coordinator|organizacija dogodkov|veranstaltungskoordination
+Excavator Operation;excavator operator|bagerist|baggerfahrer
+Exhibition Supervision;exhibition supervision|nadzor razstave|ausstellungsaufsicht
+Eyelash Styling;eyelash styling|oblikovanje trepalnic|wimpernstyling
+Facade Work;facade work|fasaderstvo|fassadenarbeiten
+Facility Services;facility services|upravljanje objektov|facility services
+Financial Analysis;financial analyst|financna analiza|finanzanalyse
+Firefighting;firefighter|gasilec|feuerwehr
+Firewall Management;firewall management|upravljanje pozarnih zidov|firewall administration
+First Aid;first aid|prva pomoc|erste hilfe
+Floristry;florist|cvetlicar|floristik
+Food Handling;food handling|ravnanje z zivili|lebensmittelhandhabung
+Food Preparation;food preparation|priprava hrane|speisenzubereitung
+Food Production;food production|proizvodnja hrane|lebensmittelproduktion
+Food Safety;food safety|varnost hrane|lebensmittelsicherheit
+Foot Care;foot care|pedikura|fusspflege
+Forestry Work;forestry worker|gozdarska dela|forstarbeit
+Fruit Sales;fruit sales|prodaja sadja|obstverkauf
+Gamekeeping;gamekeeper|lovski cuvaj|wildhueter
+Gas Station Service;gas station attendant|delo na bencinskem servisu|tankstellenmitarbeiter
+GDPR Compliance;gdpr compliance|varstvo osebnih podatkov|dsgvo konformitaet
+General Labor;general labor|fizicna dela|hilfsarbeit
+General Work;general work|splosna dela|allgemeine arbeiten
+Geography;geography|geografija|geografie
+Geriatric Care;geriatric care|geriatricna nega|geriatrische pflege
+GMP Compliance;gmp compliance|gmp skladnost|gmp konformitaet
+Guided Tours;guided tours|vodeni ogledi|fuehrungen
+HACCP;haccp
+Healthcare Education;healthcare education|zdravstvena vzgoja|gesundheitserziehung
+Higher Education;higher education|visokosolsko izobrazevanje|hochschulbildung
+History;history|zgodovina|geschichte
+Hungarian Language;hungarian|madzarscina|ungarisch
+HVAC;hvac|ogrevanje hlajenje prezracevanje|heizung klima lueftung
+Hydraulics;hydraulics|hidravlika|hydraulik
+Hygiene;hygiene|higiena|hygiene
+Hyper-V;hyper v
+IIS;iis|internet information services
+Independent Working;independent working|samostojno delo|selbststaendiges arbeiten
+Industrial Cleaning;industrial cleaning|industrijsko ciscenje|industriereinigung
+Industrial Manufacturing;industrial manufacturing|industrijska proizvodnja|industrielle fertigung
+Information Systems;information systems|informacijski sistemi|informationssysteme
+Insurance Sales;insurance sales|prodaja zavarovanj|versicherungsverkauf
+Intensive Care;intensive care|intenzivna nega|intensivpflege
+Internal Communications;internal communications|interna komunikacija|interne kommunikation
+Internal Medicine;internal medicine|interna medicina|innere medizin
+Internet of Things;internet of things|iot|internet stvari|internet der dinge
+Internship / Practical Training;internship|practical training|praksa|prakticno usposabljanje|praktikum
+Intrusion Detection;intrusion detection|zaznavanje vdorov|einbruchserkennung
+Inventory Management;inventory management|upravljanje zalog|bestandsmanagement
+IT Infrastructure;it infrastructure|it infrastruktura|it infrastruktur
+Italian Cuisine;italian cuisine|italijanska kuhinja|italienische kueche
+Italian Language;italian|italijanscina|italienisch
+Japanese Cuisine;japanese cuisine|japonska kuhinja|japanische kueche
+Java;java
+JavaScript;javascript|java script|js
+Journalism;journalist|novinarstvo|journalismus
+Kitchen Management;kitchen management|vodenje kuhinje|kuechenleitung
+Kitchen Support;kitchen assistant|pomocnik v kuhinji|kuechenhilfe
+Kubernetes;kubernetes|k8s
+LAN/WAN Networking;lan wan networking|omrezja lan wan|lan wan netzwerke
+Language Education;language teacher|jezikovno izobrazevanje|sprachunterricht
+Laundry Work;laundry work|pralnica|waescherei
+Library Science;librarian|knjiznicarstvo|bibliothekswesen
+Linux;linux
+Locomotive Operation;locomotive driver|strojevodja|lokfuehrer
+Massage Therapy;massage therapist|masaza|massage
+Material Handling;material handling|ravnanje z materialom|materialhandhabung
+Mathematics;mathematics|math|matematika|mathematik
+Meat Processing;meat processing|predelava mesa|fleischverarbeitung
+Mechanical Engineering;mechanical engineer|strojnistvo|maschinenbau
+Mechatronics;mechatronics|mehatronika|mechatronik
+Medicine;medicine|medicina|medizin
+Mediterranean Cuisine;mediterranean cuisine|mediteranska kuhinja|mediterrane kueche
+Menu Planning;menu planning|nacrtovanje jedilnikov|menueplanung
+Metal Technology;metal technology|kovinska tehnologija|metalltechnik
+Metalworking;metalworking|obdelava kovin|metallbearbeitung
+Microsoft Office;microsoft office|ms office
+Midwifery;midwife|babistvo|hebamme
+MongoDB;mongodb
+Monitoring;monitoring|nadzor sistemov|systemueberwachung
+Music Education;music teacher|glasbena vzgoja|musikerziehung
+Nail Styling;nail stylist|urejanje nohtov|nageldesign
+Nephrology;nephrology|nefrologija|nephrologie
+Network Administration;network administrator|upravljanje omrezij|netzwerkadministration
+Network Monitoring;network monitoring|nadzor omrezij|netzwerkueberwachung
+Neurology;neurology|nevrologija|neurologie
+Object-Oriented Programming;object oriented programming|oop|objektno programiranje|objektorientierte programmierung
+Occupational Therapy;occupational therapist|delovna terapija|ergotherapie
+Oncology;oncology|onkologija|onkologie
+Operating Room Care;operating room care|operacijska nega|op pflege
+Optics;optician|optika|optik
+Orthopedics;orthopedics|ortopedija|orthopaedie
+Painting;painter|pleskar|maler
+Pastry Making;pastry chef|slascicarstvo|konditorei
+Pastry Preparation;pastry preparation|priprava sladic|mehlspeisenzubereitung
+Pathology;pathology|patologija|pathologie
+Payment Systems;payment systems|placilni sistemi|zahlungssysteme
+Payroll Administration;payroll administration|obracun plac|lohnverrechnung
+Pediatrics;pediatrics|pediatrija|paediatrie
+Philosophy;philosophy|filozofija|philosophie
+Physical Education;physical education|sportna vzgoja|sportunterricht
+Physics;physics|fizika|physik
+Pizza Preparation;pizza chef|priprava pic|pizzazubereitung
+Pool Supervision;lifeguard|kopaliski mojster|bademeister
+Postal Sorting;postal sorting|sortiranje poste|postsortierung
+PowerShell;powershell
+Primary Education;primary education|razredni pouk|grundschulbildung
+Printing;printing|tiskarstvo|druck
+Problem Solving;problem solving|resevanje problemov|problemloesung
+Procurement;procurement|nabava|beschaffung
+Production Line Work;production line|delo na proizvodni liniji|fliessbandarbeit
+Property Management;property management|upravljanje nepremicnin|immobilienverwaltung
+Proxmox;proxmox
+Psychiatry;psychiatry|psihiatrija|psychiatrie
+Psychology;psychology|psihologija|psychologie
+Public Administration;public administration|javna uprava|oeffentliche verwaltung
+Public Order Enforcement;public order enforcement|javni red|ordnungsdienst
+Python;python
+Quality Control;quality control|kontrola kakovosti|qualitaetskontrolle
+Radiology;radiology|radiologija|radiologie
+Railway Operations;railway operations|zelezniski promet|bahnbetrieb
+Rebar Work;rebar work|armiranje|bewehrungsarbeiten
+Records Management;records management|upravljanje evidenc|aktenverwaltung
+Research;research|raziskovanje|forschung
+Research and Development;research and development|raziskave in razvoj|forschung und entwicklung
+Reservation Management;reservation management|upravljanje rezervacij|reservierungsmanagement
+Road Grader Operation;road grader operator|upravljalec grederja|graderfahrer
+Road Maintenance;road maintenance|vzdrzevanje cest|strasseninstandhaltung
+Robotics;robotics|robotika|robotik
+Roofing;roofer|krovec|dachdecker
+Sanitary Installation;sanitary installation|sanitarne instalacije|sanitaerinstallation
+SAP;sap
+Science Education;science teacher|naravoslovno izobrazevanje|naturwissenschaftlicher unterricht
+Secondary Education;secondary education|srednjesolsko izobrazevanje|sekundarbildung
+Security Services;security services|varnostne storitve|sicherheitsdienst
+Serbian Language;serbian|srbscina|serbisch
+Sewing;sewing|sivanje|naehen
+Sheet Metal Work;sheet metal worker|kleparstvo|blechbearbeitung
+Shelf Stocking;shelf stocking|zlaganje polic|regalbetreuung
+Site Supervision;site supervisor|gradbeni nadzor|bauaufsicht
+Social Care;social care|socialna oskrba|sozialbetreuung
+Special Needs Care;special needs care|oskrba oseb s posebnimi potrebami|behindertenbetreuung
+Speech Therapy;speech therapist|logopedija|logopaedie
+Sprayed Concrete;sprayed concrete|brizgani beton|spritzbeton
+SQL;sql
+Sterilization;sterilization|sterilizacija|sterilisation
+Storage Administration;storage administration|upravljanje diskovnih sistemov|speicheradministration
+Stove Building;stove builder|pecar|ofenbauer
+Structured Working;structured working|strukturirano delo|strukturiertes arbeiten
+Student Work;student work|studentsko delo|studentenjob
+Surgery;surgery|kirurgija|chirurgie
+Switches and Routers;switches and routers|stikala in usmerjevalniki|switches und router
+Tailoring;tailor|krojac|schneider
+Taxi Driving;taxi driver|taksist|taxifahrer
+Teamwork;teamwork|timsko delo|teamarbeit
+Technical Documentation;technical documentation|tehnicna dokumentacija|technische dokumentation
+Technical Education;technical education|tehnicno izobrazevanje|technische bildung
+Technical Maintenance;technical maintenance|tehnicno vzdrzevanje|technische wartung
+Technical Support;technical support|tehnicna podpora|technischer support
+Telecommunications;telecommunications|telekomunikacije|telekommunikation
+Terraform;terraform
+Textile Work;textile work|tekstilna dela|textilarbeit
+Therapeutic Work;therapeutic work|terapevtsko delo|therapeutische arbeit
+Tiling;tiler|polaganje ploscic|fliesenleger
+Tire Service;tire service|vulkanizer|reifenservice
+Tour Guiding;tour guide|turisticni vodic|reisefuehrer
+Upholstery;upholsterer|tapetnik|polsterer
+Urology;urology|urologija|urologie
+Utilities Maintenance;utilities maintenance|vzdrzevanje komunalne infrastrukture|instandhaltung versorgungstechnik
+Van Driving;van driver|voznik kombija|transporterfahrer
+Vehicle Diagnostics;vehicle diagnostics|diagnostika vozil|fahrzeugdiagnose
+Vehicle Towing;vehicle towing|avtovleka|abschleppdienst
+Virtualization;virtualization|virtualizacija|virtualisierung
+VMware;vmware
+Vocational Education;vocational education|poklicno izobrazevanje|berufsbildung
+Waste Management;waste management|ravnanje z odpadki|abfallwirtschaft
+Windows Server;windows server
+Wireless Networking;wireless networking|brezzicna omrezja|drahtlose netzwerke
+Wood Procurement;wood procurement|nabava lesa|holzbeschaffung
+Woodworking;woodworking|obdelava lesa|holzbearbeitung

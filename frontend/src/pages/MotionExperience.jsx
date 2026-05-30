@@ -480,6 +480,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
 
   const activeMode = mode;
   const isAnalyticsPage = activeMode === "analytics";
+  const showAiLoadingOverlay = loading && processingMode === "thinking";
   const score = analytics?.summary?.averageMatch
     ?? (jobs.length ? Math.round(jobs.reduce((sum, job) => sum + job.match, 0) / jobs.length) : 0);
   const signals = useMemo(() => mapAnalyticsToSignals(analytics, jobsTotalCount || jobs.length), [analytics, jobs.length, jobsTotalCount]);
@@ -612,7 +613,6 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       setError("Enter a prompt or upload a CV to filter listings.");
       return;
     }
-    setMode("search");
     setLoading(true);
     setError("");
     setSalaryPrediction(null);
@@ -636,6 +636,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       setSalaryPrediction(nextSalaryPrediction);
       setAnalytics(nextAnalytics);
       setLastResultsMode("search");
+      setMode("search");
       saveStoredResults({
         mode: "search",
         query,
@@ -737,7 +738,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
 
   return (
     <MotionShell mode={activeMode} score={score} theme={theme} onThemeToggle={toggleTheme} onHomeClick={resetHome} onStatisticsClick={showCurrentStatistics}>
-      {loading ? <MotionLoadingOverlay mode={activeMode} status={status} progress={loadingProgress} /> : null}
+      {showAiLoadingOverlay ? <MotionLoadingOverlay mode={activeMode} status={status} progress={loadingProgress} /> : null}
       {!isAnalyticsPage ? (
         <MotionHero
           mode={activeMode}

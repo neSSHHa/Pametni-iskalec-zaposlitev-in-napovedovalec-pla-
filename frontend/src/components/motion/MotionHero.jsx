@@ -21,7 +21,7 @@ export default function MotionHero({
 }) {
   const activeResultMode = mode === "cv" ? "cv" : "search";
 
-  if (resultPage && !loading) {
+  if (resultPage) {
     return (
       <section className="motion-hero motion-result-hero">
         <div className="motion-copy">

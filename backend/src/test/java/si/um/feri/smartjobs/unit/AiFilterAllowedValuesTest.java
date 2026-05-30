@@ -143,6 +143,16 @@ class AiFilterAllowedValuesTest {
     }
 
     @Test
+    void shouldExtractGermanCountryAliasesFromPrompt() {
+        assertThat(fastPromptFilterService().buildFilter("Jobs in Osterreich").location().country())
+                .isEqualTo("Austria");
+        assertThat(fastPromptFilterService().buildFilter("Jobs in Slowenien").location().country())
+                .isEqualTo("Slovenia");
+        assertThat(fastPromptFilterService().buildFilter("Jobs in Deutschland").location().country())
+                .isEqualTo("Germany");
+    }
+
+    @Test
     void shouldExtractWienAsViennaFromPrompt() {
         JobFilterRequest filter = fastPromptFilterService().buildFilter("Find jobs in Wien, Austria");
 
@@ -156,6 +166,23 @@ class AiFilterAllowedValuesTest {
         JobFilterRequest filter = fastPromptFilterService().buildFilter("Mechatronics jobs in Graz");
 
         assertThat(filter.skills()).containsExactly("Mechatronics");
+    }
+
+    @Test
+    void shouldExtractSkillFromSlovenianPromptAlias() {
+        when(skillRepository.findAll()).thenReturn(List.of(skill("Teaching")));
+        allowedValuesService.refresh();
+
+        JobFilterRequest filter = fastPromptFilterService().buildFilter("Iscem delo kot uciteljica");
+
+        assertThat(filter.skills()).containsExactly("Teaching");
+    }
+
+    @Test
+    void shouldExtractSkillFromGermanPromptAlias() {
+        JobFilterRequest filter = fastPromptFilterService().buildFilter("Ich suche Arbeit als Krankenschwester");
+
+        assertThat(filter.skills()).containsExactly("Nursing");
     }
 
     @Test

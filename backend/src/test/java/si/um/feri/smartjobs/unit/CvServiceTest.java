@@ -102,21 +102,32 @@ class CvServiceTest {
     }
 
     @Test
+    void shouldExtractSkillFromSlovenianCvAlias() {
+        CvProfileFilterService service = profileServiceWithAllowedSkills("Teaching");
+
+        JobFilterRequest filter = service.buildFilter("Delala sem kot uciteljica v osnovni soli.");
+
+        assertThat(filter.skills()).containsExactly("Teaching");
+        assertThat(filter.job().jobname()).isNull();
+    }
+
+    @Test
+    void shouldExtractSkillFromGermanCvAlias() {
+        CvProfileFilterService service = profileServiceWithAllowedSkills("Reception Work");
+
+        JobFilterRequest filter = service.buildFilter("Berufserfahrung als Rezeptionistin in einem Hotel.");
+
+        assertThat(filter.skills()).containsExactly("Reception Work");
+        assertThat(filter.job().jobname()).isNull();
+    }
+
+    @Test
     void shouldIgnoreCvSkillOutsideAllowedValues() {
         CvProfileFilterService service = profileServiceWithAllowedSkills("Java");
 
         JobFilterRequest filter = service.buildFilter("Rust developer with Docker experience.");
 
         assertThat(filter.skills()).isEmpty();
-    }
-
-    @Test
-    void shouldInferJavaBackendDeveloperRole() {
-        CvProfileFilterService service = profileServiceWithAllowedSkills("Java", "Spring Boot");
-
-        JobFilterRequest filter = service.buildFilter("Java and Spring Boot backend developer.");
-
-        assertThat(filter.job().jobname()).isEqualTo("Java Backend Developer");
     }
 
     @Test
@@ -135,7 +146,7 @@ class CvServiceTest {
         JobFilterRequest filter = service.buildFilter(null);
 
         assertThat(filter.skills()).isEmpty();
-        assertThat(filter.job().jobname()).isEqualTo("Software Developer");
+        assertThat(filter.job().jobname()).isNull();
         assertThat(filter.job().experienceLevelName()).isNull();
     }
 

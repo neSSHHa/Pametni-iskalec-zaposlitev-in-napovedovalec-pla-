@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import si.um.feri.smartjobs.job.dto.JobFilterRequest;
@@ -14,37 +15,22 @@ import si.um.feri.smartjobs.job.dto.JobFilterRequest;
 @Service
 public class FastPromptFilterService {
 
-    private static final Map<String, List<String>> SKILL_ALIASES = Map.ofEntries(
-            Map.entry("C#", List.of("c#")),
-            Map.entry(".NET", List.of(".net", "dotnet")),
-            Map.entry("ASP.NET Core", List.of("asp.net core", "asp net core", "asp.net")),
-            Map.entry("Entity Framework", List.of("entity framework", "ef core", "entity framework core")),
-            Map.entry("SQL Server", List.of("sql server")),
-            Map.entry("REST API", List.of("rest api", "rest apis", "restful api")),
-            Map.entry("Docker", List.of("docker")),
-            Map.entry("Git", List.of("git", "github")),
-            Map.entry("Java", List.of("java")),
-            Map.entry("Spring Boot", List.of("spring boot")),
-            Map.entry("PostgreSQL", List.of("postgresql", "postgre sql")),
-            Map.entry("React", List.of("react")),
-            Map.entry("Angular", List.of("angular")),
-            Map.entry("JavaScript", List.of("javascript", "java script")),
-            Map.entry("TypeScript", List.of("typescript", "type script")),
-            Map.entry("Python", List.of("python")),
-            Map.entry("SQL", List.of("sql"))
-    );
-
     private static final Map<String, String> COUNTRY_ALIASES = Map.ofEntries(
             Map.entry("slovenia", "Slovenia"),
             Map.entry("slovenija", "Slovenia"),
+            Map.entry("slowenien", "Slovenia"),
             Map.entry("germany", "Germany"),
             Map.entry("nemcija", "Germany"),
+            Map.entry("deutschland", "Germany"),
             Map.entry("austria", "Austria"),
             Map.entry("avstrija", "Austria"),
+            Map.entry("osterreich", "Austria"),
             Map.entry("croatia", "Croatia"),
             Map.entry("hrvaska", "Croatia"),
+            Map.entry("kroatien", "Croatia"),
             Map.entry("serbia", "Serbia"),
-            Map.entry("srbija", "Serbia")
+            Map.entry("srbija", "Serbia"),
+            Map.entry("serbien", "Serbia")
     );
 
     private static final Map<String, String> CITY_ALIASES = Map.ofEntries(
@@ -57,6 +43,7 @@ public class FastPromptFilterService {
             Map.entry("murska sobota", "Murska Sobota"),
             Map.entry("berlin", "Berlin"),
             Map.entry("munich", "Munich"),
+            Map.entry("munchen", "Munich"),
             Map.entry("hamburg", "Hamburg"),
             Map.entry("vienna", "Vienna"),
             Map.entry("wien", "Vienna"),
@@ -66,9 +53,19 @@ public class FastPromptFilterService {
     );
 
     private final AiAllowedValuesService allowedValuesService;
+    private final SkillAliasMatcherService skillAliasMatcherService;
 
     public FastPromptFilterService(AiAllowedValuesService allowedValuesService) {
+        this(allowedValuesService, new SkillAliasMatcherService());
+    }
+
+    @Autowired
+    public FastPromptFilterService(
+            AiAllowedValuesService allowedValuesService,
+            SkillAliasMatcherService skillAliasMatcherService
+    ) {
         this.allowedValuesService = allowedValuesService;
+        this.skillAliasMatcherService = skillAliasMatcherService;
     }
 
     public JobFilterRequest buildFilter(String text) {
@@ -80,7 +77,7 @@ public class FastPromptFilterService {
         return new JobFilterRequest(
                 new JobFilterRequest.JobCriteria(
                         null,
-                        inferRole(normalized, skills),
+                        null,
                         null,
                         inferYears(normalized),
                         null,
@@ -109,25 +106,7 @@ public class FastPromptFilterService {
     }
 
     private List<String> extractSkills(String normalized) {
-        Map<String, String> allowedByName = allowedByName(allowedValuesService.getAllowedSkills());
-        List<String> skills = new ArrayList<>();
-
-        SKILL_ALIASES.forEach((canonical, aliases) -> {
-            String allowed = allowedByName.get(normalize(canonical));
-            if (allowed == null || skills.contains(allowed)) {
-                return;
-            }
-            if (aliases.stream().map(this::normalize).anyMatch(normalized::contains)) {
-                skills.add(allowed);
-            }
-        });
-
-        allowedValuesService.getAllowedSkills().stream()
-                .filter(skill -> normalized.contains(normalize(skill)))
-                .filter(skill -> !skills.contains(skill))
-                .forEach(skills::add);
-
-        return skills;
+        return skillAliasMatcherService.extractAllowedSkills(normalized, allowedValuesService.getAllowedSkills());
     }
 
     private List<String> extractWorkTypes(String normalized) {
@@ -168,25 +147,6 @@ public class FastPromptFilterService {
         return new LocationGuess(city, country);
     }
 
-    private String inferRole(String normalized, List<String> skills) {
-        boolean dotnet = hasSkill(skills, ".NET") || hasSkill(skills, "C#") || normalized.contains("dotnet");
-        boolean backend = normalized.contains("backend") || normalized.contains("back end") || normalized.contains("api");
-        boolean frontend = normalized.contains("frontend") || normalized.contains("front end") || hasSkill(skills, "React") || hasSkill(skills, "Angular");
-        boolean fullStack = normalized.contains("full stack") || normalized.contains("fullstack") || normalized.contains("full-stack");
-        boolean java = hasSkill(skills, "Java") || hasSkill(skills, "Spring Boot");
-
-        if (fullStack && dotnet) return "Full Stack .NET Developer";
-        if (backend && dotnet) return ".NET Backend Developer";
-        if (backend && java) return "Java Backend Developer";
-        if (frontend && hasSkill(skills, "React")) return "React Frontend Developer";
-        if (frontend && hasSkill(skills, "Angular")) return "Angular Frontend Developer";
-        if (backend) return "Backend Developer";
-        if (frontend) return "Frontend Developer";
-        if (dotnet) return ".NET Developer";
-        if (java) return "Java Developer";
-        return null;
-    }
-
     private Integer inferYears(String normalized) {
         java.util.regex.Matcher matcher = java.util.regex.Pattern
                 .compile("(\\d+)\\s*(?:year|years|yr|yrs|leto|leta|godina|godine)")
@@ -202,11 +162,6 @@ public class FastPromptFilterService {
         if (normalized.contains("senior") || normalized.contains("lead")) return "Senior";
         if (normalized.contains("mid")) return "Mid";
         return null;
-    }
-
-    private boolean hasSkill(List<String> skills, String value) {
-        String normalized = normalize(value);
-        return skills.stream().map(this::normalize).anyMatch(skill -> skill.equals(normalized));
     }
 
     private void addAllowed(List<String> values, Map<String, String> allowedByName, String value, boolean shouldAdd) {
