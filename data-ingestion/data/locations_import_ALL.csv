@@ -286,20 +286,20 @@ loc-velenje-slovenia,NULL,Velenje,Savinja,Slovenia,46.3592,15.1103
 loc-vrhnika-slovenia,NULL,Vrhnika,Central Slovenia,Slovenia,45.9661,14.2978
 loc-zagorje-ob-savi-slovenia,NULL,Zagorje ob Savi,Central Sava,Slovenia,46.1342,14.9964
 loc-zalec-slovenia,NULL,Žalec,Savinja,Slovenia,46.2519,15.1650
-"loc-austria-austria","NULL","NULL","Austria","Austria","",""
-"loc-bludenz-bregenzer-wald-austria","NULL","NULL","Vorarlberg","Austria","47.2","9.9"
-"loc-burgenland-austria","NULL","NULL","Burgenland","Austria","47.5","16.4"
-"loc-kaernten-austria","NULL","NULL","Kärnten","Austria","46.7","14.3"
-"loc-klagenfurt-villach-austria","NULL","NULL","Kärnten","Austria","46.62","14.31"
-"loc-lungau-austria","NULL","NULL","Salzburg","Austria","47.15","13.75"
-"loc-mittelburgenland-austria","NULL","NULL","Burgenland","Austria","47.5","16.5"
-"loc-nordburgenland-austria","NULL","NULL","Burgenland","Austria","47.9","16.6"
-"loc-oberkaernten-austria","NULL","NULL","Kärnten","Austria","46.8","13.5"
-"loc-pinzgau-pongau-austria","NULL","NULL","Salzburg","Austria","47.3","13.0"
-"loc-rheintal-bodenseegebiet-austria","NULL","NULL","Vorarlberg","Austria","47.45","9.74"
-"loc-salzburg-austria","NULL","NULL","Salzburg","Austria","47.8","13.0"
-"loc-salzburg-und-umgebung-austria","NULL","NULL","Salzburg","Austria","47.8","13.05"
-"loc-suedburgenland-austria","NULL","NULL","Burgenland","Austria","47.1","16.2"
-"loc-unterkaernten-austria","NULL","NULL","Kärnten","Austria","46.6","14.8"
-"loc-vorarlberg-austria","NULL","NULL","Vorarlberg","Austria","47.25","9.9"
-"loc-wien-wien-austria","NULL","Wien","Wien","Austria","48.2082","16.3738"
+loc-austria-austria,NULL,NULL,Austria,Austria,,
+loc-bludenz-bregenzer-wald-austria,NULL,NULL,Vorarlberg,Austria,47.2,9.9
+loc-burgenland-austria,NULL,NULL,Burgenland,Austria,47.5,16.4
+loc-kaernten-austria,NULL,NULL,Kärnten,Austria,46.7,14.3
+loc-klagenfurt-villach-austria,NULL,NULL,Kärnten,Austria,46.62,14.31
+loc-lungau-austria,NULL,NULL,Salzburg,Austria,47.15,13.75
+loc-mittelburgenland-austria,NULL,NULL,Burgenland,Austria,47.5,16.5
+loc-nordburgenland-austria,NULL,NULL,Burgenland,Austria,47.9,16.6
+loc-oberkaernten-austria,NULL,NULL,Kärnten,Austria,46.8,13.5
+loc-pinzgau-pongau-austria,NULL,NULL,Salzburg,Austria,47.3,13.0
+loc-rheintal-bodenseegebiet-austria,NULL,NULL,Vorarlberg,Austria,47.45,9.74
+loc-salzburg-austria,NULL,NULL,Salzburg,Austria,47.8,13.0
+loc-salzburg-und-umgebung-austria,NULL,NULL,Salzburg,Austria,47.8,13.05
+loc-suedburgenland-austria,NULL,NULL,Burgenland,Austria,47.1,16.2
+loc-unterkaernten-austria,NULL,NULL,Kärnten,Austria,46.6,14.8
+loc-vorarlberg-austria,NULL,NULL,Vorarlberg,Austria,47.25,9.9
+loc-wien-wien-austria,NULL,Wien,Wien,Austria,48.2082,16.3738
