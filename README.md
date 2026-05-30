@@ -245,20 +245,14 @@ This command starts:
 - Spring Boot backend on port `8080`
 - React frontend on port `3000`
 
-#### 4. Import Data
-If the database is empty, run the temporary dataset import utility:
+#### 4. Import Data and Train the Salary Model
+If the database is empty or the import files changed, run:
 
-```bash
-docker-compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml --profile import up data-importer
+```powershell
+.\docker\import-data-and-train.ps1
 ```
 
-This loads the current project dataset into MySQL.
-
-After importing data, restart the backend if the allowed-values cache was loaded before the import finished:
-
-```bash
-docker-compose -f docker/docker-compose.yml restart backend
-```
+This loads the current project dataset into MySQL, refreshes backend caches and trains a fresh salary model. Normal application starts reuse the saved model from the `salary_models` Docker volume.
 
 #### 5. Check that the Application Works
 Open:
@@ -266,6 +260,7 @@ Open:
 - Frontend: `http://localhost:3000`
 - Backend jobs API: `http://localhost:8080/api/jobs`
 - AI service health check: `http://localhost:8090/api/ai/health`
+- Salary service health check: `http://localhost:8091/health`
 
 Expected AI health response:
 

@@ -1,13 +1,24 @@
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.ByteBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.*;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ImportSloveniaData {
+
+    private static final Charset WINDOWS_1252 = Charset.forName("windows-1252");
 
     private static final String URL =
             "jdbc:mysql://" + getenv("MYSQL_HOST", "localhost") + ":" +
@@ -17,6 +28,8 @@ public class ImportSloveniaData {
 
     private static final String USER = getenv("MYSQL_USER", "root");
     private static final String PASSWORD = getenv("MYSQL_PASSWORD", "nenadnenad");
+    private static final String BACKEND_CACHE_REFRESH_URL =
+            getenv("BACKEND_CACHE_REFRESH_URL", "http://localhost:8080/api/admin/cache/refresh");
 
     private static final Path DATA_DIR = Path.of("data");
 
@@ -32,6 +45,7 @@ public class ImportSloveniaData {
             importAll(conn);
 
             conn.commit();
+            refreshBackendCaches();
 
             System.out.println("=======================================");
             System.out.println("SLOVENIA + AUSTRIA IMPORT FINISHED SUCCESSFULLY");
@@ -39,12 +53,42 @@ public class ImportSloveniaData {
 
         } catch (Exception e) {
             e.printStackTrace();
+            System.exit(1);
         }
     }
 
     private static String getenv(String key, String fallback) {
         String value = System.getenv(key);
         return value == null || value.isBlank() ? fallback : value;
+    }
+
+    private static void refreshBackendCaches() throws Exception {
+        HttpClient client = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(5))
+                .build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BACKEND_CACHE_REFRESH_URL))
+                .timeout(Duration.ofMinutes(5))
+                .header("Accept", "application/json")
+                .POST(HttpRequest.BodyPublishers.noBody())
+                .build();
+
+        for (int attempt = 1; attempt <= 30; attempt++) {
+            try {
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                if (response.statusCode() >= 200 && response.statusCode() < 300) {
+                    System.out.println("Backend caches refreshed.");
+                    return;
+                }
+                System.out.println("Backend cache refresh returned HTTP " + response.statusCode() + ".");
+            } catch (IOException e) {
+                System.out.println("Backend cache refresh attempt " + attempt + " failed: " + e.getMessage());
+            }
+
+            Thread.sleep(3000);
+        }
+
+        throw new IllegalStateException("Could not refresh backend caches after import.");
     }
 
     private static void clearDatabase(Connection conn) throws SQLException {
@@ -424,7 +468,51 @@ private static Integer parseIntegerOrNull(String value) {
             return null;
         }
 
-        return trimmed;
+        return repairMojibake(trimmed);
+    }
+
+    private static String repairMojibake(String value) {
+
+        String repaired = value;
+
+        for (int attempt = 0; attempt < 2; attempt++) {
+            int markerCount = mojibakeMarkerCount(repaired);
+            if (markerCount == 0 || !WINDOWS_1252.newEncoder().canEncode(repaired)) {
+                break;
+            }
+
+            try {
+                String candidate = StandardCharsets.UTF_8.newDecoder()
+                        .onMalformedInput(CodingErrorAction.REPORT)
+                        .onUnmappableCharacter(CodingErrorAction.REPORT)
+                        .decode(ByteBuffer.wrap(repaired.getBytes(WINDOWS_1252)))
+                        .toString();
+
+                if (mojibakeMarkerCount(candidate) >= markerCount) {
+                    break;
+                }
+
+                repaired = candidate;
+            } catch (CharacterCodingException e) {
+                break;
+            }
+        }
+
+        return repaired;
+    }
+
+    private static int mojibakeMarkerCount(String value) {
+
+        int count = 0;
+
+        for (int i = 0; i < value.length(); i++) {
+            char current = value.charAt(i);
+            if (current == '\u00C3' || current == '\u00C2' || current == '\u00E2' || current == '\u00C5') {
+                count++;
+            }
+        }
+
+        return count;
     }
 
     private static Double parseDoubleOrNull(String value) {

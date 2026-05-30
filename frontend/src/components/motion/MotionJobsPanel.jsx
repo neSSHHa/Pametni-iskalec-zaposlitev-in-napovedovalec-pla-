@@ -12,6 +12,7 @@ export default function MotionJobsPanel({
   totalCount,
   filterRequest,
   salaryPrediction,
+  salaryPredictionLoading = false,
   query = "",
   cvName = "",
   hasMore = false,
@@ -57,7 +58,7 @@ export default function MotionJobsPanel({
       </div>
 
       <QuerySummaryCard mode={mode} query={query} cvName={cvName} chips={chips} />
-      <SalaryPredictionCard prediction={salaryPrediction} />
+      <SalaryPredictionCard loading={salaryPredictionLoading} prediction={salaryPrediction} resultCount={resultCount} />
 
       {loading ? <p className="motion-status">Waiting for the API response...</p> : null}
       {error ? <p className="motion-error">{error}</p> : null}
@@ -124,24 +125,46 @@ export default function MotionJobsPanel({
   );
 }
 
-function SalaryPredictionCard({ prediction }) {
+function SalaryPredictionCard({ loading, prediction, resultCount }) {
+  if (loading) {
+    return (
+      <article className="salary-prediction-card salary-prediction-loading" aria-label="Loading estimated salary range">
+        <div>
+          <span>Austrian market salary estimate</span>
+          <strong>Calculating salary range...</strong>
+          <p>Job results are ready. The salary estimate is loading separately.</p>
+        </div>
+      </article>
+    );
+  }
+
   if (!prediction?.available) return null;
 
   const min = formatEuro(prediction.predictedMinSalary, prediction.currency);
   const max = formatEuro(prediction.predictedMaxSalary, prediction.currency);
-  const confidence = Number(prediction.confidence) || 0;
+  const profileCompleteness = Number(prediction.profileCompleteness) || 0;
   const modelMae = Number(prediction.modelMae);
+  const zeroListingsNote = Number(resultCount) === 0
+    ? " No active matching listings were found, so this estimate uses historical market data."
+    : "";
+  const marketAssumptionNote = prediction.marketAssumed
+    ? " Austria was assumed because no country was provided."
+    : "";
 
   return (
     <article className="salary-prediction-card" aria-label="Predicted salary range">
       <div>
-        <span>Expected salary range</span>
+        <span>Austrian market salary estimate</span>
         <strong>{min} - {max}</strong>
-        <p>Estimated from Austrian market data for the detected role, location, skills and experience.</p>
+        <p>
+          Estimated from Austrian market data for the detected role, location, skills and experience.
+          {marketAssumptionNote}
+          {zeroListingsNote}
+        </p>
       </div>
       <aside>
-        <em>{confidence}%</em>
-        <span>Prediction confidence</span>
+        <em>{profileCompleteness}%</em>
+        <span>Profile completeness</span>
         {Number.isFinite(modelMae) ? <small>Model MAE: {formatEuro(modelMae, prediction.currency)}</small> : null}
       </aside>
     </article>

@@ -7,9 +7,10 @@ public record SalaryPredictionResponse(
         BigDecimal predictedMinSalary,
         BigDecimal predictedMaxSalary,
         String currency,
-        Integer confidence,
+        Integer profileCompleteness,
         Integer similarJobs,
         String market,
+        Boolean marketAssumed,
         String message,
         BigDecimal modelMae
 ) {

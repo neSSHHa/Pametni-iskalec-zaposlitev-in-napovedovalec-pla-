@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { BarChart3, Brain, Database, FileText, Search, UserRound } from "lucide-react";
 import { getAnalyticsDashboard } from "../api/analyticsApi.js";
 import { uploadCv } from "../api/cvApi.js";
@@ -436,6 +436,19 @@ function saveStoredResults(payload) {
   }
 }
 
+function saveStoredSalaryPrediction(salaryPrediction) {
+  if (typeof window === "undefined") return;
+
+  try {
+    const raw = window.sessionStorage.getItem(RESULTS_STORAGE_KEY);
+    if (!raw) return;
+    const storedResults = JSON.parse(raw);
+    saveStoredResults({ ...storedResults, salaryPrediction });
+  } catch {
+    // Ignore storage errors.
+  }
+}
+
 function clearStoredResults() {
   if (typeof window === "undefined") return;
 
@@ -469,6 +482,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
   const [jobsHasMore, setJobsHasMore] = useState(Boolean(storedResult?.jobsHasMore));
   const [activeFilter, setActiveFilter] = useState(storedResult?.activeFilter || null);
   const [salaryPrediction, setSalaryPrediction] = useState(storedResult?.salaryPrediction || null);
+  const [salaryPredictionLoading, setSalaryPredictionLoading] = useState(false);
   const [analytics, setAnalytics] = useState(storedResult?.analytics || null);
   const [lastResultsMode, setLastResultsMode] = useState(storedResult?.lastResultsMode || (storedResult?.mode || ""));
   const [initialLoading, setInitialLoading] = useState(false);
@@ -477,6 +491,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
   const [theme, setTheme] = useState(() => localStorage.getItem("smartjobs-theme") || "light");
+  const salaryRequestId = useRef(0);
 
   const activeMode = mode;
   const isAnalyticsPage = activeMode === "analytics";
@@ -607,6 +622,23 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
     }
   };
 
+  const requestSalaryPrediction = (filterRequest) => {
+    const requestId = ++salaryRequestId.current;
+    if (!filterRequest) {
+      setSalaryPrediction(null);
+      setSalaryPredictionLoading(false);
+      return;
+    }
+
+    setSalaryPredictionLoading(true);
+    loadSalaryPrediction(filterRequest).then((prediction) => {
+      if (salaryRequestId.current !== requestId) return;
+      setSalaryPrediction(prediction);
+      setSalaryPredictionLoading(false);
+      saveStoredSalaryPrediction(prediction);
+    });
+  };
+
   const submitPrompt = async (event) => {
     event.preventDefault();
     if (!query.trim()) {
@@ -628,12 +660,10 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       const totalCount = totalFromApiResponse(data, mappedJobs.length);
       const nextAnalytics = buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch });
       const nextFilter = data?.filterRequest || null;
-      const nextSalaryPrediction = await loadSalaryPrediction(nextFilter);
       setJobsTotalCount(totalCount);
       setJobsPage(data?.page ?? 0);
       setJobsHasMore(false);
       setActiveFilter(nextFilter);
-      setSalaryPrediction(nextSalaryPrediction);
       setAnalytics(nextAnalytics);
       setLastResultsMode("search");
       setMode("search");
@@ -646,10 +676,11 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
         jobsPage: data?.page ?? 0,
         jobsHasMore: false,
         activeFilter: nextFilter,
-        salaryPrediction: nextSalaryPrediction,
+        salaryPrediction: null,
         analytics: nextAnalytics,
         lastResultsMode: "search",
       });
+      requestSalaryPrediction(nextFilter);
       window.history.pushState({}, "", "/motion-prompt");
     } catch (err) {
       setError("The prompt API did not return a result. Check the backend and AI service.");
@@ -678,12 +709,10 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       const totalCount = totalFromApiResponse(data, mappedJobs.length);
       const nextAnalytics = buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch });
       const nextFilter = data?.filterRequest || null;
-      const nextSalaryPrediction = await loadSalaryPrediction(nextFilter);
       setJobsTotalCount(totalCount);
       setJobsPage(data?.page ?? 0);
       setJobsHasMore(false);
       setActiveFilter(nextFilter);
-      setSalaryPrediction(nextSalaryPrediction);
       setAnalytics(nextAnalytics);
       setLastResultsMode("cv");
       saveStoredResults({
@@ -695,10 +724,11 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
         jobsPage: data?.page ?? 0,
         jobsHasMore: false,
         activeFilter: nextFilter,
-        salaryPrediction: nextSalaryPrediction,
+        salaryPrediction: null,
         analytics: nextAnalytics,
         lastResultsMode: "cv",
       });
+      requestSalaryPrediction(nextFilter);
       window.history.pushState({}, "", "/motion-cv");
     } catch (err) {
       setError("The CV API did not return a result. Check that the backend and AI service are running.");
@@ -726,6 +756,8 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
     setCvName("");
     setActiveFilter(null);
     setSalaryPrediction(null);
+    setSalaryPredictionLoading(false);
+    salaryRequestId.current += 1;
     setLastResultsMode("");
     setInitialLoading(false);
     setLoading(false);
@@ -765,6 +797,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
             totalCount={jobsTotalCount || jobs.length}
             filterRequest={activeFilter}
             salaryPrediction={salaryPrediction}
+            salaryPredictionLoading={salaryPredictionLoading}
             query={query}
             cvName={cvName}
             hasMore={false}

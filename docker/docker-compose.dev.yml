@@ -16,11 +16,29 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD:-nenadnenad}
       ZRSZ_JSON_URL: ${ZRSZ_JSON_URL:-}
+      BACKEND_CACHE_REFRESH_URL: ${BACKEND_CACHE_REFRESH_URL:-http://backend:8080/api/admin/cache/refresh}
     depends_on:
       mysql:
         condition: service_healthy
       backend:
         condition: service_started
+
+  salary-trainer:
+    profiles:
+      - import
+    build: ../salary-service
+    command: ["python", "train_model.py"]
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-smartjobs}
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD:-nenadnenad}
+    volumes:
+      - salary_models:/app/models
+    depends_on:
+      data-importer:
+        condition: service_completed_successfully
 
   weekly-job-updater:
     profiles:

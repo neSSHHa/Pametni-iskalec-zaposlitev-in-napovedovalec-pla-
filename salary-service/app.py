@@ -13,6 +13,7 @@ MODEL_PATH = Path(os.getenv("SALARY_MODEL_PATH", "models/salary_model.joblib"))
 app = FastAPI(title="Smart Jobs Salary Service")
 
 model_bundle = None
+model_modified_time = None
 
 
 class JobCriteria(BaseModel):
@@ -31,8 +32,8 @@ class LocationCriteria(BaseModel):
 class SalaryPredictionRequest(BaseModel):
     job: JobCriteria | None = None
     location: LocationCriteria | None = None
-    skills: list[str] = Field(default_factory=list)
-    workTypes: list[str] = Field(default_factory=list)
+    skills: list[str] | None = Field(default_factory=list)
+    workTypes: list[str] | None = Field(default_factory=list)
 
 
 def clean_text(value):
@@ -42,11 +43,19 @@ def clean_text(value):
 
 
 def load_model():
-    global model_bundle
+    global model_bundle, model_modified_time
     if MODEL_PATH.exists():
         model_bundle = joblib.load(MODEL_PATH)
+        model_modified_time = MODEL_PATH.stat().st_mtime
     else:
         model_bundle = None
+        model_modified_time = None
+
+
+def reload_model_if_changed():
+    current_modified_time = MODEL_PATH.stat().st_mtime if MODEL_PATH.exists() else None
+    if current_modified_time != model_modified_time:
+        load_model()
 
 
 @app.on_event("startup")
@@ -56,6 +65,7 @@ def startup():
 
 @app.get("/health")
 def health():
+    reload_model_if_changed()
     return {
         "status": "ok",
         "modelLoaded": model_bundle is not None,
@@ -69,9 +79,10 @@ def unavailable(message):
         "predictedMinSalary": None,
         "predictedMaxSalary": None,
         "currency": "EUR",
-        "confidence": 0,
+        "profileCompleteness": 0,
         "similarJobs": 0,
         "market": "Austria",
+        "marketAssumed": False,
         "message": message,
     }
 
@@ -89,8 +100,8 @@ def build_feature_row(payload: SalaryPredictionRequest):
                 "experienceLevel": clean_text(job.experienceLevelName),
                 "educationLevel": clean_text(job.educationLevel),
                 "requiredExperience": job.requiredExperience or 0,
-                "skillsText": " ".join(clean_text(skill) for skill in payload.skills),
-                "workTypesText": " ".join(clean_text(work_type) for work_type in payload.workTypes),
+                "skillsText": " ".join(clean_text(skill) for skill in (payload.skills or [])),
+                "workTypesText": " ".join(clean_text(work_type) for work_type in (payload.workTypes or [])),
             }
         ]
     )
@@ -109,7 +120,7 @@ def round_salary(value):
     return int(round(float(value) / 50) * 50)
 
 
-def calculate_confidence(payload: SalaryPredictionRequest):
+def calculate_profile_completeness(payload: SalaryPredictionRequest):
     score = 45
 
     if payload.job and payload.job.jobname:
@@ -128,11 +139,13 @@ def calculate_confidence(payload: SalaryPredictionRequest):
 
 @app.post("/predict")
 def predict(payload: SalaryPredictionRequest):
+    reload_model_if_changed()
     if model_bundle is None:
         return unavailable("Salary model is not trained yet.")
 
     location = payload.location or LocationCriteria()
     country = clean_text(location.country).lower()
+    market_assumed = not country
 
     if country and country not in {"austria", "avstrija"}:
         return unavailable("Salary prediction is currently available for Austria-based searches.")
@@ -157,9 +170,14 @@ def predict(payload: SalaryPredictionRequest):
         "predictedMinSalary": predicted_min,
         "predictedMaxSalary": predicted_max,
         "currency": model_bundle.get("currency", "EUR"),
-        "confidence": calculate_confidence(payload),
+        "profileCompleteness": calculate_profile_completeness(payload),
         "similarJobs": model_bundle.get("trainingRows", 0),
         "market": model_bundle.get("market", "Austria"),
-        "message": "Prediction is based on Austrian salary data.",
+        "marketAssumed": market_assumed,
+        "message": (
+            "Austria was assumed because no country was provided."
+            if market_assumed
+            else "Prediction is based on Austrian salary data."
+        ),
         "modelMae": model_bundle.get("mae"),
     }
