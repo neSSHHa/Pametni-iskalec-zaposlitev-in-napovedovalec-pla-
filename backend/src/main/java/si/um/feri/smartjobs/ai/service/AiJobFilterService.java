@@ -12,17 +12,28 @@ public class AiJobFilterService {
 
     private final AiServiceClient aiServiceClient;
     private final AiAllowedValuesService allowedValuesService;
+    private final FastPromptFilterService fastPromptFilterService;
 
     public AiJobFilterService(
             AiServiceClient aiServiceClient,
-            AiAllowedValuesService allowedValuesService
+            AiAllowedValuesService allowedValuesService,
+            FastPromptFilterService fastPromptFilterService
     ) {
         this.aiServiceClient = aiServiceClient;
         this.allowedValuesService = allowedValuesService;
+        this.fastPromptFilterService = fastPromptFilterService;
     }
 
     public JobFilterRequest extractFilter(String text) {
-        return toJobFilterRequest(extractFromAi(text));
+        try {
+            AiJobFilterExtractionResponse aiResponse = extractFromAi(text);
+            if (isInvalid(aiResponse)) {
+                return fastPromptFilterService.buildFilter(text);
+            }
+            return toJobFilterRequest(aiResponse);
+        } catch (RuntimeException e) {
+            return fastPromptFilterService.buildFilter(text);
+        }
     }
 
     public AiJobFilterDebugResponse extractDebug(String text) {
@@ -89,6 +100,21 @@ public class AiJobFilterService {
                 aiResponse.workTypes(),
                 aiResponse.skills()
         );
+    }
+
+    private boolean isInvalid(AiJobFilterExtractionResponse aiResponse) {
+        if (aiResponse == null) {
+            return true;
+        }
+
+        return aiResponse.job() == null
+                && aiResponse.location() == null
+                && isEmpty(aiResponse.workTypes())
+                && isEmpty(aiResponse.skills());
+    }
+
+    private boolean isEmpty(java.util.List<?> values) {
+        return values == null || values.isEmpty();
     }
 
     public String rewriteCvToProfileText(String cvText) {
