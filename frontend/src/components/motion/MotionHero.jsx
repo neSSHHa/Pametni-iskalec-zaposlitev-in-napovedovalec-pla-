@@ -43,8 +43,8 @@ export default function MotionHero({
           <span className="radar-dot d4"></span>
           <span className="radar-dot d5"></span>
         </div>
-        <h1>Find jobs that truly <span>match you</span></h1>
-        <p>Upload your CV or describe what you want. Job Radar analyzes listings and returns the best matches.</p>
+        <h1>Upload your CV or write a prompt.</h1>
+        <p>Get matched job listings right away.</p>
       </div>
 
       <div className="home-mode-switch" role="group" aria-label="Processing mode">
