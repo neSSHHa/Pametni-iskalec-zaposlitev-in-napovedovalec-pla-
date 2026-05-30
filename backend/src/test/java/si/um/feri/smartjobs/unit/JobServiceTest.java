@@ -20,6 +20,7 @@ import si.um.feri.smartjobs.jobSkill.entity.JobSkill;
 import si.um.feri.smartjobs.jobSkill.repository.JobSkillRepository;
 import si.um.feri.smartjobs.location.entity.Location;
 import si.um.feri.smartjobs.skill.entity.Skill;
+import si.um.feri.smartjobs.skillRelation.entity.SkillRelation;
 import si.um.feri.smartjobs.skillRelation.repository.SkillRelationRepository;
 import si.um.feri.smartjobs.workType.entity.WorkType;
 import si.um.feri.smartjobs.workTypeJob.entity.WorkTypeJob;
@@ -492,6 +493,22 @@ void shouldReturnNullLocationFieldsWhenJobHasNoLocation() {
     }
 
     @Test
+    void shouldReturnJobsFromAustria() {
+        Location austria = location("loc-vienna", "Vienna", "Vienna", "Austria");
+        Job austrianJob = job("job-1", "Hotel Receptionist", austria);
+
+        when(jobRepository.findByLocation_CountryContainingIgnoreCase("Austria")).thenReturn(List.of(austrianJob));
+        when(jobRepository.findByIdIn(anyCollection())).thenReturn(List.of(austrianJob));
+        stubLookup(List.of(austrianJob), List.of(), List.of());
+
+        JobSearchResponse response = jobService.filterResponse(countryRequest("Austria"), 0, 10);
+
+        assertEquals(1, response.jobs().size());
+        assertEquals("job-1", response.jobs().get(0).id());
+        assertEquals("Austria", response.jobs().get(0).country());
+    }
+
+    @Test
     void shouldReturnJobsFromRequestedCity() {
         Location wien = location("loc-wien", "Wien", "Vienna", "Austria");
         Job wienJob = job("job-1", "Biology Teacher", wien);
@@ -532,6 +549,33 @@ void shouldReturnNullLocationFieldsWhenJobHasNoLocation() {
     }
 
     @Test
+    void shouldRankJobWithMultipleRequestedSkillsHigher() {
+        Job fullMatchJob = job("job-1", "Science Teacher");
+        Job partialMatchJob = job("job-2", "Science Teacher");
+        Skill biology = new Skill("skill-biology", "Biology", null);
+        Skill chemistry = new Skill("skill-chemistry", "Chemistry", null);
+        JobSkill fullBiology = new JobSkill("js-1", fullMatchJob, biology);
+        JobSkill fullChemistry = new JobSkill("js-2", fullMatchJob, chemistry);
+        JobSkill partialBiology = new JobSkill("js-3", partialMatchJob, biology);
+
+        when(jobSkillRepository.findBySkill_NameIn(anyCollection()))
+                .thenReturn(List.of(fullBiology, fullChemistry, partialBiology));
+        when(jobSkillRepository.findBySkill_IdIn(anyCollection())).thenReturn(List.of());
+        when(jobRepository.findByIdIn(anyCollection())).thenReturn(List.of(fullMatchJob, partialMatchJob));
+        stubLookup(
+                List.of(fullMatchJob, partialMatchJob),
+                List.of(fullBiology, fullChemistry, partialBiology),
+                List.of()
+        );
+
+        JobSearchResponse response = jobService.filterResponse(skillsRequest("Biology", "Chemistry"), 0, 10);
+
+        assertEquals(2, response.jobs().size());
+        assertEquals("job-1", response.jobs().get(0).id());
+        assertTrue(response.jobs().get(0).matchScore() > response.jobs().get(1).matchScore());
+    }
+
+    @Test
     void shouldRankJobsWithRequestedWorkTypeHigher() {
         Job remoteJob = job("job-1", "Teacher");
         Job onsiteJob = job("job-2", "Teacher");
@@ -554,6 +598,38 @@ void shouldReturnNullLocationFieldsWhenJobHasNoLocation() {
         assertEquals(2, response.jobs().size());
         assertEquals("job-1", response.jobs().get(0).id());
         assertTrue(response.jobs().get(0).matchScore() > response.jobs().get(1).matchScore());
+    }
+
+    @Test
+    void shouldRankRelatedSkillJobAsMatch() {
+        Job springJob = job("job-1", "Backend Developer");
+        Skill java = new Skill("skill-java", "Java", null);
+        Skill springBoot = new Skill("skill-spring-boot", "Spring Boot", null);
+        SkillRelation springFrameworkOfJava = new SkillRelation("relation-1", "FRAMEWORK_OF", springBoot, java);
+        JobSkill springSkill = new JobSkill("js-1", springJob, springBoot);
+
+        when(skillRelationRepository.findAll()).thenReturn(List.of(springFrameworkOfJava));
+        jobService.refreshSkillRelationIndex();
+        when(jobSkillRepository.findBySkill_NameIn(anyCollection())).thenReturn(List.of(springSkill));
+        when(jobSkillRepository.findBySkill_IdIn(anyCollection())).thenReturn(List.of());
+        when(jobRepository.findByIdIn(anyCollection())).thenReturn(List.of(springJob));
+        stubLookup(List.of(springJob), List.of(springSkill), List.of());
+
+        JobSearchResponse response = jobService.filterResponse(skillsRequest("Java"), 0, 10);
+
+        assertEquals(1, response.jobs().size());
+        assertEquals("job-1", response.jobs().get(0).id());
+        assertTrue(response.jobs().get(0).matchScore() > 0);
+    }
+
+    @Test
+    void shouldReturnEmptyListWhenLocationHasNoCandidates() {
+        when(jobRepository.findByLocation_CountryContainingIgnoreCase("Austria")).thenReturn(List.of());
+
+        JobSearchResponse response = jobService.filterResponse(countryRequest("Austria"), 0, 10);
+
+        assertEquals(List.of(), response.jobs());
+        assertEquals(0, response.totalCount());
     }
 
     @Test
@@ -747,6 +823,10 @@ void shouldReturnNullLocationFieldsWhenJobHasNoLocation() {
 
     private JobFilterRequest skillAndWorkTypeRequest(String skill, String workType) {
         return new JobFilterRequest(null, null, List.of(workType), List.of(skill));
+    }
+
+    private JobFilterRequest skillsRequest(String... skills) {
+        return new JobFilterRequest(null, null, List.of(), List.of(skills));
     }
 
     private JobFilterRequest requiredExperienceRequest(Integer requiredExperience) {
