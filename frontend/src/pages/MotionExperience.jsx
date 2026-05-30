@@ -128,6 +128,7 @@ function mapJob(job, index) {
   const latitude = numberOrNull(job.latitude);
   const longitude = numberOrNull(job.longitude);
   const source = sourceValue(job);
+  const skills = Array.isArray(job.skills) && job.skills.length ? job.skills : ["AI match", "Skill fit"];
 
   return {
     id: job.id || `${job.title}-${index}`,
@@ -152,7 +153,8 @@ function mapJob(job, index) {
     confidence: Number.isFinite(Number(job.confidenceScore)) ? Number(job.confidenceScore) : null,
     level: job.experienceLevel || "Not specified",
     mode: job.workMode || "Not specified",
-    tags: Array.isArray(job.skills) && job.skills.length ? job.skills.slice(0, 4) : ["AI match", "Skill fit"],
+    skills,
+    tags: skills.slice(0, 4),
   };
 }
 
@@ -241,7 +243,7 @@ function buildFilteredAnalytics(filteredJobs, meta = {}) {
       hybridJobs,
       averageMatch,
     },
-    topSkills: countItems(filteredJobs, (job) => job.tags),
+    topSkills: countItems(filteredJobs, (job) => job.skills?.length ? job.skills : job.tags),
     topRoles: countItems(filteredJobs, (job) => classifyRole(job.title)),
     cityStats,
     regionStats: countItems(filteredJobs, (job) => job.region),

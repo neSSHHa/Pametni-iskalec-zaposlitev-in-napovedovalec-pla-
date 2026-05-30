@@ -301,6 +301,7 @@ function LoadMoreButton({ remainingJobs, hasMore, onClick }) {
 
 export function JobDetailsModal({ job, filterRequest, onClose, onToggleCompare, selectedForCompare = false }) {
   const userSkills = Array.isArray(filterRequest?.skills) ? filterRequest.skills : [];
+  const jobSkills = Array.isArray(job.skills) && job.skills.length ? job.skills : job.tags;
   const detailsRef = useRef(null);
   const descriptionRef = useRef(null);
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
@@ -365,7 +366,7 @@ export function JobDetailsModal({ job, filterRequest, onClose, onToggleCompare, 
         </header>
 
         <div className="job-details-tags">
-          {job.tags.map((tag) => <em key={tag}>{tag}</em>)}
+          {jobSkills.map((tag) => <em key={tag}>{tag}</em>)}
         </div>
 
         <section>
@@ -396,7 +397,7 @@ export function JobDetailsModal({ job, filterRequest, onClose, onToggleCompare, 
           <section>
             <span>What the job has</span>
             <ul>
-              {job.tags.map((skill) => <li key={skill}><BriefcaseBusiness size={16} /> {skill}</li>)}
+              {jobSkills.map((skill) => <li key={skill}><BriefcaseBusiness size={16} /> {skill}</li>)}
             </ul>
           </section>
         </div>
