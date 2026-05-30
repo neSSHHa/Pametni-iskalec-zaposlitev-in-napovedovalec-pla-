@@ -17,6 +17,8 @@ import si.um.feri.smartjobs.educationLevel.entity.EducationLevel;
 import si.um.feri.smartjobs.educationLevel.repository.EducationLevelRepository;
 import si.um.feri.smartjobs.experienceLevel.entity.ExperienceLevel;
 import si.um.feri.smartjobs.experienceLevel.repository.ExperienceLevelRepository;
+import si.um.feri.smartjobs.location.entity.Location;
+import si.um.feri.smartjobs.location.repository.LocationRepository;
 import si.um.feri.smartjobs.skill.entity.Skill;
 import si.um.feri.smartjobs.skill.repository.SkillRepository;
 import si.um.feri.smartjobs.workType.entity.WorkType;
@@ -40,23 +42,27 @@ public class AiAllowedValuesService {
     private final EducationLevelRepository educationLevelRepository;
     private final ExperienceLevelRepository experienceLevelRepository;
     private final WorkTypeRepository workTypeRepository;
+    private final LocationRepository locationRepository;
 
     private List<String> allowedSkills = List.of();
     private List<String> allowedEducationLevels = List.of();
     private List<String> allowedExperienceLevels = List.of();
     private List<String> allowedWorkTypes = List.of();
+    private List<String> allowedLocations = List.of();
     private List<CachedSkill> cachedSkills = List.of();
 
     public AiAllowedValuesService(
             SkillRepository skillRepository,
             EducationLevelRepository educationLevelRepository,
             ExperienceLevelRepository experienceLevelRepository,
-            WorkTypeRepository workTypeRepository
+            WorkTypeRepository workTypeRepository,
+            LocationRepository locationRepository
     ) {
         this.skillRepository = skillRepository;
         this.educationLevelRepository = educationLevelRepository;
         this.experienceLevelRepository = experienceLevelRepository;
         this.workTypeRepository = workTypeRepository;
+        this.locationRepository = locationRepository;
     }
 
     @PostConstruct
@@ -93,12 +99,25 @@ public class AiAllowedValuesService {
                 .sorted()
                 .toList();
 
+        allowedLocations = locationRepository.findAll().stream()
+                .<String>flatMap(location -> Arrays.stream(new String[]{
+                        location.getCityDistrict(),
+                        location.getCity(),
+                        location.getRegion(),
+                        location.getCountry()
+                }))
+                .filter(this::hasText)
+                .sorted()
+                .distinct()
+                .toList();
+
         LOGGER.info(
-                "AI allowed values refreshed. Skills: {}, education levels: {}, experience levels: {}, work types: {}.",
+                "AI allowed values refreshed. Skills: {}, education levels: {}, experience levels: {}, work types: {}, locations: {}.",
                 allowedSkills.size(),
                 allowedEducationLevels.size(),
                 allowedExperienceLevels.size(),
-                allowedWorkTypes.size()
+                allowedWorkTypes.size(),
+                allowedLocations.size()
         );
     }
 
@@ -133,6 +152,10 @@ public class AiAllowedValuesService {
 
     public List<String> getAllowedWorkTypes() {
         return allowedWorkTypes;
+    }
+
+    public List<String> getAllowedLocations() {
+        return allowedLocations;
     }
 
     private boolean isRelevantSkill(CachedSkill skill, String normalizedText, Set<String> terms) {
