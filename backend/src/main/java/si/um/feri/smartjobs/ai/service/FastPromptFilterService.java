@@ -57,7 +57,12 @@ public class FastPromptFilterService {
             Map.entry("murska sobota", "Murska Sobota"),
             Map.entry("berlin", "Berlin"),
             Map.entry("munich", "Munich"),
-            Map.entry("hamburg", "Hamburg")
+            Map.entry("hamburg", "Hamburg"),
+            Map.entry("vienna", "Vienna"),
+            Map.entry("wien", "Vienna"),
+            Map.entry("graz", "Graz"),
+            Map.entry("linz", "Linz"),
+            Map.entry("salzburg", "Salzburg")
     );
 
     private final AiAllowedValuesService allowedValuesService;
