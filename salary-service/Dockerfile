@@ -6,6 +6,7 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app.py train_model.py ./
+COPY tests ./tests
 
 EXPOSE 8091
 
