@@ -34,7 +34,8 @@ public class AiServiceController {
                 request.allowedSkills(),
                 request.allowedEducationLevels(),
                 request.allowedExperienceLevels(),
-                request.allowedWorkTypes()
+                request.allowedWorkTypes(),
+                request.allowedLocations()
         );
     }
 
@@ -45,7 +46,8 @@ public class AiServiceController {
                 request.allowedSkills(),
                 request.allowedEducationLevels(),
                 request.allowedExperienceLevels(),
-                request.allowedWorkTypes()
+                request.allowedWorkTypes(),
+                request.allowedLocations()
         );
     }
 

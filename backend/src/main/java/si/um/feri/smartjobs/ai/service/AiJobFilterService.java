@@ -56,7 +56,8 @@ public class AiJobFilterService {
                 allowedValuesService.getAllowedSkills(),
                 allowedValuesService.getAllowedEducationLevels(),
                 allowedValuesService.getAllowedExperienceLevels(),
-                allowedValuesService.getAllowedWorkTypes()
+                allowedValuesService.getAllowedWorkTypes(),
+                allowedValuesService.getAllowedLocations()
         );
     }
 
@@ -66,7 +67,8 @@ public class AiJobFilterService {
                 allowedValuesService.getAllowedSkills(),
                 allowedValuesService.getAllowedEducationLevels(),
                 allowedValuesService.getAllowedExperienceLevels(),
-                allowedValuesService.getAllowedWorkTypes()
+                allowedValuesService.getAllowedWorkTypes(),
+                allowedValuesService.getAllowedLocations()
         );
     }
 

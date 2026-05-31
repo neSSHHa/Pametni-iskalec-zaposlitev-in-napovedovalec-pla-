@@ -47,9 +47,10 @@ public class AiServiceClient {
             List<String> allowedSkills,
             List<String> allowedEducationLevels,
             List<String> allowedExperienceLevels,
-            List<String> allowedWorkTypes
+            List<String> allowedWorkTypes,
+            List<String> allowedLocations
     ) {
-        String prompt = buildPrompt(text, "prompt", allowedSkills, allowedEducationLevels, allowedExperienceLevels, allowedWorkTypes);
+        String prompt = buildPrompt(text, "prompt", allowedSkills, allowedEducationLevels, allowedExperienceLevels, allowedWorkTypes, allowedLocations);
 
         OpenRouterChatRequest request = new OpenRouterChatRequest(
                 aiProperties.model(),
@@ -66,9 +67,10 @@ public class AiServiceClient {
             List<String> allowedSkills,
             List<String> allowedEducationLevels,
             List<String> allowedExperienceLevels,
-            List<String> allowedWorkTypes
+            List<String> allowedWorkTypes,
+            List<String> allowedLocations
     ) {
-        String prompt = buildPrompt(cvText, "cv", allowedSkills, allowedEducationLevels, allowedExperienceLevels, allowedWorkTypes);
+        String prompt = buildPrompt(cvText, "cv", allowedSkills, allowedEducationLevels, allowedExperienceLevels, allowedWorkTypes, allowedLocations);
 
         OpenRouterChatRequest request = new OpenRouterChatRequest(
                 aiProperties.model(),
@@ -99,7 +101,8 @@ public class AiServiceClient {
             List<String> allowedSkills,
             List<String> allowedEducationLevels,
             List<String> allowedExperienceLevels,
-            List<String> allowedWorkTypes
+            List<String> allowedWorkTypes,
+            List<String> allowedLocations
     ) {
         String typeRules = "cv".equals(type) ? cvRules() : promptRules();
 
@@ -115,10 +118,11 @@ public class AiServiceClient {
 
                 Critical rules:
                 - The app domain is unknown. It can be IT, healthcare, finance, logistics, education, construction, USA jobs, Europe jobs, anything.
-                - The controlled database values below are the source of truth for skills, workTypes, educationLevel and experienceLevelName.
+                - The controlled database values below are the source of truth for skills, workTypes, educationLevel, experienceLevelName and location.
                 - Use ONLY values from the allowed lists for skills, workTypes, educationLevel and experienceLevelName.
-                - job.jobname and location are free-text extraction fields: infer them from the input and normalize to English when clear.
-                - Translate city/country names to normal English names when clear, for example Wien -> Vienna, Beograd -> Belgrade.
+                - For location fields, prefer exact values from allowedLocations whenever a matching city, region or country is present.
+                - Do not translate a location away from an allowed database value. For example, if allowedLocations contains "Wien", return "Wien", not "Vienna".
+                - job.jobname is a free-text extraction field: infer it from the input and normalize to English when clear.
                 - If a controlled value is not in the allowed list, do not put it in skills/workTypes/educationLevel/experienceLevelName.
                 - If the user clearly mentions an important skill/title that is not allowed, put it into unknownSkills.
                 - Extract skills exhaustively, not selectively.
@@ -146,6 +150,7 @@ public class AiServiceClient {
                 workTypes: %s
                 educationLevels: %s
                 experienceLevels: %s
+                locations: %s
 
                 Exact output shape:
                 {
@@ -188,6 +193,7 @@ public class AiServiceClient {
                 jsonArray(allowedWorkTypes),
                 jsonArray(allowedEducationLevels),
                 jsonArray(allowedExperienceLevels),
+                jsonArray(allowedLocations),
                 input
         );
     }

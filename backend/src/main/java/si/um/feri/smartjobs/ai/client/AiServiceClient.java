@@ -27,9 +27,10 @@ public class AiServiceClient {
             List<String> allowedSkills,
             List<String> allowedEducationLevels,
             List<String> allowedExperienceLevels,
-            List<String> allowedWorkTypes
+            List<String> allowedWorkTypes,
+            List<String> allowedLocations
     ) {
-        return postExtraction("/api/ai/jobs/extract", text, allowedSkills, allowedEducationLevels, allowedExperienceLevels, allowedWorkTypes);
+        return postExtraction("/api/ai/jobs/extract", text, allowedSkills, allowedEducationLevels, allowedExperienceLevels, allowedWorkTypes, allowedLocations);
     }
 
     public AiJobFilterExtractionResponse extractCvJobFilter(
@@ -37,9 +38,10 @@ public class AiServiceClient {
             List<String> allowedSkills,
             List<String> allowedEducationLevels,
             List<String> allowedExperienceLevels,
-            List<String> allowedWorkTypes
+            List<String> allowedWorkTypes,
+            List<String> allowedLocations
     ) {
-        return postExtraction("/api/ai/cv/extract", cvText, allowedSkills, allowedEducationLevels, allowedExperienceLevels, allowedWorkTypes);
+        return postExtraction("/api/ai/cv/extract", cvText, allowedSkills, allowedEducationLevels, allowedExperienceLevels, allowedWorkTypes, allowedLocations);
     }
 
     public String rewriteCvToProfileText(String cvText) {
@@ -62,11 +64,12 @@ public class AiServiceClient {
             List<String> allowedSkills,
             List<String> allowedEducationLevels,
             List<String> allowedExperienceLevels,
-            List<String> allowedWorkTypes
+            List<String> allowedWorkTypes,
+            List<String> allowedLocations
     ) {
         AiJobFilterExtractionResponse response = restTemplate.postForObject(
                 aiProperties.serviceUrl() + path,
-                new AiExtractionRequest(text, allowedSkills, allowedEducationLevels, allowedExperienceLevels, allowedWorkTypes),
+                new AiExtractionRequest(text, allowedSkills, allowedEducationLevels, allowedExperienceLevels, allowedWorkTypes, allowedLocations),
                 AiJobFilterExtractionResponse.class
         );
 

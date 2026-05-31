@@ -28,7 +28,7 @@ class AiSearchIntegrationTest extends AbstractIntegrationTestData {
 
     @Test
     void shouldExtractFiltersFromPrompt() throws Exception {
-        when(aiServiceClient.extractJobFilter(eq("remote jobs in Austria"), anyList(), anyList(), anyList(), anyList()))
+        when(aiServiceClient.extractJobFilter(eq("remote jobs in Austria"), anyList(), anyList(), anyList(), anyList(), anyList()))
                 .thenReturn(austriaRemoteResponse());
 
         mockMvc.perform(post("/api/ai/jobs/extract")
@@ -41,7 +41,7 @@ class AiSearchIntegrationTest extends AbstractIntegrationTestData {
 
     @Test
     void shouldSearchAustriaJobsFromPrompt() throws Exception {
-        when(aiServiceClient.extractJobFilter(eq("jobs in Austria"), anyList(), anyList(), anyList(), anyList()))
+        when(aiServiceClient.extractJobFilter(eq("jobs in Austria"), anyList(), anyList(), anyList(), anyList(), anyList()))
                 .thenReturn(countryResponse("Austria"));
 
         mockMvc.perform(post("/api/ai/jobs/filter")
@@ -53,7 +53,7 @@ class AiSearchIntegrationTest extends AbstractIntegrationTestData {
 
     @Test
     void shouldSearchWienRemoteJobsFromPrompt() throws Exception {
-        when(aiServiceClient.extractJobFilter(eq("remote jobs in Wien"), anyList(), anyList(), anyList(), anyList()))
+        when(aiServiceClient.extractJobFilter(eq("remote jobs in Wien"), anyList(), anyList(), anyList(), anyList(), anyList()))
                 .thenReturn(viennaRemoteResponse());
 
         mockMvc.perform(post("/api/ai/jobs/filter")
@@ -66,7 +66,7 @@ class AiSearchIntegrationTest extends AbstractIntegrationTestData {
 
     @Test
     void shouldSearchJobsFromSkillPrompt() throws Exception {
-        when(aiServiceClient.extractJobFilter(eq("React jobs"), anyList(), anyList(), anyList(), anyList()))
+        when(aiServiceClient.extractJobFilter(eq("React jobs"), anyList(), anyList(), anyList(), anyList(), anyList()))
                 .thenReturn(skillResponse("React"));
 
         mockMvc.perform(post("/api/ai/jobs/filter")
@@ -78,7 +78,7 @@ class AiSearchIntegrationTest extends AbstractIntegrationTestData {
 
     @Test
     void shouldReturnJobsWhenAiReturnsValidFilter() throws Exception {
-        when(aiServiceClient.extractJobFilter(eq("Mechatronics in Graz"), anyList(), anyList(), anyList(), anyList()))
+        when(aiServiceClient.extractJobFilter(eq("Mechatronics in Graz"), anyList(), anyList(), anyList(), anyList(), anyList()))
                 .thenReturn(new AiJobFilterExtractionResponse(
                         null,
                         new AiJobFilterExtractionResponse.LocationData(null, "Graz", List.of("Graz"), null, List.of(), "Austria", List.of("Austria"), null, null),
@@ -96,7 +96,7 @@ class AiSearchIntegrationTest extends AbstractIntegrationTestData {
 
     @Test
     void shouldFallbackToFastParserWhenAiUnavailable() throws Exception {
-        when(aiServiceClient.extractJobFilter(eq("Mechatronics jobs in Austria"), anyList(), anyList(), anyList(), anyList()))
+        when(aiServiceClient.extractJobFilter(eq("Mechatronics jobs in Austria"), anyList(), anyList(), anyList(), anyList(), anyList()))
                 .thenThrow(new IllegalStateException("AI unavailable"));
 
         mockMvc.perform(post("/api/ai/jobs/filter")
@@ -108,7 +108,7 @@ class AiSearchIntegrationTest extends AbstractIntegrationTestData {
 
     @Test
     void shouldFallbackToFastParserWhenAiReturnsInvalidResponse() throws Exception {
-        when(aiServiceClient.extractJobFilter(eq("remote jobs in Austria"), anyList(), anyList(), anyList(), anyList()))
+        when(aiServiceClient.extractJobFilter(eq("remote jobs in Austria"), anyList(), anyList(), anyList(), anyList(), anyList()))
                 .thenReturn(new AiJobFilterExtractionResponse(null, null, List.of(), List.of(), List.of()));
 
         mockMvc.perform(post("/api/ai/jobs/filter")
@@ -126,12 +126,12 @@ class AiSearchIntegrationTest extends AbstractIntegrationTestData {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.jobs[0].city", is("Vienna")));
 
-        verify(aiServiceClient, never()).extractJobFilter(eq("React jobs in Wien"), anyList(), anyList(), anyList(), anyList());
+        verify(aiServiceClient, never()).extractJobFilter(eq("React jobs in Wien"), anyList(), anyList(), anyList(), anyList(), anyList());
     }
 
     @Test
     void shouldUseThinkingModeWhenRequested() throws Exception {
-        when(aiServiceClient.extractJobFilter(eq("jobs in Austria"), anyList(), anyList(), anyList(), anyList()))
+        when(aiServiceClient.extractJobFilter(eq("jobs in Austria"), anyList(), anyList(), anyList(), anyList(), anyList()))
                 .thenReturn(countryResponse("Austria"));
 
         mockMvc.perform(post("/api/ai/jobs/filter")
@@ -139,7 +139,7 @@ class AiSearchIntegrationTest extends AbstractIntegrationTestData {
                         .content(objectMapper.writeValueAsString(new NaturalLanguageJobFilterRequest("jobs in Austria", "thinking"))))
                 .andExpect(status().isOk());
 
-        verify(aiServiceClient).extractJobFilter(eq("jobs in Austria"), anyList(), anyList(), anyList(), anyList());
+        verify(aiServiceClient).extractJobFilter(eq("jobs in Austria"), anyList(), anyList(), anyList(), anyList(), anyList());
     }
 
     @Test

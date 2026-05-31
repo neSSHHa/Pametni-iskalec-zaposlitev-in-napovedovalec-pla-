@@ -78,7 +78,7 @@ class CvMatchingIntegrationTest extends AbstractIntegrationTestData {
 
     @Test
     void shouldUseThinkingCvModeWhenRequested() throws Exception {
-        when(aiServiceClient.extractCvJobFilter(eq("Nurse with patient care experience."), anyList(), anyList(), anyList(), anyList()))
+        when(aiServiceClient.extractCvJobFilter(eq("Nurse with patient care experience."), anyList(), anyList(), anyList(), anyList(), anyList()))
                 .thenReturn(new AiJobFilterExtractionResponse(null, null, List.of("On-site"), List.of("Nursing"), List.of()));
         MockMultipartFile file = textFile("cv.txt", "Nurse with patient care experience.");
 
@@ -90,7 +90,7 @@ class CvMatchingIntegrationTest extends AbstractIntegrationTestData {
 
     @Test
     void shouldReturnMatchedJobsWhenStubAiExtractsCvFilter() throws Exception {
-        when(aiServiceClient.extractCvJobFilter(eq("I work in hotel service in Vienna."), anyList(), anyList(), anyList(), anyList()))
+        when(aiServiceClient.extractCvJobFilter(eq("I work in hotel service in Vienna."), anyList(), anyList(), anyList(), anyList(), anyList()))
                 .thenReturn(new AiJobFilterExtractionResponse(
                         null,
                         new AiJobFilterExtractionResponse.LocationData(null, "Vienna", List.of("Vienna"), null, List.of(), "Austria", List.of("Austria"), null, null),

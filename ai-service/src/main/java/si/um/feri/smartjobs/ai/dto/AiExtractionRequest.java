@@ -7,6 +7,7 @@ public record AiExtractionRequest(
         List<String> allowedSkills,
         List<String> allowedEducationLevels,
         List<String> allowedExperienceLevels,
-        List<String> allowedWorkTypes
+        List<String> allowedWorkTypes,
+        List<String> allowedLocations
 ) {
 }

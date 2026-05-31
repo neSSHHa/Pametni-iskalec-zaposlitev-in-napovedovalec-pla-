@@ -236,7 +236,7 @@ class AiFilterAllowedValuesTest {
                 fastPromptFilterService
         );
 
-        when(aiServiceClient.extractJobFilter(eq("Mechatronics remote work in Austria"), anyList(), anyList(), anyList(), anyList()))
+        when(aiServiceClient.extractJobFilter(eq("Mechatronics remote work in Austria"), anyList(), anyList(), anyList(), anyList(), anyList()))
                 .thenThrow(new IllegalStateException("Invalid AI response"));
 
         JobFilterRequest filter = aiJobFilterService.extractFilter("Mechatronics remote work in Austria");
@@ -255,7 +255,7 @@ class AiFilterAllowedValuesTest {
                 fastPromptFilterService()
         );
 
-        when(aiServiceClient.extractJobFilter(eq("Mechatronics remote work in Austria"), anyList(), anyList(), anyList(), anyList()))
+        when(aiServiceClient.extractJobFilter(eq("Mechatronics remote work in Austria"), anyList(), anyList(), anyList(), anyList(), anyList()))
                 .thenReturn(new AiJobFilterExtractionResponse(null, null, List.of(), List.of(), List.of()));
 
         JobFilterRequest filter = aiJobFilterService.extractFilter("Mechatronics remote work in Austria");
@@ -274,7 +274,7 @@ class AiFilterAllowedValuesTest {
                 fastPromptFilterService()
         );
 
-        when(aiServiceClient.extractJobFilter(eq("Mechatronics remote work in Austria"), anyList(), anyList(), anyList(), anyList()))
+        when(aiServiceClient.extractJobFilter(eq("Mechatronics remote work in Austria"), anyList(), anyList(), anyList(), anyList(), anyList()))
                 .thenReturn(null);
 
         JobFilterRequest filter = aiJobFilterService.extractFilter("Mechatronics remote work in Austria");
@@ -311,7 +311,7 @@ class AiFilterAllowedValuesTest {
                 List.of()
         );
 
-        when(aiServiceClient.extractJobFilter(eq("Mechatronics remote work in Austria"), anyList(), anyList(), anyList(), anyList()))
+        when(aiServiceClient.extractJobFilter(eq("Mechatronics remote work in Austria"), anyList(), anyList(), anyList(), anyList(), anyList()))
                 .thenReturn(aiResponse);
 
         JobFilterRequest filter = aiJobFilterService.extractFilter("Mechatronics remote work in Austria");
