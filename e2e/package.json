@@ -1,0 +1,14 @@
+{
+  "name": "smartjobs-e2e",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:sequence": "powershell -ExecutionPolicy Bypass -File ./run-tests-sequential.ps1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0"
+  }
+}

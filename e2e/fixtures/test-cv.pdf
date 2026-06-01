@@ -1,0 +1,91 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 1876 >>
+stream
+BT
+/F1 11 Tf
+50 760 Td
+(Kristina Novak) Tj
+0 -14 Td
+(Junior Software Developer) Tj
+0 -14 Td
+(Maribor, Slovenia | Open to hybrid and remote work) Tj
+0 -14 Td
+(Email: kristina.novak@example.com) Tj
+0 -14 Td
+0 -14 Td
+/F1 13 Tf
+(PROFILE) Tj
+/F1 11 Tf
+0 -18 Td
+(Junior software developer focused on backend and full-stack web applications. Looking for a Junior Java Developer or Software Developer role in Maribor, Ljubljana, Slovenia or remote/hybrid work. Interested in jobs using Java, Spring Boot, SQL, REST APIs, React and JavaScript.) Tj
+0 -14 Td
+0 -14 Td
+/F1 13 Tf
+(SKILLS) Tj
+/F1 11 Tf
+0 -18 Td
+(Java, Spring Boot, SQL, MySQL, REST APIs, React, JavaScript, HTML, CSS, Git, Docker, Agile, Unit testing, API integration.) Tj
+0 -14 Td
+0 -14 Td
+/F1 13 Tf
+(EXPERIENCE) Tj
+/F1 11 Tf
+0 -18 Td
+(Software Development Intern - Smart Jobs University Project, Maribor) Tj
+0 -14 Td
+(Built REST API features with Java and Spring Boot. Implemented frontend screens with React and JavaScript. Worked with SQL and MySQL data, job search filters, CV analysis workflows and salary prediction services.) Tj
+0 -14 Td
+0 -14 Td
+(Junior Backend Project Developer - Student Project) Tj
+0 -14 Td
+(Developed backend endpoints, DTOs and service tests. Integrated external services and improved job recommendation logic. Used Git, Maven, JUnit and API testing.) Tj
+0 -14 Td
+0 -14 Td
+/F1 13 Tf
+(EDUCATION) Tj
+/F1 11 Tf
+0 -18 Td
+(University of Maribor, Faculty of Electrical Engineering and Computer Science) Tj
+0 -14 Td
+(Computer Science / Software Engineering student.) Tj
+0 -14 Td
+0 -14 Td
+/F1 13 Tf
+(JOB PREFERENCES) Tj
+/F1 11 Tf
+0 -18 Td
+(Desired role: Junior Java Developer, Backend Developer, Software Developer.) Tj
+0 -14 Td
+(Location: Maribor, Ljubljana, Slovenia. Work type: Hybrid or Remote.) Tj
+0 -14 Td
+(Expected salary: from 1800 EUR. Experience level: Junior, 1 to 2 years.) Tj
+0 -14 Td
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2239
+%%EOF
