@@ -194,6 +194,7 @@ SmartJobPlatform/
 - Do not hard-code secrets in source code.
 - Use service names inside Docker network, for example `http://ai-service:8090`.
 - Use `AI_SERVICE_URL` to configure backend-to-AI-service communication.
+- Use the production logging runbook in [`docs/production-logging.md`](docs/production-logging.md) to collect and search logs with Alloy, Loki and Grafana.
 
 ## Installation Instructions
 

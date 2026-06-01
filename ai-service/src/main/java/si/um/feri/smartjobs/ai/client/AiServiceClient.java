@@ -12,6 +12,9 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -26,11 +29,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import si.um.feri.smartjobs.ai.config.AiProperties;
+import si.um.feri.smartjobs.ai.config.RequestLoggingFilter;
 import si.um.feri.smartjobs.ai.dto.AiJobFilterExtractionResponse;
 
 @Component
 public class AiServiceClient {
     private static final Pattern NUMBER_PATTERN = Pattern.compile("-?\\d+(?:[.,]\\d+)?");
+    private static final Logger LOGGER = LoggerFactory.getLogger(AiServiceClient.class);
 
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
@@ -59,7 +64,18 @@ public class AiServiceClient {
                 Map.of("type", "json_object")
         );
 
-        return parseAiResponse(callOpenRouter(request, "job filter"));
+        AiJobFilterExtractionResponse response = parseAiResponse(callOpenRouter(request, "job filter"));
+        LOGGER.info(
+                "event=ai.filter.extracted requestId={} interactionId={} skills={} unknownSkills={} workTypes={} job={} location={}",
+                MDC.get(RequestLoggingFilter.REQUEST_ID_MDC_KEY),
+                MDC.get(RequestLoggingFilter.INTERACTION_ID_MDC_KEY),
+                response.skills(),
+                response.unknownSkills(),
+                response.workTypes(),
+                response.job(),
+                response.location()
+        );
+        return response;
     }
 
     public AiJobFilterExtractionResponse extractCvJobFilter(
@@ -493,10 +509,41 @@ public class AiServiceClient {
             headers.set("X-Title", aiProperties.openrouterTitle());
         }
 
-        OpenRouterChatResponse response = restTemplate.postForObject(
-                aiProperties.openrouterUrl() + "/chat/completions",
-                new HttpEntity<>(request, headers),
-                OpenRouterChatResponse.class
+        String requestId = MDC.get(RequestLoggingFilter.REQUEST_ID_MDC_KEY);
+        String interactionId = MDC.get(RequestLoggingFilter.INTERACTION_ID_MDC_KEY);
+        long startedAt = System.nanoTime();
+        LOGGER.info(
+                "event=outbound.started requestId={} interactionId={} target=openrouter operation={}",
+                requestId,
+                interactionId,
+                purpose
+        );
+
+        OpenRouterChatResponse response;
+        try {
+            response = restTemplate.postForObject(
+                    aiProperties.openrouterUrl() + "/chat/completions",
+                    new HttpEntity<>(request, headers),
+                    OpenRouterChatResponse.class
+            );
+        } catch (RuntimeException exception) {
+            LOGGER.error(
+                    "event=outbound.failed requestId={} interactionId={} target=openrouter operation={} durationMs={}",
+                    requestId,
+                    interactionId,
+                    purpose,
+                    elapsedMs(startedAt),
+                    exception
+            );
+            throw exception;
+        }
+
+        LOGGER.info(
+                "event=outbound.completed requestId={} interactionId={} target=openrouter operation={} durationMs={}",
+                requestId,
+                interactionId,
+                purpose,
+                elapsedMs(startedAt)
         );
 
         if (response != null && response.error() != null) {
@@ -517,6 +564,10 @@ public class AiServiceClient {
         }
 
         return message.content();
+    }
+
+    private long elapsedMs(long startedAt) {
+        return java.util.concurrent.TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startedAt);
     }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BarChart3, Brain, Database, FileText, Search, UserRound } from "lucide-react";
 import { getAnalyticsDashboard } from "../api/analyticsApi.js";
+import { createInteractionId } from "../api/apiClient.js";
 import { uploadCv } from "../api/cvApi.js";
 import { getJobs, searchJobsByPrompt } from "../api/jobApi.js";
 import { predictSalary } from "../api/salaryApi.js";
@@ -459,11 +460,11 @@ function clearStoredResults() {
   }
 }
 
-async function loadSalaryPrediction(filterRequest) {
+async function loadSalaryPrediction(filterRequest, interactionId) {
   if (!filterRequest) return null;
 
   try {
-    const prediction = await predictSalary(filterRequest);
+    const prediction = await predictSalary(filterRequest, interactionId);
     return prediction?.available ? prediction : null;
   } catch {
     return null;
@@ -622,7 +623,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
     }
   };
 
-  const requestSalaryPrediction = (filterRequest) => {
+  const requestSalaryPrediction = (filterRequest, interactionId) => {
     const requestId = ++salaryRequestId.current;
     if (!filterRequest) {
       setSalaryPrediction(null);
@@ -631,7 +632,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
     }
 
     setSalaryPredictionLoading(true);
-    loadSalaryPrediction(filterRequest).then((prediction) => {
+    loadSalaryPrediction(filterRequest, interactionId).then((prediction) => {
       if (salaryRequestId.current !== requestId) return;
       setSalaryPrediction(prediction);
       setSalaryPredictionLoading(false);
@@ -653,7 +654,8 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       : "Fast mode detects clear criteria and ranks listings...");
 
     try {
-      const data = await searchJobsByPrompt(query, processingMode);
+      const interactionId = createInteractionId();
+      const data = await searchJobsByPrompt(query, processingMode, interactionId);
       setLoadingProgress(100);
       const mappedJobs = listFromApiResponse(data).map(mapJob);
       setJobs(mappedJobs);
@@ -680,7 +682,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
         analytics: nextAnalytics,
         lastResultsMode: "search",
       });
-      requestSalaryPrediction(nextFilter);
+      requestSalaryPrediction(nextFilter, interactionId);
       window.history.pushState({}, "", "/motion-prompt");
     } catch (err) {
       setError("The prompt API did not return a result. Check the backend and AI service.");
@@ -702,7 +704,8 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       : "The CV is being read, the fast parser is extracting skills and ranking listings...");
 
     try {
-      const data = await uploadCv(file, processingMode);
+      const interactionId = createInteractionId();
+      const data = await uploadCv(file, processingMode, interactionId);
       setLoadingProgress(100);
       const mappedJobs = (data?.jobs || []).map(mapJob);
       setJobs(mappedJobs);
@@ -728,7 +731,7 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
         analytics: nextAnalytics,
         lastResultsMode: "cv",
       });
-      requestSalaryPrediction(nextFilter);
+      requestSalaryPrediction(nextFilter, interactionId);
       window.history.pushState({}, "", "/motion-cv");
     } catch (err) {
       setError("The CV API did not return a result. Check that the backend and AI service are running.");

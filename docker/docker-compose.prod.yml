@@ -1,14 +1,28 @@
+x-logging: &default-logging
+  driver: local
+  options:
+    max-size: "10m"
+    max-file: "5"
+
 services:
   mysql:
     restart: always
+    logging: *default-logging
 
   backend:
     restart: always
+    logging: *default-logging
     environment:
       SPRING_PROFILES_ACTIVE: prod
 
   ai-service:
     restart: always
+    logging: *default-logging
+
+  salary-service:
+    restart: always
+    logging: *default-logging
 
   frontend:
     restart: always
+    logging: *default-logging

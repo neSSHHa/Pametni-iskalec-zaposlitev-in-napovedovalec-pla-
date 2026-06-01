@@ -8,12 +8,16 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 
 import si.um.feri.smartjobs.job.dto.JobFilterRequest;
 
 @Service
 public class FastPromptFilterService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(FastPromptFilterService.class);
 
     private static final Map<String, String> COUNTRY_ALIASES = Map.ofEntries(
             Map.entry("slovenia", "Slovenia"),
@@ -74,7 +78,7 @@ public class FastPromptFilterService {
         List<String> workTypes = extractWorkTypes(normalized);
         LocationGuess location = extractLocation(normalized);
 
-        return new JobFilterRequest(
+        JobFilterRequest filterRequest = new JobFilterRequest(
                 new JobFilterRequest.JobCriteria(
                         null,
                         null,
@@ -103,6 +107,19 @@ public class FastPromptFilterService {
                 workTypes,
                 skills
         );
+
+        LOGGER.info(
+                "event=fast.filter.extracted requestId={} interactionId={} skills={} workTypes={} city={} country={} experienceYears={} experienceLevel={}",
+                MDC.get("requestId"),
+                MDC.get("interactionId"),
+                filterRequest.skills(),
+                filterRequest.workTypes(),
+                filterRequest.location().city(),
+                filterRequest.location().country(),
+                filterRequest.job().requiredExperience(),
+                filterRequest.job().experienceLevelName()
+        );
+        return filterRequest;
     }
 
     private List<String> extractSkills(String normalized) {

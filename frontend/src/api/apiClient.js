@@ -5,4 +5,14 @@ const apiClient = axios.create({
   timeout: 420000,
 });
 
+export function createInteractionId() {
+  return globalThis.crypto?.randomUUID?.() ||
+    `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
+apiClient.interceptors.request.use((config) => {
+  config.headers["X-Request-ID"] = createInteractionId();
+  return config;
+});
+
 export default apiClient;

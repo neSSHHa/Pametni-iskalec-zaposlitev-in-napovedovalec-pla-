@@ -1,5 +1,8 @@
 package si.um.feri.smartjobs.ai.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +33,7 @@ vrne List<JobDto>
 @RestController
 @RequestMapping("/api/ai/jobs")
 public class AiJobFilterController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AiJobFilterController.class);
 
     private final AiJobFilterService aiJobFilterService;
     private final FastPromptFilterService fastPromptFilterService;
@@ -47,10 +51,34 @@ public class AiJobFilterController {
 
     @PostMapping("/filter")
     public JobSearchResponse filterFromNaturalLanguage(@RequestBody NaturalLanguageJobFilterRequest request) {
-        JobFilterRequest filterRequest = isThinking(request.mode())
+        String requestId = MDC.get("requestId");
+        String interactionId = MDC.get("interactionId");
+        String mode = isThinking(request.mode()) ? "thinking" : "fast";
+        LOGGER.info(
+                "event=job.prompt.received requestId={} interactionId={} mode={} prompt={}",
+                requestId,
+                interactionId,
+                mode,
+                safeForLog(request.text())
+        );
+
+        JobFilterRequest filterRequest = "thinking".equals(mode)
                 ? aiJobFilterService.extractFilter(request.text())
                 : fastPromptFilterService.buildFilter(request.text());
-        return jobService.filterResponse(filterRequest);
+        JobSearchResponse response = jobService.filterResponse(filterRequest);
+
+        LOGGER.info(
+                "event=job.prompt.search.completed requestId={} interactionId={} mode={} skills={} workTypes={} location={} returnedJobs={} totalJobs={}",
+                requestId,
+                interactionId,
+                mode,
+                filterRequest.skills(),
+                filterRequest.workTypes(),
+                filterRequest.location(),
+                response.jobs().size(),
+                response.totalCount()
+        );
+        return response;
     }
 
     @PostMapping("/extract")
@@ -60,6 +88,10 @@ public class AiJobFilterController {
 
     private boolean isThinking(String mode) {
         return "thinking".equalsIgnoreCase(mode);
+    }
+
+    private String safeForLog(String value) {
+        return value == null ? null : value.replaceAll("[\\r\\n\\t]", " ");
     }
 
 }

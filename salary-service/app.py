@@ -1,19 +1,84 @@
+import logging
 import os
+import re
+import time
+import uuid
 from pathlib import Path
 
 import joblib
 import numpy as np
 import pandas as pd
 from fastapi import FastAPI
+from fastapi import Request
 from pydantic import BaseModel, Field
 
 
 MODEL_PATH = Path(os.getenv("SALARY_MODEL_PATH", "models/salary_model.joblib"))
+REQUEST_ID_HEADER = "X-Request-ID"
+INTERACTION_ID_HEADER = "X-Interaction-ID"
+SAFE_REQUEST_ID = re.compile(r"^[A-Za-z0-9._-]{1,100}$")
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Smart Jobs Salary Service")
 
 model_bundle = None
 model_modified_time = None
+
+
+@app.middleware("http")
+async def log_request(request: Request, call_next):
+    request_id = safe_request_id(request.headers.get(REQUEST_ID_HEADER))
+    interaction_id = safe_interaction_id(request.headers.get(INTERACTION_ID_HEADER), request_id)
+    request.state.request_id = request_id
+    request.state.interaction_id = interaction_id
+    started_at = time.perf_counter()
+    logger.info(
+        "event=request.started requestId=%s interactionId=%s method=%s path=%s",
+        request_id,
+        interaction_id,
+        request.method,
+        request.url.path,
+    )
+
+    try:
+        response = await call_next(request)
+    except Exception:
+        logger.exception(
+            "event=request.failed requestId=%s interactionId=%s method=%s path=%s durationMs=%d",
+            request_id,
+            interaction_id,
+            request.method,
+            request.url.path,
+            elapsed_ms(started_at),
+        )
+        raise
+
+    response.headers[REQUEST_ID_HEADER] = request_id
+    response.headers[INTERACTION_ID_HEADER] = interaction_id
+    logger.info(
+        "event=request.completed requestId=%s interactionId=%s method=%s path=%s status=%s durationMs=%d",
+        request_id,
+        interaction_id,
+        request.method,
+        request.url.path,
+        response.status_code,
+        elapsed_ms(started_at),
+    )
+    return response
+
+
+def elapsed_ms(started_at):
+    return round((time.perf_counter() - started_at) * 1000)
+
+
+def safe_request_id(candidate):
+    return candidate if candidate and SAFE_REQUEST_ID.fullmatch(candidate) else str(uuid.uuid4())
+
+
+def safe_interaction_id(candidate, request_id):
+    return candidate if candidate and SAFE_REQUEST_ID.fullmatch(candidate) else request_id
 
 
 class JobCriteria(BaseModel):
@@ -87,6 +152,14 @@ def unavailable(message):
     }
 
 
+def current_request_id(request):
+    return getattr(request.state, "request_id", None) if request else None
+
+
+def current_interaction_id(request):
+    return getattr(request.state, "interaction_id", None) if request else None
+
+
 def build_feature_row(payload: SalaryPredictionRequest):
     job = payload.job or JobCriteria()
     location = payload.location or LocationCriteria()
@@ -138,9 +211,14 @@ def calculate_profile_completeness(payload: SalaryPredictionRequest):
 
 
 @app.post("/predict")
-def predict(payload: SalaryPredictionRequest):
+def predict(payload: SalaryPredictionRequest, request: Request = None):
     reload_model_if_changed()
     if model_bundle is None:
+        logger.info(
+            "event=salary.unavailable requestId=%s interactionId=%s reason=model-not-trained",
+            current_request_id(request),
+            current_interaction_id(request),
+        )
         return unavailable("Salary model is not trained yet.")
 
     location = payload.location or LocationCriteria()
@@ -148,6 +226,12 @@ def predict(payload: SalaryPredictionRequest):
     market_assumed = not country
 
     if country and country not in {"austria", "avstrija"}:
+        logger.info(
+            "event=salary.unavailable requestId=%s interactionId=%s reason=unsupported-country country=%s",
+            current_request_id(request),
+            current_interaction_id(request),
+            clean_text(location.country),
+        )
         return unavailable("Salary prediction is currently available for Austria-based searches.")
 
     features = build_feature_row(payload)
@@ -165,7 +249,7 @@ def predict(payload: SalaryPredictionRequest):
     if predicted_max < predicted_min:
         predicted_max = round_salary(predicted_min * model_bundle.get("salaryRatio", {}).get("globalRatio", 1.22))
 
-    return {
+    response = {
         "available": True,
         "predictedMinSalary": predicted_min,
         "predictedMaxSalary": predicted_max,
@@ -181,3 +265,15 @@ def predict(payload: SalaryPredictionRequest):
         ),
         "modelMae": model_bundle.get("mae"),
     }
+    logger.info(
+        "event=salary.predicted requestId=%s interactionId=%s jobName=%s city=%s country=%s predictedMinSalary=%s predictedMaxSalary=%s currency=%s",
+        current_request_id(request),
+        current_interaction_id(request),
+        clean_text(payload.job.jobname if payload.job else None),
+        clean_text(location.city),
+        clean_text(location.country),
+        response["predictedMinSalary"],
+        response["predictedMaxSalary"],
+        response["currency"],
+    )
+    return response

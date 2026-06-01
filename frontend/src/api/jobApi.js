@@ -15,7 +15,9 @@ export async function searchJobsByText(query) {
   return response.data;
 }
 
-export async function searchJobsByPrompt(text, mode = "fast") {
-  const response = await apiClient.post("/ai/jobs/filter", { text, mode });
+export async function searchJobsByPrompt(text, mode = "fast", interactionId) {
+  const response = await apiClient.post("/ai/jobs/filter", { text, mode }, {
+    headers: interactionId ? { "X-Interaction-ID": interactionId } : {},
+  });
   return response.data;
 }
