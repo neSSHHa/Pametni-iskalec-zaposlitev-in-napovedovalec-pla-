@@ -116,6 +116,19 @@ class SalaryPredictionAppTest(unittest.TestCase):
 
         self.assertEqual(3400, result["predictedMaxSalary"])
 
+    def test_build_feature_row_adds_derived_seniority_and_experience_bucket(self):
+        request = self.austrian_request()
+        request.job.jobname = "Senior Java Developer"
+        request.job.requiredExperience = 5
+
+        row = app.build_feature_row(request).iloc[0]
+
+        self.assertEqual("senior", row["seniorityFromTitle"])
+        self.assertEqual("3_5_years", row["requiredExperienceBucket"])
+        self.assertEqual("it", row["jobDomain"])
+        self.assertEqual("developer", row["titleRole"])
+        self.assertEqual("1_2", row["skillCountBucket"])
+
     def austrian_request(self):
         return app.SalaryPredictionRequest(
             job=app.JobCriteria(

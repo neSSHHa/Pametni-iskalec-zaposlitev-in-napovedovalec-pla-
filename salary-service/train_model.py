@@ -1,22 +1,28 @@
 import os
+import re
 from pathlib import Path
 
 import joblib
 import mysql.connector
 import numpy as np
 import pandas as pd
-from sklearn.compose import ColumnTransformer
+from sklearn.compose import ColumnTransformer, TransformedTargetRegressor
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
+try:
+    from lightgbm import LGBMRegressor
+except ImportError:
+    LGBMRegressor = None
+
 
 MODEL_DIR = Path(os.getenv("SALARY_MODEL_DIR", "models"))
 MODEL_PATH = MODEL_DIR / "salary_model.joblib"
-
+MIN_MONTHLY_SALARY = 1000
+MAX_MONTHLY_SALARY = 8000
 DB_CONFIG = {
     "host": os.getenv("MYSQL_HOST", "localhost"),
     "port": int(os.getenv("MYSQL_PORT", "3307")),
@@ -30,6 +36,157 @@ def clean_text(value):
     if value is None:
         return ""
     return str(value).strip()
+
+
+def seniority_from_title(value):
+    title = clean_text(value).lower()
+
+    if re_search(r"\b(praktikum|praktikant|intern|trainee)\b", title):
+        return "intern"
+    if re_search(r"\b(junior|jr\.?|entry|graduate|absolvent)\b", title):
+        return "junior"
+    if re_search(r"\b(senior|sr\.?|lead|principal|staff|expert|experte|spezialist)\b", title):
+        return "senior"
+    if re_search(r"\b(manager|head|leiter|leitung|teamlead|teamleiter|projektleiter)\b", title):
+        return "manager"
+
+    return "unknown"
+
+
+def re_search(pattern, value):
+    return re.search(pattern, value, flags=re.IGNORECASE) is not None
+
+
+def experience_bucket(value):
+    years = pd.to_numeric(value, errors="coerce")
+    if pd.isna(years) or years <= 0:
+        return "unknown_or_0"
+    if years <= 2:
+        return "1_2_years"
+    if years <= 5:
+        return "3_5_years"
+    if years <= 9:
+        return "6_9_years"
+    return "10_plus"
+
+
+def text_contains_any(text, keywords):
+    return any(keyword in text for keyword in keywords)
+
+
+def job_domain(job_name, skills_text):
+    text = f"{clean_text(job_name)} {clean_text(skills_text)}".lower()
+
+    if text_contains_any(text, [
+        "software", "developer", "entwickler", "programming", "python", "javascript",
+        "java", "linux", "cloud", "azure", "devops", "api", "it-", "informatik",
+        "data", "sap", "kubernetes",
+    ]):
+        return "it"
+    if text_contains_any(text, [
+        "arzt", "ärztin", "medizin", "nursing", "pflege", "patient", "dgkp",
+        "krankenpfleger", "laboratory", "dental", "gesundheits", "therapie",
+    ]):
+        return "medical_care"
+    if text_contains_any(text, [
+        "koch", "köchin", "küche", "kitchen", "restaurant", "hotel", "hospitality",
+        "gastgewerbe", "kellner", "servicekraft", "haccp", "food", "baking",
+        "rezeptionist",
+    ]):
+        return "hospitality_food"
+    if text_contains_any(text, [
+        "sales", "verkauf", "verkäufer", "retail", "kassa", "customer", "außendienst",
+        "vertrieb", "feinkost",
+    ]):
+        return "sales_retail"
+    if text_contains_any(text, [
+        "engineer", "techniker", "technical", "maintenance", "electrical", "elektriker",
+        "elektrotechnik", "mechatronics", "mechanical", "automation", "servicetechniker",
+        "kfz", "diagnostics",
+    ]):
+        return "engineering_technical"
+    if text_contains_any(text, [
+        "construction", "maurer", "tischler", "dachdecker", "maler", "plumbing",
+        "installateur", "carpentry", "welding", "schlosser", "spengler", "monteur",
+        "metalworking",
+    ]):
+        return "construction_trades"
+    if text_contains_any(text, [
+        "warehouse", "lager", "forklift", "lkw", "fahrer", "driver", "truck",
+        "transport", "logistics", "lenker",
+    ]):
+        return "logistics_transport"
+    if text_contains_any(text, [
+        "accounting", "buchhalter", "finance", "controlling", "controller",
+        "payroll", "tax", "legal",
+    ]):
+        return "finance_accounting"
+    if text_contains_any(text, [
+        "teaching", "teacher", "pädagog", "elementarpädagog", "trainer", "ausbildung",
+    ]):
+        return "education"
+    if text_contains_any(text, [
+        "cleaning", "reinigung", "housekeeping", "facility", "zimmermädchen",
+    ]):
+        return "cleaning_facility"
+    if text_contains_any(text, [
+        "production", "produktion", "assembly", "machine", "cnc", "manufacturing",
+        "quality control", "produktionsmitarbeiter",
+    ]):
+        return "production_manufacturing"
+    if text_contains_any(text, [
+        "administration", "office", "microsoft office", "assistenz", "assistent",
+        "reception", "sekretariat",
+    ]):
+        return "administration_office"
+
+    return "unknown"
+
+
+def title_role(job_name):
+    text = clean_text(job_name).lower()
+
+    if text_contains_any(text, ["manager", "head", "leiter", "leitung", "teamlead", "projektleiter"]):
+        return "manager"
+    if text_contains_any(text, ["developer", "entwickler", "software", "programmierer"]):
+        return "developer"
+    if text_contains_any(text, ["engineer", "ingenieur"]):
+        return "engineer"
+    if text_contains_any(text, ["techniker", "elektriker", "monteur", "mechaniker", "mechatroniker"]):
+        return "technician"
+    if text_contains_any(text, ["arzt", "ärztin", "oberarzt", "facharzt"]):
+        return "doctor"
+    if text_contains_any(text, ["pflege", "krankenpfleger", "dgkp"]):
+        return "nurse"
+    if text_contains_any(text, ["koch", "köchin", "kellner", "rezeptionist"]):
+        return "hospitality_worker"
+    if text_contains_any(text, ["verkauf", "verkäufer", "sales", "kassa"]):
+        return "sales_worker"
+    if text_contains_any(text, ["fahrer", "lenker", "lkw"]):
+        return "driver"
+    if text_contains_any(text, ["buchhalter", "controller", "accountant"]):
+        return "finance_worker"
+    if text_contains_any(text, ["lehrer", "teacher", "pädagog", "trainer"]):
+        return "teacher"
+    if text_contains_any(text, ["assistent", "assistenz", "mitarbeiter"]):
+        return "assistant"
+    if text_contains_any(text, ["arbeiter", "facharbeiter", "produktion"]):
+        return "worker"
+
+    return "unknown"
+
+
+def skill_count_bucket(skills_text):
+    skills = [skill for skill in clean_text(skills_text).split() if skill]
+    count = len(skills)
+
+    if count == 0:
+        return "0"
+    if count <= 2:
+        return "1_2"
+    if count <= 5:
+        return "3_5"
+    return "6_plus"
 
 
 def normalize_country(value):
@@ -125,9 +282,17 @@ def prepare_dataset():
     jobs["requiredExperience"] = pd.to_numeric(jobs["requiredExperience"], errors="coerce").fillna(0)
     jobs["minSalary"] = pd.to_numeric(jobs["minSalary"], errors="coerce")
     jobs["maxSalary"] = pd.to_numeric(jobs["maxSalary"], errors="coerce")
+    jobs["seniorityFromTitle"] = jobs["jobName"].map(seniority_from_title)
+    jobs["requiredExperienceBucket"] = jobs["requiredExperience"].map(experience_bucket)
+    jobs["jobDomain"] = jobs.apply(lambda row: job_domain(row["jobName"], row["skillsText"]), axis=1)
+    jobs["titleRole"] = jobs["jobName"].map(title_role)
+    jobs["skillCountBucket"] = jobs["skillsText"].map(skill_count_bucket)
 
     jobs = jobs.dropna(subset=["minSalary"])
-    jobs = jobs[jobs["minSalary"] > 0]
+    jobs = jobs[
+        (jobs["minSalary"] >= MIN_MONTHLY_SALARY)
+        & (jobs["minSalary"] <= MAX_MONTHLY_SALARY)
+    ]
 
     return jobs
 
@@ -163,26 +328,90 @@ def calculate_salary_ratio(df):
     }
 
 
-def build_model():
-    preprocess = ColumnTransformer(
+FEATURES = [
+    "jobName",
+    "city",
+    "region",
+    "experienceLevel",
+    "educationLevel",
+    "requiredExperience",
+    "seniorityFromTitle",
+    "requiredExperienceBucket",
+    "jobDomain",
+    "titleRole",
+    "skillCountBucket",
+    "skillsText",
+    "workTypesText",
+]
+
+
+def build_preprocessor():
+    return ColumnTransformer(
         transformers=[
-            ("job_title", TfidfVectorizer(max_features=700, ngram_range=(1, 2)), "jobName"),
-            ("skills", TfidfVectorizer(max_features=500, ngram_range=(1, 2)), "skillsText"),
+            ("job_title", TfidfVectorizer(max_features=1200, ngram_range=(1, 2)), "jobName"),
+            (
+                "job_title_char",
+                TfidfVectorizer(analyzer="char_wb", max_features=500, ngram_range=(3, 5)),
+                "jobName",
+            ),
+            ("skills", TfidfVectorizer(max_features=900, ngram_range=(1, 2)), "skillsText"),
             ("work_types", TfidfVectorizer(max_features=80), "workTypesText"),
             (
                 "categorical",
                 OneHotEncoder(handle_unknown="ignore", min_frequency=5),
-                ["city", "region", "experienceLevel", "educationLevel"],
+                [
+                    "city",
+                    "region",
+                    "experienceLevel",
+                    "educationLevel",
+                    "seniorityFromTitle",
+                    "requiredExperienceBucket",
+                    "jobDomain",
+                    "titleRole",
+                    "skillCountBucket",
+                ],
             ),
             ("numeric", StandardScaler(with_mean=False), ["requiredExperience"]),
         ]
     )
 
+
+def build_feature_pipeline(regressor):
     return Pipeline(
         steps=[
-            ("preprocess", preprocess),
-            ("model", Ridge(alpha=1.0)),
+            ("preprocess", build_preprocessor()),
+            ("model", regressor),
         ]
+    )
+
+
+def with_log_target(regressor):
+    return TransformedTargetRegressor(
+        regressor=build_feature_pipeline(regressor),
+        func=np.log1p,
+        inverse_func=np.expm1,
+    )
+
+
+def build_model(model_name="lightgbm_log"):
+    if model_name != "lightgbm_log":
+        raise ValueError("Only the selected LightGBM salary model is supported.")
+    if LGBMRegressor is None:
+        raise RuntimeError("LightGBM is required to train the salary model.")
+
+    return with_log_target(
+        LGBMRegressor(
+            objective="regression_l1",
+            n_estimators=900,
+            learning_rate=0.025,
+            num_leaves=255,
+            min_child_samples=10,
+            subsample=0.9,
+            colsample_bytree=0.85,
+            reg_lambda=1.0,
+            random_state=42,
+            verbosity=-1,
+        )
     )
 
 
@@ -193,18 +422,7 @@ def train():
     if len(df) < 100:
         raise RuntimeError("Not enough Austrian salary data to train salary model.")
 
-    features = [
-        "jobName",
-        "city",
-        "region",
-        "experienceLevel",
-        "educationLevel",
-        "requiredExperience",
-        "skillsText",
-        "workTypesText",
-    ]
-
-    X = df[features]
+    X = df[FEATURES]
     y = df["minSalary"]
 
     X_train, X_test, y_train, y_test = train_test_split(
@@ -214,22 +432,22 @@ def train():
         random_state=42,
     )
 
-    model = build_model()
+    model = build_model("lightgbm_log")
     model.fit(X_train, y_train)
 
-    predictions = model.predict(X_test)
-    predictions = np.maximum(predictions, 0)
+    predictions = np.maximum(model.predict(X_test), 0)
     mae = mean_absolute_error(y_test, predictions)
 
     ratio_info = calculate_salary_ratio(df)
 
     bundle = {
         "model": model,
-        "features": features,
+        "features": FEATURES,
         "target": "minSalary",
         "market": "Austria",
         "currency": "EUR",
         "mae": round(float(mae), 2),
+        "modelName": "lightgbm_log",
         "trainingRows": int(len(df)),
         "salaryRatio": ratio_info,
     }
@@ -238,6 +456,7 @@ def train():
     joblib.dump(bundle, MODEL_PATH)
 
     print(f"Model saved to: {MODEL_PATH}")
+    print("Model: lightgbm_log")
     print(f"MAE: {mae:.2f} EUR")
     print(f"Global max/min ratio: {ratio_info['globalRatio']}")
     print(f"Ratio sample size: {ratio_info['ratioSampleSize']}")

@@ -1,7 +1,9 @@
 import unittest
 from unittest.mock import patch
 
+import numpy as np
 import pandas as pd
+from sklearn.compose import TransformedTargetRegressor
 
 import train_model
 
@@ -121,8 +123,65 @@ class SalaryTrainingTest(unittest.TestCase):
         self.assertEqual("Wien", row["city"])
         self.assertEqual("Junior", row["experienceLevel"])
         self.assertEqual(0, row["requiredExperience"])
+        self.assertEqual("unknown", row["seniorityFromTitle"])
+        self.assertEqual("unknown_or_0", row["requiredExperienceBucket"])
+        self.assertEqual("it", row["jobDomain"])
+        self.assertEqual("developer", row["titleRole"])
+        self.assertEqual("1_2", row["skillCountBucket"])
         self.assertEqual("Docker Java", row["skillsText"])
         self.assertEqual("Hybrid", row["workTypesText"])
+
+    def test_seniority_from_title_detects_common_levels(self):
+        self.assertEqual("senior", train_model.seniority_from_title("Senior Java Developer"))
+        self.assertEqual("junior", train_model.seniority_from_title("Junior Data Analyst"))
+        self.assertEqual("intern", train_model.seniority_from_title("Praktikant Software Engineering"))
+        self.assertEqual("manager", train_model.seniority_from_title("Teamleiter IT Operations"))
+        self.assertEqual("unknown", train_model.seniority_from_title("Java Developer"))
+
+    def test_experience_bucket_groups_sparse_year_values(self):
+        self.assertEqual("unknown_or_0", train_model.experience_bucket(None))
+        self.assertEqual("unknown_or_0", train_model.experience_bucket(0))
+        self.assertEqual("1_2_years", train_model.experience_bucket(2))
+        self.assertEqual("3_5_years", train_model.experience_bucket(5))
+        self.assertEqual("6_9_years", train_model.experience_bucket(8))
+        self.assertEqual("10_plus", train_model.experience_bucket(10))
+
+    def test_job_domain_uses_title_and_skills(self):
+        self.assertEqual("it", train_model.job_domain("Java Developer", "Docker Kubernetes"))
+        self.assertEqual("medical_care", train_model.job_domain("Facharzt Neurologie", "Medicine Patient"))
+        self.assertEqual("hospitality_food", train_model.job_domain("Koch", "Restaurant HACCP"))
+        self.assertEqual("sales_retail", train_model.job_domain("Verkäufer", "Retail Customer"))
+        self.assertEqual("unknown", train_model.job_domain("Generalist", ""))
+
+    def test_title_role_extracts_common_roles(self):
+        self.assertEqual("doctor", train_model.title_role("Oberarzt Neurologie"))
+        self.assertEqual("technician", train_model.title_role("KFZ-Techniker"))
+        self.assertEqual("sales_worker", train_model.title_role("Verkäufer"))
+        self.assertEqual("unknown", train_model.title_role("Generalist"))
+
+    def test_skill_count_bucket_groups_skill_text_size(self):
+        self.assertEqual("0", train_model.skill_count_bucket(""))
+        self.assertEqual("1_2", train_model.skill_count_bucket("Java Docker"))
+        self.assertEqual("3_5", train_model.skill_count_bucket("Java Docker Linux Cloud Python"))
+        self.assertEqual("6_plus", train_model.skill_count_bucket("Java Docker Linux Cloud Python Azure"))
+
+    def test_prepare_dataset_removes_monthly_salary_outliers(self):
+        connection = FakeConnection()
+        jobs = pd.DataFrame(
+            [
+                self.job_row("job-1", "Developer", "Wien", "Wien", "Mid", "Bachelor", 2, "999", None),
+                self.job_row("job-2", "Developer", "Wien", "Wien", "Mid", "Bachelor", 2, "3000", None),
+                self.job_row("job-3", "Developer", "Wien", "Wien", "Mid", "Bachelor", 2, "13000", None),
+            ]
+        )
+
+        with patch.object(train_model, "get_connection", return_value=connection), \
+                patch.object(train_model, "load_jobs", return_value=jobs), \
+                patch.object(train_model, "load_skills", return_value=pd.DataFrame(columns=["jobId", "skillName"])), \
+                patch.object(train_model, "load_work_types", return_value=pd.DataFrame(columns=["jobId", "workTypeName"])):
+            result = train_model.prepare_dataset()
+
+        self.assertEqual(["job-2"], result["jobId"].tolist())
 
     def test_prepare_dataset_closes_connection_when_loading_fails(self):
         connection = FakeConnection()
@@ -146,6 +205,11 @@ class SalaryTrainingTest(unittest.TestCase):
                     "experienceLevel": "Junior" if index < 10 else "Senior",
                     "educationLevel": "Bachelor",
                     "requiredExperience": index % 6,
+                    "seniorityFromTitle": "unknown",
+                    "requiredExperienceBucket": train_model.experience_bucket(index % 6),
+                    "jobDomain": "it" if index % 2 == 0 else "education",
+                    "titleRole": "developer" if index % 2 == 0 else "teacher",
+                    "skillCountBucket": "1_2",
                     "skillsText": "Java Docker" if index % 2 == 0 else "Teaching Biology",
                     "workTypesText": "Hybrid" if index % 2 == 0 else "On-site",
                 }
@@ -164,6 +228,11 @@ class SalaryTrainingTest(unittest.TestCase):
                     "experienceLevel": "Unknown Level",
                     "educationLevel": "Unknown Education",
                     "requiredExperience": 4,
+                    "seniorityFromTitle": "senior",
+                    "requiredExperienceBucket": "3_5_years",
+                    "jobDomain": "it",
+                    "titleRole": "unknown",
+                    "skillCountBucket": "1_2",
                     "skillsText": "Kubernetes Terraform",
                     "workTypesText": "Remote",
                 }
@@ -173,6 +242,17 @@ class SalaryTrainingTest(unittest.TestCase):
 
         self.assertTrue(pd.notna(prediction))
         self.assertGreater(prediction, 0)
+
+    def test_model_uses_log_transformed_salary_target(self):
+        model = train_model.build_model()
+
+        self.assertIsInstance(model, TransformedTargetRegressor)
+        self.assertIs(model.func, np.log1p)
+        self.assertIs(model.inverse_func, np.expm1)
+
+    def test_unknown_model_name_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "Only the selected LightGBM"):
+            train_model.build_model("ridge_raw_alpha_1")
 
     def job_row(
         self,
@@ -196,6 +276,23 @@ class SalaryTrainingTest(unittest.TestCase):
             "requiredExperience": required_experience,
             "minSalary": min_salary,
             "maxSalary": max_salary,
+        }
+
+    def feature_row(self, job_name, city, experience_level, skills_text, required_experience):
+        return {
+            "jobName": job_name,
+            "city": city,
+            "region": city,
+            "experienceLevel": experience_level,
+            "educationLevel": "Bachelor",
+            "requiredExperience": required_experience,
+            "seniorityFromTitle": train_model.seniority_from_title(job_name),
+            "requiredExperienceBucket": train_model.experience_bucket(required_experience),
+            "jobDomain": train_model.job_domain(job_name, skills_text),
+            "titleRole": train_model.title_role(job_name),
+            "skillCountBucket": train_model.skill_count_bucket(skills_text),
+            "skillsText": skills_text,
+            "workTypesText": "Full-time",
         }
 
     def value_for_job(self, dataframe, job_id, column):

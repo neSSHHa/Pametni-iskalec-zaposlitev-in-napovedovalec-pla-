@@ -107,6 +107,121 @@ def clean_text(value):
     return str(value).strip()
 
 
+def seniority_from_title(value):
+    title = clean_text(value).lower()
+
+    if re.search(r"\b(praktikum|praktikant|intern|trainee)\b", title, flags=re.IGNORECASE):
+        return "intern"
+    if re.search(r"\b(junior|jr\.?|entry|graduate|absolvent)\b", title, flags=re.IGNORECASE):
+        return "junior"
+    if re.search(r"\b(senior|sr\.?|lead|principal|staff|expert|experte|spezialist)\b", title, flags=re.IGNORECASE):
+        return "senior"
+    if re.search(r"\b(manager|head|leiter|leitung|teamlead|teamleiter|projektleiter)\b", title, flags=re.IGNORECASE):
+        return "manager"
+
+    return "unknown"
+
+
+def experience_bucket(value):
+    if value is None:
+        return "unknown_or_0"
+    try:
+        years = float(value)
+    except (TypeError, ValueError):
+        return "unknown_or_0"
+
+    if years <= 0:
+        return "unknown_or_0"
+    if years <= 2:
+        return "1_2_years"
+    if years <= 5:
+        return "3_5_years"
+    if years <= 9:
+        return "6_9_years"
+    return "10_plus"
+
+
+def text_contains_any(text, keywords):
+    return any(keyword in text for keyword in keywords)
+
+
+def job_domain(job_name, skills_text):
+    text = f"{clean_text(job_name)} {clean_text(skills_text)}".lower()
+
+    if text_contains_any(text, ["software", "developer", "entwickler", "programming", "python", "javascript", "java", "linux", "cloud", "azure", "devops", "api", "it-", "informatik", "data", "sap", "kubernetes"]):
+        return "it"
+    if text_contains_any(text, ["arzt", "ärztin", "medizin", "nursing", "pflege", "patient", "dgkp", "krankenpfleger", "laboratory", "dental", "gesundheits", "therapie"]):
+        return "medical_care"
+    if text_contains_any(text, ["koch", "köchin", "küche", "kitchen", "restaurant", "hotel", "hospitality", "gastgewerbe", "kellner", "servicekraft", "haccp", "food", "baking", "rezeptionist"]):
+        return "hospitality_food"
+    if text_contains_any(text, ["sales", "verkauf", "verkäufer", "retail", "kassa", "customer", "außendienst", "vertrieb", "feinkost"]):
+        return "sales_retail"
+    if text_contains_any(text, ["engineer", "techniker", "technical", "maintenance", "electrical", "elektriker", "elektrotechnik", "mechatronics", "mechanical", "automation", "servicetechniker", "kfz", "diagnostics"]):
+        return "engineering_technical"
+    if text_contains_any(text, ["construction", "maurer", "tischler", "dachdecker", "maler", "plumbing", "installateur", "carpentry", "welding", "schlosser", "spengler", "monteur", "metalworking"]):
+        return "construction_trades"
+    if text_contains_any(text, ["warehouse", "lager", "forklift", "lkw", "fahrer", "driver", "truck", "transport", "logistics", "lenker"]):
+        return "logistics_transport"
+    if text_contains_any(text, ["accounting", "buchhalter", "finance", "controlling", "controller", "payroll", "tax", "legal"]):
+        return "finance_accounting"
+    if text_contains_any(text, ["teaching", "teacher", "pädagog", "elementarpädagog", "trainer", "ausbildung"]):
+        return "education"
+    if text_contains_any(text, ["cleaning", "reinigung", "housekeeping", "facility", "zimmermädchen"]):
+        return "cleaning_facility"
+    if text_contains_any(text, ["production", "produktion", "assembly", "machine", "cnc", "manufacturing", "quality control", "produktionsmitarbeiter"]):
+        return "production_manufacturing"
+    if text_contains_any(text, ["administration", "office", "microsoft office", "assistenz", "assistent", "reception", "sekretariat"]):
+        return "administration_office"
+
+    return "unknown"
+
+
+def title_role(job_name):
+    text = clean_text(job_name).lower()
+
+    if text_contains_any(text, ["manager", "head", "leiter", "leitung", "teamlead", "projektleiter"]):
+        return "manager"
+    if text_contains_any(text, ["developer", "entwickler", "software", "programmierer"]):
+        return "developer"
+    if text_contains_any(text, ["engineer", "ingenieur"]):
+        return "engineer"
+    if text_contains_any(text, ["techniker", "elektriker", "monteur", "mechaniker", "mechatroniker"]):
+        return "technician"
+    if text_contains_any(text, ["arzt", "ärztin", "oberarzt", "facharzt"]):
+        return "doctor"
+    if text_contains_any(text, ["pflege", "krankenpfleger", "dgkp"]):
+        return "nurse"
+    if text_contains_any(text, ["koch", "köchin", "kellner", "rezeptionist"]):
+        return "hospitality_worker"
+    if text_contains_any(text, ["verkauf", "verkäufer", "sales", "kassa"]):
+        return "sales_worker"
+    if text_contains_any(text, ["fahrer", "lenker", "lkw"]):
+        return "driver"
+    if text_contains_any(text, ["buchhalter", "controller", "accountant"]):
+        return "finance_worker"
+    if text_contains_any(text, ["lehrer", "teacher", "pädagog", "trainer"]):
+        return "teacher"
+    if text_contains_any(text, ["assistent", "assistenz", "mitarbeiter"]):
+        return "assistant"
+    if text_contains_any(text, ["arbeiter", "facharbeiter", "produktion"]):
+        return "worker"
+
+    return "unknown"
+
+
+def skill_count_bucket(skills_text):
+    skills = [skill for skill in clean_text(skills_text).split() if skill]
+    count = len(skills)
+
+    if count == 0:
+        return "0"
+    if count <= 2:
+        return "1_2"
+    if count <= 5:
+        return "3_5"
+    return "6_plus"
+
+
 def load_model():
     global model_bundle, model_modified_time
     if MODEL_PATH.exists():
@@ -163,6 +278,7 @@ def current_interaction_id(request):
 def build_feature_row(payload: SalaryPredictionRequest):
     job = payload.job or JobCriteria()
     location = payload.location or LocationCriteria()
+    skills_text = " ".join(clean_text(skill) for skill in (payload.skills or []))
 
     return pd.DataFrame(
         [
@@ -173,7 +289,12 @@ def build_feature_row(payload: SalaryPredictionRequest):
                 "experienceLevel": clean_text(job.experienceLevelName),
                 "educationLevel": clean_text(job.educationLevel),
                 "requiredExperience": job.requiredExperience or 0,
-                "skillsText": " ".join(clean_text(skill) for skill in (payload.skills or [])),
+                "seniorityFromTitle": seniority_from_title(job.jobname),
+                "requiredExperienceBucket": experience_bucket(job.requiredExperience),
+                "jobDomain": job_domain(job.jobname, skills_text),
+                "titleRole": title_role(job.jobname),
+                "skillCountBucket": skill_count_bucket(skills_text),
+                "skillsText": skills_text,
                 "workTypesText": " ".join(clean_text(work_type) for work_type in (payload.workTypes or [])),
             }
         ]
