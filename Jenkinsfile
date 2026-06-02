@@ -1,11 +1,40 @@
 pipeline {
     agent any
 
+    options {
+        timestamps()
+        disableConcurrentBuilds()
+    }
+
     stages {
-        stage('Build Backend') {
+        stage('Backend Tests') {
             steps {
                 dir('backend') {
-                    sh 'mvn clean test'
+                    bat 'mvn.cmd clean test'
+                }
+            }
+        }
+
+        stage('AI Service Tests') {
+            steps {
+                dir('ai-service') {
+                    bat 'mvn.cmd clean test'
+                }
+            }
+        }
+
+        stage('Frontend Install') {
+            steps {
+                dir('frontend') {
+                    bat 'npm.cmd ci'
+                }
+            }
+        }
+
+        stage('Frontend Tests') {
+            steps {
+                dir('frontend') {
+                    bat 'npm.cmd run test'
                 }
             }
         }
@@ -13,10 +42,15 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 dir('frontend') {
-                    sh 'npm ci'
-                    sh 'npm run build'
+                    bat 'npm.cmd run build'
                 }
             }
+        }
+    }
+
+    post {
+        always {
+            junit allowEmptyResults: true, testResults: 'backend/target/surefire-reports/*.xml,ai-service/target/surefire-reports/*.xml'
         }
     }
 }
