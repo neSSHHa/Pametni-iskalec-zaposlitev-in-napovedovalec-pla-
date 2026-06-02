@@ -100,8 +100,8 @@ class SalaryTrainingTest(unittest.TestCase):
         )
         skills = pd.DataFrame(
             [
-                {"jobId": "job-1", "skillName": "Java"},
-                {"jobId": "job-1", "skillName": "Docker"},
+                {"jobId": "job-1", "skillName": "Java", "skillTypeName": "Technical"},
+                {"jobId": "job-1", "skillName": "Docker", "skillTypeName": "Technical"},
             ]
         )
         work_types = pd.DataFrame(
@@ -128,11 +128,14 @@ class SalaryTrainingTest(unittest.TestCase):
         self.assertEqual("it", row["jobDomain"])
         self.assertEqual("developer", row["titleRole"])
         self.assertEqual("1_2", row["skillCountBucket"])
+        self.assertEqual("Technical", row["primarySkillType"])
         self.assertEqual("Docker Java", row["skillsText"])
+        self.assertEqual("Technical", row["skillTypesText"])
         self.assertEqual("Hybrid", row["workTypesText"])
 
     def test_seniority_from_title_detects_common_levels(self):
         self.assertEqual("senior", train_model.seniority_from_title("Senior Java Developer"))
+        self.assertEqual("senior", train_model.seniority_from_title("Neurosurgeon Specialist"))
         self.assertEqual("junior", train_model.seniority_from_title("Junior Data Analyst"))
         self.assertEqual("intern", train_model.seniority_from_title("Praktikant Software Engineering"))
         self.assertEqual("manager", train_model.seniority_from_title("Teamleiter IT Operations"))
@@ -149,15 +152,41 @@ class SalaryTrainingTest(unittest.TestCase):
     def test_job_domain_uses_title_and_skills(self):
         self.assertEqual("it", train_model.job_domain("Java Developer", "Docker Kubernetes"))
         self.assertEqual("medical_care", train_model.job_domain("Facharzt Neurologie", "Medicine Patient"))
+        self.assertEqual("medical_care", train_model.job_domain("Neurosurgeon Specialist", "Medicine"))
+        self.assertEqual("medical_care", train_model.job_domain("Nurse", "Patient Care"))
         self.assertEqual("hospitality_food", train_model.job_domain("Koch", "Restaurant HACCP"))
+        self.assertEqual("hospitality_food", train_model.job_domain("Waiter", "Restaurant Service"))
         self.assertEqual("sales_retail", train_model.job_domain("Verkäufer", "Retail Customer"))
         self.assertEqual("unknown", train_model.job_domain("Generalist", ""))
 
     def test_title_role_extracts_common_roles(self):
         self.assertEqual("doctor", train_model.title_role("Oberarzt Neurologie"))
+        self.assertEqual("doctor", train_model.title_role("Neurosurgeon Specialist"))
+        self.assertEqual("nurse", train_model.title_role("Nurse"))
+        self.assertEqual("hospitality_worker", train_model.title_role("Waiter"))
         self.assertEqual("technician", train_model.title_role("KFZ-Techniker"))
         self.assertEqual("sales_worker", train_model.title_role("Verkäufer"))
         self.assertEqual("unknown", train_model.title_role("Generalist"))
+
+    def test_salary_baselines_are_grouped_by_role_and_domain(self):
+        jobs = pd.DataFrame(
+            [
+                {"titleRole": "nurse", "jobDomain": "medical_care", "primarySkillType": "Healthcare", "minSalary": 3000},
+                {"titleRole": "nurse", "jobDomain": "medical_care", "primarySkillType": "Healthcare", "minSalary": 3400},
+                {"titleRole": "hospitality_worker", "jobDomain": "hospitality_food", "primarySkillType": "Hospitality", "minSalary": 2000},
+                {"titleRole": "hospitality_worker", "jobDomain": "hospitality_food", "primarySkillType": "Hospitality", "minSalary": 2200},
+            ]
+        )
+
+        result = train_model.calculate_salary_baselines(jobs, min_count=2)
+
+        self.assertEqual(2600, result["globalMedian"])
+        self.assertEqual(3200, result["byTitleRole"]["nurse"]["median"])
+        self.assertEqual(2100, result["byTitleRole"]["hospitality_worker"]["median"])
+        self.assertEqual(3200, result["byPrimarySkillType"]["Healthcare"]["median"])
+        self.assertEqual(2100, result["byPrimarySkillType"]["Hospitality"]["median"])
+        self.assertEqual(3200, result["byJobDomain"]["medical_care"]["median"])
+        self.assertEqual(2100, result["byJobDomain"]["hospitality_food"]["median"])
 
     def test_skill_count_bucket_groups_skill_text_size(self):
         self.assertEqual("0", train_model.skill_count_bucket(""))
@@ -165,13 +194,14 @@ class SalaryTrainingTest(unittest.TestCase):
         self.assertEqual("3_5", train_model.skill_count_bucket("Java Docker Linux Cloud Python"))
         self.assertEqual("6_plus", train_model.skill_count_bucket("Java Docker Linux Cloud Python Azure"))
 
-    def test_prepare_dataset_removes_monthly_salary_outliers(self):
+    def test_prepare_dataset_keeps_all_positive_monthly_salaries(self):
         connection = FakeConnection()
         jobs = pd.DataFrame(
             [
                 self.job_row("job-1", "Developer", "Wien", "Wien", "Mid", "Bachelor", 2, "999", None),
                 self.job_row("job-2", "Developer", "Wien", "Wien", "Mid", "Bachelor", 2, "3000", None),
                 self.job_row("job-3", "Developer", "Wien", "Wien", "Mid", "Bachelor", 2, "13000", None),
+                self.job_row("job-4", "Developer", "Wien", "Wien", "Mid", "Bachelor", 2, "0", None),
             ]
         )
 
@@ -181,7 +211,7 @@ class SalaryTrainingTest(unittest.TestCase):
                 patch.object(train_model, "load_work_types", return_value=pd.DataFrame(columns=["jobId", "workTypeName"])):
             result = train_model.prepare_dataset()
 
-        self.assertEqual(["job-2"], result["jobId"].tolist())
+        self.assertEqual(["job-1", "job-2", "job-3"], result["jobId"].tolist())
 
     def test_prepare_dataset_closes_connection_when_loading_fails(self):
         connection = FakeConnection()
@@ -210,7 +240,9 @@ class SalaryTrainingTest(unittest.TestCase):
                     "jobDomain": "it" if index % 2 == 0 else "education",
                     "titleRole": "developer" if index % 2 == 0 else "teacher",
                     "skillCountBucket": "1_2",
+                    "primarySkillType": "Technical" if index % 2 == 0 else "Education",
                     "skillsText": "Java Docker" if index % 2 == 0 else "Teaching Biology",
+                    "skillTypesText": "Technical" if index % 2 == 0 else "Education",
                     "workTypesText": "Hybrid" if index % 2 == 0 else "On-site",
                 }
             )
@@ -233,7 +265,9 @@ class SalaryTrainingTest(unittest.TestCase):
                     "jobDomain": "it",
                     "titleRole": "unknown",
                     "skillCountBucket": "1_2",
+                    "primarySkillType": "Technical",
                     "skillsText": "Kubernetes Terraform",
+                    "skillTypesText": "Technical",
                     "workTypesText": "Remote",
                 }
             ]
@@ -291,7 +325,9 @@ class SalaryTrainingTest(unittest.TestCase):
             "jobDomain": train_model.job_domain(job_name, skills_text),
             "titleRole": train_model.title_role(job_name),
             "skillCountBucket": train_model.skill_count_bucket(skills_text),
+            "primarySkillType": "unknown",
             "skillsText": skills_text,
+            "skillTypesText": "",
             "workTypesText": "Full-time",
         }
 

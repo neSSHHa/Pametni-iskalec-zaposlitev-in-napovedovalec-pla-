@@ -114,7 +114,7 @@ def seniority_from_title(value):
         return "intern"
     if re.search(r"\b(junior|jr\.?|entry|graduate|absolvent)\b", title, flags=re.IGNORECASE):
         return "junior"
-    if re.search(r"\b(senior|sr\.?|lead|principal|staff|expert|experte|spezialist)\b", title, flags=re.IGNORECASE):
+    if re.search(r"\b(senior|sr\.?|lead|principal|staff|expert|experte|specialist|spezialist)\b", title, flags=re.IGNORECASE):
         return "senior"
     if re.search(r"\b(manager|head|leiter|leitung|teamlead|teamleiter|projektleiter)\b", title, flags=re.IGNORECASE):
         return "manager"
@@ -148,6 +148,12 @@ def text_contains_any(text, keywords):
 def job_domain(job_name, skills_text):
     text = f"{clean_text(job_name)} {clean_text(skills_text)}".lower()
 
+    if text_contains_any(text, ["nurse", "nursing"]):
+        return "medical_care"
+    if text_contains_any(text, ["surgeon", "neurosurgeon", "chirurg", "neurochirurg", "neurokirurg"]):
+        return "medical_care"
+    if text_contains_any(text, ["waiter", "waitress", "server"]):
+        return "hospitality_food"
     if text_contains_any(text, ["software", "developer", "entwickler", "programming", "python", "javascript", "java", "linux", "cloud", "azure", "devops", "api", "it-", "informatik", "data", "sap", "kubernetes"]):
         return "it"
     if text_contains_any(text, ["arzt", "ärztin", "medizin", "nursing", "pflege", "patient", "dgkp", "krankenpfleger", "laboratory", "dental", "gesundheits", "therapie"]):
@@ -179,6 +185,12 @@ def job_domain(job_name, skills_text):
 def title_role(job_name):
     text = clean_text(job_name).lower()
 
+    if text_contains_any(text, ["nurse", "nursing"]):
+        return "nurse"
+    if text_contains_any(text, ["surgeon", "neurosurgeon", "chirurg", "neurochirurg", "neurokirurg"]):
+        return "doctor"
+    if text_contains_any(text, ["waiter", "waitress", "server"]):
+        return "hospitality_worker"
     if text_contains_any(text, ["manager", "head", "leiter", "leitung", "teamlead", "projektleiter"]):
         return "manager"
     if text_contains_any(text, ["developer", "entwickler", "software", "programmierer"]):
@@ -220,6 +232,27 @@ def skill_count_bucket(skills_text):
     if count <= 5:
         return "3_5"
     return "6_plus"
+
+
+def primary_skill_type(skill_types_text):
+    skill_types = [clean_text(value) for value in clean_text(skill_types_text).split("|") if clean_text(value)]
+    if not skill_types:
+        return "unknown"
+
+    counts = pd.Series(skill_types).value_counts()
+    return clean_text(counts.index[0]) or "unknown"
+
+
+def skill_types_for_skills(skills):
+    skill_type_by_skill = model_bundle.get("skillTypeBySkill", {}) if model_bundle else {}
+    skill_types = []
+
+    for skill in skills or []:
+        skill_type = skill_type_by_skill.get(clean_text(skill).lower())
+        if skill_type:
+            skill_types.append(skill_type)
+
+    return " | ".join(sorted(set(skill_types)))
 
 
 def load_model():
@@ -279,6 +312,7 @@ def build_feature_row(payload: SalaryPredictionRequest):
     job = payload.job or JobCriteria()
     location = payload.location or LocationCriteria()
     skills_text = " ".join(clean_text(skill) for skill in (payload.skills or []))
+    skill_types_text = skill_types_for_skills(payload.skills or [])
 
     return pd.DataFrame(
         [
@@ -294,7 +328,9 @@ def build_feature_row(payload: SalaryPredictionRequest):
                 "jobDomain": job_domain(job.jobname, skills_text),
                 "titleRole": title_role(job.jobname),
                 "skillCountBucket": skill_count_bucket(skills_text),
+                "primarySkillType": primary_skill_type(skill_types_text),
                 "skillsText": skills_text,
+                "skillTypesText": skill_types_text,
                 "workTypesText": " ".join(clean_text(work_type) for work_type in (payload.workTypes or [])),
             }
         ]
@@ -308,6 +344,39 @@ def ratio_for_experience(experience_level):
 
     key = clean_text(experience_level)
     return float(ratios_by_experience.get(key, global_ratio))
+
+
+def salary_baseline_for_features(features):
+    baseline_info = model_bundle.get("salaryBaselines", {}) if model_bundle else {}
+    row = features.iloc[0]
+
+    role = clean_text(row.get("titleRole"))
+    primary_type = clean_text(row.get("primarySkillType"))
+    domain = clean_text(row.get("jobDomain"))
+    by_role = baseline_info.get("byTitleRole", {})
+    by_primary_type = baseline_info.get("byPrimarySkillType", {})
+    by_domain = baseline_info.get("byJobDomain", {})
+
+    if role in by_role:
+        return float(by_role[role]["median"]), "titleRole"
+    if primary_type in by_primary_type:
+        return float(by_primary_type[primary_type]["median"]), "primarySkillType"
+    if domain in by_domain:
+        return float(by_domain[domain]["median"]), "jobDomain"
+
+    global_median = baseline_info.get("globalMedian")
+    if global_median:
+        return float(global_median), "global"
+
+    return None, None
+
+
+def blend_with_salary_baseline(predicted_min, features):
+    baseline, _source = salary_baseline_for_features(features)
+    if baseline is None:
+        return predicted_min
+
+    return (predicted_min * 0.65) + (baseline * 0.35)
 
 
 def round_salary(value):
@@ -360,6 +429,7 @@ def predict(payload: SalaryPredictionRequest, request: Request = None):
 
     predicted_min = float(model.predict(features)[0])
     predicted_min = max(predicted_min, 0)
+    predicted_min = blend_with_salary_baseline(predicted_min, features)
 
     ratio = ratio_for_experience(payload.job.experienceLevelName if payload.job else None)
     predicted_max = predicted_min * ratio
