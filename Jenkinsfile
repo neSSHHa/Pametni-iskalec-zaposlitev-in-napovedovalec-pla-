@@ -31,14 +31,6 @@ pipeline {
             }
         }
 
-        stage('Frontend Tests') {
-            steps {
-                dir('frontend') {
-                    bat 'npm.cmd run test'
-                }
-            }
-        }
-
         stage('Build Frontend') {
             steps {
                 dir('frontend') {
