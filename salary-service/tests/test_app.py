@@ -27,6 +27,11 @@ class SalaryPredictionAppTest(unittest.TestCase):
                     "Junior": 1.30,
                 },
             },
+            "skillTypeBySkill": {
+                "java": "Technical",
+                "patient care": "Healthcare",
+                "restaurant service": "Hospitality",
+            },
         }
         self.reload_patch = patch.object(app, "reload_model_if_changed")
         self.reload_patch.start()
@@ -128,6 +133,56 @@ class SalaryPredictionAppTest(unittest.TestCase):
         self.assertEqual("it", row["jobDomain"])
         self.assertEqual("developer", row["titleRole"])
         self.assertEqual("1_2", row["skillCountBucket"])
+        self.assertEqual("Technical", row["primarySkillType"])
+        self.assertEqual("Technical", row["skillTypesText"])
+
+    def test_build_feature_row_recognizes_english_nurse_and_waiter_roles(self):
+        nurse_request = self.austrian_request()
+        nurse_request.job.jobname = "Nurse"
+        nurse_request.skills = ["Patient Care"]
+        waiter_request = self.austrian_request()
+        waiter_request.job.jobname = "Waiter"
+        waiter_request.skills = ["Restaurant Service"]
+
+        nurse_row = app.build_feature_row(nurse_request).iloc[0]
+        waiter_row = app.build_feature_row(waiter_request).iloc[0]
+
+        self.assertEqual("medical_care", nurse_row["jobDomain"])
+        self.assertEqual("nurse", nurse_row["titleRole"])
+        self.assertEqual("Healthcare", nurse_row["primarySkillType"])
+        self.assertEqual("hospitality_food", waiter_row["jobDomain"])
+        self.assertEqual("hospitality_worker", waiter_row["titleRole"])
+        self.assertEqual("Hospitality", waiter_row["primarySkillType"])
+
+    def test_build_feature_row_recognizes_neurosurgeon_as_senior_doctor(self):
+        request = self.austrian_request()
+        request.job.jobname = "Neurosurgeon Specialist"
+        request.skills = ["Medicine", "Patient Care"]
+
+        row = app.build_feature_row(request).iloc[0]
+
+        self.assertEqual("senior", row["seniorityFromTitle"])
+        self.assertEqual("medical_care", row["jobDomain"])
+        self.assertEqual("doctor", row["titleRole"])
+
+    def test_role_salary_baseline_blends_overbroad_model_prediction(self):
+        self.fake_model.prediction = 3000
+        app.model_bundle["salaryBaselines"] = {
+            "globalMedian": 2600,
+            "byTitleRole": {
+                "hospitality_worker": {"count": 100, "median": 2200},
+            },
+            "byPrimarySkillType": {},
+            "byJobDomain": {},
+        }
+        request = self.austrian_request()
+        request.job.jobname = "Waiter"
+        request.skills = ["Restaurant Service"]
+
+        result = app.predict(request)
+
+        self.assertEqual(2700, result["predictedMinSalary"])
+        self.assertEqual(3550, result["predictedMaxSalary"])
 
     def austrian_request(self):
         return app.SalaryPredictionRequest(

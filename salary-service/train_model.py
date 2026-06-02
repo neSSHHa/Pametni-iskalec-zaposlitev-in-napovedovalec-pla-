@@ -21,8 +21,6 @@ except ImportError:
 
 MODEL_DIR = Path(os.getenv("SALARY_MODEL_DIR", "models"))
 MODEL_PATH = MODEL_DIR / "salary_model.joblib"
-MIN_MONTHLY_SALARY = 1000
-MAX_MONTHLY_SALARY = 8000
 DB_CONFIG = {
     "host": os.getenv("MYSQL_HOST", "localhost"),
     "port": int(os.getenv("MYSQL_PORT", "3307")),
@@ -45,7 +43,7 @@ def seniority_from_title(value):
         return "intern"
     if re_search(r"\b(junior|jr\.?|entry|graduate|absolvent)\b", title):
         return "junior"
-    if re_search(r"\b(senior|sr\.?|lead|principal|staff|expert|experte|spezialist)\b", title):
+    if re_search(r"\b(senior|sr\.?|lead|principal|staff|expert|experte|specialist|spezialist)\b", title):
         return "senior"
     if re_search(r"\b(manager|head|leiter|leitung|teamlead|teamleiter|projektleiter)\b", title):
         return "manager"
@@ -77,6 +75,12 @@ def text_contains_any(text, keywords):
 def job_domain(job_name, skills_text):
     text = f"{clean_text(job_name)} {clean_text(skills_text)}".lower()
 
+    if text_contains_any(text, ["nurse", "nursing"]):
+        return "medical_care"
+    if text_contains_any(text, ["surgeon", "neurosurgeon", "chirurg", "neurochirurg", "neurokirurg"]):
+        return "medical_care"
+    if text_contains_any(text, ["waiter", "waitress", "server"]):
+        return "hospitality_food"
     if text_contains_any(text, [
         "software", "developer", "entwickler", "programming", "python", "javascript",
         "java", "linux", "cloud", "azure", "devops", "api", "it-", "informatik",
@@ -146,6 +150,12 @@ def job_domain(job_name, skills_text):
 def title_role(job_name):
     text = clean_text(job_name).lower()
 
+    if text_contains_any(text, ["nurse", "nursing"]):
+        return "nurse"
+    if text_contains_any(text, ["surgeon", "neurosurgeon", "chirurg", "neurochirurg", "neurokirurg"]):
+        return "doctor"
+    if text_contains_any(text, ["waiter", "waitress", "server"]):
+        return "hospitality_worker"
     if text_contains_any(text, ["manager", "head", "leiter", "leitung", "teamlead", "projektleiter"]):
         return "manager"
     if text_contains_any(text, ["developer", "entwickler", "software", "programmierer"]):
@@ -226,9 +236,11 @@ def load_skills(connection):
     query = """
         SELECT
             js.JobId AS jobId,
-            s.name AS skillName
+            s.name AS skillName,
+            st.name AS skillTypeName
         FROM JobSkill js
         JOIN Skill s ON js.SkillId = s.id
+        LEFT JOIN SkillType st ON s.SkillTypeId = st.id
     """
     return pd.read_sql(query, connection)
 
@@ -244,8 +256,8 @@ def load_work_types(connection):
     return pd.read_sql(query, connection)
 
 
-def join_many_to_one(base_df, values_df, value_column, output_column):
-    if values_df.empty:
+def join_many_to_one(base_df, values_df, value_column, output_column, separator=" "):
+    if values_df.empty or value_column not in values_df.columns:
         base_df[output_column] = ""
         return base_df
 
@@ -253,13 +265,34 @@ def join_many_to_one(base_df, values_df, value_column, output_column):
         values_df
         .dropna(subset=["jobId", value_column])
         .groupby("jobId")[value_column]
-        .apply(lambda values: " ".join(sorted(set(clean_text(value) for value in values if clean_text(value)))))
+        .apply(lambda values: separator.join(sorted(set(clean_text(value) for value in values if clean_text(value)))))
         .reset_index(name=output_column)
     )
 
     result = base_df.merge(grouped, on="jobId", how="left")
     result[output_column] = result[output_column].fillna("")
     return result
+
+
+def primary_skill_type(skill_types_text):
+    skill_types = [clean_text(value) for value in clean_text(skill_types_text).split("|") if clean_text(value)]
+    if not skill_types:
+        return "unknown"
+
+    counts = pd.Series(skill_types).value_counts()
+    return clean_text(counts.index[0]) or "unknown"
+
+
+def skill_type_mapping(skills_df):
+    if skills_df.empty or "skillTypeName" not in skills_df.columns:
+        return {}
+
+    mapping_df = skills_df.dropna(subset=["skillName", "skillTypeName"]).copy()
+    return {
+        clean_text(row["skillName"]).lower(): clean_text(row["skillTypeName"])
+        for _, row in mapping_df.iterrows()
+        if clean_text(row["skillName"]) and clean_text(row["skillTypeName"])
+    }
 
 
 def prepare_dataset():
@@ -272,6 +305,7 @@ def prepare_dataset():
         connection.close()
 
     jobs = join_many_to_one(jobs, skills, "skillName", "skillsText")
+    jobs = join_many_to_one(jobs, skills, "skillTypeName", "skillTypesText", separator=" | ")
     jobs = join_many_to_one(jobs, work_types, "workTypeName", "workTypesText")
 
     jobs["jobName"] = jobs["jobName"].map(clean_text)
@@ -287,12 +321,10 @@ def prepare_dataset():
     jobs["jobDomain"] = jobs.apply(lambda row: job_domain(row["jobName"], row["skillsText"]), axis=1)
     jobs["titleRole"] = jobs["jobName"].map(title_role)
     jobs["skillCountBucket"] = jobs["skillsText"].map(skill_count_bucket)
+    jobs["primarySkillType"] = jobs["skillTypesText"].map(primary_skill_type)
 
     jobs = jobs.dropna(subset=["minSalary"])
-    jobs = jobs[
-        (jobs["minSalary"] >= MIN_MONTHLY_SALARY)
-        & (jobs["minSalary"] <= MAX_MONTHLY_SALARY)
-    ]
+    jobs = jobs[jobs["minSalary"] > 0]
 
     return jobs
 
@@ -328,6 +360,33 @@ def calculate_salary_ratio(df):
     }
 
 
+def calculate_salary_baselines(df, min_count=30):
+    def grouped_baselines(column):
+        grouped = (
+            df.dropna(subset=[column, "minSalary"])
+            .groupby(column)["minSalary"]
+            .agg(["count", "median"])
+            .reset_index()
+        )
+
+        return {
+            clean_text(row[column]): {
+                "count": int(row["count"]),
+                "median": round(float(row["median"]), 2),
+            }
+            for _, row in grouped.iterrows()
+            if clean_text(row[column]) and int(row["count"]) >= min_count
+        }
+
+    return {
+        "globalMedian": round(float(df["minSalary"].median()), 2),
+        "byTitleRole": grouped_baselines("titleRole"),
+        "byPrimarySkillType": grouped_baselines("primarySkillType"),
+        "byJobDomain": grouped_baselines("jobDomain"),
+        "minCount": int(min_count),
+    }
+
+
 FEATURES = [
     "jobName",
     "city",
@@ -340,7 +399,9 @@ FEATURES = [
     "jobDomain",
     "titleRole",
     "skillCountBucket",
+    "primarySkillType",
     "skillsText",
+    "skillTypesText",
     "workTypesText",
 ]
 
@@ -355,6 +416,7 @@ def build_preprocessor():
                 "jobName",
             ),
             ("skills", TfidfVectorizer(max_features=900, ngram_range=(1, 2)), "skillsText"),
+            ("skill_types", TfidfVectorizer(max_features=40, ngram_range=(1, 2)), "skillTypesText"),
             ("work_types", TfidfVectorizer(max_features=80), "workTypesText"),
             (
                 "categorical",
@@ -369,6 +431,7 @@ def build_preprocessor():
                     "jobDomain",
                     "titleRole",
                     "skillCountBucket",
+                    "primarySkillType",
                 ],
             ),
             ("numeric", StandardScaler(with_mean=False), ["requiredExperience"]),
@@ -439,6 +502,12 @@ def train():
     mae = mean_absolute_error(y_test, predictions)
 
     ratio_info = calculate_salary_ratio(df)
+    baseline_info = calculate_salary_baselines(df)
+    connection = get_connection()
+    try:
+        skill_type_by_skill = skill_type_mapping(load_skills(connection))
+    finally:
+        connection.close()
 
     bundle = {
         "model": model,
@@ -450,6 +519,8 @@ def train():
         "modelName": "lightgbm_log",
         "trainingRows": int(len(df)),
         "salaryRatio": ratio_info,
+        "salaryBaselines": baseline_info,
+        "skillTypeBySkill": skill_type_by_skill,
     }
 
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
@@ -460,6 +531,8 @@ def train():
     print(f"MAE: {mae:.2f} EUR")
     print(f"Global max/min ratio: {ratio_info['globalRatio']}")
     print(f"Ratio sample size: {ratio_info['ratioSampleSize']}")
+    print(f"Salary baseline roles: {len(baseline_info['byTitleRole'])}")
+    print(f"Salary baseline skill types: {len(baseline_info['byPrimarySkillType'])}")
 
 
 if __name__ == "__main__":
