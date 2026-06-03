@@ -108,7 +108,7 @@ export default function MotionHero({
             <textarea
               value={query}
               onChange={(event) => onQueryChange(event.target.value)}
-              placeholder="E.g. I am looking for a junior .NET role in Maribor, remote or hybrid, salary from 1800 EUR, 2+ years of experience, C#, SQL..."
+              placeholder="E.g. I am looking for a junior .NET role in Maribor, remote or hybrid, salary from 1800 EUR, 2+ years of experience, C++, SQL..."
             />
             <button className="search-btn" type="submit" disabled={loading || !query.trim()}>
               <Search size={21} strokeWidth={2} />
