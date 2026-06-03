@@ -6,11 +6,18 @@ pipeline {
         disableConcurrentBuilds()
     }
 
+    environment {
+        APP_DIR = '/opt/smartjobs'
+        COMPOSE = 'docker compose --env-file .env -f docker/docker-compose.server.yml'
+        OBS_COMPOSE = 'docker compose --env-file .env -f docker/docker-compose.server.yml -f docker/docker-compose.observability.yml'
+        PLAYWRIGHT_BASE_URL = 'http://host.docker.internal:3000'
+    }
+
     stages {
         stage('Backend Tests') {
             steps {
                 dir('backend') {
-                    bat 'mvn.cmd clean test'
+                    sh 'mvn clean test'
                 }
             }
         }
@@ -18,29 +25,55 @@ pipeline {
         stage('AI Service Tests') {
             steps {
                 dir('ai-service') {
-                    bat 'mvn.cmd clean test'
+                    sh 'mvn clean test'
                 }
             }
         }
 
-        stage('Frontend Install') {
+        stage('Frontend Tests') {
             steps {
                 dir('frontend') {
-                    bat 'npm.cmd ci'
-                }
-            }
-        }
-
-        stage('Build Frontend') {
-            steps {
-                dir('frontend') {
-<<<<<<< HEAD
                     sh 'npm ci'
                     sh 'npm test'
                     sh 'npm run build'
-=======
-                    bat 'npm.cmd run build'
->>>>>>> 7be2ec7d83712e8cd071ede362f5c57a1831e1fb
+                }
+            }
+        }
+
+        stage('Deploy Production') {
+            when {
+                branch 'production'
+            }
+            steps {
+                dir("${APP_DIR}") {
+                    sh 'git fetch origin production'
+                    sh 'git checkout production'
+                    sh 'git pull origin production'
+                    sh "${COMPOSE} up -d --build"
+                    sh "${OBS_COMPOSE} up -d"
+                }
+            }
+        }
+
+        stage('Live Smoke Tests') {
+            when {
+                branch 'production'
+            }
+            steps {
+                sh 'curl -f http://host.docker.internal:3000'
+                sh 'curl -f "http://host.docker.internal:8080/api/jobs?page=0&size=1"'
+            }
+        }
+
+        stage('Production E2E Tests') {
+            when {
+                branch 'production'
+            }
+            steps {
+                dir('e2e') {
+                    sh 'npm ci'
+                    sh 'npx playwright install --with-deps chromium'
+                    sh 'npx playwright test'
                 }
             }
         }
@@ -49,6 +82,7 @@ pipeline {
     post {
         always {
             junit allowEmptyResults: true, testResults: 'backend/target/surefire-reports/*.xml,ai-service/target/surefire-reports/*.xml'
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'e2e/playwright-report/**,e2e/test-results/**'
         }
     }
 }
