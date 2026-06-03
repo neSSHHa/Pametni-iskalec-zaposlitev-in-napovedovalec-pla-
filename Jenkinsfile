@@ -31,6 +31,15 @@ pipeline {
             }
         }
 
+        stage('Salary Service Tests') {
+            steps {
+                dir('salary-service') {
+                    sh 'docker build -t smartjobs-salary-service-test:${BUILD_NUMBER} .'
+                    sh 'docker run --rm smartjobs-salary-service-test:${BUILD_NUMBER} sh -c "pip install --no-cache-dir pytest && pytest"'
+                }
+            }
+        }
+
         stage('Frontend Tests') {
             steps {
                 dir('frontend') {
