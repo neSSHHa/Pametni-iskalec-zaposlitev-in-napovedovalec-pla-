@@ -10,7 +10,8 @@ pipeline {
         APP_DIR = '/opt/smartjobs'
         COMPOSE = 'docker compose --env-file .env -f docker/docker-compose.server.yml'
         OBS_COMPOSE = 'docker compose --env-file .env -f docker/docker-compose.server.yml -f docker/docker-compose.observability.yml'
-        PLAYWRIGHT_BASE_URL = 'http://host.docker.internal:3000'
+        PRODUCTION_BASE_URL = 'http://134.209.204.3'
+        PLAYWRIGHT_BASE_URL = "${PRODUCTION_BASE_URL}"
     }
 
     stages {
@@ -60,8 +61,8 @@ pipeline {
                 branch 'production'
             }
             steps {
-                sh 'curl -f http://host.docker.internal:3000'
-                sh 'curl -f "http://host.docker.internal:8080/api/jobs?page=0&size=1"'
+                sh 'curl --fail --max-time 20 "${PRODUCTION_BASE_URL}"'
+                sh 'curl --fail --max-time 20 "${PRODUCTION_BASE_URL}/api/jobs?page=0&size=1"'
             }
         }
 
