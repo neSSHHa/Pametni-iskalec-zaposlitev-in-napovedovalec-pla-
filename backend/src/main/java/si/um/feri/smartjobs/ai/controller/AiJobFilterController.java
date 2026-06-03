@@ -1,5 +1,8 @@
 package si.um.feri.smartjobs.ai.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -32,6 +35,7 @@ vrne List<JobDto>
 
 @RestController
 @RequestMapping("/api/ai/jobs")
+@Tag(name = "AI Job Filtering", description = "AI-assisted endpoints that transform natural language prompts into job search filters.")
 public class AiJobFilterController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AiJobFilterController.class);
 
@@ -50,6 +54,11 @@ public class AiJobFilterController {
     }
 
     @PostMapping("/filter")
+    @Operation(
+            summary = "Filter jobs from a natural language prompt",
+            description = "Accepts a user-written prompt, extracts job search intent, builds a SmartJobs filter request, and returns matching jobs. Use mode 'fast' for local rule-based extraction or 'thinking' for AI extraction."
+    )
+    @ApiResponse(responseCode = "200", description = "The prompt was converted into filters and matching jobs were returned.")
     public JobSearchResponse filterFromNaturalLanguage(@RequestBody NaturalLanguageJobFilterRequest request) {
         String requestId = MDC.get("requestId");
         String interactionId = MDC.get("interactionId");
@@ -82,6 +91,11 @@ public class AiJobFilterController {
     }
 
     @PostMapping("/extract")
+    @Operation(
+            summary = "Debug natural language filter extraction",
+            description = "Returns the raw extracted AI filter payload together with the normalized SmartJobs filter request. This is useful for testing prompt interpretation."
+    )
+    @ApiResponse(responseCode = "200", description = "The prompt extraction debug payload was returned successfully.")
     public AiJobFilterDebugResponse extractFilterDebug(@RequestBody NaturalLanguageJobFilterRequest request) {
         return aiJobFilterService.extractDebug(request.text());
     }
