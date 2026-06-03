@@ -1,0 +1,20 @@
+services:
+  jenkins:
+    build:
+      context: .
+      dockerfile: jenkins/Dockerfile
+    container_name: smartjobs-jenkins
+    restart: unless-stopped
+    user: root
+    ports:
+      - "127.0.0.1:8081:8080"
+      - "127.0.0.1:50000:50000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/smartjobs:/opt/smartjobs
+
+volumes:
+  jenkins_home:
