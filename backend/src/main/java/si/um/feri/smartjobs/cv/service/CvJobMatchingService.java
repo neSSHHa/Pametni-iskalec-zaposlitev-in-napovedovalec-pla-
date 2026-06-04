@@ -79,7 +79,8 @@ public class CvJobMatchingService {
                 rankedJobs.page(),
                 rankedJobs.size(),
                 rankedJobs.hasMore(),
-                rankedJobs.averageMatch()
+                rankedJobs.averageMatch(),
+                rankedJobs.analytics()
         );
     }
 

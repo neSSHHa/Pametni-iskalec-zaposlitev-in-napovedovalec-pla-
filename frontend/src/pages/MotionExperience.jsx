@@ -660,7 +660,9 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       const mappedJobs = listFromApiResponse(data).map(mapJob);
       setJobs(mappedJobs);
       const totalCount = totalFromApiResponse(data, mappedJobs.length);
-      const nextAnalytics = buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch });
+      const nextAnalytics = data?.analytics
+        ? { ...data.analytics, isFiltered: true }
+        : buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch });
       const nextFilter = data?.filterRequest || null;
       setJobsTotalCount(totalCount);
       setJobsPage(data?.page ?? 0);
@@ -710,7 +712,9 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       const mappedJobs = (data?.jobs || []).map(mapJob);
       setJobs(mappedJobs);
       const totalCount = totalFromApiResponse(data, mappedJobs.length);
-      const nextAnalytics = buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch });
+      const nextAnalytics = data?.analytics
+        ? { ...data.analytics, isFiltered: true }
+        : buildFilteredAnalytics(mappedJobs, { totalCount, averageMatch: data?.averageMatch });
       const nextFilter = data?.filterRequest || null;
       setJobsTotalCount(totalCount);
       setJobsPage(data?.page ?? 0);

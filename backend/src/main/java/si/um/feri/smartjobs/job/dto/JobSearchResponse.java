@@ -1,6 +1,7 @@
 package si.um.feri.smartjobs.job.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import si.um.feri.smartjobs.analytics.dto.AnalyticsDashboardDto;
 
 import java.util.List;
 
@@ -19,6 +20,19 @@ public record JobSearchResponse(
         @Schema(description = "Average match score for the returned jobs.", example = "82")
         Integer averageMatch,
         @Schema(description = "Filter request used to produce this response, when applicable.")
-        JobFilterRequest filterRequest
+        JobFilterRequest filterRequest,
+        @Schema(description = "Analytics calculated over all jobs matching the query, not only the returned page.")
+        AnalyticsDashboardDto analytics
 ) {
+        public JobSearchResponse(
+                List<JobDto> jobs,
+                long totalCount,
+                int page,
+                int size,
+                boolean hasMore,
+                Integer averageMatch,
+                JobFilterRequest filterRequest
+        ) {
+                this(jobs, totalCount, page, size, hasMore, averageMatch, filterRequest, null);
+        }
 }

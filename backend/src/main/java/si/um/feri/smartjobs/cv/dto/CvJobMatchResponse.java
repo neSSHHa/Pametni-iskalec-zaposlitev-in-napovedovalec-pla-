@@ -1,6 +1,7 @@
 package si.um.feri.smartjobs.cv.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import si.um.feri.smartjobs.analytics.dto.AnalyticsDashboardDto;
 import si.um.feri.smartjobs.job.dto.JobDto;
 import si.um.feri.smartjobs.job.dto.JobFilterRequest;
 
@@ -27,6 +28,22 @@ public record CvJobMatchResponse(
         @Schema(description = "Whether more matching jobs are available.", example = "false")
         boolean hasMore,
         @Schema(description = "Average match score for returned jobs.", example = "84")
-        Integer averageMatch
+        Integer averageMatch,
+        @Schema(description = "Analytics calculated over all jobs matching the CV profile, not only the returned page.")
+        AnalyticsDashboardDto analytics
 ) {
+        public CvJobMatchResponse(
+                String filename,
+                String contentType,
+                String extractedText,
+                JobFilterRequest filterRequest,
+                List<JobDto> jobs,
+                long totalCount,
+                int page,
+                int size,
+                boolean hasMore,
+                Integer averageMatch
+        ) {
+                this(filename, contentType, extractedText, filterRequest, jobs, totalCount, page, size, hasMore, averageMatch, null);
+        }
 }

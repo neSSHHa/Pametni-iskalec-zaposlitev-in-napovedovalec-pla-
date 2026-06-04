@@ -21,6 +21,20 @@ public record AnalyticsSummaryDto(
         @Schema(description = "Average salary estimate across jobs with salary data.", example = "3150")
         BigDecimal averageSalary,
         @Schema(description = "Highest salary found in the dataset.", example = "9000")
-        BigDecimal highestSalary
+        BigDecimal highestSalary,
+        @Schema(description = "Average match score for filtered search results.", example = "82")
+        Integer averageMatch
 ) {
+        public AnalyticsSummaryDto(
+                long totalJobs,
+                long totalCompanies,
+                long totalLocations,
+                long totalCountries,
+                long jobsWithSalary,
+                long remoteJobs,
+                BigDecimal averageSalary,
+                BigDecimal highestSalary
+        ) {
+                this(totalJobs, totalCompanies, totalLocations, totalCountries, jobsWithSalary, remoteJobs, averageSalary, highestSalary, null);
+        }
 }
