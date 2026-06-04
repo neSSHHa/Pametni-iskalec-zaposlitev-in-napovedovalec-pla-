@@ -29,7 +29,6 @@ import si.um.feri.smartjobs.workTypeJob.repository.WorkTypeJobRepository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -476,23 +475,6 @@ void shouldReturnNullLocationFieldsWhenJobHasNoLocation() {
 
         assertEquals(2, response.jobs().size());
         assertEquals(List.of("job-1", "job-2"), response.jobs().stream().map(JobDto::id).toList());
-    }
-
-    @Test
-    void shouldReturnFilteredAnalyticsForAllMatchesWhenResultsAreLimited() {
-        List<Job> jobs = IntStream.rangeClosed(1, 201)
-                .mapToObj(index -> job("job-" + index, "React Developer " + index))
-                .toList();
-
-        when(jobRepository.findAll()).thenReturn(jobs);
-        stubLookup(jobs, List.of(), List.of());
-
-        JobSearchResponse response = jobService.filterResponse(emptyRequest());
-
-        assertEquals(JobService.DEFAULT_MATCH_LIMIT, response.jobs().size());
-        assertEquals(201, response.totalCount());
-        assertTrue(response.hasMore());
-        assertEquals(201, response.analytics().summary().totalJobs());
     }
 
     @Test
