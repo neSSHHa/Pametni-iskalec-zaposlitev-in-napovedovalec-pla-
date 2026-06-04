@@ -9,7 +9,7 @@ RUN apt-get update \
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app.py train_model.py ./
+COPY app.py train_model.py pytest.ini ./
 COPY tests ./tests
 
 EXPOSE 8091
