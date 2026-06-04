@@ -9849,3 +9849,2725 @@ body .motion-shell.mode-idle .home-mode-switch {
 body .motion-shell.mode-idle .search-panel {
   margin-top: 2px !important;
 }
+
+/* Responsive app pass: keep the product UI usable on phones and small tablets. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+canvas,
+video {
+  max-width: 100%;
+}
+
+@media (max-width: 980px) {
+  body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: auto auto !important;
+    gap: 12px 16px !important;
+    min-height: 0 !important;
+    padding: 14px clamp(14px, 4vw, 24px) !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark {
+    grid-column: 1 !important;
+    min-width: 0 !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > span {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .jr-topbar .topbar-actions {
+    grid-column: 2 !important;
+    height: auto !important;
+    gap: 8px !important;
+  }
+
+  body .motion-shell .jr-topbar nav {
+    grid-column: 1 / -1 !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    padding: 2px 0 4px !important;
+    scrollbar-width: thin !important;
+  }
+
+  body .motion-shell .jr-topbar nav a {
+    flex: 0 0 auto !important;
+    min-height: 38px !important;
+    border: 1px solid rgba(124, 58, 237, 0.14) !important;
+    border-radius: 999px !important;
+    padding: 9px 14px !important;
+    background: rgba(124, 58, 237, 0.05) !important;
+    line-height: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar nav a.active {
+    color: #ffffff !important;
+    border-color: #7c3aed !important;
+    background: #7c3aed !important;
+  }
+
+  body .motion-shell .jr-topbar .rail-meter {
+    display: none !important;
+  }
+
+  body .motion-shell .motion-stage,
+  body .motion-shell.mode-idle .motion-stage,
+  body .motion-shell.mode-compare .motion-stage {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 18px clamp(14px, 4vw, 24px) 42px !important;
+  }
+
+  body .motion-shell.mode-idle .home-hero {
+    gap: 18px !important;
+    padding: 0 0 30px !important;
+  }
+
+  body .motion-shell.mode-idle .home-hero .motion-copy,
+  body .motion-shell.mode-idle .home-hero .motion-copy h1,
+  body .motion-shell.mode-idle .home-hero .motion-copy p {
+    max-width: 100% !important;
+  }
+
+  body .motion-shell.mode-idle .search-panel {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    width: 100% !important;
+    padding: 16px !important;
+  }
+
+  body .motion-shell .panel-side,
+  body .motion-shell .upload-box,
+  body .motion-shell .prompt-box,
+  body .motion-shell .entry-card,
+  body .motion-shell .motion-panel,
+  body .motion-shell .motion-map-panel,
+  body .motion-shell .compare-job-card,
+  body .motion-shell .compare-section {
+    min-width: 0 !important;
+  }
+
+  body .motion-shell .steps,
+  body .motion-shell .mission,
+  body .motion-shell .signal-strip,
+  body .motion-shell .motion-grid,
+  body .motion-shell .motion-stats,
+  body .motion-shell .map-insights,
+  body .motion-shell .city-equalizer,
+  body .motion-shell .compare-card-grid,
+  body .motion-shell .compare-sections {
+    grid-template-columns: 1fr !important;
+  }
+
+  body .motion-shell .mission-visual {
+    min-height: 300px !important;
+  }
+
+  body .motion-shell .motion-map,
+  body .motion-shell .map-canvas-lite {
+    min-height: 360px !important;
+  }
+
+  body .motion-shell .motion-map-lite {
+    grid-template-columns: 1fr !important;
+  }
+
+  body .motion-shell .compare-hero.compact {
+    grid-template-columns: 1fr !important;
+    align-items: stretch !important;
+  }
+
+  body .motion-shell .compare-back-button,
+  body .motion-shell .compare-clear-button {
+    width: fit-content !important;
+    max-width: 100% !important;
+  }
+
+  body .motion-shell .compare-row,
+  body .motion-shell .compare-row.long {
+    grid-template-columns: 1fr !important;
+  }
+
+  body .motion-shell .compare-row > span {
+    margin-bottom: 2px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  body .motion-shell .jr-topbar {
+    position: sticky !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    gap: 10px !important;
+    padding: 12px 12px 10px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark {
+    gap: 9px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    flex-basis: 32px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > span {
+    font-size: 20px !important;
+    letter-spacing: -0.03em !important;
+  }
+
+  body .motion-shell .jr-topbar .topbar-actions {
+    gap: 6px !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .compare-button {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+
+  body .motion-shell .jr-topbar .compare-count-badge {
+    right: -6px !important;
+    bottom: -6px !important;
+    min-width: 24px !important;
+    height: 20px !important;
+    padding: 0 5px !important;
+    font-size: 10px !important;
+  }
+
+  body .motion-shell .jr-topbar nav a {
+    min-height: 34px !important;
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+  }
+
+  body .motion-shell.mode-idle .home-hero .motion-copy h1,
+  body .motion-shell .motion-copy h1,
+  body .motion-shell .hero-title {
+    font-size: clamp(30px, 11vw, 44px) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  body .motion-shell.mode-idle .home-hero .motion-copy p,
+  body .motion-shell .motion-copy p {
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+  }
+
+  body .motion-shell .home-mode-switch {
+    width: 100% !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  body .motion-shell.mode-idle .search-panel,
+  body .motion-shell .entry-card,
+  body .motion-shell .motion-panel,
+  body .motion-shell .motion-map-panel,
+  body .motion-shell .compare-job-card,
+  body .motion-shell .compare-section,
+  body .motion-shell .loading-copy {
+    padding: 14px !important;
+  }
+
+  body .motion-shell .upload-box {
+    min-height: 170px !important;
+    padding: 16px 12px !important;
+  }
+
+  body .motion-shell .prompt-box textarea,
+  body .motion-shell .motion-command textarea {
+    min-height: 132px !important;
+    font-size: 15px !important;
+  }
+
+  body .motion-shell .search-btn,
+  body .motion-shell .prompt-submit,
+  body .motion-shell .cv-submit,
+  body .motion-shell .job-load-more {
+    width: 100% !important;
+    min-height: 48px !important;
+  }
+
+  body .motion-shell .section-title,
+  body .motion-shell .section-heading h2,
+  body .motion-shell .compare-hero h1 {
+    font-size: clamp(24px, 8vw, 34px) !important;
+    line-height: 1.12 !important;
+  }
+
+  body .motion-shell .motion-job {
+    grid-template-columns: 34px minmax(0, 1fr) !important;
+    align-items: start !important;
+    gap: 10px !important;
+    padding: 12px !important;
+  }
+
+  body .motion-shell .job-index {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  body .motion-shell .motion-job aside,
+  body .motion-shell .motion-job footer {
+    grid-column: 1 / -1 !important;
+    text-align: left !important;
+  }
+
+  body .motion-shell .motion-job aside strong {
+    font-size: 22px !important;
+  }
+
+  body .motion-shell .filter-chip-strip {
+    margin-inline: -2px !important;
+    padding-bottom: 10px !important;
+  }
+
+  body .motion-shell .map-controls {
+    top: 10px !important;
+    left: 10px !important;
+  }
+
+  body .motion-shell .map-help {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 10px 0 0 !important;
+    border-radius: 8px !important;
+  }
+
+  body .motion-shell .motion-map,
+  body .motion-shell .map-canvas-lite {
+    min-height: 300px !important;
+  }
+
+  body .motion-shell .job-details-backdrop {
+    padding: 78px 10px 12px !important;
+  }
+
+  body .motion-shell .job-details-page {
+    width: 100% !important;
+    max-height: calc(100svh - 92px) !important;
+    padding: 18px 14px !important;
+    overflow: auto !important;
+  }
+
+  body .motion-shell .job-details-page header {
+    grid-template-columns: 1fr auto !important;
+    gap: 12px !important;
+    padding-right: 0 !important;
+  }
+
+  body .motion-shell .job-details-page header > :first-child {
+    grid-column: 1 / -1 !important;
+  }
+
+  body .motion-shell .job-details-page h2 {
+    font-size: clamp(24px, 8vw, 34px) !important;
+    line-height: 1.08 !important;
+  }
+
+  body .motion-shell .job-details-page .job-source-row {
+    width: 100% !important;
+    border-radius: 8px !important;
+    flex-wrap: wrap !important;
+  }
+
+  body .motion-shell .job-details-page .job-details-tags em,
+  body .motion-shell .filter-chip-strip span,
+  body .motion-shell .motion-job em {
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+
+  body .motion-shell .loading-copy {
+    width: min(100%, 420px) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  body .motion-shell .jr-topbar .motion-mark > span {
+    font-size: 18px !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .compare-button {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+  }
+
+  body .motion-shell .home-mode-switch,
+  body .motion-shell .motion-mode-switch {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Real mobile navbar: logo + actions + hamburger, with a clean dropdown menu. */
+body .motion-shell .jr-topbar .mobile-nav-toggle {
+  display: none !important;
+}
+
+@media (max-width: 980px) {
+  body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) auto auto !important;
+    grid-template-rows: auto auto !important;
+    align-items: center !important;
+    gap: 10px !important;
+    overflow: visible !important;
+    border-bottom: 1px solid rgba(124, 58, 237, 0.12) !important;
+    background: color-mix(in srgb, var(--surface) 94%, transparent) !important;
+    backdrop-filter: blur(18px) !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar .topbar-actions {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    display: grid !important;
+    width: 46px !important;
+    height: 46px !important;
+    min-width: 46px !important;
+    min-height: 46px !important;
+    place-items: center !important;
+    border: 1px solid rgba(124, 58, 237, 0.2) !important;
+    border-radius: 999px !important;
+    padding: 0 !important;
+    color: #7c3aed !important;
+    background: rgba(124, 58, 237, 0.08) !important;
+    box-shadow: 0 10px 24px rgba(124, 58, 237, 0.1) !important;
+    cursor: pointer !important;
+  }
+
+  body .motion-shell.theme-dark .jr-topbar .mobile-nav-toggle {
+    color: #c4b5fd !important;
+    border-color: rgba(196, 181, 253, 0.22) !important;
+    background: rgba(139, 92, 246, 0.15) !important;
+  }
+
+  body .motion-shell .jr-topbar nav,
+  body .motion-shell .jr-topbar nav.open {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    border-radius: 18px !important;
+    transform: none !important;
+    transition: max-height 180ms ease, opacity 160ms ease, padding 180ms ease, border-color 180ms ease !important;
+  }
+
+  body .motion-shell .jr-topbar nav {
+    display: grid !important;
+    max-height: 0 !important;
+    gap: 8px !important;
+    border: 1px solid transparent !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  body .motion-shell .jr-topbar nav.open {
+    max-height: 260px !important;
+    border-color: rgba(124, 58, 237, 0.16) !important;
+    padding: 10px !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    background: color-mix(in srgb, var(--surface) 96%, var(--accent-soft)) !important;
+    box-shadow: 0 18px 42px rgba(24, 18, 43, 0.12) !important;
+  }
+
+  body .motion-shell .jr-topbar nav a {
+    display: flex !important;
+    width: 100% !important;
+    min-height: 44px !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    border-radius: 12px !important;
+    padding: 0 14px !important;
+    color: var(--text) !important;
+    border-color: transparent !important;
+    background: transparent !important;
+    font-size: 15px !important;
+    line-height: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar nav a::after {
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 999px !important;
+    content: "" !important;
+    background: transparent !important;
+  }
+
+  body .motion-shell .jr-topbar nav a:hover,
+  body .motion-shell .jr-topbar nav a.active {
+    color: #ffffff !important;
+    background: #7c3aed !important;
+  }
+
+  body .motion-shell .jr-topbar nav a.active::after {
+    background: #ffffff !important;
+  }
+}
+
+@media (max-width: 640px) {
+  body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) auto auto !important;
+    padding: 10px 12px !important;
+  }
+
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  body .motion-shell .jr-topbar .motion-mark > span {
+    max-width: 118px !important;
+  }
+}
+
+/* Mobile redesign for results, details and comparison screens. */
+@media (max-width: 760px) {
+  body .motion-shell .job-panel,
+  body .motion-shell .compare-page.compact {
+    border: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  body .motion-shell .results-overview,
+  body .motion-shell .query-summary-card,
+  body .motion-shell .salary-prediction-card,
+  body .motion-shell .result-toolbar,
+  body .motion-shell .compare-hero.compact {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    border: 1px solid rgba(124, 58, 237, 0.14) !important;
+    border-radius: 18px !important;
+    padding: 16px !important;
+    background: color-mix(in srgb, var(--surface) 96%, var(--accent-soft)) !important;
+    box-shadow: 0 18px 42px rgba(24, 18, 43, 0.08) !important;
+  }
+
+  body .motion-shell .results-overview h2,
+  body .motion-shell .compare-hero.compact h1 {
+    margin: 0 !important;
+    font-size: clamp(26px, 8vw, 34px) !important;
+    line-height: 1.08 !important;
+  }
+
+  body .motion-shell .results-overview p,
+  body .motion-shell .query-summary-card p,
+  body .motion-shell .salary-prediction-card p {
+    margin: 0 !important;
+    font-size: 14px !important;
+    line-height: 1.48 !important;
+  }
+
+  body .motion-shell .compatibility-summary {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 12px !important;
+    border-radius: 14px !important;
+    padding: 10px !important;
+    background: rgba(124, 58, 237, 0.07) !important;
+  }
+
+  body .motion-shell .score-ring {
+    width: 82px !important;
+    height: 82px !important;
+  }
+
+  body .motion-shell .score-ring strong {
+    font-size: 24px !important;
+  }
+
+  body .motion-shell .score-ring span,
+  body .motion-shell .compatibility-summary p {
+    font-size: 12px !important;
+  }
+
+  body .motion-shell .query-summary-card {
+    grid-template-columns: 42px minmax(0, 1fr) !important;
+    align-items: start !important;
+  }
+
+  body .motion-shell .query-radar {
+    display: none !important;
+  }
+
+  body .motion-shell .filter-chip-strip {
+    gap: 7px !important;
+    overflow-x: auto !important;
+    padding: 4px 0 2px !important;
+  }
+
+  body .motion-shell .filter-chip-strip span {
+    flex: 0 0 auto !important;
+    min-height: 32px !important;
+    border-radius: 999px !important;
+    padding: 7px 10px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .result-toolbar-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  body .motion-shell .result-sort-control {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  body .motion-shell .result-sort-control > span {
+    grid-column: 1 / -1 !important;
+    color: var(--muted) !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+  }
+
+  body .motion-shell .result-sort-control button,
+  body .motion-shell .view-statistics-button {
+    min-height: 44px !important;
+    border-radius: 999px !important;
+    justify-content: center !important;
+    padding: 0 13px !important;
+  }
+
+  body .motion-shell .job-stream {
+    gap: 14px !important;
+  }
+
+  body .motion-shell .motion-job {
+    display: grid !important;
+    grid-template-columns: 44px minmax(0, 1fr) !important;
+    gap: 12px !important;
+    align-items: start !important;
+    border: 1px solid rgba(124, 58, 237, 0.16) !important;
+    border-left: 0 !important;
+    border-radius: 20px !important;
+    padding: 14px !important;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 98%, #ffffff), color-mix(in srgb, var(--surface-soft) 62%, var(--surface))) !important;
+    box-shadow: 0 18px 42px rgba(24, 18, 43, 0.09) !important;
+  }
+
+  body .motion-shell.theme-dark .motion-job {
+    background: linear-gradient(180deg, rgba(22, 28, 43, 0.98), rgba(17, 24, 39, 0.98)) !important;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28) !important;
+  }
+
+  body .motion-shell .motion-job::before {
+    position: absolute !important;
+    inset: 0 0 auto 0 !important;
+    height: 4px !important;
+    content: "" !important;
+    background: linear-gradient(90deg, #7c3aed, #a78bfa, #10b981) !important;
+  }
+
+  body .motion-shell .motion-job .job-logo {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 14px !important;
+    color: #ffffff !important;
+    background: #7c3aed !important;
+    font-size: 14px !important;
+  }
+
+  body .motion-shell .motion-job .job-main {
+    min-width: 0 !important;
+  }
+
+  body .motion-shell .motion-job .job-main > span {
+    display: block !important;
+    overflow: hidden !important;
+    max-width: 100% !important;
+    color: #7c3aed !important;
+    font-size: 13px !important;
+    line-height: 1.25 !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell.theme-dark .motion-job .job-main > span {
+    color: #c4b5fd !important;
+  }
+
+  body .motion-shell .motion-job h3 {
+    margin: 4px 0 8px !important;
+    color: var(--text) !important;
+    font-size: clamp(19px, 5.7vw, 24px) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  body .motion-shell .motion-job p {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px 8px !important;
+    align-items: center !important;
+    margin: 0 !important;
+    color: var(--muted) !important;
+    font-size: 13px !important;
+    line-height: 1.35 !important;
+  }
+
+  body .motion-shell .motion-job p i {
+    display: none !important;
+  }
+
+  body .motion-shell .motion-job footer {
+    grid-column: 1 / -1 !important;
+    gap: 7px !important;
+    margin-top: 10px !important;
+  }
+
+  body .motion-shell .motion-job em {
+    max-width: 100% !important;
+    border-radius: 999px !important;
+    padding: 6px 9px !important;
+    color: #5b21b6 !important;
+    background: rgba(124, 58, 237, 0.09) !important;
+    font-size: 12px !important;
+    line-height: 1.15 !important;
+    white-space: normal !important;
+  }
+
+  body .motion-shell.theme-dark .motion-job em {
+    color: #ddd6fe !important;
+    background: rgba(139, 92, 246, 0.18) !important;
+  }
+
+  body .motion-shell .motion-job aside {
+    grid-column: 1 / -1 !important;
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    gap: 3px 12px !important;
+    align-items: center !important;
+    margin-top: 4px !important;
+    border-radius: 16px !important;
+    padding: 12px !important;
+    text-align: left !important;
+    background: rgba(124, 58, 237, 0.07) !important;
+  }
+
+  body .motion-shell .motion-job aside strong {
+    grid-row: 1 / span 3 !important;
+    color: #7c3aed !important;
+    font-size: 34px !important;
+    line-height: 0.95 !important;
+  }
+
+  body .motion-shell .motion-job aside small,
+  body .motion-shell .motion-job aside span {
+    color: var(--muted) !important;
+    font-size: 12px !important;
+    line-height: 1.25 !important;
+  }
+
+  body .motion-shell .motion-job .match-dots {
+    display: flex !important;
+    gap: 4px !important;
+  }
+
+  body .motion-shell .motion-job .match-dots i {
+    width: 13px !important;
+    height: 5px !important;
+    border-radius: 999px !important;
+    background: rgba(124, 58, 237, 0.18) !important;
+  }
+
+  body .motion-shell .motion-job .match-dots i.active {
+    background: #7c3aed !important;
+  }
+
+  body .motion-shell .job-compare-card-button {
+    grid-column: 1 / -1 !important;
+    display: flex !important;
+    width: 100% !important;
+    min-height: 46px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin-top: 2px !important;
+    border: 1px solid rgba(124, 58, 237, 0.24) !important;
+    border-radius: 999px !important;
+    color: #6d28d9 !important;
+    background: rgba(124, 58, 237, 0.08) !important;
+  }
+
+  body .motion-shell .job-compare-card-button.active,
+  body .motion-shell .job-compare-card-button:hover {
+    color: #ffffff !important;
+    background: #7c3aed !important;
+  }
+
+  body .motion-shell .job-load-more {
+    margin-top: 16px !important;
+    border-radius: 999px !important;
+    color: #ffffff !important;
+    background: #7c3aed !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body .motion-shell .job-details-backdrop {
+    display: grid !important;
+    align-items: end !important;
+    padding: 74px 0 0 !important;
+    background: rgba(8, 10, 18, 0.54) !important;
+  }
+
+  body .motion-shell .job-details-page {
+    display: grid !important;
+    gap: 14px !important;
+    width: 100% !important;
+    max-height: calc(100svh - 74px) !important;
+    min-height: 0 !important;
+    overflow: auto !important;
+    border: 0 !important;
+    border-radius: 24px 24px 0 0 !important;
+    padding: 18px 16px 22px !important;
+    background: var(--surface) !important;
+    box-shadow: 0 -20px 60px rgba(15, 23, 42, 0.24) !important;
+  }
+
+  body .motion-shell .job-details-page::before {
+    justify-self: center !important;
+    width: 42px !important;
+    height: 5px !important;
+    border-radius: 999px !important;
+    content: "" !important;
+    background: rgba(124, 58, 237, 0.22) !important;
+  }
+
+  body .motion-shell .job-details-close {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 3 !important;
+    justify-self: end !important;
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    border-radius: 999px !important;
+    padding: 0 !important;
+    color: #ffffff !important;
+    background: #7c3aed !important;
+  }
+
+  body .motion-shell .job-details-page header {
+    display: grid !important;
+    grid-template-columns: 54px minmax(0, 1fr) !important;
+    gap: 12px !important;
+    align-items: start !important;
+    padding: 0 !important;
+  }
+
+  body .motion-shell .job-details-page .job-logo.large {
+    width: 54px !important;
+    height: 54px !important;
+    border-radius: 16px !important;
+    color: #ffffff !important;
+    background: #7c3aed !important;
+  }
+
+  body .motion-shell .job-details-page header > div:nth-child(2) {
+    min-width: 0 !important;
+  }
+
+  body .motion-shell .job-details-page header span {
+    color: #7c3aed !important;
+    font-size: 13px !important;
+    letter-spacing: 0.04em !important;
+  }
+
+  body .motion-shell .job-details-page h2 {
+    margin: 4px 0 10px !important;
+    font-size: clamp(24px, 7.8vw, 34px) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  body .motion-shell .job-details-meta {
+    gap: 7px !important;
+  }
+
+  body .motion-shell .job-details-meta b {
+    border-radius: 999px !important;
+    padding: 7px 10px !important;
+    font-size: 12px !important;
+    line-height: 1.15 !important;
+  }
+
+  body .motion-shell .job-details-page header aside {
+    grid-column: 1 / -1 !important;
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 4px 12px !important;
+    border-radius: 18px !important;
+    padding: 13px !important;
+    background: rgba(124, 58, 237, 0.08) !important;
+  }
+
+  body .motion-shell .job-details-page header aside strong {
+    grid-row: 1 / span 2 !important;
+    color: #7c3aed !important;
+    font-size: 38px !important;
+    line-height: 0.95 !important;
+  }
+
+  body .motion-shell .job-details-compare-button {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    min-height: 44px !important;
+    justify-content: center !important;
+    border-radius: 999px !important;
+  }
+
+  body .motion-shell .job-details-page .job-source-row {
+    width: 100% !important;
+    align-items: stretch !important;
+    border-radius: 16px !important;
+    padding: 10px !important;
+  }
+
+  body .motion-shell .job-details-page .job-source-link,
+  body .motion-shell .job-details-page .job-source-row em {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  body .motion-shell .job-details-page .job-details-tags {
+    display: flex !important;
+    gap: 7px !important;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    margin: 0 !important;
+    padding-bottom: 4px !important;
+  }
+
+  body .motion-shell .job-details-page .job-details-tags em {
+    flex: 0 0 auto !important;
+    max-width: min(260px, 80vw) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .job-details-page section,
+  body .motion-shell .match-columns section,
+  body .motion-shell .job-details-page dl div {
+    border: 1px solid rgba(124, 58, 237, 0.13) !important;
+    border-radius: 18px !important;
+    padding: 14px !important;
+    background: color-mix(in srgb, var(--surface) 96%, var(--accent-soft)) !important;
+    box-shadow: none !important;
+  }
+
+  body .motion-shell .job-details-page section p {
+    color: var(--text) !important;
+    font-size: 15px !important;
+    line-height: 1.58 !important;
+  }
+
+  body .motion-shell .match-columns {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  body .motion-shell .match-columns ul {
+    gap: 8px !important;
+    padding: 0 !important;
+  }
+
+  body .motion-shell .match-columns li {
+    align-items: flex-start !important;
+    border-radius: 12px !important;
+    padding: 9px 10px !important;
+    line-height: 1.35 !important;
+  }
+
+  body .motion-shell .job-details-page dl {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body .motion-shell .compare-page.compact {
+    display: grid !important;
+    gap: 14px !important;
+  }
+
+  body .motion-shell .compare-hero.compact {
+    align-items: stretch !important;
+  }
+
+  body .motion-shell .compare-back-button,
+  body .motion-shell .compare-clear-button,
+  body .motion-shell .compare-placeholder-card button,
+  body .motion-shell .compare-empty-card button {
+    display: inline-flex !important;
+    min-height: 44px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    border-radius: 999px !important;
+  }
+
+  body .motion-shell .compare-clear-button {
+    width: 100% !important;
+    color: #ffffff !important;
+    background: #7c3aed !important;
+  }
+
+  body .motion-shell .compare-card-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  body .motion-shell .compare-job-card {
+    display: grid !important;
+    gap: 10px !important;
+    border: 1px solid rgba(124, 58, 237, 0.16) !important;
+    border-radius: 20px !important;
+    padding: 15px !important;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 98%, #ffffff), color-mix(in srgb, var(--surface-soft) 62%, var(--surface))) !important;
+    box-shadow: 0 18px 42px rgba(24, 18, 43, 0.09) !important;
+  }
+
+  body .motion-shell.theme-dark .compare-job-card {
+    background: linear-gradient(180deg, rgba(22, 28, 43, 0.98), rgba(17, 24, 39, 0.98)) !important;
+  }
+
+  body .motion-shell .compare-job-card header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+
+  body .motion-shell .compare-job-card header > span {
+    display: inline-grid !important;
+    width: 34px !important;
+    height: 34px !important;
+    place-items: center !important;
+    border-radius: 12px !important;
+    color: #ffffff !important;
+    background: #7c3aed !important;
+  }
+
+  body .motion-shell .compare-job-card header button {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 999px !important;
+  }
+
+  body .motion-shell .compare-job-title-button {
+    font-size: clamp(21px, 6.3vw, 28px) !important;
+    line-height: 1.12 !important;
+  }
+
+  body .motion-shell .compare-job-card > p {
+    margin: 0 !important;
+    color: #7c3aed !important;
+    font-size: 14px !important;
+  }
+
+  body .motion-shell .compare-job-card > div {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 7px !important;
+  }
+
+  body .motion-shell .compare-job-card > div span {
+    border-radius: 999px !important;
+    padding: 7px 10px !important;
+    background: rgba(124, 58, 237, 0.08) !important;
+    font-size: 12px !important;
+  }
+
+  body .motion-shell .compare-job-card > strong {
+    color: #7c3aed !important;
+    font-size: 40px !important;
+    line-height: 0.95 !important;
+  }
+
+  body .motion-shell .compare-sections {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  body .motion-shell .compare-section {
+    display: grid !important;
+    gap: 11px !important;
+    border: 1px solid rgba(124, 58, 237, 0.16) !important;
+    border-radius: 20px !important;
+    padding: 15px !important;
+    background: color-mix(in srgb, var(--surface) 97%, var(--accent-soft)) !important;
+    box-shadow: 0 18px 42px rgba(24, 18, 43, 0.08) !important;
+  }
+
+  body .motion-shell .compare-section h2 {
+    display: flex !important;
+    gap: 9px !important;
+    align-items: center !important;
+    margin: 0 !important;
+    color: var(--text) !important;
+    font-size: 17px !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+  }
+
+  body .motion-shell .compare-section h2 svg {
+    color: #7c3aed !important;
+  }
+
+  body .motion-shell .compare-row {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    border-radius: 16px !important;
+    padding: 12px !important;
+    background: var(--surface) !important;
+  }
+
+  body .motion-shell .compare-row > span {
+    color: #7c3aed !important;
+    font-size: 12px !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+  }
+
+  body .motion-shell .compare-row p {
+    display: grid !important;
+    gap: 5px !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    border: 1px solid rgba(124, 58, 237, 0.12) !important;
+    border-radius: 14px !important;
+    padding: 10px !important;
+    color: var(--text) !important;
+    background: color-mix(in srgb, var(--surface-soft) 68%, var(--surface)) !important;
+    font-size: 14px !important;
+    line-height: 1.38 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  body .motion-shell .compare-row p::before {
+    content: attr(data-side) !important;
+    color: var(--muted) !important;
+    font-size: 11px !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+  }
+
+  body .motion-shell .compare-row.highlight p {
+    color: #5b21b6 !important;
+    background: rgba(124, 58, 237, 0.1) !important;
+    font-size: 18px !important;
+  }
+
+  body .motion-shell .skill-compare-block {
+    display: grid !important;
+    gap: 8px !important;
+    border-radius: 16px !important;
+    padding: 12px !important;
+    background: var(--surface) !important;
+  }
+
+  body .motion-shell .skill-compare-block > div {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 7px !important;
+  }
+
+  body .motion-shell .skill-compare-block em {
+    border-radius: 999px !important;
+    padding: 7px 10px !important;
+    color: #5b21b6 !important;
+    background: rgba(124, 58, 237, 0.09) !important;
+    font-size: 12px !important;
+    font-style: normal !important;
+  }
+}
+
+/* Final mobile nav and details lock. */
+@media (max-width: 760px) {
+  body .motion-shell .jr-topbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    display: flex !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    min-height: 64px !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    padding: 10px 12px !important;
+    overflow: visible !important;
+    border-bottom: 1px solid rgba(124, 58, 237, 0.16) !important;
+    background: color-mix(in srgb, var(--surface) 95%, transparent) !important;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08) !important;
+    backdrop-filter: blur(18px) !important;
+  }
+
+  body .motion-shell.theme-dark .jr-topbar {
+    background: rgba(8, 12, 22, 0.96) !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32) !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark {
+    display: inline-flex !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    max-width: calc(100vw - 164px) !important;
+    align-items: center !important;
+    gap: 9px !important;
+    order: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    flex: 0 0 34px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > span {
+    display: block !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    color: var(--text) !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .jr-topbar .topbar-actions {
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 6px !important;
+    order: 2 !important;
+    height: auto !important;
+    margin: 0 !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .compare-button,
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    position: relative !important;
+    display: grid !important;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    place-items: center !important;
+    margin: 0 !important;
+    border: 1px solid rgba(124, 58, 237, 0.2) !important;
+    border-radius: 14px !important;
+    padding: 0 !important;
+    color: #7c3aed !important;
+    background: rgba(124, 58, 237, 0.08) !important;
+    transform: none !important;
+  }
+
+  body .motion-shell.theme-dark .jr-topbar .theme-toggle,
+  body .motion-shell.theme-dark .jr-topbar .compare-button,
+  body .motion-shell.theme-dark .jr-topbar .mobile-nav-toggle {
+    color: #ddd6fe !important;
+    border-color: rgba(196, 181, 253, 0.2) !important;
+    background: rgba(139, 92, 246, 0.14) !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle > svg,
+  body .motion-shell .jr-topbar .compare-button > svg,
+  body .motion-shell .jr-topbar .mobile-nav-toggle > svg {
+    position: static !important;
+    width: 20px !important;
+    height: 20px !important;
+    transform: none !important;
+  }
+
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    flex: 0 0 40px !important;
+    order: 3 !important;
+    cursor: pointer !important;
+  }
+
+  body .motion-shell .jr-topbar .rail-meter,
+  body .motion-shell .jr-topbar .theme-toggle > span,
+  body .motion-shell .jr-topbar .compare-button > span {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .jr-topbar .compare-count-badge {
+    position: absolute !important;
+    right: -7px !important;
+    bottom: -7px !important;
+    z-index: 4 !important;
+    display: inline-flex !important;
+    width: auto !important;
+    min-width: 25px !important;
+    height: 21px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    clip: auto !important;
+    clip-path: none !important;
+    overflow: visible !important;
+    border-radius: 999px !important;
+    padding: 0 6px !important;
+    color: #ffffff !important;
+    background: #7c3aed !important;
+    box-shadow: 0 8px 18px rgba(124, 58, 237, 0.36) !important;
+    font-size: 10px !important;
+    line-height: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar nav,
+  body .motion-shell .jr-topbar nav.open {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    right: 12px !important;
+    left: 12px !important;
+    z-index: 1001 !important;
+    display: grid !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
+    gap: 8px !important;
+    width: auto !important;
+    max-width: none !important;
+    overflow: hidden !important;
+    border-radius: 18px !important;
+    transform: none !important;
+  }
+
+  body .motion-shell .jr-topbar nav {
+    max-height: 0 !important;
+    border: 1px solid transparent !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  body .motion-shell .jr-topbar nav.open {
+    max-height: 320px !important;
+    border-color: rgba(124, 58, 237, 0.2) !important;
+    padding: 10px !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    background: var(--surface) !important;
+    box-shadow: 0 22px 60px rgba(15, 23, 42, 0.18) !important;
+  }
+
+  body .motion-shell.theme-dark .jr-topbar nav.open {
+    background: #111827 !important;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.42) !important;
+  }
+
+  body .motion-shell .jr-topbar nav a {
+    display: flex !important;
+    width: 100% !important;
+    min-height: 46px !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    border: 0 !important;
+    border-radius: 13px !important;
+    padding: 0 14px !important;
+    color: var(--text) !important;
+    background: transparent !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar nav a.active,
+  body .motion-shell .jr-topbar nav a:hover {
+    color: #ffffff !important;
+    background: #7c3aed !important;
+  }
+
+  body .motion-shell .motion-stage,
+  body .motion-shell.mode-idle .motion-stage,
+  body .motion-shell.mode-compare .motion-stage {
+    padding-top: 18px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  body .motion-shell .jr-topbar {
+    padding-inline: 10px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark {
+    max-width: calc(100vw - 150px) !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > span {
+    font-size: 18px !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .compare-button,
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body .motion-shell .job-details-backdrop {
+    z-index: 2000 !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    background: rgba(2, 6, 15, 0.62) !important;
+  }
+
+  body .motion-shell .job-details-page {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 88svh !important;
+    min-height: 0 !important;
+    overflow: auto !important;
+    border: 0 !important;
+    border-radius: 26px 26px 0 0 !important;
+    padding: 14px 14px 22px !important;
+    color: var(--text) !important;
+    background: var(--surface) !important;
+    box-shadow: 0 -24px 70px rgba(0, 0, 0, 0.32) !important;
+  }
+
+  body .motion-shell .job-details-page::before {
+    display: block !important;
+    flex: 0 0 auto !important;
+    width: 44px !important;
+    height: 5px !important;
+    margin: 0 auto 2px !important;
+    border-radius: 999px !important;
+    content: "" !important;
+    background: rgba(124, 58, 237, 0.26) !important;
+  }
+
+  body .motion-shell .job-details-close {
+    position: absolute !important;
+    top: 14px !important;
+    right: 14px !important;
+    z-index: 5 !important;
+    display: grid !important;
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    place-items: center !important;
+    border: 1px solid rgba(124, 58, 237, 0.18) !important;
+    border-radius: 14px !important;
+    padding: 0 !important;
+    color: #7c3aed !important;
+    background: rgba(124, 58, 237, 0.08) !important;
+  }
+
+  body .motion-shell .job-details-page header {
+    display: grid !important;
+    grid-template-columns: 52px minmax(0, 1fr) !important;
+    gap: 12px !important;
+    align-items: start !important;
+    padding: 8px 50px 0 0 !important;
+  }
+
+  body .motion-shell .job-details-page .job-logo.large {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 16px !important;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
+    font-size: 15px !important;
+  }
+
+  body .motion-shell .job-details-page header > div:nth-child(2) {
+    min-width: 0 !important;
+  }
+
+  body .motion-shell .job-details-page header > div:nth-child(2) > span {
+    display: block !important;
+    overflow: hidden !important;
+    max-width: 100% !important;
+    color: #7c3aed !important;
+    font-size: 12px !important;
+    letter-spacing: 0.08em !important;
+    line-height: 1.2 !important;
+    text-overflow: ellipsis !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .job-details-page h2 {
+    margin: 5px 0 10px !important;
+    color: var(--text) !important;
+    font-size: clamp(23px, 7vw, 32px) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  body .motion-shell .job-details-meta {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 7px !important;
+  }
+
+  body .motion-shell .job-details-meta b {
+    border: 1px solid rgba(124, 58, 237, 0.14) !important;
+    border-radius: 999px !important;
+    padding: 7px 10px !important;
+    color: var(--muted) !important;
+    background: rgba(124, 58, 237, 0.06) !important;
+    font-size: 12px !important;
+    line-height: 1.15 !important;
+  }
+
+  body .motion-shell .job-details-page header aside {
+    grid-column: 1 / -1 !important;
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    gap: 4px 12px !important;
+    align-items: center !important;
+    margin-top: 2px !important;
+    border: 1px solid rgba(124, 58, 237, 0.14) !important;
+    border-radius: 18px !important;
+    padding: 13px !important;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(167, 139, 250, 0.08)) !important;
+  }
+
+  body .motion-shell .job-details-page header aside strong {
+    grid-row: 1 / span 2 !important;
+    color: #7c3aed !important;
+    font-size: 40px !important;
+    line-height: 0.95 !important;
+  }
+
+  body .motion-shell .job-details-page header aside > span {
+    color: var(--muted) !important;
+    font-size: 13px !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+  }
+
+  body .motion-shell .job-details-compare-button {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    min-height: 44px !important;
+    justify-content: center !important;
+    margin-top: 8px !important;
+    border-radius: 999px !important;
+  }
+
+  body .motion-shell .job-details-page .job-details-tags {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 7px !important;
+    overflow-x: auto !important;
+    margin: 0 !important;
+    padding: 0 0 4px !important;
+  }
+
+  body .motion-shell .job-details-page .job-details-tags em {
+    flex: 0 0 auto !important;
+    max-width: min(250px, 78vw) !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(124, 58, 237, 0.14) !important;
+    border-radius: 999px !important;
+    padding: 7px 11px !important;
+    color: #5b21b6 !important;
+    background: rgba(124, 58, 237, 0.08) !important;
+    font-size: 12px !important;
+    line-height: 1.15 !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell.theme-dark .job-details-page .job-details-tags em {
+    color: #ddd6fe !important;
+    background: rgba(139, 92, 246, 0.16) !important;
+  }
+
+  body .motion-shell .job-details-page section,
+  body .motion-shell .match-columns section,
+  body .motion-shell .job-details-page dl div {
+    display: grid !important;
+    gap: 8px !important;
+    border: 1px solid rgba(124, 58, 237, 0.13) !important;
+    border-radius: 18px !important;
+    padding: 14px !important;
+    background: color-mix(in srgb, var(--surface) 96%, var(--accent-soft)) !important;
+    box-shadow: none !important;
+  }
+
+  body .motion-shell .job-details-page section > span,
+  body .motion-shell .match-columns span,
+  body .motion-shell .job-details-page dt {
+    color: #7c3aed !important;
+    font-size: 12px !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+  }
+
+  body .motion-shell .job-details-page section p {
+    margin: 0 !important;
+    color: var(--text) !important;
+    font-size: 15px !important;
+    line-height: 1.58 !important;
+  }
+
+  body .motion-shell .match-columns {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  body .motion-shell .match-columns ul {
+    display: grid !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body .motion-shell .match-columns li {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+    border-radius: 12px !important;
+    padding: 9px 10px !important;
+    background: var(--surface) !important;
+    line-height: 1.35 !important;
+  }
+
+  body .motion-shell .job-details-page dl {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    margin: 0 !important;
+  }
+}
+
+/* Absolute final phone layout: simple navbar and readable job details. */
+@media (max-width: 760px) {
+  body .motion-shell .jr-topbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 3000 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto auto !important;
+    grid-template-rows: 48px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    min-height: 68px !important;
+    align-items: center !important;
+    column-gap: 8px !important;
+    padding: 10px 12px !important;
+    overflow: visible !important;
+    border-bottom: 1px solid rgba(124, 58, 237, 0.18) !important;
+    background: #070b14 !important;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22) !important;
+  }
+
+  body .motion-shell.theme-light .jr-topbar {
+    background: #ffffff !important;
+    box-shadow: 0 12px 28px rgba(24, 18, 43, 0.08) !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    display: inline-flex !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    align-items: center !important;
+    gap: 10px !important;
+    overflow: hidden !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    flex: 0 0 36px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > span {
+    display: block !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    color: var(--text) !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .jr-topbar .topbar-actions {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: contents !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .rail-meter {
+    display: none !important;
+  }
+
+  body .motion-shell .jr-topbar .compare-button {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar .compare-button,
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    position: relative !important;
+    display: grid !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    place-items: center !important;
+    margin: 0 !important;
+    border: 1px solid rgba(124, 58, 237, 0.32) !important;
+    border-radius: 14px !important;
+    padding: 0 !important;
+    color: #ddd6fe !important;
+    background: rgba(124, 58, 237, 0.16) !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  body .motion-shell.theme-light .jr-topbar .compare-button,
+  body .motion-shell.theme-light .jr-topbar .mobile-nav-toggle {
+    color: #6d28d9 !important;
+    background: rgba(124, 58, 237, 0.08) !important;
+  }
+
+  body .motion-shell .jr-topbar .compare-button > svg,
+  body .motion-shell .jr-topbar .mobile-nav-toggle > svg {
+    position: static !important;
+    width: 21px !important;
+    height: 21px !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  body .motion-shell .jr-topbar .compare-button > span {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .jr-topbar .compare-count-badge {
+    position: absolute !important;
+    right: -7px !important;
+    bottom: -7px !important;
+    z-index: 4 !important;
+    display: inline-flex !important;
+    min-width: 26px !important;
+    height: 22px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    clip: auto !important;
+    clip-path: none !important;
+    overflow: visible !important;
+    border-radius: 999px !important;
+    padding: 0 6px !important;
+    color: #ffffff !important;
+    background: #7c3aed !important;
+    font-size: 10px !important;
+    line-height: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar nav,
+  body .motion-shell .jr-topbar nav.open {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    right: 12px !important;
+    left: 12px !important;
+    z-index: 3001 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: calc(100vw - 24px) !important;
+    overflow: hidden !important;
+    border-radius: 18px !important;
+    transform: none !important;
+  }
+
+  body .motion-shell .jr-topbar nav {
+    max-height: 0 !important;
+    border: 1px solid transparent !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  body .motion-shell .jr-topbar nav.open {
+    max-height: 260px !important;
+    border-color: rgba(124, 58, 237, 0.24) !important;
+    padding: 10px !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    background: #0b1020 !important;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.38) !important;
+  }
+
+  body .motion-shell.theme-light .jr-topbar nav.open {
+    background: #ffffff !important;
+    box-shadow: 0 22px 60px rgba(24, 18, 43, 0.16) !important;
+  }
+
+  body .motion-shell .jr-topbar nav a {
+    position: relative !important;
+    display: flex !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    border: 0 !important;
+    border-radius: 14px !important;
+    padding: 0 16px !important;
+    color: var(--text) !important;
+    background: transparent !important;
+    font-size: 17px !important;
+    line-height: 1 !important;
+    text-align: left !important;
+  }
+
+  body .motion-shell .jr-topbar nav a::after {
+    display: none !important;
+  }
+
+  body .motion-shell .jr-topbar nav a::before {
+    width: 8px !important;
+    height: 8px !important;
+    margin-right: 10px !important;
+    border-radius: 999px !important;
+    content: "" !important;
+    background: transparent !important;
+  }
+
+  body .motion-shell .jr-topbar nav a.active {
+    color: #ffffff !important;
+    background: #7c3aed !important;
+  }
+
+  body .motion-shell .jr-topbar nav a.active::before {
+    background: #ffffff !important;
+  }
+}
+
+@media (max-width: 370px) {
+  body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) 40px 40px !important;
+    column-gap: 6px !important;
+    padding-inline: 10px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    flex-basis: 32px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > span {
+    font-size: 18px !important;
+  }
+
+  body .motion-shell .jr-topbar .compare-button,
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body .motion-shell .job-details-backdrop {
+    z-index: 4000 !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: rgba(2, 6, 15, 0.66) !important;
+  }
+
+  body .motion-shell .job-details-page {
+    position: relative !important;
+    inset: auto 0 0 0 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    max-height: 88svh !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    border: 0 !important;
+    border-radius: 26px 26px 0 0 !important;
+    padding: 14px 16px 22px !important;
+    color: var(--text) !important;
+    background: #080d19 !important;
+    box-shadow: 0 -24px 70px rgba(0, 0, 0, 0.34) !important;
+    transform: none !important;
+  }
+
+  body .motion-shell.theme-light .job-details-page {
+    background: #ffffff !important;
+  }
+
+  body .motion-shell .job-details-page::before {
+    display: block !important;
+    width: 44px !important;
+    height: 5px !important;
+    justify-self: center !important;
+    margin: 0 0 2px !important;
+    border-radius: 999px !important;
+    content: "" !important;
+    background: rgba(124, 58, 237, 0.32) !important;
+  }
+
+  body .motion-shell .job-details-close {
+    position: absolute !important;
+    top: 14px !important;
+    right: 14px !important;
+    z-index: 5 !important;
+    display: grid !important;
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    place-items: center !important;
+    border: 1px solid rgba(124, 58, 237, 0.3) !important;
+    border-radius: 14px !important;
+    padding: 0 !important;
+    color: #ddd6fe !important;
+    background: rgba(124, 58, 237, 0.16) !important;
+  }
+
+  body .motion-shell.theme-light .job-details-close {
+    color: #6d28d9 !important;
+    background: rgba(124, 58, 237, 0.08) !important;
+  }
+
+  body .motion-shell .job-details-page header {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+    align-items: start !important;
+    min-width: 0 !important;
+    padding: 4px 52px 0 0 !important;
+  }
+
+  body .motion-shell .job-details-page .job-logo.large {
+    width: 58px !important;
+    height: 58px !important;
+    border-radius: 18px !important;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
+    font-size: 15px !important;
+  }
+
+  body .motion-shell .job-details-page header > div:nth-child(2) {
+    min-width: 0 !important;
+  }
+
+  body .motion-shell .job-details-page header > div:nth-child(2) > span {
+    display: block !important;
+    overflow: hidden !important;
+    max-width: 100% !important;
+    color: #a78bfa !important;
+    font-size: 12px !important;
+    letter-spacing: 0.08em !important;
+    line-height: 1.2 !important;
+    text-overflow: ellipsis !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell.theme-light .job-details-page header > div:nth-child(2) > span {
+    color: #7c3aed !important;
+  }
+
+  body .motion-shell .job-details-page h2 {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 5px 0 10px !important;
+    color: var(--text) !important;
+    font-size: clamp(24px, 7.5vw, 34px) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.02em !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  body .motion-shell .job-details-meta {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 7px !important;
+  }
+
+  body .motion-shell .job-details-meta b,
+  body .motion-shell .job-details-page .job-details-tags em {
+    border: 1px solid rgba(124, 58, 237, 0.2) !important;
+    border-radius: 999px !important;
+    padding: 7px 10px !important;
+    color: #ddd6fe !important;
+    background: rgba(124, 58, 237, 0.14) !important;
+    font-size: 12px !important;
+    line-height: 1.15 !important;
+  }
+
+  body .motion-shell.theme-light .job-details-meta b,
+  body .motion-shell.theme-light .job-details-page .job-details-tags em {
+    color: #5b21b6 !important;
+    background: rgba(124, 58, 237, 0.08) !important;
+  }
+
+  body .motion-shell .job-details-page header aside {
+    grid-column: auto !important;
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    gap: 4px 12px !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin-top: 2px !important;
+    border: 1px solid rgba(124, 58, 237, 0.22) !important;
+    border-radius: 18px !important;
+    padding: 13px !important;
+    background: rgba(124, 58, 237, 0.12) !important;
+  }
+
+  body .motion-shell .job-details-page header aside strong {
+    grid-row: 1 / span 2 !important;
+    color: #a78bfa !important;
+    font-size: 40px !important;
+    line-height: 0.95 !important;
+  }
+
+  body .motion-shell.theme-light .job-details-page header aside strong {
+    color: #7c3aed !important;
+  }
+
+  body .motion-shell .job-details-page header aside > span {
+    color: var(--muted) !important;
+    font-size: 13px !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+  }
+
+  body .motion-shell .job-details-compare-button {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    min-height: 44px !important;
+    justify-content: center !important;
+    margin-top: 8px !important;
+    border-radius: 999px !important;
+  }
+}
+
+/* Phone header reset: one clean logo, one clean menu button. */
+body .motion-shell .mobile-nav-compare-link {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  body .motion-shell .jr-topbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 5000 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 46px !important;
+    grid-template-rows: 46px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    min-height: 66px !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 10px 14px !important;
+    overflow: visible !important;
+    border-bottom: 1px solid rgba(124, 58, 237, 0.18) !important;
+    background: #070b14 !important;
+  }
+
+  body .motion-shell.theme-light .jr-topbar {
+    background: #ffffff !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    display: inline-flex !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    align-items: center !important;
+    gap: 10px !important;
+    overflow: hidden !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    flex: 0 0 36px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > span {
+    display: block !important;
+    overflow: hidden !important;
+    color: var(--text) !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .jr-topbar .topbar-actions,
+  body .motion-shell .jr-topbar .compare-button,
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .rail-meter {
+    display: none !important;
+  }
+
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: grid !important;
+    width: 46px !important;
+    height: 46px !important;
+    min-width: 46px !important;
+    min-height: 46px !important;
+    place-items: center !important;
+    margin: 0 !important;
+    border: 1px solid rgba(124, 58, 237, 0.34) !important;
+    border-radius: 14px !important;
+    padding: 0 !important;
+    color: #ddd6fe !important;
+    background: rgba(124, 58, 237, 0.16) !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  body .motion-shell.theme-light .jr-topbar .mobile-nav-toggle {
+    color: #6d28d9 !important;
+    background: rgba(124, 58, 237, 0.08) !important;
+  }
+
+  body .motion-shell .jr-topbar .mobile-nav-toggle svg {
+    position: static !important;
+    width: 22px !important;
+    height: 22px !important;
+    transform: none !important;
+  }
+
+  body .motion-shell .jr-topbar nav,
+  body .motion-shell .jr-topbar nav.open {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    left: 14px !important;
+    right: 14px !important;
+    z-index: 5001 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    width: auto !important;
+    max-width: calc(100vw - 28px) !important;
+    overflow: hidden !important;
+    border-radius: 18px !important;
+  }
+
+  body .motion-shell .jr-topbar nav {
+    max-height: 0 !important;
+    border: 1px solid transparent !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  body .motion-shell .jr-topbar nav.open {
+    max-height: 320px !important;
+    border-color: rgba(124, 58, 237, 0.26) !important;
+    padding: 10px !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    background: #0b1020 !important;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.38) !important;
+  }
+
+  body .motion-shell.theme-light .jr-topbar nav.open {
+    background: #ffffff !important;
+    box-shadow: 0 22px 60px rgba(24, 18, 43, 0.16) !important;
+  }
+
+  body .motion-shell .jr-topbar nav a,
+  body .motion-shell .jr-topbar .mobile-nav-compare-link {
+    display: flex !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    border: 0 !important;
+    border-radius: 14px !important;
+    padding: 0 16px !important;
+    color: var(--text) !important;
+    background: transparent !important;
+    font: inherit !important;
+    font-size: 17px !important;
+    line-height: 1 !important;
+    text-align: left !important;
+    cursor: pointer !important;
+  }
+
+  body .motion-shell .jr-topbar nav a::before,
+  body .motion-shell .jr-topbar .mobile-nav-compare-link::before {
+    width: 8px !important;
+    height: 8px !important;
+    margin-right: 10px !important;
+    border-radius: 999px !important;
+    content: "" !important;
+    background: transparent !important;
+  }
+
+  body .motion-shell .jr-topbar nav a::after {
+    display: none !important;
+  }
+
+  body .motion-shell .jr-topbar nav a.active,
+  body .motion-shell .jr-topbar nav a:hover,
+  body .motion-shell .jr-topbar .mobile-nav-compare-link:hover {
+    color: #ffffff !important;
+    background: #7c3aed !important;
+  }
+
+  body .motion-shell .jr-topbar nav a.active::before {
+    background: #ffffff !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body .motion-shell .query-summary-card {
+    grid-template-columns: 62px minmax(0, 1fr) !important;
+    align-items: start !important;
+    min-height: auto !important;
+  }
+
+  body .motion-shell .query-icon {
+    width: 58px !important;
+    height: 58px !important;
+    border-radius: 18px !important;
+  }
+
+  body .motion-shell .query-summary-card > div:nth-child(2) {
+    min-width: 0 !important;
+    padding-top: 2px !important;
+  }
+
+  body .motion-shell .query-summary-card > div:nth-child(2) > span,
+  body .motion-shell .query-summary-card p {
+    display: block !important;
+    width: 100% !important;
+    overflow-wrap: anywhere !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body .motion-shell .job-details-page {
+    text-align: center !important;
+  }
+
+  body .motion-shell .job-details-page header {
+    grid-template-columns: 1fr !important;
+    justify-items: center !important;
+    padding: 8px 52px 0 !important;
+    text-align: center !important;
+  }
+
+  body .motion-shell .job-details-page .job-logo.large {
+    justify-self: center !important;
+  }
+
+  body .motion-shell .job-details-page header > div:nth-child(2),
+  body .motion-shell .job-details-page h2 {
+    text-align: center !important;
+  }
+
+  body .motion-shell .job-details-page header > div:nth-child(2) > span {
+    text-align: center !important;
+  }
+
+  body .motion-shell .job-details-meta,
+  body .motion-shell .job-details-page .job-details-tags {
+    justify-content: center !important;
+  }
+
+  body .motion-shell .job-details-page header aside {
+    text-align: center !important;
+  }
+
+  body .motion-shell .job-details-page header aside strong {
+    justify-self: end !important;
+  }
+
+  body .motion-shell .job-details-page section,
+  body .motion-shell .match-columns section,
+  body .motion-shell .job-details-page dl div {
+    text-align: left !important;
+  }
+}
+
+/* Final phone topbar: keep all expected icons visible and aligned. */
+@media (max-width: 760px) {
+  body .motion-shell .jr-topbar {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
+    grid-template-rows: 42px !important;
+    gap: 7px !important;
+    min-height: 64px !important;
+    padding: 10px 12px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    gap: 8px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    flex-basis: 34px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > span {
+    font-size: 19px !important;
+  }
+
+  body .motion-shell .jr-topbar .topbar-actions {
+    display: contents !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: grid !important;
+  }
+
+  body .motion-shell .jr-topbar .compare-button {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    display: grid !important;
+  }
+
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    grid-column: 4 !important;
+    grid-row: 1 !important;
+    display: grid !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .compare-button,
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    border-radius: 12px !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle > svg,
+  body .motion-shell .jr-topbar .compare-button > svg,
+  body .motion-shell .jr-topbar .mobile-nav-toggle > svg {
+    width: 19px !important;
+    height: 19px !important;
+  }
+
+  body .motion-shell .jr-topbar .rail-meter,
+  body .motion-shell .jr-topbar .theme-toggle > span,
+  body .motion-shell .jr-topbar .compare-button > span {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .jr-topbar .compare-count-badge {
+    right: -7px !important;
+    bottom: -7px !important;
+  }
+}
+
+@media (max-width: 370px) {
+  body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) 36px 36px 36px !important;
+    gap: 6px !important;
+    padding-inline: 10px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > span {
+    font-size: 17px !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .compare-button,
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+  }
+}
+
+/* Final phone details width: full sheet, full-width cards, centered title only. */
+@media (max-width: 760px) {
+  body .motion-shell .job-details-page {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding: 14px 14px 22px !important;
+  }
+
+  body .motion-shell .job-details-page header {
+    width: 100% !important;
+    padding: 8px 50px 0 !important;
+  }
+
+  body .motion-shell .job-details-page header > div:nth-child(2),
+  body .motion-shell .job-details-page .job-details-meta,
+  body .motion-shell .job-details-page .job-source-row,
+  body .motion-shell .job-details-page header aside,
+  body .motion-shell .job-details-page .job-details-tags,
+  body .motion-shell .job-details-page section,
+  body .motion-shell .match-columns,
+  body .motion-shell .match-columns section,
+  body .motion-shell .job-details-page dl,
+  body .motion-shell .job-details-page dl div {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  body .motion-shell .job-details-page .job-source-row,
+  body .motion-shell .job-details-page header aside {
+    justify-self: stretch !important;
+  }
+
+  body .motion-shell .job-details-page .job-source-link {
+    width: 100% !important;
+    min-height: 44px !important;
+  }
+
+  body .motion-shell .job-details-page .job-details-tags {
+    justify-content: flex-start !important;
+  }
+
+  body .motion-shell .job-details-page h2 {
+    margin-inline: auto !important;
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+}
+
+/* Phone correction: visible topbar actions, padded details sheet, aligned score card. */
+@media (max-width: 760px) {
+  body .motion-shell .jr-topbar {
+    display: flex !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    min-height: 66px !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    padding: 10px 12px !important;
+    overflow: visible !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark {
+    display: inline-flex !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    align-items: center !important;
+    gap: 9px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    flex: 0 0 34px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > span {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    font-size: 19px !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .jr-topbar .topbar-actions {
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
+    align-items: center !important;
+    gap: 7px !important;
+    height: auto !important;
+    margin: 0 !important;
+    order: 2 !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .compare-button,
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    position: relative !important;
+    display: grid !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    place-items: center !important;
+    margin: 0 !important;
+    border-radius: 12px !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    flex: 0 0 38px !important;
+    order: 3 !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle > svg,
+  body .motion-shell .jr-topbar .compare-button > svg,
+  body .motion-shell .jr-topbar .mobile-nav-toggle > svg {
+    position: static !important;
+    width: 19px !important;
+    height: 19px !important;
+    transform: none !important;
+  }
+
+  body .motion-shell .jr-topbar .rail-meter,
+  body .motion-shell .jr-topbar .theme-toggle > span,
+  body .motion-shell .jr-topbar .compare-button > span {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .jr-topbar nav,
+  body .motion-shell .jr-topbar nav.open {
+    left: 12px !important;
+    right: 12px !important;
+    max-width: calc(100vw - 24px) !important;
+  }
+
+  body .motion-shell .compatibility-summary {
+    grid-template-columns: 96px minmax(0, 1fr) !important;
+    justify-items: center !important;
+    padding: 14px !important;
+  }
+
+  body .motion-shell .score-ring {
+    justify-self: center !important;
+    width: 88px !important;
+    height: 88px !important;
+  }
+
+  body .motion-shell .score-ring strong {
+    font-size: 24px !important;
+    line-height: 1 !important;
+  }
+
+  body .motion-shell .score-ring span {
+    max-width: 72px !important;
+    font-size: 11px !important;
+    line-height: 1.05 !important;
+    text-align: center !important;
+  }
+
+  body .motion-shell .compatibility-summary p {
+    justify-self: stretch !important;
+    text-align: center !important;
+  }
+
+  body .motion-shell .job-details-backdrop {
+    padding: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  body .motion-shell .job-details-page {
+    width: calc(100vw - 18px) !important;
+    max-width: calc(100vw - 18px) !important;
+    margin: 0 9px !important;
+    padding: 14px 14px 22px !important;
+    overflow-x: hidden !important;
+    border-radius: 24px 24px 0 0 !important;
+  }
+
+  body .motion-shell .job-details-page header {
+    width: 100% !important;
+    padding: 8px 48px 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  body .motion-shell .job-details-page h2 {
+    max-width: 100% !important;
+    font-size: clamp(22px, 6.3vw, 30px) !important;
+    line-height: 1.12 !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+  }
+
+  body .motion-shell .job-details-page .job-source-row,
+  body .motion-shell .job-details-page header aside,
+  body .motion-shell .job-details-page section,
+  body .motion-shell .match-columns section,
+  body .motion-shell .job-details-page dl div {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (max-width: 390px) {
+  body .motion-shell .jr-topbar {
+    gap: 5px !important;
+    padding-inline: 9px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark {
+    gap: 7px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 31px !important;
+    height: 31px !important;
+    min-width: 31px !important;
+    min-height: 31px !important;
+    flex-basis: 31px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > span {
+    font-size: 17px !important;
+  }
+
+  body .motion-shell .jr-topbar .topbar-actions {
+    gap: 5px !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .compare-button,
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    width: 35px !important;
+    height: 35px !important;
+    min-width: 35px !important;
+    min-height: 35px !important;
+  }
+
+  body .motion-shell .jr-topbar .compare-count-badge {
+    right: -6px !important;
+    bottom: -7px !important;
+    min-width: 22px !important;
+    height: 20px !important;
+    padding: 0 5px !important;
+    font-size: 10px !important;
+  }
+}

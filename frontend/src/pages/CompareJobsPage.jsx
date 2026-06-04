@@ -213,8 +213,8 @@ function CompareRow({ label, left, right, long = false, highlight = false }) {
   return (
     <div className={`compare-row ${long ? "long" : ""} ${highlight ? "highlight" : ""} ${same ? "same" : "different"}`}>
       <span>{label}</span>
-      <p>{displayValue(left)}</p>
-      <p>{displayValue(right)}</p>
+      <p data-side="Job A">{displayValue(left)}</p>
+      <p data-side="Job B">{displayValue(right)}</p>
     </div>
   );
 }

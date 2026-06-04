@@ -1,4 +1,5 @@
-import { Scale, SunMoon } from "lucide-react";
+import { Menu, Scale, SunMoon, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useComparison } from "../../context/ComparisonContext.jsx";
 
 const navLinks = [
@@ -14,12 +15,18 @@ function navigate(event, href) {
 
 export default function MotionShell({ mode, score, theme, onThemeToggle, onHomeClick, onStatisticsClick, children }) {
   const path = window.location.pathname;
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const comparison = useComparison();
   const jobsActive = ["/motion-prompt", "/motion-cv"].includes(path) || (mode !== "idle" && mode !== "analytics" && mode !== "compare" && path !== "/compare");
+
+  useEffect(() => {
+    setMobileNavOpen(false);
+  }, [path, mode]);
 
   const openComparison = () => {
     window.history.pushState({}, "", "/compare");
     window.dispatchEvent(new Event("jobradar:navigate"));
+    setMobileNavOpen(false);
   };
 
   return (
@@ -38,7 +45,17 @@ export default function MotionShell({ mode, score, theme, onThemeToggle, onHomeC
           <img className="logo-mark" src="/jobradar.svg" alt="" aria-hidden="true" />
           <span>Job Radar</span>
         </a>
-        <nav aria-label="Motion pages">
+        <button
+          className="mobile-nav-toggle"
+          type="button"
+          aria-label={mobileNavOpen ? "Close navigation" : "Open navigation"}
+          aria-expanded={mobileNavOpen}
+          aria-controls="jobradar-navigation"
+          onClick={() => setMobileNavOpen((open) => !open)}
+        >
+          {mobileNavOpen ? <X size={22} strokeWidth={1.9} /> : <Menu size={22} strokeWidth={1.9} />}
+        </button>
+        <nav id="jobradar-navigation" className={mobileNavOpen ? "open" : ""} aria-label="Motion pages">
           {navLinks.map(([label, href]) => (
             <a
               className={(href === "/analytics" ? path === "/analytics" : path === "/motion" && mode === "idle") ? "active" : ""}
@@ -48,22 +65,28 @@ export default function MotionShell({ mode, score, theme, onThemeToggle, onHomeC
                 if (href === "/motion" && onHomeClick) {
                   event.preventDefault();
                   onHomeClick();
+                  setMobileNavOpen(false);
                   return;
                 }
 
                 if (href === "/analytics" && mode !== "idle" && onStatisticsClick) {
                   event.preventDefault();
                   onStatisticsClick();
+                  setMobileNavOpen(false);
                   return;
                 }
 
                 navigate(event, href);
+                setMobileNavOpen(false);
               }}
             >
               {label}
             </a>
           ))}
           {jobsActive ? <a className="active" href="/motion-prompt" onClick={(event) => event.preventDefault()}>Jobs</a> : null}
+          <button className="mobile-nav-compare-link" type="button" onClick={openComparison}>
+            Compare jobs ({comparison.count}/{comparison.maxJobs})
+          </button>
         </nav>
         <div className="topbar-actions">
           <button className="theme-toggle" type="button" onClick={onThemeToggle} aria-label="Toggle dark or light mode">
