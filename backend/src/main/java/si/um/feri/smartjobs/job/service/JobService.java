@@ -1,6 +1,7 @@
 package si.um.feri.smartjobs.job.service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +11,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import jakarta.annotation.PostConstruct;
@@ -20,6 +23,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import si.um.feri.smartjobs.analytics.dto.AnalyticsDashboardDto;
+import si.um.feri.smartjobs.analytics.dto.AnalyticsSummaryDto;
+import si.um.feri.smartjobs.analytics.dto.CountStatDto;
+import si.um.feri.smartjobs.analytics.dto.LocationStatDto;
+import si.um.feri.smartjobs.analytics.dto.SalaryStatsDto;
 import si.um.feri.smartjobs.job.dto.JobDto;
 import si.um.feri.smartjobs.job.dto.JobFilterRequest;
 import si.um.feri.smartjobs.job.dto.JobSearchResponse;
@@ -227,7 +235,57 @@ public class JobService {
                 safeLimit,
                 scoredJobs.size() > safeLimit,
                 averageMatch,
-                request
+                request,
+                buildFilteredAnalytics(scoredJobs, lookup, averageMatch)
+        );
+    }
+
+    private AnalyticsDashboardDto buildFilteredAnalytics(List<ScoredJob> scoredJobs, BatchLookup lookup, Integer averageMatch) {
+        List<Job> jobs = scoredJobs.stream().map(ScoredJob::job).toList();
+        long totalJobs = jobs.size();
+        SalaryStatsDto salaryStats = salaryStats(jobs);
+
+        AnalyticsSummaryDto summary = new AnalyticsSummaryDto(
+                totalJobs,
+                jobs.stream()
+                        .map(Job::getCompanyName)
+                        .filter(this::hasText)
+                        .map(this::normalize)
+                        .distinct()
+                        .count(),
+                jobs.stream()
+                        .map(Job::getLocation)
+                        .filter(Objects::nonNull)
+                        .map(Location::getId)
+                        .distinct()
+                        .count(),
+                jobs.stream()
+                        .map(Job::getLocation)
+                        .filter(Objects::nonNull)
+                        .map(Location::getCountry)
+                        .filter(this::hasText)
+                        .map(this::normalize)
+                        .distinct()
+                        .count(),
+                salaryStats.jobsWithSalary(),
+                jobs.stream().filter(job -> isRemote(job, lookup)).count(),
+                salaryStats.averageSalary(),
+                salaryStats.highestSalary(),
+                averageMatch
+        );
+
+        return new AnalyticsDashboardDto(
+                summary,
+                topSkills(jobs, lookup, totalJobs, 50),
+                countBy(jobs, job -> classifyRole(job.getJobName()), totalJobs, 50),
+                locationStats(jobs, LocationLevel.CITY, 50),
+                locationStats(jobs, LocationLevel.REGION, 50),
+                locationStats(jobs, LocationLevel.COUNTRY, 50),
+                countBy(jobs, job -> job.getExperienceLevel() == null ? "Unknown" : job.getExperienceLevel().getName(), totalJobs, 50),
+                workTypeStats(jobs, lookup, totalJobs, 50),
+                countBy(jobs, job -> job.getEducationLevel() == null ? "Unknown" : job.getEducationLevel().getName(), totalJobs, 50),
+                countBy(jobs, job -> hasText(job.getSourceWebsite()) ? job.getSourceWebsite() : "Unknown", totalJobs, 50),
+                salaryStats
         );
     }
 
@@ -837,6 +895,227 @@ public class JobService {
         return new WorkTypeValues(new ArrayList<>(displayNames), new ArrayList<>(normalizedValues));
     }
 
+    private List<CountStatDto> topSkills(List<Job> jobs, BatchLookup lookup, long denominator, int limit) {
+        return jobs.stream()
+                .flatMap(job -> lookup.skillsByJobId()
+                        .getOrDefault(job.getId(), SkillValues.empty())
+                        .displayNames()
+                        .stream())
+                .filter(this::hasText)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .map(entry -> new CountStatDto(entry.getKey(), entry.getValue(), percentage(entry.getValue(), denominator)))
+                .sorted(countComparator())
+                .limit(safeAnalyticsLimit(limit))
+                .toList();
+    }
+
+    private List<CountStatDto> workTypeStats(List<Job> jobs, BatchLookup lookup, long denominator, int limit) {
+        return jobs.stream()
+                .flatMap(job -> lookup.workTypesByJobId()
+                        .getOrDefault(job.getId(), WorkTypeValues.empty())
+                        .displayNames()
+                        .stream())
+                .filter(this::hasText)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .map(entry -> new CountStatDto(entry.getKey(), entry.getValue(), percentage(entry.getValue(), denominator)))
+                .sorted(countComparator())
+                .limit(safeAnalyticsLimit(limit))
+                .toList();
+    }
+
+    private List<CountStatDto> countBy(List<Job> jobs, Function<Job, String> classifier, long denominator, int limit) {
+        return jobs.stream()
+                .map(classifier)
+                .filter(this::hasText)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .map(entry -> new CountStatDto(entry.getKey(), entry.getValue(), percentage(entry.getValue(), denominator)))
+                .sorted(countComparator())
+                .limit(safeAnalyticsLimit(limit))
+                .toList();
+    }
+
+    private List<LocationStatDto> locationStats(List<Job> jobs, LocationLevel level, int limit) {
+        long totalJobs = jobs.size();
+
+        return jobs.stream()
+                .filter(job -> job.getLocation() != null)
+                .collect(Collectors.groupingBy(job -> locationKey(job.getLocation(), level)))
+                .entrySet()
+                .stream()
+                .filter(entry -> hasText(entry.getKey()))
+                .map(entry -> toLocationStat(entry.getKey(), entry.getValue(), totalJobs, level))
+                .sorted(Comparator.comparingLong(LocationStatDto::count).reversed()
+                        .thenComparing(LocationStatDto::label))
+                .limit(safeAnalyticsLimit(limit))
+                .toList();
+    }
+
+    private LocationStatDto toLocationStat(String label, List<Job> jobs, long totalJobs, LocationLevel level) {
+        Location sample = jobs.stream()
+                .map(Job::getLocation)
+                .filter(Objects::nonNull)
+                .findFirst()
+                .orElse(null);
+
+        return new LocationStatDto(
+                label,
+                level == LocationLevel.CITY && sample != null ? sample.getCity() : null,
+                sample == null ? null : sample.getRegion(),
+                sample == null ? null : sample.getCountry(),
+                jobs.size(),
+                percentage(jobs.size(), totalJobs),
+                averageCoordinate(jobs, true),
+                averageCoordinate(jobs, false)
+        );
+    }
+
+    private String locationKey(Location location, LocationLevel level) {
+        return switch (level) {
+            case CITY -> firstText(location.getCity(), location.getRegion(), location.getCountry(), "Unknown");
+            case REGION -> firstText(location.getRegion(), location.getCountry(), "Unknown");
+            case COUNTRY -> firstText(location.getCountry(), "Unknown");
+        };
+    }
+
+    private BigDecimal averageCoordinate(List<Job> jobs, boolean latitude) {
+        List<BigDecimal> coordinates = jobs.stream()
+                .map(Job::getLocation)
+                .filter(Objects::nonNull)
+                .map(location -> latitude ? location.getLatitude() : location.getLongitude())
+                .filter(Objects::nonNull)
+                .toList();
+
+        return average(coordinates, 6);
+    }
+
+    private SalaryStatsDto salaryStats(List<Job> jobs) {
+        List<SalaryRange> salaryRanges = jobs.stream()
+                .map(this::salaryRange)
+                .flatMap(List::stream)
+                .toList();
+
+        if (salaryRanges.isEmpty()) {
+            return new SalaryStatsDto(0, null, null, null, null, null);
+        }
+
+        BigDecimal lowest = salaryRanges.stream()
+                .map(SalaryRange::min)
+                .min(BigDecimal::compareTo)
+                .orElse(null);
+        BigDecimal highest = salaryRanges.stream()
+                .map(SalaryRange::max)
+                .max(BigDecimal::compareTo)
+                .orElse(null);
+
+        return new SalaryStatsDto(
+                salaryRanges.size(),
+                lowest,
+                highest,
+                average(salaryRanges.stream().map(SalaryRange::min).toList(), 2),
+                average(salaryRanges.stream().map(SalaryRange::max).toList(), 2),
+                average(salaryRanges.stream().map(SalaryRange::midpoint).toList(), 2)
+        );
+    }
+
+    private List<SalaryRange> salaryRange(Job job) {
+        BigDecimal min = firstNonNull(job.getMinSalary(), job.getPredictedMinSalary());
+        BigDecimal max = firstNonNull(job.getMaxSalary(), job.getPredictedMaxSalary());
+        min = firstNonNull(min, max);
+        max = firstNonNull(max, min);
+
+        if (min == null || max == null) {
+            return List.of();
+        }
+
+        if (min.compareTo(max) > 0) {
+            return List.of(new SalaryRange(max, min));
+        }
+
+        return List.of(new SalaryRange(min, max));
+    }
+
+    private BigDecimal average(List<BigDecimal> values, int scale) {
+        List<BigDecimal> cleanValues = values.stream()
+                .filter(Objects::nonNull)
+                .toList();
+
+        if (cleanValues.isEmpty()) {
+            return null;
+        }
+
+        BigDecimal sum = cleanValues.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+        return sum.divide(BigDecimal.valueOf(cleanValues.size()), scale, RoundingMode.HALF_UP);
+    }
+
+    private Comparator<CountStatDto> countComparator() {
+        return Comparator.comparingLong(CountStatDto::count)
+                .reversed()
+                .thenComparing(CountStatDto::label);
+    }
+
+    private String classifyRole(String title) {
+        String normalizedTitle = normalize(title);
+        if (normalizedTitle.matches(".*(developer|engineer|razvijalec|programer|software|backend|frontend|full stack|devops|database|react|java).*")) {
+            return "Razvijalci / inzenirji";
+        }
+        if (normalizedTitle.matches(".*(medicinska|sestra|zdravstveni|farmacevtski|bolnicar|nega|nursing).*")) {
+            return "Zdravstvo in nega";
+        }
+        if (normalizedTitle.matches(".*(racunovodja|knjigovodja|davcni|payroll|obracun).*")) {
+            return "Racunovodstvo in finance";
+        }
+        if (normalizedTitle.matches(".*(designer|oblikovalec|graphic|graf).*")) {
+            return "Oblikovanje";
+        }
+        if (normalizedTitle.matches(".*(prodajalec|komercialist|sales|consultant|svetovalec).*")) {
+            return "Prodaja in storitve";
+        }
+        if (normalizedTitle.matches(".*(kuhar|natakar|hrane|gostinstvo).*")) {
+            return "Gostinstvo in kuhinja";
+        }
+        if (normalizedTitle.matches(".*(skladiscnik|voznik|dostavljavec|delivery|truck).*")) {
+            return "Logistika in transport";
+        }
+        if (normalizedTitle.matches(".*(ucitelj|teaching|sola).*")) {
+            return "Izobrazevanje";
+        }
+        return hasText(title) ? title : "Other";
+    }
+
+    private double percentage(long count, long total) {
+        if (total <= 0) {
+            return 0;
+        }
+
+        return BigDecimal.valueOf(count * 100.0 / total)
+                .setScale(1, RoundingMode.HALF_UP)
+                .doubleValue();
+    }
+
+    private long safeAnalyticsLimit(int limit) {
+        if (limit <= 0) {
+            return 10;
+        }
+
+        return Math.min(limit, 50);
+    }
+
+    private String firstText(String... values) {
+        for (String value : values) {
+            if (hasText(value)) {
+                return value;
+            }
+        }
+
+        return "Unknown";
+    }
+
     private BigDecimal firstNonNull(BigDecimal first, BigDecimal second) {
         return first != null ? first : second;
     }
@@ -964,6 +1243,18 @@ public class JobService {
     }
 
     private record ScoredJob(Job job, MatchScore score) {
+    }
+
+    private record SalaryRange(BigDecimal min, BigDecimal max) {
+        BigDecimal midpoint() {
+            return min.add(max).divide(BigDecimal.valueOf(2), 2, RoundingMode.HALF_UP);
+        }
+    }
+
+    private enum LocationLevel {
+        CITY,
+        REGION,
+        COUNTRY
     }
 
     private record BatchLookup(
