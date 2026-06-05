@@ -1,6 +1,7 @@
 import { Menu, Scale, SunMoon, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useComparison } from "../../context/ComparisonContext.jsx";
+import useAuth from "../../hooks/useAuth.js";
 
 const navLinks = [
   ["Home", "/motion"],
@@ -17,6 +18,7 @@ export default function MotionShell({ mode, score, theme, onThemeToggle, onHomeC
   const path = window.location.pathname;
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const comparison = useComparison();
+  const auth = useAuth();
   const jobsActive = ["/motion-prompt", "/motion-cv"].includes(path) || (mode !== "idle" && mode !== "analytics" && mode !== "compare" && path !== "/compare");
 
   useEffect(() => {
@@ -25,6 +27,12 @@ export default function MotionShell({ mode, score, theme, onThemeToggle, onHomeC
 
   const openComparison = () => {
     window.history.pushState({}, "", "/compare");
+    window.dispatchEvent(new Event("jobradar:navigate"));
+    setMobileNavOpen(false);
+  };
+
+  const goTo = (href) => {
+    window.history.pushState({}, "", href);
     window.dispatchEvent(new Event("jobradar:navigate"));
     setMobileNavOpen(false);
   };
@@ -84,6 +92,15 @@ export default function MotionShell({ mode, score, theme, onThemeToggle, onHomeC
             </a>
           ))}
           {jobsActive ? <a className="active" href="/motion-prompt" onClick={(event) => event.preventDefault()}>Jobs</a> : null}
+          {auth.admin ? <button className="mobile-nav-compare-link" type="button" onClick={() => goTo("/admin")}>Admin panel</button> : null}
+          {!auth.authenticated ? (
+            <>
+              <button className="mobile-nav-compare-link" type="button" onClick={auth.login}>Login</button>
+              <button className="mobile-nav-compare-link" type="button" onClick={auth.register}>Register</button>
+            </>
+          ) : (
+            <button className="mobile-nav-compare-link" type="button" onClick={auth.logout}>Logout</button>
+          )}
           <button className="mobile-nav-compare-link" type="button" onClick={openComparison}>
             Compare jobs ({comparison.count}/{comparison.maxJobs})
           </button>
@@ -107,6 +124,12 @@ export default function MotionShell({ mode, score, theme, onThemeToggle, onHomeC
             <span>Avg match</span>
             <strong>{score}%</strong>
           </div>
+          {auth.admin ? <button className="topbar-text-action" type="button" onClick={() => goTo("/admin")}>Admin</button> : null}
+          {!auth.authenticated ? (
+            <button className="topbar-text-action" type="button" onClick={auth.login}>Login</button>
+          ) : (
+            <button className="topbar-text-action" type="button" onClick={auth.logout}>Logout</button>
+          )}
         </div>
       </header>
 

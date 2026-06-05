@@ -17,6 +17,12 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
         physical_naming_strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  security:
+    oauth2:
+        resourceserver:
+          jwt:
+            issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:8081/realms/smartjobs}
+            jwk-set-uri: ${KEYCLOAK_JWK_SET_URI:http://localhost:8081/realms/smartjobs/protocol/openid-connect/certs}
 
 smartjobs:
   cors-allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000}
