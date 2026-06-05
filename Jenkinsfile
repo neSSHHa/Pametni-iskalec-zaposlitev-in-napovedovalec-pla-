@@ -10,7 +10,7 @@ pipeline {
         APP_DIR = '/opt/smartjobs'
         COMPOSE = 'docker compose --env-file .env -f docker/docker-compose.server.yml'
         OBS_COMPOSE = 'docker compose --env-file .env -f docker/docker-compose.server.yml -f docker/docker-compose.observability.yml'
-        PRODUCTION_BASE_URL = 'http://134.209.204.3'
+        PRODUCTION_BASE_URL = 'https://www.jobsearchwith.me'
         PLAYWRIGHT_BASE_URL = "${PRODUCTION_BASE_URL}"
     }
 

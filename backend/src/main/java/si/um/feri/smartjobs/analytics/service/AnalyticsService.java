@@ -1,5 +1,9 @@
 package si.um.feri.smartjobs.analytics.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import si.um.feri.smartjobs.analytics.dto.AnalyticsDashboardDto;
 import si.um.feri.smartjobs.analytics.dto.AnalyticsSummaryDto;
@@ -27,6 +31,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class AnalyticsService {
+
+    private static final Logger log = LoggerFactory.getLogger(AnalyticsService.class);
+    private static final int MAX_CACHED_LIMIT = 50;
 
     private static final List<RoleDefinition> ROLE_DEFINITIONS = List.of(
             new RoleDefinition("Razvijalci / inzenirji", List.of(
@@ -66,6 +73,7 @@ public class AnalyticsService {
     private final JobRepository jobRepository;
     private final JobSkillRepository jobSkillRepository;
     private final WorkTypeJobRepository workTypeJobRepository;
+    private volatile AnalyticsDashboardDto cachedDashboard;
 
     public AnalyticsService(
             JobRepository jobRepository,
@@ -77,7 +85,36 @@ public class AnalyticsService {
         this.workTypeJobRepository = workTypeJobRepository;
     }
 
+    @EventListener(ApplicationReadyEvent.class)
+    public void refreshDashboardCacheOnStartup() {
+        refreshDashboardCache();
+    }
+
+    public synchronized void refreshDashboardCache() {
+        long startedAt = System.currentTimeMillis();
+        cachedDashboard = buildDashboard(MAX_CACHED_LIMIT);
+        log.info(
+                "Analytics dashboard cache refreshed in {} ms.",
+                System.currentTimeMillis() - startedAt
+        );
+    }
+
     public AnalyticsDashboardDto dashboard(int limit) {
+        AnalyticsDashboardDto dashboard = cachedDashboard;
+
+        if (dashboard == null) {
+            synchronized (this) {
+                if (cachedDashboard == null) {
+                    refreshDashboardCache();
+                }
+                dashboard = cachedDashboard;
+            }
+        }
+
+        return limitDashboard(dashboard, limit);
+    }
+
+    private AnalyticsDashboardDto buildDashboard(int limit) {
         return new AnalyticsDashboardDto(
                 summary(),
                 topSkills(limit),
@@ -91,6 +128,32 @@ public class AnalyticsService {
                 sourceStats(limit),
                 salaryStats()
         );
+    }
+
+    private AnalyticsDashboardDto limitDashboard(AnalyticsDashboardDto dashboard, int limit) {
+        int safeLimit = (int) safeLimit(limit);
+
+        return new AnalyticsDashboardDto(
+                dashboard.summary(),
+                limitList(dashboard.topSkills(), safeLimit),
+                limitList(dashboard.topRoles(), safeLimit),
+                limitList(dashboard.cityStats(), safeLimit),
+                limitList(dashboard.regionStats(), safeLimit),
+                limitList(dashboard.countryStats(), safeLimit),
+                limitList(dashboard.experienceLevelStats(), safeLimit),
+                limitList(dashboard.workTypeStats(), safeLimit),
+                limitList(dashboard.educationLevelStats(), safeLimit),
+                limitList(dashboard.sourceStats(), safeLimit),
+                dashboard.salaryStats()
+        );
+    }
+
+    private <T> List<T> limitList(List<T> values, int limit) {
+        if (values == null || values.size() <= limit) {
+            return values;
+        }
+
+        return values.subList(0, limit);
     }
 
     public AnalyticsSummaryDto summary() {

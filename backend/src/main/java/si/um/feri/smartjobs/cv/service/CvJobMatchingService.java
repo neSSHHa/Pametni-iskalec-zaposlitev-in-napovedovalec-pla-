@@ -46,9 +46,7 @@ public class CvJobMatchingService {
 
         String extractedText = cvTextExtractionService.extractText(file);
 
-        JobFilterRequest filterRequest = "thinking".equals(normalizedMode)
-                ? aiJobFilterService.extractCvFilter(extractedText)
-                : cvProfileFilterService.buildFilter(extractedText);
+        JobFilterRequest filterRequest = extractFilter(extractedText, normalizedMode);
         LOGGER.info(
                 "event=cv.filter.extracted requestId={} interactionId={} mode={} skills={} workTypes={} location={}",
                 requestId,
@@ -82,6 +80,19 @@ public class CvJobMatchingService {
                 rankedJobs.averageMatch(),
                 rankedJobs.analytics()
         );
+    }
+
+    private JobFilterRequest extractFilter(String extractedText, String normalizedMode) {
+        if (!"thinking".equals(normalizedMode)) {
+            return cvProfileFilterService.buildFilter(extractedText);
+        }
+
+        try {
+            return aiJobFilterService.extractCvFilter(extractedText);
+        } catch (RuntimeException e) {
+            LOGGER.warn("event=cv.ai.fallback reason={}", e.getMessage());
+            return cvProfileFilterService.buildFilter(extractedText);
+        }
     }
 
     private boolean isThinking(String mode) {

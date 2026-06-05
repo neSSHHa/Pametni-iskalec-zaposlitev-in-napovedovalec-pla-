@@ -210,6 +210,34 @@ class CvServiceTest {
     }
 
     @Test
+    void shouldFallBackToLocalProfileFilterWhenThinkingModeFails() {
+        CvTextExtractionService textExtractionService = mock(CvTextExtractionService.class);
+        CvProfileFilterService profileFilterService = mock(CvProfileFilterService.class);
+        AiJobFilterService aiJobFilterService = mock(AiJobFilterService.class);
+        JobService jobService = mock(JobService.class);
+        CvJobMatchingService service = new CvJobMatchingService(
+                textExtractionService,
+                profileFilterService,
+                aiJobFilterService,
+                jobService
+        );
+        MockMultipartFile file = cvFile();
+        JobFilterRequest fallbackFilter = emptyFilter();
+        JobSearchResponse rankedJobs = new JobSearchResponse(List.of(), 0, 0, 50, false, null, fallbackFilter);
+
+        when(textExtractionService.extractText(file)).thenReturn("Java backend developer");
+        when(aiJobFilterService.extractCvFilter("Java backend developer")).thenThrow(new IllegalStateException("AI unavailable"));
+        when(profileFilterService.buildFilter("Java backend developer")).thenReturn(fallbackFilter);
+        when(jobService.filterResponse(fallbackFilter)).thenReturn(rankedJobs);
+
+        CvJobMatchResponse response = service.matchJobs(file, "thinking");
+
+        assertThat(response.filterRequest()).isSameAs(fallbackFilter);
+        verify(aiJobFilterService).extractCvFilter("Java backend developer");
+        verify(profileFilterService).buildFilter("Java backend developer");
+    }
+
+    @Test
     void shouldDelegateCvDebugExtractionToAiService() {
         CvTextExtractionService textExtractionService = mock(CvTextExtractionService.class);
         AiJobFilterService aiJobFilterService = mock(AiJobFilterService.class);
