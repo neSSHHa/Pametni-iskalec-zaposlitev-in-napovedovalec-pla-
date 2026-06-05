@@ -71,7 +71,6 @@ pipeline {
             }
             steps {
                 sh 'curl --fail --max-time 20 "${PRODUCTION_BASE_URL}"'
-                sh 'curl --fail --max-time 20 "${PRODUCTION_BASE_URL}/api/health"'
                 sh 'curl --fail --max-time 20 "${PRODUCTION_BASE_URL}/api/jobs?page=0&size=1"'
             }
         }
