@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import si.um.feri.smartjobs.ai.service.AiAllowedValuesService;
+import si.um.feri.smartjobs.analytics.service.AnalyticsService;
 import si.um.feri.smartjobs.educationLevel.entity.EducationLevel;
 import si.um.feri.smartjobs.educationLevel.repository.EducationLevelRepository;
 import si.um.feri.smartjobs.experienceLevel.entity.ExperienceLevel;
@@ -55,6 +56,7 @@ abstract class AbstractIntegrationTestData {
     @Autowired protected JobSkillRepository jobSkillRepository;
     @Autowired protected WorkTypeJobRepository workTypeJobRepository;
     @Autowired protected AiAllowedValuesService aiAllowedValuesService;
+    @Autowired protected AnalyticsService analyticsService;
     @Autowired protected JobService jobService;
 
     protected EducationLevel bachelor;
@@ -186,6 +188,7 @@ abstract class AbstractIntegrationTestData {
         aiAllowedValuesService.refresh();
         jobService.refreshSkillRelationIndex();
         jobService.refreshJobLookupIndex();
+        analyticsService.refreshDashboardCache();
     }
 
     protected void clearData() {

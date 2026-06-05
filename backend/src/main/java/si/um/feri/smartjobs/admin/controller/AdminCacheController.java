@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import si.um.feri.smartjobs.ai.service.AiAllowedValuesService;
+import si.um.feri.smartjobs.analytics.service.AnalyticsService;
 import si.um.feri.smartjobs.job.service.JobService;
 
 @RestController
@@ -19,26 +20,30 @@ import si.um.feri.smartjobs.job.service.JobService;
 public class AdminCacheController {
 
     private final AiAllowedValuesService aiAllowedValuesService;
+    private final AnalyticsService analyticsService;
     private final JobService jobService;
 
     public AdminCacheController(
             AiAllowedValuesService aiAllowedValuesService,
+            AnalyticsService analyticsService,
             JobService jobService
     ) {
         this.aiAllowedValuesService = aiAllowedValuesService;
+        this.analyticsService = analyticsService;
         this.jobService = jobService;
     }
 
     @PostMapping("/refresh")
     @Operation(
             summary = "Refresh backend caches",
-            description = "Refreshes AI allowed values, skill relation indexes, and job lookup indexes used by filtering and recommendation logic."
+            description = "Refreshes AI allowed values, analytics dashboard cache, skill relation indexes, and job lookup indexes used by filtering and recommendation logic."
     )
     @ApiResponse(responseCode = "200", description = "Caches were refreshed successfully.")
     public Map<String, Object> refreshCaches() {
         aiAllowedValuesService.refresh();
         jobService.refreshSkillRelationIndex();
         jobService.refreshJobLookupIndex();
+        analyticsService.refreshDashboardCache();
 
         return Map.of(
                 "status", "OK",
