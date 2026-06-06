@@ -1,6 +1,10 @@
 server:
   port: 8080
 
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5level [%thread] %logger{36} requestId=%X{requestId:-none} interactionId=%X{interactionId:-none} userId=%X{userId:-guest} userEmail=%X{userEmail:-guest} : %msg%n"
+
 spring:
   application:
     name: smartjobs-backend
