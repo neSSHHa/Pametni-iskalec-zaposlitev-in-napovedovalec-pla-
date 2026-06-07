@@ -111,6 +111,21 @@ export async function getAdminOverview() {
   return response.data;
 }
 
+export async function getAdminLogs(params = {}) {
+  const response = await apiClient.get("/admin/logs", { params });
+  return response.data;
+}
+
+export async function getAdminCacheStatus() {
+  const response = await apiClient.get("/admin/cache/status");
+  return response.data;
+}
+
+export async function refreshAdminCaches() {
+  const response = await apiClient.post("/admin/cache/refresh");
+  return response.data;
+}
+
 function randomString(length) {
   const values = new Uint8Array(length);
   crypto.getRandomValues(values);
