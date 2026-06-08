@@ -189,19 +189,6 @@ function countItems(items, getter) {
     .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
 }
 
-function classifyRole(title = "") {
-  const normalized = title.toLowerCase();
-  if (/(developer|engineer|razvijalec|java|react|frontend|backend|software|devops|database)/.test(normalized)) return "Razvijalci / inzenirji";
-  if (/(designer|grafi|oblikoval)/.test(normalized)) return "Oblikovanje";
-  if (/(kuhar|natakar|hrane|food)/.test(normalized)) return "Gostinstvo in kuhinja";
-  if (/(terapevt|zdrav|medic|nega|nurs|bolni)/.test(normalized)) return "Zdravstvo in nega";
-  if (/(racun|account|tax|dav)/.test(normalized)) return "Racunovodstvo in finance";
-  if (/(prodaj|sales|consultant|svetovalec)/.test(normalized)) return "Prodaja in storitve";
-  if (/(skladisc|voznik|logistik|warehouse)/.test(normalized)) return "Logistika in transport";
-  if (/(ucitelj|teaching|sola)/.test(normalized)) return "Izobrazevanje";
-  return "Other roles";
-}
-
 function buildFilteredAnalytics(filteredJobs, meta = {}) {
   const totalJobs = meta.totalCount ?? filteredJobs.length;
   const cityStats = countItems(filteredJobs, (job) => job.city).map((item) => {
@@ -246,7 +233,7 @@ function buildFilteredAnalytics(filteredJobs, meta = {}) {
       averageMatch,
     },
     topSkills: countItems(filteredJobs, (job) => job.skills?.length ? job.skills : job.tags),
-    topRoles: countItems(filteredJobs, (job) => classifyRole(job.title)),
+    topRoles: [],
     cityStats,
     regionStats: countItems(filteredJobs, (job) => job.region),
     countryStats,
@@ -295,7 +282,7 @@ function mapAnalyticsToSignals(analytics, jobsCount) {
     return [
       [String(totalJobs), "active listings", "The complete job database"],
       [statValue(analytics?.topSkills), "top skill", "Most common requirement in listings"],
-      [statValue(analytics?.topRoles), "most wanted role", "Current market by category"],
+      [statValue(analytics?.topRoles), "most wanted category", "Current market by database category"],
       [statValue(analytics?.cityStats), "strongest location", `${summary?.totalLocations ?? analytics?.cityStats?.length ?? 0} locations in the database`],
     ];
   }
@@ -317,9 +304,9 @@ function mapAnalyticsToStats(analytics) {
       tone: "cyan",
     },
     {
-      title: "Most wanted roles",
+      title: "Most wanted categories",
       value: statValue(analytics?.topRoles),
-      detail: analytics?.topRoles?.slice(0, 4).map((item) => `${item.label} (${item.count})`).join("\n") || "Developers, designers, chefs, therapists and other roles.",
+      detail: analytics?.topRoles?.slice(0, 4).map((item) => `${item.label} (${item.count})`).join("\n") || "Categories are loaded from database skill types.",
       tone: "pink",
     },
     {

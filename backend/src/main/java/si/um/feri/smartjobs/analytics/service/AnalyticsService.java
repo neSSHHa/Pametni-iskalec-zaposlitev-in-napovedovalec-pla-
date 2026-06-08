@@ -35,41 +35,6 @@ public class AnalyticsService {
     private static final Logger log = LoggerFactory.getLogger(AnalyticsService.class);
     private static final int MAX_CACHED_LIMIT = 50;
 
-    private static final List<RoleDefinition> ROLE_DEFINITIONS = List.of(
-            new RoleDefinition("Razvijalci / inzenirji", List.of(
-                    "developer", "engineer", "razvijalec", "programer", "software", "backend", "frontend",
-                    "full stack", "devops", "database"
-            )),
-            new RoleDefinition("Zdravstvo in nega", List.of(
-                    "medicinska", "sestra", "zdravstveni", "farmacevtski", "bolnicar", "nega", "nursing"
-            )),
-            new RoleDefinition("Pravo in administracija", List.of(
-                    "pravni", "pravosodni", "sodelavec", "svetovalec", "administrator", "upravni", "razpisno"
-            )),
-            new RoleDefinition("Racunovodstvo in finance", List.of(
-                    "racunovodja", "knjigovodja", "davcni", "payroll", "obracun"
-            )),
-            new RoleDefinition("Oblikovanje", List.of(
-                    "designer", "oblikovalec", "graphic", "graf", "prelamljalec"
-            )),
-            new RoleDefinition("Proizvodnja in vzdrzevanje", List.of(
-                    "tiskar", "upravljalec", "obdelovalec", "kontrolor", "vzdrzevalec", "proizvodnji",
-                    "strojev", "kovin"
-            )),
-            new RoleDefinition("Prodaja in storitve", List.of(
-                    "prodajalec", "komercialist", "sales", "consultant", "svetovalec"
-            )),
-            new RoleDefinition("Gostinstvo in kuhinja", List.of(
-                    "kuhar", "natakar", "hrane", "gostinstvo"
-            )),
-            new RoleDefinition("Logistika in transport", List.of(
-                    "skladiscnik", "voznik", "dostavljavec", "delivery", "truck"
-            )),
-            new RoleDefinition("Izobrazevanje", List.of(
-                    "ucitelj", "teaching", "sola", "visokosolski"
-            ))
-    );
-
     private final JobRepository jobRepository;
     private final JobSkillRepository jobSkillRepository;
     private final WorkTypeJobRepository workTypeJobRepository;
@@ -214,9 +179,24 @@ public class AnalyticsService {
     }
 
     public List<CountStatDto> topRoles(int limit) {
-        List<Job> jobs = jobRepository.findAll();
+        List<JobSkill> jobSkills = jobSkillRepository.findAll();
+        long totalJobs = jobRepository.count();
 
-        return countBy(jobs, job -> classifyRole(job.getJobName()), jobs.size(), limit);
+        return jobSkills.stream()
+                .filter(jobSkill -> jobSkill.getJob() != null)
+                .filter(jobSkill -> jobSkill.getSkill() != null)
+                .filter(jobSkill -> jobSkill.getSkill().getSkillType() != null)
+                .filter(jobSkill -> hasText(jobSkill.getSkill().getSkillType().getName()))
+                .collect(Collectors.groupingBy(
+                        jobSkill -> jobSkill.getSkill().getSkillType().getName(),
+                        Collectors.mapping(jobSkill -> jobSkill.getJob().getId(), Collectors.toSet())
+                ))
+                .entrySet()
+                .stream()
+                .map(entry -> new CountStatDto(entry.getKey(), entry.getValue().size(), percentage(entry.getValue().size(), totalJobs)))
+                .sorted(countComparator())
+                .limit(safeLimit(limit))
+                .toList();
     }
 
     public List<LocationStatDto> locationStats(String level, int limit) {
@@ -422,16 +402,6 @@ public class AnalyticsService {
                 .count();
     }
 
-    private String classifyRole(String title) {
-        String normalizedTitle = normalize(title);
-
-        return ROLE_DEFINITIONS.stream()
-                .filter(definition -> definition.keywords().stream().anyMatch(normalizedTitle::contains))
-                .map(RoleDefinition::label)
-                .findFirst()
-                .orElse(hasText(title) ? title : "Other");
-    }
-
     private double percentage(long count, long total) {
         if (total <= 0) {
             return 0;
@@ -481,9 +451,6 @@ public class AnalyticsService {
         }
 
         return value.toLowerCase(Locale.ROOT).trim();
-    }
-
-    private record RoleDefinition(String label, List<String> keywords) {
     }
 
     private record SalaryRange(BigDecimal min, BigDecimal max) {

@@ -29,7 +29,7 @@ public class AnalyticsController {
     }
 
     @GetMapping
-    @Operation(summary = "Get analytics dashboard", description = "Returns the full analytics dashboard payload with summary metrics, top skills, top roles, location statistics, category distributions, and salary statistics.")
+    @Operation(summary = "Get analytics dashboard", description = "Returns the full analytics dashboard payload with summary metrics, top skills, top database skill categories, location statistics, category distributions, and salary statistics.")
     @ApiResponse(responseCode = "200", description = "Analytics dashboard was returned successfully.")
     public AnalyticsDashboardDto getAnalytics(@RequestParam(defaultValue = "10") int limit) {
         return analyticsService.dashboard(limit);
@@ -57,8 +57,8 @@ public class AnalyticsController {
     }
 
     @GetMapping("/roles")
-    @Operation(summary = "Get top roles", description = "Returns the most common job roles or titles in the job database.")
-    @ApiResponse(responseCode = "200", description = "Role statistics were returned successfully.")
+    @Operation(summary = "Get top categories", description = "Returns the most common database skill categories used by job listings.")
+    @ApiResponse(responseCode = "200", description = "Category statistics were returned successfully.")
     public List<CountStatDto> getRoleStats(@RequestParam(defaultValue = "10") int limit) {
         return analyticsService.topRoles(limit);
     }

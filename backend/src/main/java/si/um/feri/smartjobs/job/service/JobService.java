@@ -293,7 +293,7 @@ public class JobService {
         return new AnalyticsDashboardDto(
                 summary,
                 topSkills(jobs, lookup, totalJobs, 50),
-                countBy(jobs, job -> classifyRole(job.getJobName()), totalJobs, 50),
+                skillTypeStats(jobs, lookup, totalJobs, 50),
                 locationStats(jobs, LocationLevel.CITY, 50),
                 locationStats(jobs, LocationLevel.REGION, 50),
                 locationStats(jobs, LocationLevel.COUNTRY, 50),
@@ -865,6 +865,7 @@ public class JobService {
     private SkillValues toSkillValues(List<JobSkill> jobSkills) {
         LinkedHashSet<String> displayNames = new LinkedHashSet<>();
         LinkedHashSet<String> normalizedValues = new LinkedHashSet<>();
+        LinkedHashSet<String> skillTypeNames = new LinkedHashSet<>();
 
         for (JobSkill jobSkill : jobSkills) {
             if (jobSkill.getSkill() == null) {
@@ -877,9 +878,12 @@ public class JobService {
             if (hasText(jobSkill.getSkill().getId())) {
                 normalizedValues.add(normalize(jobSkill.getSkill().getId()));
             }
+            if (jobSkill.getSkill().getSkillType() != null && hasText(jobSkill.getSkill().getSkillType().getName())) {
+                skillTypeNames.add(jobSkill.getSkill().getSkillType().getName());
+            }
         }
 
-        return new SkillValues(new ArrayList<>(displayNames), new ArrayList<>(normalizedValues));
+        return new SkillValues(new ArrayList<>(displayNames), new ArrayList<>(normalizedValues), new ArrayList<>(skillTypeNames));
     }
 
     private Map<String, WorkTypeValues> workTypeValuesByJobId(List<WorkTypeJob> workTypeJobs) {
@@ -917,6 +921,23 @@ public class JobService {
                         .getOrDefault(job.getId(), SkillValues.empty())
                         .displayNames()
                         .stream())
+                .filter(this::hasText)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .map(entry -> new CountStatDto(entry.getKey(), entry.getValue(), percentage(entry.getValue(), denominator)))
+                .sorted(countComparator())
+                .limit(safeAnalyticsLimit(limit))
+                .toList();
+    }
+
+    private List<CountStatDto> skillTypeStats(List<Job> jobs, BatchLookup lookup, long denominator, int limit) {
+        return jobs.stream()
+                .flatMap(job -> lookup.skillsByJobId()
+                        .getOrDefault(job.getId(), SkillValues.empty())
+                        .skillTypeNames()
+                        .stream()
+                        .distinct())
                 .filter(this::hasText)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
                 .entrySet()
@@ -1073,35 +1094,6 @@ public class JobService {
         return Comparator.comparingLong(CountStatDto::count)
                 .reversed()
                 .thenComparing(CountStatDto::label);
-    }
-
-    private String classifyRole(String title) {
-        String normalizedTitle = normalize(title);
-        if (normalizedTitle.matches(".*(developer|engineer|razvijalec|programer|software|backend|frontend|full stack|devops|database|react|java).*")) {
-            return "Razvijalci / inzenirji";
-        }
-        if (normalizedTitle.matches(".*(medicinska|sestra|zdravstveni|farmacevtski|bolnicar|nega|nursing).*")) {
-            return "Zdravstvo in nega";
-        }
-        if (normalizedTitle.matches(".*(racunovodja|knjigovodja|davcni|payroll|obracun).*")) {
-            return "Racunovodstvo in finance";
-        }
-        if (normalizedTitle.matches(".*(designer|oblikovalec|graphic|graf).*")) {
-            return "Oblikovanje";
-        }
-        if (normalizedTitle.matches(".*(prodajalec|komercialist|sales|consultant|svetovalec).*")) {
-            return "Prodaja in storitve";
-        }
-        if (normalizedTitle.matches(".*(kuhar|natakar|hrane|gostinstvo).*")) {
-            return "Gostinstvo in kuhinja";
-        }
-        if (normalizedTitle.matches(".*(skladiscnik|voznik|dostavljavec|delivery|truck).*")) {
-            return "Logistika in transport";
-        }
-        if (normalizedTitle.matches(".*(ucitelj|teaching|sola).*")) {
-            return "Izobrazevanje";
-        }
-        return hasText(title) ? title : "Other";
     }
 
     private double percentage(long count, long total) {
@@ -1288,9 +1280,9 @@ public class JobService {
         }
     }
 
-    private record SkillValues(List<String> displayNames, List<String> normalizedValues) {
+    private record SkillValues(List<String> displayNames, List<String> normalizedValues, List<String> skillTypeNames) {
         static SkillValues empty() {
-            return new SkillValues(List.of(), List.of());
+            return new SkillValues(List.of(), List.of(), List.of());
         }
     }
 
