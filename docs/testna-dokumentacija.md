@@ -24,9 +24,10 @@ Poudarek dokumenta je na konkretnih testih, uporabljenih orodjih, testnih scenar
 | --------------- | --------------------------------------------------------------------------- | ------------------------- | ----------------------------------------- |
 | Frontend        | Uporabniški vmesnik za iskanje, prikaz in primerjavo zaposlitev.            | Unit, E2E                 | Vitest, React Testing Library, Playwright |
 | Backend         | API endpointi, filtriranje, priporočila, CV obdelava in povezava s podatki. | Unit, integracijski testi | JUnit, Spring Boot Test, Maven            |
-| AI Service      | Pretvorba promptov in CV vsebine v strukturirane iskalne kriterije.         | Unit, integracijski testi | JUnit, Spring Boot Test, Maven            |
 | Salary Service  | Napoved plače in priprava modela za napovedovanje.                          | Unit, API testi           | pytest                                    |
 | Podatkovna baza | Shranjevanje, branje in filtriranje oglasov.                                | Integracijski testi       | Spring Boot Test                          |
+
+AI tokovi so trenutno preverjeni prek backend integracijskih in live AI testov. Ločena testna zbirka v modulu `ai-service` trenutno ni implementirana.
 
 ---
 
@@ -43,12 +44,9 @@ Unit testi preverjajo posamezne dele kode z uporabo mock objektov ali vnaprej pr
 | BE-UT-003 | JUnit, Mockito     | Filtriranje po mestu.                  | Ujemanje lokacije oglasa z izbranim mestom.                     | Vrnejo se oglasi iz izbranega mesta.            |
 | BE-UT-004 | JUnit, Mockito     | Filtriranje po veščinah.               | Primerjava zahtevanih veščin z veščinami oglasa.                | Vrnejo se oglasi z ustreznimi veščinami.        |
 | BE-UT-005 | JUnit, Mockito     | Filtriranje po več kriterijih.         | Kombinacija lokacije, veščin, tipa dela, izkušenj in izobrazbe. | Rezultati so pravilno filtrirani in rangirani.  |
-| BE-UT-006 | JUnit, Mockito     | Izračun priporočil za uporabnika.      | Ujemanje med profilom uporabnika in oglasi.                     | Sistem pravilno izračuna priporočene oglase.    |
-| BE-UT-007 | JUnit, Mockito     | Obdelava CV podatkov.                  | Pretvorba CV vsebine v kriterije za iskanje.                    | Sistem vrne veljaven iskalni profil.            |
-| BE-UT-008 | JUnit, Mockito     | Zahteva za napoved plače.              | Priprava podatkov za Salary Service in obdelava odgovora.       | Vrne se strukturiran odgovor z napovedjo plače. |
-| BE-UT-009 | JUnit              | Validacija dovoljenih AI vrednosti.    | Usklajenost AI vrednosti s sistemskimi šifranti.                | Neveljavne vrednosti se ne uporabijo v filtru.  |
-| BE-UT-010 | JUnit              | Generiranje in preverjanje JWT žetona. | Varnostna logika avtentikacije.                                 | Žeton se pravilno generira in validira.         |
-| BE-UT-011 | JUnit, Spring Test | Registracija in prijava uporabnika.    | Validacija zahtev in odziv avtentikacijskega API-ja.            | API vrne pravilen avtentikacijski odziv.        |
+| BE-UT-006 | JUnit, Mockito     | Obdelava CV podatkov.                  | Pretvorba CV vsebine v kriterije za iskanje.                    | Sistem vrne veljaven iskalni profil.            |
+| BE-UT-007 | JUnit, Mockito     | Zahteva za napoved plače.              | Priprava podatkov za Salary Service in obdelava odgovora.       | Vrne se strukturiran odgovor z napovedjo plače. |
+| BE-UT-008 | JUnit              | Validacija dovoljenih AI vrednosti.    | Usklajenost AI vrednosti s sistemskimi šifranti.                | Neveljavne vrednosti se ne uporabijo v filtru.  |
 
 ### 4.2 Frontend unit testi
 
@@ -60,18 +58,7 @@ Unit testi preverjajo posamezne dele kode z uporabo mock objektov ali vnaprej pr
 | FE-UT-004 | Vitest, React Testing Library, user-event | Dodajanje oglasov v primerjavo. | Omejitev izbire oglasov za primerjavo.                                                | Sistem dovoli največ dva oglasa za primerjavo.              |
 | FE-UT-005 | Vitest, React Testing Library, user-event | Prikaz podrobnosti oglasa.      | Odpiranje modala, prikaz vira, razširitev opisa in zapiranje.                         | Podrobnosti oglasa se pravilno prikažejo in zaprejo.        |
 
-### 4.3 AI Service unit testi
-
-| ID        | Orodje                  | Testni scenarij               | Kaj se preverja                           | Pričakovan rezultat                               |
-| --------- | ----------------------- | ----------------------------- | ----------------------------------------- | ------------------------------------------------- |
-| AI-UT-001 | JUnit, Spring Boot Test | Prompt vsebuje naziv dela.    | Ekstrakcija naziva delovnega mesta.       | Vrne se pravilen `jobName`.                       |
-| AI-UT-002 | JUnit, Spring Boot Test | Prompt vsebuje lokacijo.      | Ekstrakcija mesta, države ali regije.     | Vrne se pravilno strukturirana lokacija.          |
-| AI-UT-003 | JUnit, Spring Boot Test | Prompt vsebuje veščine.       | Ekstrakcija in normalizacija veščin.      | Vrne se seznam ustreznih veščin.                  |
-| AI-UT-004 | JUnit, Spring Boot Test | Prazen ali nepopoln prompt.   | Validacija vhodnih podatkov.              | Sistem vrne prazen filter ali validacijski odziv. |
-| AI-UT-005 | JUnit, Spring Boot Test | AI vrne strukturiran odgovor. | Pretvorba AI odgovora v sistemski format. | Odgovor se pravilno preslika v filter.            |
-| AI-UT-006 | JUnit, Spring Boot Test | AI odgovor nima vseh polj.    | Obdelava manjkajočih vrednosti.           | Sistem nadaljuje obdelavo brez prekinitve.        |
-
-### 4.4 Salary Service unit testi
+### 4.3 Salary Service unit testi
 
 | ID         | Orodje | Testni scenarij                     | Kaj se preverja                                                                  | Pričakovan rezultat                                  |
 | ---------- | ------ | ----------------------------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------- |
@@ -81,16 +68,15 @@ Unit testi preverjajo posamezne dele kode z uporabo mock objektov ali vnaprej pr
 | SAL-UT-004 | pytest | Manjkajoč model.                    | Obnašanje API-ja brez pripravljenega modela.                                     | Odgovor označi, da model še ni pripravljen.          |
 | SAL-UT-005 | pytest | Priprava podatkov za model.         | Čiščenje podatkov, združevanje veščin in tipov dela, izločanje neveljavnih plač. | Podatki so pripravljeni za učenje modela.            |
 | SAL-UT-006 | pytest | Učenje in napoved z modelom.        | Stabilnost model pipelinea in napovedovanje za nove kategorije.                  | Model se nauči in vrne veljavno pozitivno napoved.   |
+| SAL-UT-007 | pytest | Izračun plačnega razpona.           | Razmerja po izkušnjah, fallback razmerje in zaokroževanje na 50 EUR.             | Minimalna in maksimalna plača sta pravilno izračunani. |
+| SAL-UT-008 | pytest | Izpeljane značilke.                 | Senioriteta, domena, vloga, izkušnje in kategorije veščin.                       | Model prejme pravilno pripravljene značilke.         |
+| SAL-UT-009 | pytest | Tržne salary baseline vrednosti.    | Median vrednosti po vlogi, domeni in vrsti veščin.                               | Napoved se smiselno prilagodi podatkom trga.         |
+| SAL-UT-010 | pytest | Nezadostni podatki za trening.      | Zavrnitev treninga z manj kot 100 veljavnimi zapisi.                            | Trening se ustavi z nadzorovano napako.              |
 
-### 4.5 Zagon unit testov
+### 4.4 Zagon unit testov
 
 ```bash
 cd backend
-mvn clean test
-```
-
-```bash
-cd ai-service
 mvn clean test
 ```
 
@@ -118,11 +104,10 @@ Integracijski testi preverjajo delovanje povezanih delov sistema. Pri teh testih
 | INT-003 | JUnit, Spring Boot Test | Preverjanje integritete uvoženih podatkov.  | Prisotnost in konsistentnost podatkov v bazi.                             | Podatki so pravilno zapisani in berljivi.           |
 | INT-004 | JUnit, Spring Boot Test | Ujemanje CV profila z oglasi.               | Tok obdelave CV kriterijev in iskanja oglasov.                            | Sistem vrne ustrezno rangirane rezultate.           |
 | INT-005 | JUnit, Spring Boot Test | Pridobivanje statistike.                    | Delovanje analitičnih endpointov in agregacij.                            | API vrne pravilne statistične podatke.              |
-| INT-006 | JUnit, Spring Boot Test | Komunikacija backenda z AI Service.         | Pošiljanje zahteve in obdelava strukturiranega AI odgovora.               | Backend prejme in obdela AI rezultat.               |
-| INT-007 | JUnit, Spring Boot Test | Iskanje z naravnim jezikom.                 | Tok prompt, AI filter, backend filtriranje in rezultati.                  | Sistem vrne rezultate na podlagi prompta.           |
-| INT-008 | JUnit, Spring Boot Test | Live AI integracijski testi.                | AI ekstrakcija promptov, CV ekstrakcija in iskanje z realističnimi vnosi. | Testi se izvedejo samo ob `RUN_LIVE_AI_TESTS=true`. |
-| INT-009 | JUnit, Spring Boot Test | Napoved plače prek backend API-ja.          | Backend endpoint in obdelava odgovora Salary Service logike.              | API vrne strukturirano napoved plače.               |
-| INT-010 | JUnit, Spring Boot Test | Zahteva z manjkajočimi ali delnimi podatki. | Validacija request/response toka.                                         | Sistem vrne nadzorovan odziv.                       |
+| INT-006 | JUnit, Spring Boot Test | Iskanje z naravnim jezikom.                 | Tok prompt, AI filter, backend filtriranje in rezultati.                  | Sistem vrne rezultate na podlagi prompta.           |
+| INT-007 | JUnit, Spring Boot Test | Live AI integracijski testi.                | AI ekstrakcija promptov, CV ekstrakcija in iskanje z realističnimi vnosi. | Testi se izvedejo samo ob `RUN_LIVE_AI_TESTS=true`. |
+| INT-008 | JUnit, Spring Boot Test | Napoved plače prek backend API-ja.          | Backend endpoint in obdelava odgovora Salary Service logike.              | API vrne strukturirano napoved plače.               |
+| INT-009 | JUnit, Spring Boot Test | Zahteva z manjkajočimi ali delnimi podatki. | Validacija request/response toka.                                         | Sistem vrne nadzorovan odziv.                       |
 
 ### 5.1 Zagon integracijskih testov
 
@@ -190,7 +175,7 @@ Osnovni CI koraki se izvajajo na veji `main` in na drugih razvojnih vejah, kjer 
 | Faza                 | Ukaz                                                                                      | Namen                                                                                          | Pričakovan rezultat                                     |
 | -------------------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | Backend Tests        | `cd backend && mvn clean test`                                                            | Izvajanje backend unit in integracijskih testov, ki jih Maven zazna v testni fazi.             | Backend testna zbirka se zaključi brez napak.           |
-| AI Service Tests     | `cd ai-service && mvn clean test`                                                         | Izvajanje testov AI Service modula.                                                            | AI Service testi se zaključijo brez napak.              |
+| AI Service Tests     | `cd ai-service && mvn clean test`                                                         | Izvajanje Maven testne faze za AI Service; ločeni testni razredi trenutno niso implementirani. | Modul se uspešno prevede in testna faza se zaključi.    |
 | Salary Service Tests | `cd salary-service`, priprava `.venv`, `pip install -r requirements.txt pytest`, `pytest` | Izvajanje pytest testov za napoved plače in pripravo modela.                                   | Salary Service testi se zaključijo brez napak.          |
 | Frontend Tests       | `cd frontend && npm ci && npm test && npm run build`                                      | Namestitev odvisnosti, izvedba frontend unit testov in priprava produkcijske frontend verzije. | Frontend testi uspejo in aplikacija se uspešno sestavi. |
 
