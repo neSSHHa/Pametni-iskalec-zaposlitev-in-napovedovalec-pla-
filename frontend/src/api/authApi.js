@@ -48,6 +48,7 @@ export async function startKeycloakLogin(mode = "login") {
   url.searchParams.set("scope", "openid profile email");
   url.searchParams.set("code_challenge", challenge);
   url.searchParams.set("code_challenge_method", "S256");
+  url.searchParams.set("theme", readTheme());
   window.location.href = url.toString();
 }
 
@@ -150,6 +151,11 @@ function base64Url(bytes) {
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
     .replace(/=+$/, "");
+}
+
+function readTheme() {
+  const theme = localStorage.getItem("smartjobs-theme");
+  return theme === "dark" ? "dark" : "light";
 }
 
 function postKeycloakLogoutInBackground(refreshToken) {
