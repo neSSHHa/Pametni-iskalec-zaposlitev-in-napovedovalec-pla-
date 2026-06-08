@@ -121,4 +121,3 @@ Use the time picker in the top-right corner to select the last hour, day or seve
 - Keep passwords, JWT tokens, API keys and CV contents out of logs.
 - Prompt text is stored in Loki for seven days. Avoid entering personal or sensitive information in search prompts. Revisit this choice before accepting real users.
 - Alloy receives read-only access to the Docker socket so it can discover containers and read logs. Treat Alloy as a trusted infrastructure service.
-- Browser-side React errors are not captured by container logs. Add a frontend error-monitoring service separately when needed.

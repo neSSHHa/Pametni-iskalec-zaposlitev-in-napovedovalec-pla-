@@ -213,5 +213,5 @@ The root README only covers the project overview and Docker setup. Development c
 - [Salary service documentation](salary-service/README.md)
 - [Data ingestion documentation](data-ingestion/README.md)
 - [Job updater documentation](weekly-job-updater/README.md)
-- [Test documentation](docs/testna-dokumentacija.md)
+- [Test documentation](docs/test-documentation.md)
 - [Production logging with Grafana, Loki and Alloy](docs/production-logging.md)
