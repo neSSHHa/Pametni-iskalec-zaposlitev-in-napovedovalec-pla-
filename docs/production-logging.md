@@ -1,5 +1,7 @@
 # Production Logging
 
+The logging dashboard is an internal operational tool intended only for authorized developers and administrators. It is not part of the public application and requires both server access and valid Grafana credentials.
+
 ## What Runs
 
 The single-server production logging pipeline is:
@@ -16,8 +18,6 @@ application stdout/stderr -> Docker -> Grafana Alloy -> Loki -> Grafana
 - Grafana is the browser interface for searching Loki.
 
 Loki data, Grafana settings and Alloy positions are stored in Docker volumes. Recreating an application container does not delete the logs already stored in Loki.
-
-This setup protects against application-container replacement. It does not protect against losing the whole server. Move Loki storage to another server or object storage later if that becomes necessary.
 
 ## Configure The Password
 
@@ -43,6 +43,8 @@ docker compose \
 ## Open Grafana Safely
 
 Grafana listens only on `127.0.0.1:3001` on the production server. It is not exposed directly to the internet.
+
+Only authorized team members with SSH access to the production server and the Grafana administrator password can open the dashboard.
 
 From your computer, create an SSH tunnel:
 
@@ -119,4 +121,3 @@ Use the time picker in the top-right corner to select the last hour, day or seve
 - Keep passwords, JWT tokens, API keys and CV contents out of logs.
 - Prompt text is stored in Loki for seven days. Avoid entering personal or sensitive information in search prompts. Revisit this choice before accepting real users.
 - Alloy receives read-only access to the Docker socket so it can discover containers and read logs. Treat Alloy as a trusted infrastructure service.
-- Browser-side React errors are not captured by container logs. Add a frontend error-monitoring service separately when needed.

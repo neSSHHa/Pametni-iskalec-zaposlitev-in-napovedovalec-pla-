@@ -6,4 +6,4 @@ COPY pom.xml .
 COPY src ./src
 COPY data ./data
 
-CMD ["mvn", "compile", "exec:java", "-Dexec.mainClass=ImportSloveniaData"]
+CMD ["mvn", "compile", "exec:java", "-Dexec.mainClass=InitialDataImporter"]
