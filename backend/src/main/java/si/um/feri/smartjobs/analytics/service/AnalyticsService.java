@@ -114,6 +114,10 @@ public class AnalyticsService {
         return limitDashboard(dashboard, limit);
     }
 
+    public boolean isDashboardCacheLoaded() {
+        return cachedDashboard != null;
+    }
+
     private AnalyticsDashboardDto buildDashboard(int limit) {
         return new AnalyticsDashboardDto(
                 summary(),

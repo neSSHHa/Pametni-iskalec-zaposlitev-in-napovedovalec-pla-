@@ -131,6 +131,22 @@ public class JobService {
         );
     }
 
+    public boolean isSkillRelationIndexLoaded() {
+        return !skillRelationIndex.relatedBySkill().isEmpty();
+    }
+
+    public boolean isJobLookupIndexLoaded() {
+        return !jobLookupIndex.skillsByJobId().isEmpty() || !jobLookupIndex.workTypesByJobId().isEmpty();
+    }
+
+    public Map<String, Integer> cacheSizes() {
+        return Map.of(
+                "skillRelationKeys", skillRelationIndex.relatedBySkill().size(),
+                "jobSkillLookups", jobLookupIndex.skillsByJobId().size(),
+                "jobWorkTypeLookups", jobLookupIndex.workTypesByJobId().size()
+        );
+    }
+
     public List<JobDto> findAll() {
         List<Job> jobs = jobRepository.findAll();
         BatchLookup lookup = buildLookup(jobs);
