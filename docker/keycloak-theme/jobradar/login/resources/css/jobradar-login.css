@@ -10,6 +10,18 @@
   --jr-accent-2: #a855f7;
 }
 
+:root.jr-auth-light {
+  color-scheme: light;
+  --jr-bg: #f8fafc;
+  --jr-panel: #ffffff;
+  --jr-panel-soft: #eef2ff;
+  --jr-border: rgba(109, 40, 217, 0.22);
+  --jr-text: #111827;
+  --jr-muted: #475569;
+  --jr-accent: #7c3aed;
+  --jr-accent-2: #9333ea;
+}
+
 html,
 body {
   min-height: 100vh;
@@ -20,6 +32,14 @@ body {
     var(--jr-bg) !important;
   color: var(--jr-text);
   font-family: Inter, "Segoe UI", system-ui, sans-serif;
+}
+
+:root.jr-auth-light body {
+  background:
+    radial-gradient(circle at 18% 10%, rgba(124, 58, 237, 0.12), transparent 28%),
+    radial-gradient(circle at 82% 14%, rgba(45, 212, 191, 0.08), transparent 26%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%),
+    var(--jr-bg) !important;
 }
 
 .login-pf,
@@ -46,6 +66,91 @@ body {
     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent);
+}
+
+:root.jr-auth-light .login-pf-page::before {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.06) 1px, transparent 1px);
+}
+
+.jr-auth-theme-toggle {
+  position: fixed;
+  top: 28px;
+  right: 36px;
+  left: auto;
+  z-index: 20;
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--jr-border);
+  border-radius: 14px;
+  padding: 0;
+  color: var(--jr-text);
+  background: rgba(15, 23, 42, 0.78);
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+}
+
+.jr-auth-theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+:root.jr-auth-light .jr-auth-theme-toggle {
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
+}
+
+.jr-auth-home-link {
+  position: fixed;
+  top: 84px;
+  left: 36px;
+  right: auto;
+  z-index: 20;
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--jr-border);
+  border-radius: 14px;
+  padding: 0 18px;
+  color: var(--jr-text) !important;
+  background: rgba(15, 23, 42, 0.78);
+  text-decoration: none !important;
+  backdrop-filter: blur(16px);
+}
+
+.jr-auth-home-link span[aria-hidden="true"] {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.jr-auth-home-link:hover,
+.jr-auth-home-link:focus {
+  border-color: rgba(167, 139, 250, 0.72);
+  color: #ffffff !important;
+  background: rgba(36, 27, 67, 0.9);
+}
+
+:root.jr-auth-light .jr-auth-home-link {
+  color: #312e81 !important;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
+}
+
+:root.jr-auth-light .jr-auth-home-link:hover,
+:root.jr-auth-light .jr-auth-home-link:focus {
+  color: #4c1d95 !important;
+  background: #ffffff;
 }
 
 #kc-header-wrapper {
@@ -79,6 +184,11 @@ body {
   border-radius: 24px;
   background: linear-gradient(180deg, rgba(13, 20, 36, 0.98), rgba(7, 12, 23, 0.98)) !important;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+}
+
+:root.jr-auth-light .login-pf-page .card-pf {
+  background: rgba(255, 255, 255, 0.92) !important;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
 }
 
 #kc-page-title {
@@ -115,6 +225,11 @@ body {
   color: var(--jr-text) !important;
   box-shadow: none !important;
   font-size: 16px;
+}
+
+:root.jr-auth-light .login-pf-page .form-control {
+  background: rgba(248, 250, 252, 0.96) !important;
+  color: #111827 !important;
 }
 
 .login-pf-page input[type="text"],
@@ -182,6 +297,10 @@ body {
 #kc-registration,
 #kc-info-wrapper {
   text-align: center;
+}
+
+#kc-form-options {
+  display: none !important;
 }
 
 #kc-registration {
@@ -254,6 +373,23 @@ body {
 @media (max-width: 640px) {
   .login-pf-page {
     padding: 18px 12px !important;
+  }
+
+  .jr-auth-home-link {
+    top: 14px;
+    left: 12px;
+    min-height: 42px;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+
+  .jr-auth-theme-toggle {
+    top: 14px;
+    left: auto;
+    right: 12px;
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
   }
 
   .login-pf-page .card-pf {
@@ -513,19 +649,20 @@ body {
 #kc-header {
   position: fixed !important;
   top: clamp(18px, 3.2vw, 34px) !important;
-  right: clamp(18px, 4vw, 44px) !important;
+  left: clamp(18px, 4vw, 44px) !important;
+  right: auto !important;
   z-index: 5 !important;
   width: auto !important;
   margin: 0 !important;
   padding: 0 !important;
-  text-align: right !important;
+  text-align: left !important;
   pointer-events: none !important;
 }
 
 #kc-header-wrapper {
   display: inline-flex !important;
   align-items: center !important;
-  justify-content: flex-end !important;
+  justify-content: flex-start !important;
   gap: 10px !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -534,7 +671,7 @@ body {
   font-weight: 400 !important;
   line-height: 1 !important;
   letter-spacing: 0 !important;
-  text-align: right !important;
+  text-align: left !important;
   text-transform: none !important;
 }
 
@@ -592,10 +729,10 @@ body {
 #kc-header {
   position: fixed !important;
   top: 28px !important;
-  right: 36px !important;
-  left: auto !important;
+  left: 36px !important;
+  right: auto !important;
   width: auto !important;
-  text-align: right !important;
+  text-align: left !important;
 }
 
 #kc-header-wrapper {
@@ -792,4 +929,129 @@ body {
   min-height: 50px !important;
   border-radius: 999px !important;
   background: linear-gradient(135deg, var(--jr-accent), var(--jr-accent-2)) !important;
+}
+
+/* Light theme contrast pass: validation, helper text and controls must stay readable. */
+:root.jr-auth-light .login-pf-page,
+:root.jr-auth-light .login-pf-page .card-pf,
+:root.jr-auth-light .login-pf-page #kc-content,
+:root.jr-auth-light .login-pf-page #kc-content-wrapper,
+:root.jr-auth-light .login-pf-page #kc-form,
+:root.jr-auth-light .login-pf-page #kc-form-wrapper {
+  color: #111827 !important;
+}
+
+:root.jr-auth-light .login-pf-page label,
+:root.jr-auth-light .login-pf-page .control-label,
+:root.jr-auth-light .login-pf-page .pf-c-form__label,
+:root.jr-auth-light .login-pf-page .pf-v5-c-form__label,
+:root.jr-auth-light .login-pf-page .pf-c-form__helper-text,
+:root.jr-auth-light .login-pf-page .pf-v5-c-form__helper-text,
+:root.jr-auth-light .login-pf-page .instruction,
+:root.jr-auth-light .login-pf-page #kc-form-options,
+:root.jr-auth-light .login-pf-page #kc-registration,
+:root.jr-auth-light .login-pf-page #kc-info-wrapper {
+  color: #334155 !important;
+}
+
+:root.jr-auth-light .login-pf-page a,
+:root.jr-auth-light .login-pf-page #kc-form-options a,
+:root.jr-auth-light .login-pf-page #kc-registration a,
+:root.jr-auth-light .login-pf-page #kc-info-wrapper a {
+  color: #6d28d9 !important;
+}
+
+:root.jr-auth-light .login-pf-page a:hover,
+:root.jr-auth-light .login-pf-page a:focus {
+  color: #4c1d95 !important;
+}
+
+:root.jr-auth-light .login-pf-page input.form-control,
+:root.jr-auth-light .login-pf-page input.pf-c-form-control,
+:root.jr-auth-light .login-pf-page input[type="text"],
+:root.jr-auth-light .login-pf-page input[type="email"],
+:root.jr-auth-light .login-pf-page input[type="password"],
+:root.jr-auth-light .login-pf-page .pf-c-input-group,
+:root.jr-auth-light .login-pf-page .input-group,
+:root.jr-auth-light .login-pf-page .password-input-group {
+  border-color: rgba(91, 33, 182, 0.46) !important;
+  background: #f8fafc !important;
+  color: #111827 !important;
+}
+
+:root.jr-auth-light .login-pf-page input::placeholder {
+  color: #64748b !important;
+  opacity: 1 !important;
+}
+
+:root.jr-auth-light .login-pf-page .form-control:focus,
+:root.jr-auth-light .login-pf-page input:focus,
+:root.jr-auth-light .login-pf-page .pf-c-input-group:focus-within,
+:root.jr-auth-light .login-pf-page .input-group:focus-within,
+:root.jr-auth-light .login-pf-page .password-input-group:focus-within {
+  border-color: #7c3aed !important;
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.18) !important;
+}
+
+:root.jr-auth-light .login-pf-page .pf-c-input-group button,
+:root.jr-auth-light .login-pf-page .input-group button,
+:root.jr-auth-light .login-pf-page .password-input-group button,
+:root.jr-auth-light .login-pf-page .pf-c-input-group .btn,
+:root.jr-auth-light .login-pf-page .input-group .btn,
+:root.jr-auth-light .login-pf-page .password-input-group .btn {
+  border-left-color: rgba(91, 33, 182, 0.34) !important;
+  background: #ede9fe !important;
+  color: #312e81 !important;
+}
+
+:root.jr-auth-light .login-pf-page .alert,
+:root.jr-auth-light .login-pf-page .alert-error,
+:root.jr-auth-light .login-pf-page .pf-c-alert,
+:root.jr-auth-light .login-pf-page .pf-v5-c-alert,
+:root.jr-auth-light .login-pf-page #input-error,
+:root.jr-auth-light .login-pf-page [id^="input-error-"],
+:root.jr-auth-light .login-pf-page .kc-feedback-text,
+:root.jr-auth-light .login-pf-page .pf-m-danger,
+:root.jr-auth-light .login-pf-page .pf-v5-m-danger,
+:root.jr-auth-light .login-pf-page .pf-c-alert__title,
+:root.jr-auth-light .login-pf-page .pf-v5-c-alert__title,
+:root.jr-auth-light .login-pf-page .pf-c-form__helper-text.pf-m-error,
+:root.jr-auth-light .login-pf-page .pf-v5-c-form__helper-text.pf-m-error,
+:root.jr-auth-light .login-pf-page .pf-c-helper-text__item.pf-m-error,
+:root.jr-auth-light .login-pf-page .pf-v5-c-helper-text__item.pf-m-error {
+  border-color: rgba(220, 38, 38, 0.48) !important;
+  background: #fee2e2 !important;
+  color: #7f1d1d !important;
+}
+
+:root.jr-auth-light .login-pf-page .has-error input,
+:root.jr-auth-light .login-pf-page .pf-m-error input,
+:root.jr-auth-light .login-pf-page input[aria-invalid="true"],
+:root.jr-auth-light .login-pf-page .form-control[aria-invalid="true"],
+:root.jr-auth-light .login-pf-page .pf-c-form-control[aria-invalid="true"] {
+  border-color: #dc2626 !important;
+  background: #fff7f7 !important;
+  color: #111827 !important;
+}
+
+:root.jr-auth-light .login-pf-page .has-error .pf-c-input-group,
+:root.jr-auth-light .login-pf-page .has-error .input-group,
+:root.jr-auth-light .login-pf-page .has-error .password-input-group {
+  border-color: #dc2626 !important;
+  background: #fff7f7 !important;
+}
+
+/* Forgot password is intentionally disabled in the UI. Keep this last. */
+.login-pf-page #kc-form-options,
+.login-pf-page #reset-login,
+.login-pf-page a[href*="reset-credentials"],
+.login-pf-page a[href*="login-actions/reset"],
+.login-pf-page a[href*="forgot"] {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
 }
