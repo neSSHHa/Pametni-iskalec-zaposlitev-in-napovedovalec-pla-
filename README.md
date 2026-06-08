@@ -92,6 +92,8 @@ Make sure you have:
 - Docker
 - Docker Compose
 
+Make sure Docker Desktop or the Docker daemon is running before continuing.
+
 ### 2. Clone and enter the project
 
 ```powershell
@@ -123,6 +125,12 @@ OPENROUTER_API_KEY=your_api_key_here
 
 You can create an OpenRouter key at [https://openrouter.ai](https://openrouter.ai). AI features such as natural-language extraction, CV processing and job normalization require this key.
 
+`OPENROUTER_API_KEY` enables AI features in the application. 
+
+`OPENROUTER_API_KEYS` is used only by the optional 3-day job updater.
+
+Job normalization requires OpenRouter keys, which can be created at [openrouter.ai/settings/keys](https://openrouter.ai/settings/keys). With the free version and its request limits, a complete data update may take approximately three days.
+
 Do not commit real API keys or passwords.
 
 ### 4. Start the application
@@ -131,7 +139,19 @@ Do not commit real API keys or passwords.
 docker compose -f docker/docker-compose.yml up -d --build
 ```
 
-This starts the frontend, backend, database, AI service and salary service.
+This starts the frontend, backend, database, Keycloak, AI service and salary service. Keycloak provides login, registration and role-based access.
+
+The first build may take several minutes. Check that all containers are running:
+
+```bash
+docker compose -f docker/docker-compose.yml ps
+```
+
+If a service does not start, inspect the logs:
+
+```bash
+docker compose -f docker/docker-compose.yml logs -f
+```
 
 ### 5. Import the initial data and train the salary model
 
@@ -160,10 +180,14 @@ The Windows script performs the same three steps automatically. The process fill
 
 ### 6. Open the application
 
-```text
-http://localhost:3000
-```
+- Application: [http://localhost:3000](http://localhost:3000)
+- Backend API: [http://localhost:8080](http://localhost:8080)
+- Swagger UI: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+- Keycloak: [http://localhost:8081](http://localhost:8081)
 
+The recurring job updater is not started by the basic application command. See the [Job updater documentation](weekly-job-updater/README.md) when you want to refresh current listings.
+
+Production logging is available through Grafana, Loki and Grafana Alloy. It is optional and documented separately in [Production logging](docs/production-logging.md).
 
 ### 7. Stop the application
 
@@ -177,6 +201,8 @@ To also remove local database data and saved models:
 docker compose -f docker/docker-compose.yml down -v
 ```
 
+Warning: `down -v` permanently removes the imported database data and trained salary model.
+
 ## Further documentation
 
 The root README only covers the project overview and Docker setup. Development commands, service configuration and implementation details belong in the module documentation:
@@ -187,5 +213,5 @@ The root README only covers the project overview and Docker setup. Development c
 - [Salary service documentation](salary-service/README.md)
 - [Data ingestion documentation](data-ingestion/README.md)
 - [Job updater documentation](weekly-job-updater/README.md)
-- [ZRSZ importer documentation](zrsz-job-importer/README.md)
 - [Test documentation](docs/testna-dokumentacija.md)
+- [Production logging with Grafana, Loki and Alloy](docs/production-logging.md)

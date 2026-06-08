@@ -58,7 +58,7 @@ public class WeeklyJobUpdatePreview {
     private static final int SYNC_CYCLE_MAX_AGE_DAYS =
             parseIntEnv("SYNC_CYCLE_MAX_AGE_DAYS", 7);
     private static final int SCHEDULER_INTERVAL_HOURS =
-            parseIntEnv("JOB_UPDATER_SCHEDULER_INTERVAL_HOURS", 24);
+            parseIntEnv("JOB_UPDATER_SCHEDULER_INTERVAL_HOURS", 72);
     private static final double NORMALIZATION_MIN_SUCCESS_RATIO_SLOVENIA =
             parseDoubleEnv("NORMALIZATION_MIN_SUCCESS_RATIO_SLOVENIA", 0.85);
     private static final double NORMALIZATION_MIN_SUCCESS_RATIO_AUSTRIA =
@@ -251,7 +251,7 @@ public class WeeklyJobUpdatePreview {
 
     private static void scrapeCareerJetInto(HttpClient client, Map<String, JSONObject> jobsByKey, ScrapeStats stats)
             throws Exception {
-        String apiKey = getenv("CAREERJET_API_KEY", "f12c9bc965368ce7c4079c5d7d18b144");
+        String apiKey = getenv("CAREERJET_API_KEY", "");
         String userIp = getenv("CAREERJET_USER_IP", "164.8.39.10");
 
         String auth = Base64.getEncoder()
