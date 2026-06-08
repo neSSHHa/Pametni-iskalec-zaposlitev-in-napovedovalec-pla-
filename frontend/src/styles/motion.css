@@ -9850,6 +9850,673 @@ body .motion-shell.mode-idle .search-panel {
   margin-top: 2px !important;
 }
 
+.topbar-text-action {
+  min-height: 40px;
+  border: 1px solid rgba(124, 58, 237, 0.18);
+  border-radius: 999px;
+  padding: 0 14px;
+  color: var(--text);
+  background: rgba(124, 58, 237, 0.06);
+  cursor: pointer;
+}
+
+.topbar-text-action:hover {
+  color: #ffffff;
+  background: #7c3aed;
+}
+
+.topbar-text-action.active {
+  color: #ffffff;
+  border-color: #7c3aed;
+  background: #7c3aed;
+}
+
+.auth-page,
+.admin-page {
+  min-height: 100svh;
+  position: relative;
+  display: grid;
+  align-content: center;
+  padding: clamp(18px, 5vw, 48px);
+  color: #f8fbff;
+  background:
+    radial-gradient(circle at 16% 12%, rgba(124, 58, 237, 0.24), transparent 30%),
+    radial-gradient(circle at 84% 18%, rgba(45, 212, 191, 0.12), transparent 26%),
+    #070b14;
+  overflow: hidden;
+}
+
+.auth-page::before,
+.admin-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent);
+}
+
+.auth-back {
+  position: absolute;
+  top: clamp(16px, 4vw, 28px);
+  left: clamp(16px, 4vw, 34px);
+  z-index: 1;
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid rgba(139, 92, 246, 0.28);
+  border-radius: 999px;
+  padding: 0 16px;
+  color: #f8fbff;
+  background: rgba(15, 23, 42, 0.78);
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+}
+
+.auth-panel,
+.admin-hero,
+.admin-grid article {
+  border: 1px solid rgba(124, 58, 237, 0.24);
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(14, 21, 38, 0.96), rgba(9, 14, 26, 0.98));
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+}
+
+.auth-panel {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 14px;
+  width: min(100%, 520px);
+  margin: 0 auto;
+  padding: clamp(22px, 5vw, 34px);
+  text-align: center;
+}
+
+.auth-panel img {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 4px;
+}
+
+.auth-panel span,
+.admin-hero span,
+.admin-grid span {
+  color: #a78bfa;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.auth-panel h1,
+.admin-hero h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(30px, 6vw, 50px);
+  line-height: 1.05;
+}
+
+.auth-panel p,
+.admin-hero p {
+  margin: 0;
+  color: #b9c4d8;
+  line-height: 1.55;
+}
+
+.auth-panel button {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0 18px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.auth-panel .auth-secondary {
+  color: #d8ccff;
+  border-color: rgba(139, 92, 246, 0.28);
+  background: rgba(139, 92, 246, 0.12);
+}
+
+.admin-page {
+  align-content: start;
+  gap: 18px;
+  overflow-y: auto;
+}
+
+.admin-hero {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  width: min(100%, 980px);
+  margin: 56px auto 0;
+  padding: clamp(18px, 4vw, 28px);
+}
+
+.admin-hero svg {
+  flex: 0 0 auto;
+  color: #a78bfa;
+}
+
+.admin-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(100%, 980px);
+  margin: 0 auto;
+  gap: 14px;
+}
+
+.admin-grid article {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+}
+
+.admin-grid article > svg {
+  color: #a78bfa;
+}
+
+.admin-grid strong {
+  color: #ffffff;
+  font-size: clamp(28px, 5vw, 44px);
+}
+
+.admin-error {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1180px);
+  margin: 0 auto;
+}
+
+.admin-console {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1.18fr);
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  gap: 16px;
+  align-items: start;
+}
+
+.admin-left,
+.admin-right {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+.admin-left .admin-grid {
+  width: 100%;
+  margin: 0;
+}
+
+.admin-card {
+  min-width: 0;
+  border: 1px solid rgba(124, 58, 237, 0.24);
+  border-radius: 24px;
+  padding: clamp(16px, 3vw, 22px);
+  background: linear-gradient(180deg, rgba(14, 21, 38, 0.96), rgba(9, 14, 26, 0.98));
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.24);
+}
+
+.admin-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.admin-card-head span,
+.admin-log-form label {
+  color: #a78bfa;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.admin-card-head h2 {
+  margin: 4px 0 0;
+  color: #ffffff;
+  font-size: clamp(20px, 3vw, 28px);
+  line-height: 1.1;
+}
+
+.admin-card-head > svg {
+  color: #a78bfa;
+  flex: 0 0 auto;
+}
+
+.admin-card-head button,
+.admin-log-form button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(139, 92, 246, 0.34);
+  border-radius: 999px;
+  padding: 0 14px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  cursor: pointer;
+  box-shadow: 0 16px 42px rgba(124, 58, 237, 0.24);
+}
+
+.admin-card-head button:disabled,
+.admin-log-form button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.admin-danger-button,
+.admin-card-head .admin-danger-button {
+  min-height: 50px;
+  border-color: rgba(248, 113, 113, 0.42);
+  padding-inline: 18px;
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  box-shadow: 0 18px 46px rgba(220, 38, 38, 0.28);
+}
+
+.admin-weekly-card .admin-card-head {
+  align-items: center;
+}
+
+.admin-disclaimer-toggle {
+  display: inline-flex;
+  min-height: 40px;
+  width: fit-content;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(248, 113, 113, 0.28);
+  border-radius: 999px;
+  margin: 0 0 12px;
+  padding: 0 13px;
+  color: #fecaca;
+  background: rgba(127, 29, 29, 0.18);
+  cursor: pointer;
+}
+
+.admin-disclaimer-toggle svg {
+  color: #f87171;
+}
+
+.admin-disclaimer {
+  margin: 0 0 14px;
+  border: 1px solid rgba(248, 113, 113, 0.22);
+  border-radius: 16px;
+  padding: 13px 14px;
+  color: #fecaca;
+  background: rgba(127, 29, 29, 0.18);
+  line-height: 1.45;
+}
+
+.admin-cache-list {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-cache-summary,
+.admin-cache-row {
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  border-radius: 16px;
+  padding: 12px;
+  background: rgba(3, 7, 18, 0.42);
+}
+
+.admin-cache-summary {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #e2e8f0;
+}
+
+.admin-cache-summary.ok {
+  border-color: rgba(45, 212, 191, 0.26);
+}
+
+.admin-cache-summary.warn {
+  border-color: rgba(251, 191, 36, 0.34);
+}
+
+.admin-cache-row {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-cache-row div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.admin-cache-row strong {
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.admin-cache-row span {
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-size: 12px;
+}
+
+.admin-cache-row span.ok {
+  color: #99f6e4;
+  background: rgba(20, 184, 166, 0.16);
+}
+
+.admin-cache-row span.warn {
+  color: #fde68a;
+  background: rgba(217, 119, 6, 0.16);
+}
+
+.admin-cache-row p {
+  margin: 0;
+  color: #94a3b8;
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.admin-log-card {
+  min-height: 660px;
+}
+
+.admin-log-form {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.3fr) minmax(150px, 0.7fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.admin-log-form label {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.admin-log-form input,
+.admin-log-form select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid rgba(139, 92, 246, 0.34);
+  border-radius: 14px;
+  padding: 0 14px;
+  color: #eef2ff;
+  background: rgba(15, 23, 42, 0.84);
+  outline: none;
+}
+
+.admin-log-form select {
+  appearance: none;
+}
+
+.admin-input-icon {
+  position: relative;
+  min-width: 0;
+}
+
+.admin-input-icon svg {
+  position: absolute;
+  top: 50%;
+  left: 13px;
+  color: #a78bfa;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.admin-input-icon input {
+  padding-left: 40px;
+}
+
+.admin-log-form button {
+  align-self: end;
+  min-height: 44px;
+}
+
+.admin-log-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 0 0 12px;
+}
+
+.admin-log-meta span,
+.admin-log-meta code {
+  border: 1px solid rgba(139, 92, 246, 0.22);
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: #c4b5fd;
+  background: rgba(124, 58, 237, 0.12);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.admin-log-meta code {
+  max-width: 100%;
+  border-radius: 12px;
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
+
+.admin-log-list {
+  display: grid;
+  gap: 10px;
+  max-height: 560px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.admin-log-list.compact {
+  max-height: 310px;
+}
+
+.admin-log-row {
+  min-width: 0;
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  border-radius: 16px;
+  padding: 12px;
+  background: rgba(3, 7, 18, 0.42);
+}
+
+.admin-log-row div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.admin-log-row time,
+.admin-log-row span,
+.admin-log-row b {
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: #c4b5fd;
+  background: rgba(124, 58, 237, 0.13);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.admin-log-row b {
+  color: #ffffff;
+  background: rgba(45, 212, 191, 0.14);
+}
+
+.admin-log-row p {
+  margin: 0;
+  color: #cbd5e1;
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: 12px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.admin-empty {
+  margin: 0;
+  border: 1px dashed rgba(139, 92, 246, 0.28);
+  border-radius: 16px;
+  padding: 18px;
+  color: #94a3b8;
+  background: rgba(15, 23, 42, 0.42);
+}
+
+.motion-shell .admin-page {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  min-height: auto;
+  padding: 0;
+  color: var(--text);
+  background: transparent;
+  overflow: visible;
+}
+
+.motion-shell .admin-page::before {
+  display: none;
+}
+
+.motion-shell .admin-left .admin-grid {
+  grid-template-columns: 1fr;
+}
+
+.motion-shell.theme-light .admin-card,
+.motion-shell.theme-light .admin-grid article {
+  border-color: rgba(109, 40, 217, 0.18);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 18px 46px rgba(15, 23, 42, 0.08);
+}
+
+.motion-shell.theme-light .admin-card-head h2,
+.motion-shell.theme-light .admin-grid strong,
+.motion-shell.theme-light .admin-cache-row strong {
+  color: #111827;
+}
+
+.motion-shell.theme-light .admin-card-head span,
+.motion-shell.theme-light .admin-grid span,
+.motion-shell.theme-light .admin-log-form label {
+  color: #6d28d9;
+}
+
+.motion-shell.theme-light .admin-log-form input,
+.motion-shell.theme-light .admin-log-form select,
+.motion-shell.theme-light .admin-cache-summary,
+.motion-shell.theme-light .admin-cache-row,
+.motion-shell.theme-light .admin-log-row,
+.motion-shell.theme-light .admin-empty {
+  color: #111827;
+  background: rgba(248, 250, 252, 0.94);
+}
+
+.motion-shell.theme-light .admin-log-row p,
+.motion-shell.theme-light .admin-cache-row p {
+  color: #334155;
+}
+
+.motion-shell.theme-light .admin-log-row time,
+.motion-shell.theme-light .admin-log-row span,
+.motion-shell.theme-light .admin-log-meta span,
+.motion-shell.theme-light .admin-log-meta code {
+  color: #5b21b6;
+  background: rgba(124, 58, 237, 0.16);
+  border-color: rgba(109, 40, 217, 0.22);
+}
+
+.motion-shell.theme-light .admin-log-row b {
+  color: #0f766e;
+  background: rgba(20, 184, 166, 0.22);
+}
+
+.motion-shell.theme-light .admin-cache-row span.ok {
+  color: #0f766e;
+  background: rgba(20, 184, 166, 0.2);
+}
+
+.motion-shell.theme-light .admin-cache-row span.warn {
+  color: #92400e;
+  background: rgba(245, 158, 11, 0.22);
+}
+
+.motion-shell.theme-light .admin-disclaimer {
+  color: #991b1b;
+  background: rgba(254, 226, 226, 0.74);
+}
+
+.motion-shell.theme-light .admin-disclaimer-toggle {
+  color: #991b1b;
+  background: rgba(254, 226, 226, 0.8);
+}
+
+@media (max-width: 760px) {
+  .topbar-text-action {
+    display: none !important;
+  }
+
+  .auth-page,
+  .admin-page {
+    padding: 16px;
+    overflow-y: auto;
+  }
+
+  .motion-shell .admin-page {
+    padding: 0;
+    overflow: visible;
+  }
+
+  .auth-panel {
+    margin-top: 58px;
+    border-radius: 22px;
+  }
+
+  .admin-hero {
+    margin-top: 58px;
+    align-items: flex-start;
+    border-radius: 22px;
+  }
+
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-console {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-log-form {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-log-card {
+    min-height: 0;
+  }
+
+  .auth-back {
+    top: 12px;
+    left: 12px;
+    min-height: 38px;
+    padding-inline: 13px;
+  }
+}
+
 /* Responsive app pass: keep the product UI usable on phones and small tablets. */
 html,
 body {
@@ -12570,4 +13237,1130 @@ body .motion-shell .mobile-nav-compare-link {
     padding: 0 5px !important;
     font-size: 10px !important;
   }
+}
+
+/* Responsive header hardening: keep theme, compare and menu controls visible
+   through narrow desktop, tablet, and phone widths. */
+@media (max-width: 1100px) {
+  body .motion-shell .jr-topbar {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 44px 44px 44px !important;
+    align-items: center !important;
+    gap: 10px !important;
+    min-height: 72px !important;
+    padding: 10px clamp(12px, 3vw, 22px) !important;
+    overflow: visible !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > span {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .jr-topbar .topbar-actions {
+    display: contents !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .compare-button,
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    position: relative !important;
+    display: grid !important;
+    flex: 0 0 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    place-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar .compare-button {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    grid-column: 4 !important;
+    grid-row: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle > svg,
+  body .motion-shell .jr-topbar .compare-button > svg,
+  body .motion-shell .jr-topbar .mobile-nav-toggle > svg {
+    display: block !important;
+    position: static !important;
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: currentColor !important;
+    stroke: currentColor !important;
+    inset: auto !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    align-self: center !important;
+    transform: none !important;
+  }
+
+  body .motion-shell .jr-topbar .rail-meter,
+  body .motion-shell .jr-topbar .theme-toggle > span,
+  body .motion-shell .jr-topbar .compare-button > span {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .jr-topbar nav {
+    display: none !important;
+  }
+
+  body .motion-shell .jr-topbar nav.open {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    left: clamp(12px, 3vw, 22px) !important;
+    right: clamp(12px, 3vw, 22px) !important;
+    z-index: 80 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    width: auto !important;
+    max-width: none !important;
+    padding: 12px !important;
+    border-radius: 18px !important;
+  }
+
+  body .motion-shell .jr-topbar nav.open a,
+  body .motion-shell .jr-topbar nav.open .mobile-nav-compare-link {
+    min-height: 42px !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 520px) {
+  body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
+    min-height: 64px !important;
+    padding-inline: 10px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > span {
+    font-size: clamp(16px, 4.2vw, 20px) !important;
+  }
+
+  body .motion-shell .jr-topbar .topbar-actions {
+    display: contents !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .compare-button,
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    flex-basis: 38px !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    border-radius: 12px !important;
+  }
+
+  body .motion-shell .jr-topbar .compare-count-badge {
+    right: -7px !important;
+    bottom: -7px !important;
+    min-width: 23px !important;
+    height: 20px !important;
+    padding: 0 5px !important;
+    font-size: 10px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) 35px 35px 35px !important;
+    gap: 6px !important;
+    padding-inline: 8px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark {
+    gap: 6px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+  }
+
+  body .motion-shell .jr-topbar .topbar-actions {
+    display: contents !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .compare-button,
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    flex-basis: 35px !important;
+    width: 35px !important;
+    height: 35px !important;
+    min-width: 35px !important;
+    min-height: 35px !important;
+  }
+}
+
+/* Keep the home fast/AI switch readable on very narrow phones. */
+@media (max-width: 430px) {
+  body .motion-shell.mode-idle .home-mode-switch,
+  body .motion-shell .home-mode-switch {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: min(100%, 360px) !important;
+    min-width: 0 !important;
+    gap: 3px !important;
+    padding: 4px !important;
+    border-radius: 999px !important;
+  }
+
+  body .motion-shell.mode-idle .home-mode-switch button,
+  body .motion-shell .home-mode-switch button {
+    display: grid !important;
+    grid-template-columns: 14px minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    align-items: center !important;
+    min-width: 0 !important;
+    min-height: 42px !important;
+    column-gap: 6px !important;
+    padding: 7px 8px !important;
+    border-radius: 999px !important;
+    text-align: left !important;
+  }
+
+  body .motion-shell.mode-idle .home-mode-switch svg,
+  body .motion-shell .home-mode-switch svg {
+    grid-column: 1 !important;
+    grid-row: 1 / 3 !important;
+    width: 14px !important;
+    height: 14px !important;
+    align-self: center !important;
+  }
+
+  body .motion-shell.mode-idle .home-mode-switch span,
+  body .motion-shell.mode-idle .home-mode-switch small,
+  body .motion-shell .home-mode-switch span,
+  body .motion-shell .home-mode-switch small {
+    display: block !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    line-height: 1.05 !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell.mode-idle .home-mode-switch span,
+  body .motion-shell .home-mode-switch span {
+    font-size: 11px !important;
+    font-weight: 800 !important;
+  }
+
+  body .motion-shell.mode-idle .home-mode-switch small,
+  body .motion-shell .home-mode-switch small {
+    font-size: 9px !important;
+  }
+}
+
+/* Definitive responsive topbar lock. This intentionally comes last. */
+@media (max-width: 1100px) {
+  html body .motion-shell .jr-topbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) max-content !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 70px !important;
+    gap: 10px !important;
+    padding: 10px clamp(12px, 2.8vw, 22px) !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark {
+    grid-column: 1 !important;
+    display: inline-flex !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    align-items: center !important;
+    justify-self: start !important;
+    overflow: hidden !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark > span {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    grid-column: 2 !important;
+    display: grid !important;
+    grid-template-columns: 44px 44px 44px !important;
+    align-items: center !important;
+    justify-content: end !important;
+    justify-items: center !important;
+    gap: 8px !important;
+    min-width: 148px !important;
+    width: 148px !important;
+    max-width: 148px !important;
+    height: 44px !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+  }
+
+  html body .motion-shell .jr-topbar .theme-toggle,
+  html body .motion-shell .jr-topbar .compare-button,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    position: relative !important;
+    inset: auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    max-width: 44px !important;
+    max-height: 44px !important;
+    place-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    border-radius: 14px !important;
+    transform: none !important;
+    box-sizing: border-box !important;
+  }
+
+  html body .motion-shell .jr-topbar .theme-toggle {
+    grid-column: 1 !important;
+  }
+
+  html body .motion-shell .jr-topbar .compare-button {
+    grid-column: 2 !important;
+  }
+
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    grid-column: 3 !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-icon {
+    position: static !important;
+    display: grid !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    place-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-style: normal !important;
+    color: currentColor !important;
+    transform: none !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-icon svg,
+  html body .motion-shell .jr-topbar .theme-toggle > svg,
+  html body .motion-shell .jr-topbar .compare-button > svg,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle > svg {
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: currentColor !important;
+    stroke: currentColor !important;
+    transform: none !important;
+  }
+
+  html body .motion-shell .jr-topbar .rail-meter,
+  html body .motion-shell .jr-topbar .theme-toggle > span,
+  html body .motion-shell .jr-topbar .compare-button > span {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+
+  html body .motion-shell .jr-topbar nav {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    left: clamp(12px, 2.8vw, 22px) !important;
+    right: clamp(12px, 2.8vw, 22px) !important;
+    z-index: 120 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: 0 !important;
+    padding: 0 12px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    border-radius: 18px !important;
+    transform: translateY(-4px) !important;
+  }
+
+  html body .motion-shell .jr-topbar nav.open {
+    max-height: 280px !important;
+    padding: 12px !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+  }
+
+  html body .motion-shell.theme-light .jr-topbar nav.open {
+    background: #ffffff !important;
+    border: 1px solid rgba(124, 58, 237, 0.22) !important;
+    box-shadow: 0 22px 60px rgba(24, 18, 43, 0.16) !important;
+  }
+}
+
+@media (min-width: 1101px) {
+  html body .motion-shell .jr-topbar .topbar-actions {
+    justify-self: end !important;
+    margin-left: auto !important;
+  }
+
+  html body .motion-shell .jr-topbar .theme-toggle,
+  html body .motion-shell .jr-topbar .compare-button,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    border-radius: 14px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-icon {
+    display: grid !important;
+    place-items: center !important;
+    font-style: normal !important;
+  }
+}
+
+@media (max-width: 520px) {
+  html body .motion-shell .jr-topbar {
+    min-height: 62px !important;
+    padding: 8px 10px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    grid-template-columns: 38px 38px 38px !important;
+    min-width: 126px !important;
+    width: 126px !important;
+    max-width: 126px !important;
+    height: 38px !important;
+    gap: 6px !important;
+  }
+
+  html body .motion-shell .jr-topbar .theme-toggle,
+  html body .motion-shell .jr-topbar .compare-button,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    max-width: 38px !important;
+    max-height: 38px !important;
+    border-radius: 12px !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark > span {
+    font-size: 17px !important;
+  }
+
+  html body .motion-shell.mode-idle .upload-card {
+    padding: 12px 10px 14px !important;
+  }
+
+  html body .motion-shell.mode-idle .motion-upload,
+  html body .motion-shell.mode-idle .upload-box {
+    width: min(100%, 220px) !important;
+    min-height: 205px !important;
+    padding: 20px 14px 14px !important;
+    margin-inline: auto !important;
+  }
+
+  html body .motion-shell.mode-idle .motion-upload strong,
+  html body .motion-shell.mode-idle .upload-box strong {
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+  }
+
+  html body .motion-shell.mode-idle .cv-submit {
+    width: min(100%, 168px) !important;
+    min-height: 46px !important;
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  html body .motion-shell .jr-topbar {
+    padding-inline: 7px !important;
+    gap: 6px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    grid-template-columns: 34px 34px 34px !important;
+    min-width: 110px !important;
+    width: 110px !important;
+    max-width: 110px !important;
+    height: 34px !important;
+    gap: 4px !important;
+  }
+
+  html body .motion-shell .jr-topbar .theme-toggle,
+  html body .motion-shell .jr-topbar .compare-button,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    max-width: 34px !important;
+    max-height: 34px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-icon,
+  html body .motion-shell .jr-topbar .topbar-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    min-height: 18px !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark > span {
+    font-size: 14px !important;
+  }
+}
+
+/* Topbar action reset: one consistent square icon system across all widths. */
+html body .motion-shell .jr-topbar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+  display: grid !important;
+  grid-template-columns: minmax(150px, 1fr) minmax(180px, auto) minmax(118px, 1fr) !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 76px !important;
+  padding: 10px clamp(16px, 3vw, 48px) !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+}
+
+html body .motion-shell .jr-topbar .motion-mark {
+  grid-column: 1 !important;
+  justify-self: start !important;
+  min-width: 0 !important;
+  align-self: center !important;
+  transform: translateY(2px) !important;
+}
+
+html body .motion-shell .jr-topbar .motion-mark > span {
+  font-weight: 500 !important;
+}
+
+html body .motion-shell .jr-topbar nav {
+  grid-column: 2 !important;
+  justify-self: center !important;
+}
+
+html body .motion-shell .jr-topbar .topbar-actions {
+  grid-column: 3 !important;
+  justify-self: end !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 12px !important;
+  min-width: max-content !important;
+  width: auto !important;
+  max-width: none !important;
+  height: auto !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+html body .motion-shell .jr-topbar .theme-toggle,
+html body .motion-shell .jr-topbar .compare-button,
+html body .motion-shell .jr-topbar .mobile-nav-toggle {
+  position: relative !important;
+  inset: auto !important;
+  display: grid !important;
+  flex: 0 0 46px !important;
+  grid-template-columns: 1fr !important;
+  grid-template-rows: 1fr !important;
+  width: 46px !important;
+  height: 46px !important;
+  min-width: 46px !important;
+  min-height: 46px !important;
+  max-width: 46px !important;
+  max-height: 46px !important;
+  place-items: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  color: #111827 !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  border: 1px solid rgba(124, 58, 237, 0.16) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 16px 36px rgba(31, 27, 55, 0.07) !important;
+  outline: none !important;
+  transform: none !important;
+  box-sizing: border-box !important;
+}
+
+html body .motion-shell.theme-dark .jr-topbar .theme-toggle,
+html body .motion-shell.theme-dark .jr-topbar .compare-button,
+html body .motion-shell.theme-dark .jr-topbar .mobile-nav-toggle {
+  color: #f8fafc !important;
+  background: rgba(15, 23, 42, 0.86) !important;
+  border-color: rgba(167, 139, 250, 0.26) !important;
+}
+
+html body .motion-shell .jr-topbar .theme-toggle:hover,
+html body .motion-shell .jr-topbar .compare-button:hover,
+html body .motion-shell .jr-topbar .mobile-nav-toggle:hover,
+html body .motion-shell .jr-topbar .theme-toggle:focus-visible,
+html body .motion-shell .jr-topbar .compare-button:focus-visible,
+html body .motion-shell .jr-topbar .mobile-nav-toggle:focus-visible {
+  color: #7c3aed !important;
+  background: rgba(250, 247, 255, 0.96) !important;
+  border-color: rgba(124, 58, 237, 0.38) !important;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12), 0 16px 36px rgba(31, 27, 55, 0.08) !important;
+}
+
+html body .motion-shell .jr-topbar .topbar-icon {
+  position: static !important;
+  inset: auto !important;
+  display: grid !important;
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  min-height: 22px !important;
+  place-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-style: normal !important;
+  color: currentColor !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  clip: auto !important;
+  clip-path: none !important;
+  overflow: visible !important;
+  transform: none !important;
+}
+
+html body .motion-shell .jr-topbar .topbar-icon svg,
+html body .motion-shell .jr-topbar .theme-toggle svg,
+html body .motion-shell .jr-topbar .compare-button svg,
+html body .motion-shell .jr-topbar .mobile-nav-toggle svg {
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  width: 21px !important;
+  height: 21px !important;
+  min-width: 21px !important;
+  min-height: 21px !important;
+  max-width: 21px !important;
+  max-height: 21px !important;
+  color: currentColor !important;
+  stroke: currentColor !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  clip: auto !important;
+  clip-path: none !important;
+  overflow: visible !important;
+  transform: none !important;
+}
+
+html body .motion-shell .jr-topbar .theme-toggle > span:not(.topbar-icon),
+html body .motion-shell .jr-topbar .compare-button > span:not(.topbar-icon),
+html body .motion-shell .jr-topbar .rail-meter {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}
+
+html body .motion-shell .jr-topbar .mobile-nav-toggle {
+  display: none !important;
+}
+
+html body .motion-shell .jr-topbar .compare-count-badge {
+  position: absolute !important;
+  right: -8px !important;
+  bottom: -8px !important;
+  display: inline-grid !important;
+  min-width: 26px !important;
+  height: 22px !important;
+  place-items: center !important;
+  padding: 0 6px !important;
+  color: #fff !important;
+  background: #7c3aed !important;
+  border-radius: 999px !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  box-shadow: 0 10px 20px rgba(124, 58, 237, 0.34) !important;
+}
+
+@media (max-width: 760px) {
+  html body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) max-content !important;
+    min-height: 70px !important;
+    padding: 10px clamp(12px, 2.8vw, 24px) !important;
+  }
+
+  html body .motion-shell .jr-topbar nav {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    left: clamp(12px, 2.8vw, 24px) !important;
+    right: clamp(12px, 2.8vw, 24px) !important;
+    z-index: 120 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: 0 !important;
+    padding: 0 12px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    border-radius: 18px !important;
+    transform: translateY(-4px) !important;
+  }
+
+  html body .motion-shell .jr-topbar nav.open {
+    max-height: 280px !important;
+    padding: 12px !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+  }
+
+  html body .motion-shell.theme-light .jr-topbar nav.open {
+    background: #ffffff !important;
+    border: 1px solid rgba(124, 58, 237, 0.22) !important;
+    box-shadow: 0 22px 60px rgba(24, 18, 43, 0.16) !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    grid-column: 2 !important;
+    display: flex !important;
+  }
+
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    display: grid !important;
+  }
+}
+
+@media (max-width: 520px) {
+  html body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) 126px !important;
+    min-height: 62px !important;
+    padding: 8px 10px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    display: grid !important;
+    grid-template-columns: 38px 38px 38px !important;
+    justify-self: end !important;
+    justify-content: end !important;
+    width: 126px !important;
+    min-width: 126px !important;
+    max-width: 126px !important;
+    gap: 6px !important;
+  }
+
+  html body .motion-shell .jr-topbar .theme-toggle,
+  html body .motion-shell .jr-topbar .compare-button,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    flex-basis: 38px !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    max-width: 38px !important;
+    max-height: 38px !important;
+    border-radius: 12px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-icon,
+  html body .motion-shell .jr-topbar .topbar-icon svg,
+  html body .motion-shell .jr-topbar .theme-toggle svg,
+  html body .motion-shell .jr-topbar .compare-button svg,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle svg {
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    min-height: 18px !important;
+    max-width: 18px !important;
+    max-height: 18px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  html body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) 110px !important;
+    padding-inline: 7px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    grid-template-columns: 34px 34px 34px !important;
+    width: 110px !important;
+    min-width: 110px !important;
+    max-width: 110px !important;
+    gap: 4px !important;
+  }
+
+  html body .motion-shell .jr-topbar .theme-toggle,
+  html body .motion-shell .jr-topbar .compare-button,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    flex-basis: 34px !important;
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    max-width: 34px !important;
+    max-height: 34px !important;
+  }
+}
+
+/* Mobile topbar final override: pin actions to the right edge and keep mode text calm. */
+@media (max-width: 760px) {
+  html body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) !important;
+    padding-right: 154px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    position: absolute !important;
+    top: 50% !important;
+    right: 10px !important;
+    z-index: 140 !important;
+    display: flex !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    gap: 8px !important;
+    justify-self: auto !important;
+    justify-content: flex-end !important;
+    transform: translateY(-50%) !important;
+  }
+}
+
+@media (max-width: 520px) {
+  html body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) !important;
+    padding-right: 128px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    right: 8px !important;
+    display: flex !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    gap: 6px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  html body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) !important;
+    padding-right: 112px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    right: 6px !important;
+    display: flex !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    gap: 4px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  html body .motion-shell.mode-idle .home-mode-switch span,
+  html body .motion-shell .home-mode-switch span {
+    font-weight: 500 !important;
+  }
+
+  html body .motion-shell.mode-idle .home-mode-switch small,
+  html body .motion-shell .home-mode-switch small {
+    font-weight: 400 !important;
+  }
+}
+
+/* Tablet header: keep the same nav style as desktop until the real mobile header starts. */
+@media (min-width: 761px) and (max-width: 1100px) {
+  html body .motion-shell .jr-topbar {
+    display: grid !important;
+    grid-template-columns: 240px minmax(260px, 1fr) 240px !important;
+    align-items: center !important;
+    min-height: 90px !important;
+    padding: 0 clamp(22px, 4vw, 44px) !important;
+    overflow: visible !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    align-self: center !important;
+    transform: none !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark > span {
+    font-weight: 400 !important;
+  }
+
+  html body .motion-shell .jr-topbar nav,
+  html body .motion-shell .jr-topbar nav.open {
+    position: static !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    justify-self: center !important;
+    align-self: center !important;
+    gap: 46px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  html body .motion-shell .jr-topbar nav a {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: auto !important;
+    min-height: 0 !important;
+    padding: 28px 0 !important;
+    color: #33405d !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+  }
+
+  html body .motion-shell .jr-topbar nav a.active,
+  html body .motion-shell .jr-topbar nav a:hover {
+    color: var(--accent) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  html body .motion-shell .jr-topbar nav a::before {
+    display: none !important;
+    content: none !important;
+  }
+
+  html body .motion-shell .jr-topbar nav a::after {
+    position: absolute !important;
+    right: 0 !important;
+    bottom: 13px !important;
+    left: 0 !important;
+    display: none !important;
+    width: auto !important;
+    height: 2px !important;
+    border-radius: 20px !important;
+    background: linear-gradient(90deg, var(--purple), var(--purple-3)) !important;
+    box-shadow: 0 0 16px rgba(139, 92, 246, .85) !important;
+    transform: none !important;
+    content: "" !important;
+  }
+
+  html body .motion-shell .jr-topbar nav a.active::after {
+    display: block !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    align-self: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 12px !important;
+    height: 90px !important;
+    min-width: max-content !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    display: none !important;
+  }
+}
+
+/* Final topbar text lock: no bold header text, keep active nav underline visible. */
+html body .motion-shell .jr-topbar .motion-mark,
+html body .motion-shell .jr-topbar .motion-mark > span,
+html body .motion-shell .jr-topbar nav,
+html body .motion-shell .jr-topbar nav a,
+html body .motion-shell .jr-topbar nav a.active,
+html body .motion-shell .jr-topbar .theme-toggle > span,
+html body .motion-shell .jr-topbar .compare-button > span,
+html body .motion-shell .jr-topbar .mobile-nav-toggle > span {
+  font-weight: 400 !important;
+}
+
+html body .motion-shell .jr-topbar nav a::before {
+  display: none !important;
+  content: none !important;
+}
+
+html body .motion-shell .jr-topbar nav a.active::after {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 13px !important;
+  left: 0 !important;
+  display: block !important;
+  width: auto !important;
+  height: 2px !important;
+  border-radius: 20px !important;
+  background: linear-gradient(90deg, var(--purple), var(--purple-3)) !important;
+  box-shadow: 0 0 16px rgba(139, 92, 246, .85) !important;
+  transform: none !important;
+  content: "" !important;
+}
+
+html body .motion-shell.theme-dark .jr-topbar nav a.active::after {
+  background: linear-gradient(90deg, var(--purple), var(--purple-3)) !important;
+  box-shadow: 0 0 16px rgba(139, 92, 246, .85) !important;
+}
+
+html body .motion-shell.theme-dark .jr-topbar .theme-toggle,
+html body .motion-shell.theme-dark .jr-topbar .compare-button,
+html body .motion-shell.theme-dark .jr-topbar .mobile-nav-toggle {
+  color: #a78bfa !important;
+  background: rgba(30, 20, 64, 0.82) !important;
+  border-color: rgba(139, 92, 246, 0.42) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18) !important;
+}
+
+html body .motion-shell.theme-dark .jr-topbar .theme-toggle:hover,
+html body .motion-shell.theme-dark .jr-topbar .theme-toggle:focus-visible,
+html body .motion-shell.theme-dark .jr-topbar .compare-button:hover,
+html body .motion-shell.theme-dark .jr-topbar .compare-button:focus-visible,
+html body .motion-shell.theme-dark .jr-topbar .mobile-nav-toggle:hover,
+html body .motion-shell.theme-dark .jr-topbar .mobile-nav-toggle:focus-visible {
+  color: #a78bfa !important;
+  background: rgba(30, 20, 64, 0.82) !important;
+  border-color: rgba(139, 92, 246, 0.42) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* Analytics active nav must match Home: purple line, never white. */
+html body .motion-shell.mode-analytics .jr-topbar nav a.active::before,
+html body .motion-shell .jr-topbar nav a[href="/analytics"].active::before {
+  display: none !important;
+  content: none !important;
+}
+
+html body .motion-shell.mode-analytics .jr-topbar nav a.active::after,
+html body .motion-shell .jr-topbar nav a[href="/analytics"].active::after {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 13px !important;
+  left: 0 !important;
+  display: block !important;
+  width: auto !important;
+  height: 2px !important;
+  border-radius: 20px !important;
+  background: linear-gradient(90deg, #7c3aed, #8b5cf6) !important;
+  box-shadow: 0 0 16px rgba(139, 92, 246, .85) !important;
+  opacity: 1 !important;
+  transform: none !important;
+  content: "" !important;
 }

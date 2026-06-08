@@ -1,0 +1,85 @@
+{
+  "realm": "smartjobs",
+  "displayName": "Job Radar",
+  "displayNameHtml": "Job Radar",
+  "enabled": true,
+  "registrationAllowed": true,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "loginTheme": "jobradar",
+  "roles": {
+    "realm": [
+      {
+        "name": "USER",
+        "description": "Regular Job Radar user"
+      },
+      {
+        "name": "ADMIN",
+        "description": "Job Radar administrator"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "jobradar-frontend",
+      "name": "Job Radar Frontend",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": [
+        "http://localhost:3000/auth/callback",
+        "http://localhost:3000/*",
+        "https://www.jobsearchwith.me/auth/callback",
+        "https://www.jobsearchwith.me/*"
+      ],
+      "webOrigins": [
+        "http://localhost:3000",
+        "https://www.jobsearchwith.me"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      }
+    }
+  ],
+  "users": [
+    {
+      "username": "admin",
+      "email": "admin@jobradar.local",
+      "firstName": "Job",
+      "lastName": "Admin",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "USER",
+        "ADMIN"
+      ]
+    },
+    {
+      "username": "user",
+      "email": "user@jobradar.local",
+      "firstName": "Job",
+      "lastName": "User",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "user123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "USER"
+      ]
+    }
+  ]
+}

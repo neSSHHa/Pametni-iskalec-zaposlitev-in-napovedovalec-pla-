@@ -5,6 +5,7 @@ import java.text.Normalizer;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -156,6 +157,26 @@ public class AiAllowedValuesService {
 
     public List<String> getAllowedLocations() {
         return allowedLocations;
+    }
+
+    public boolean isCacheLoaded() {
+        return !allowedSkills.isEmpty()
+                && !allowedEducationLevels.isEmpty()
+                && !allowedExperienceLevels.isEmpty()
+                && !allowedWorkTypes.isEmpty()
+                && !allowedLocations.isEmpty()
+                && !cachedSkills.isEmpty();
+    }
+
+    public Map<String, Integer> cacheSizes() {
+        return Map.of(
+                "skills", allowedSkills.size(),
+                "educationLevels", allowedEducationLevels.size(),
+                "experienceLevels", allowedExperienceLevels.size(),
+                "workTypes", allowedWorkTypes.size(),
+                "locations", allowedLocations.size(),
+                "normalizedSkills", cachedSkills.size()
+        );
     }
 
     private boolean isRelevantSkill(CachedSkill skill, String normalizedText, Set<String> terms) {

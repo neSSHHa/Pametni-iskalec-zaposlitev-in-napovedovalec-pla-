@@ -12,7 +12,17 @@ export function createInteractionId() {
 
 apiClient.interceptors.request.use((config) => {
   config.headers["X-Request-ID"] = createInteractionId();
+  const token = readAccessToken();
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
+
+function readAccessToken() {
+  try {
+    return JSON.parse(localStorage.getItem("jobradar-auth") || "null")?.accessToken || "";
+  } catch {
+    return "";
+  }
+}
 
 export default apiClient;

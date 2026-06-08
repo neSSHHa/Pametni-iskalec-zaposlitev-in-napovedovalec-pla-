@@ -71,4 +71,5 @@ public class User {
     public LocalDate getUpdatedAt() { return updatedAt; }
     public EducationLevel getEducationLevel() { return educationLevel; }
     public ExperienceLevel getExperienceLevel() { return experienceLevel; }
+
 }
