@@ -1,7 +1,13 @@
 import EuropeJobsMap from "./EuropeJobsMap.jsx";
 
 function insightList(items = [], limit = 4) {
-  return items.slice(0, limit).map((item) => `${item.label} (${item.count})`).join(", ") || "No data";
+  return items.slice(0, limit).map((item) => `${item.label} (${item.count})`).join("\n") || "No data";
+}
+
+function DetailLines({ text }) {
+  return String(text || "")
+    .split("\n")
+    .map((line) => <span key={line}>{line}</span>);
 }
 
 export default function MotionMapSection({ countries = [], cities = [], analytics }) {
@@ -27,7 +33,7 @@ export default function MotionMapSection({ countries = [], cities = [], analytic
     {
       label: "Flexible work",
       value: String(remoteCount + hybridCount),
-      detail: `${remoteCount} remote, ${hybridCount} hybrid in ${filteredLabel}.`,
+      detail: `${remoteCount} remote\n${hybridCount} hybrid in ${filteredLabel}.`,
     },
     {
       label: "Experience level",
@@ -51,7 +57,7 @@ export default function MotionMapSection({ countries = [], cities = [], analytic
           <article key={insight.label} style={{ animationDelay: `${index * 90}ms` }}>
             <span>{insight.label}</span>
             <strong>{insight.value}</strong>
-            <p>{insight.detail}</p>
+            <p><DetailLines text={insight.detail} /></p>
           </article>
         ))}
       </div>

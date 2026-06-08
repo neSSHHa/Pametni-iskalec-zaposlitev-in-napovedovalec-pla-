@@ -1372,6 +1372,15 @@ button {
   line-height: 1.45;
 }
 
+.map-insights p span {
+  display: block;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+}
+
 .city-equalizer article {
   display: grid;
   gap: 8px;
@@ -9445,7 +9454,7 @@ body .motion-shell .jr-topbar {
   display: grid !important;
   grid-template-columns: 240px minmax(260px, 1fr) 240px !important;
   align-items: center !important;
-  min-height: 90px !important;
+  min-height: 96px !important;
   padding: 0 clamp(22px, 4vw, 44px) !important;
 }
 
@@ -13806,7 +13815,7 @@ html body .motion-shell .jr-topbar {
   align-items: center !important;
   width: 100% !important;
   max-width: 100% !important;
-  min-height: 76px !important;
+  min-height: 96px !important;
   padding: 10px clamp(16px, 3vw, 48px) !important;
   overflow: visible !important;
   box-sizing: border-box !important;
@@ -14170,7 +14179,7 @@ html body .motion-shell .jr-topbar .compare-count-badge {
     display: grid !important;
     grid-template-columns: 240px minmax(260px, 1fr) 240px !important;
     align-items: center !important;
-    min-height: 90px !important;
+    min-height: 96px !important;
     padding: 0 clamp(22px, 4vw, 44px) !important;
     overflow: visible !important;
   }
