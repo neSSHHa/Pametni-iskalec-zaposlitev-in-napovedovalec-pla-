@@ -13238,3 +13238,1129 @@ body .motion-shell .mobile-nav-compare-link {
     font-size: 10px !important;
   }
 }
+
+/* Responsive header hardening: keep theme, compare and menu controls visible
+   through narrow desktop, tablet, and phone widths. */
+@media (max-width: 1100px) {
+  body .motion-shell .jr-topbar {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 44px 44px 44px !important;
+    align-items: center !important;
+    gap: 10px !important;
+    min-height: 72px !important;
+    padding: 10px clamp(12px, 3vw, 22px) !important;
+    overflow: visible !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > span {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .jr-topbar .topbar-actions {
+    display: contents !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .compare-button,
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    position: relative !important;
+    display: grid !important;
+    flex: 0 0 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    place-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar .compare-button {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    grid-column: 4 !important;
+    grid-row: 1 !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle > svg,
+  body .motion-shell .jr-topbar .compare-button > svg,
+  body .motion-shell .jr-topbar .mobile-nav-toggle > svg {
+    display: block !important;
+    position: static !important;
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: currentColor !important;
+    stroke: currentColor !important;
+    inset: auto !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    align-self: center !important;
+    transform: none !important;
+  }
+
+  body .motion-shell .jr-topbar .rail-meter,
+  body .motion-shell .jr-topbar .theme-toggle > span,
+  body .motion-shell .jr-topbar .compare-button > span {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell .jr-topbar nav {
+    display: none !important;
+  }
+
+  body .motion-shell .jr-topbar nav.open {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    left: clamp(12px, 3vw, 22px) !important;
+    right: clamp(12px, 3vw, 22px) !important;
+    z-index: 80 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    width: auto !important;
+    max-width: none !important;
+    padding: 12px !important;
+    border-radius: 18px !important;
+  }
+
+  body .motion-shell .jr-topbar nav.open a,
+  body .motion-shell .jr-topbar nav.open .mobile-nav-compare-link {
+    min-height: 42px !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 520px) {
+  body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) 38px 38px 38px !important;
+    min-height: 64px !important;
+    padding-inline: 10px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > span {
+    font-size: clamp(16px, 4.2vw, 20px) !important;
+  }
+
+  body .motion-shell .jr-topbar .topbar-actions {
+    display: contents !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .compare-button,
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    flex-basis: 38px !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    border-radius: 12px !important;
+  }
+
+  body .motion-shell .jr-topbar .compare-count-badge {
+    right: -7px !important;
+    bottom: -7px !important;
+    min-width: 23px !important;
+    height: 20px !important;
+    padding: 0 5px !important;
+    font-size: 10px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) 35px 35px 35px !important;
+    gap: 6px !important;
+    padding-inline: 8px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark {
+    gap: 6px !important;
+  }
+
+  body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+  }
+
+  body .motion-shell .jr-topbar .topbar-actions {
+    display: contents !important;
+  }
+
+  body .motion-shell .jr-topbar .theme-toggle,
+  body .motion-shell .jr-topbar .compare-button,
+  body .motion-shell .jr-topbar .mobile-nav-toggle {
+    flex-basis: 35px !important;
+    width: 35px !important;
+    height: 35px !important;
+    min-width: 35px !important;
+    min-height: 35px !important;
+  }
+}
+
+/* Keep the home fast/AI switch readable on very narrow phones. */
+@media (max-width: 430px) {
+  body .motion-shell.mode-idle .home-mode-switch,
+  body .motion-shell .home-mode-switch {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: min(100%, 360px) !important;
+    min-width: 0 !important;
+    gap: 3px !important;
+    padding: 4px !important;
+    border-radius: 999px !important;
+  }
+
+  body .motion-shell.mode-idle .home-mode-switch button,
+  body .motion-shell .home-mode-switch button {
+    display: grid !important;
+    grid-template-columns: 14px minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    align-items: center !important;
+    min-width: 0 !important;
+    min-height: 42px !important;
+    column-gap: 6px !important;
+    padding: 7px 8px !important;
+    border-radius: 999px !important;
+    text-align: left !important;
+  }
+
+  body .motion-shell.mode-idle .home-mode-switch svg,
+  body .motion-shell .home-mode-switch svg {
+    grid-column: 1 !important;
+    grid-row: 1 / 3 !important;
+    width: 14px !important;
+    height: 14px !important;
+    align-self: center !important;
+  }
+
+  body .motion-shell.mode-idle .home-mode-switch span,
+  body .motion-shell.mode-idle .home-mode-switch small,
+  body .motion-shell .home-mode-switch span,
+  body .motion-shell .home-mode-switch small {
+    display: block !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    line-height: 1.05 !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body .motion-shell.mode-idle .home-mode-switch span,
+  body .motion-shell .home-mode-switch span {
+    font-size: 11px !important;
+    font-weight: 800 !important;
+  }
+
+  body .motion-shell.mode-idle .home-mode-switch small,
+  body .motion-shell .home-mode-switch small {
+    font-size: 9px !important;
+  }
+}
+
+/* Definitive responsive topbar lock. This intentionally comes last. */
+@media (max-width: 1100px) {
+  html body .motion-shell .jr-topbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) max-content !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 70px !important;
+    gap: 10px !important;
+    padding: 10px clamp(12px, 2.8vw, 22px) !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark {
+    grid-column: 1 !important;
+    display: inline-flex !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    align-items: center !important;
+    justify-self: start !important;
+    overflow: hidden !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark > span {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    grid-column: 2 !important;
+    display: grid !important;
+    grid-template-columns: 44px 44px 44px !important;
+    align-items: center !important;
+    justify-content: end !important;
+    justify-items: center !important;
+    gap: 8px !important;
+    min-width: 148px !important;
+    width: 148px !important;
+    max-width: 148px !important;
+    height: 44px !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
+  }
+
+  html body .motion-shell .jr-topbar .theme-toggle,
+  html body .motion-shell .jr-topbar .compare-button,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    position: relative !important;
+    inset: auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    max-width: 44px !important;
+    max-height: 44px !important;
+    place-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    border-radius: 14px !important;
+    transform: none !important;
+    box-sizing: border-box !important;
+  }
+
+  html body .motion-shell .jr-topbar .theme-toggle {
+    grid-column: 1 !important;
+  }
+
+  html body .motion-shell .jr-topbar .compare-button {
+    grid-column: 2 !important;
+  }
+
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    grid-column: 3 !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-icon {
+    position: static !important;
+    display: grid !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    place-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-style: normal !important;
+    color: currentColor !important;
+    transform: none !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-icon svg,
+  html body .motion-shell .jr-topbar .theme-toggle > svg,
+  html body .motion-shell .jr-topbar .compare-button > svg,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle > svg {
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: currentColor !important;
+    stroke: currentColor !important;
+    transform: none !important;
+  }
+
+  html body .motion-shell .jr-topbar .rail-meter,
+  html body .motion-shell .jr-topbar .theme-toggle > span,
+  html body .motion-shell .jr-topbar .compare-button > span {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+
+  html body .motion-shell .jr-topbar nav {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    left: clamp(12px, 2.8vw, 22px) !important;
+    right: clamp(12px, 2.8vw, 22px) !important;
+    z-index: 120 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: 0 !important;
+    padding: 0 12px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    border-radius: 18px !important;
+    transform: translateY(-4px) !important;
+  }
+
+  html body .motion-shell .jr-topbar nav.open {
+    max-height: 280px !important;
+    padding: 12px !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+  }
+
+  html body .motion-shell.theme-light .jr-topbar nav.open {
+    background: #ffffff !important;
+    border: 1px solid rgba(124, 58, 237, 0.22) !important;
+    box-shadow: 0 22px 60px rgba(24, 18, 43, 0.16) !important;
+  }
+}
+
+@media (min-width: 1101px) {
+  html body .motion-shell .jr-topbar .topbar-actions {
+    justify-self: end !important;
+    margin-left: auto !important;
+  }
+
+  html body .motion-shell .jr-topbar .theme-toggle,
+  html body .motion-shell .jr-topbar .compare-button,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    border-radius: 14px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-icon {
+    display: grid !important;
+    place-items: center !important;
+    font-style: normal !important;
+  }
+}
+
+@media (max-width: 520px) {
+  html body .motion-shell .jr-topbar {
+    min-height: 62px !important;
+    padding: 8px 10px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    grid-template-columns: 38px 38px 38px !important;
+    min-width: 126px !important;
+    width: 126px !important;
+    max-width: 126px !important;
+    height: 38px !important;
+    gap: 6px !important;
+  }
+
+  html body .motion-shell .jr-topbar .theme-toggle,
+  html body .motion-shell .jr-topbar .compare-button,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    max-width: 38px !important;
+    max-height: 38px !important;
+    border-radius: 12px !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark > span {
+    font-size: 17px !important;
+  }
+
+  html body .motion-shell.mode-idle .upload-card {
+    padding: 12px 10px 14px !important;
+  }
+
+  html body .motion-shell.mode-idle .motion-upload,
+  html body .motion-shell.mode-idle .upload-box {
+    width: min(100%, 220px) !important;
+    min-height: 205px !important;
+    padding: 20px 14px 14px !important;
+    margin-inline: auto !important;
+  }
+
+  html body .motion-shell.mode-idle .motion-upload strong,
+  html body .motion-shell.mode-idle .upload-box strong {
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+  }
+
+  html body .motion-shell.mode-idle .cv-submit {
+    width: min(100%, 168px) !important;
+    min-height: 46px !important;
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  html body .motion-shell .jr-topbar {
+    padding-inline: 7px !important;
+    gap: 6px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    grid-template-columns: 34px 34px 34px !important;
+    min-width: 110px !important;
+    width: 110px !important;
+    max-width: 110px !important;
+    height: 34px !important;
+    gap: 4px !important;
+  }
+
+  html body .motion-shell .jr-topbar .theme-toggle,
+  html body .motion-shell .jr-topbar .compare-button,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    max-width: 34px !important;
+    max-height: 34px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-icon,
+  html body .motion-shell .jr-topbar .topbar-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    min-height: 18px !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark > .logo-mark {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark > span {
+    font-size: 14px !important;
+  }
+}
+
+/* Topbar action reset: one consistent square icon system across all widths. */
+html body .motion-shell .jr-topbar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+  display: grid !important;
+  grid-template-columns: minmax(150px, 1fr) minmax(180px, auto) minmax(118px, 1fr) !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 76px !important;
+  padding: 10px clamp(16px, 3vw, 48px) !important;
+  overflow: visible !important;
+  box-sizing: border-box !important;
+}
+
+html body .motion-shell .jr-topbar .motion-mark {
+  grid-column: 1 !important;
+  justify-self: start !important;
+  min-width: 0 !important;
+  align-self: center !important;
+  transform: translateY(2px) !important;
+}
+
+html body .motion-shell .jr-topbar .motion-mark > span {
+  font-weight: 500 !important;
+}
+
+html body .motion-shell .jr-topbar nav {
+  grid-column: 2 !important;
+  justify-self: center !important;
+}
+
+html body .motion-shell .jr-topbar .topbar-actions {
+  grid-column: 3 !important;
+  justify-self: end !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 12px !important;
+  min-width: max-content !important;
+  width: auto !important;
+  max-width: none !important;
+  height: auto !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+html body .motion-shell .jr-topbar .theme-toggle,
+html body .motion-shell .jr-topbar .compare-button,
+html body .motion-shell .jr-topbar .mobile-nav-toggle {
+  position: relative !important;
+  inset: auto !important;
+  display: grid !important;
+  flex: 0 0 46px !important;
+  grid-template-columns: 1fr !important;
+  grid-template-rows: 1fr !important;
+  width: 46px !important;
+  height: 46px !important;
+  min-width: 46px !important;
+  min-height: 46px !important;
+  max-width: 46px !important;
+  max-height: 46px !important;
+  place-items: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  color: #111827 !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  border: 1px solid rgba(124, 58, 237, 0.16) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 16px 36px rgba(31, 27, 55, 0.07) !important;
+  outline: none !important;
+  transform: none !important;
+  box-sizing: border-box !important;
+}
+
+html body .motion-shell.theme-dark .jr-topbar .theme-toggle,
+html body .motion-shell.theme-dark .jr-topbar .compare-button,
+html body .motion-shell.theme-dark .jr-topbar .mobile-nav-toggle {
+  color: #f8fafc !important;
+  background: rgba(15, 23, 42, 0.86) !important;
+  border-color: rgba(167, 139, 250, 0.26) !important;
+}
+
+html body .motion-shell .jr-topbar .theme-toggle:hover,
+html body .motion-shell .jr-topbar .compare-button:hover,
+html body .motion-shell .jr-topbar .mobile-nav-toggle:hover,
+html body .motion-shell .jr-topbar .theme-toggle:focus-visible,
+html body .motion-shell .jr-topbar .compare-button:focus-visible,
+html body .motion-shell .jr-topbar .mobile-nav-toggle:focus-visible {
+  color: #7c3aed !important;
+  background: rgba(250, 247, 255, 0.96) !important;
+  border-color: rgba(124, 58, 237, 0.38) !important;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12), 0 16px 36px rgba(31, 27, 55, 0.08) !important;
+}
+
+html body .motion-shell .jr-topbar .topbar-icon {
+  position: static !important;
+  inset: auto !important;
+  display: grid !important;
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  min-height: 22px !important;
+  place-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-style: normal !important;
+  color: currentColor !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  clip: auto !important;
+  clip-path: none !important;
+  overflow: visible !important;
+  transform: none !important;
+}
+
+html body .motion-shell .jr-topbar .topbar-icon svg,
+html body .motion-shell .jr-topbar .theme-toggle svg,
+html body .motion-shell .jr-topbar .compare-button svg,
+html body .motion-shell .jr-topbar .mobile-nav-toggle svg {
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  width: 21px !important;
+  height: 21px !important;
+  min-width: 21px !important;
+  min-height: 21px !important;
+  max-width: 21px !important;
+  max-height: 21px !important;
+  color: currentColor !important;
+  stroke: currentColor !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  clip: auto !important;
+  clip-path: none !important;
+  overflow: visible !important;
+  transform: none !important;
+}
+
+html body .motion-shell .jr-topbar .theme-toggle > span:not(.topbar-icon),
+html body .motion-shell .jr-topbar .compare-button > span:not(.topbar-icon),
+html body .motion-shell .jr-topbar .rail-meter {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}
+
+html body .motion-shell .jr-topbar .mobile-nav-toggle {
+  display: none !important;
+}
+
+html body .motion-shell .jr-topbar .compare-count-badge {
+  position: absolute !important;
+  right: -8px !important;
+  bottom: -8px !important;
+  display: inline-grid !important;
+  min-width: 26px !important;
+  height: 22px !important;
+  place-items: center !important;
+  padding: 0 6px !important;
+  color: #fff !important;
+  background: #7c3aed !important;
+  border-radius: 999px !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  box-shadow: 0 10px 20px rgba(124, 58, 237, 0.34) !important;
+}
+
+@media (max-width: 760px) {
+  html body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) max-content !important;
+    min-height: 70px !important;
+    padding: 10px clamp(12px, 2.8vw, 24px) !important;
+  }
+
+  html body .motion-shell .jr-topbar nav {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    left: clamp(12px, 2.8vw, 24px) !important;
+    right: clamp(12px, 2.8vw, 24px) !important;
+    z-index: 120 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: 0 !important;
+    padding: 0 12px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    border-radius: 18px !important;
+    transform: translateY(-4px) !important;
+  }
+
+  html body .motion-shell .jr-topbar nav.open {
+    max-height: 280px !important;
+    padding: 12px !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+  }
+
+  html body .motion-shell.theme-light .jr-topbar nav.open {
+    background: #ffffff !important;
+    border: 1px solid rgba(124, 58, 237, 0.22) !important;
+    box-shadow: 0 22px 60px rgba(24, 18, 43, 0.16) !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    grid-column: 2 !important;
+    display: flex !important;
+  }
+
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    display: grid !important;
+  }
+}
+
+@media (max-width: 520px) {
+  html body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) 126px !important;
+    min-height: 62px !important;
+    padding: 8px 10px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    display: grid !important;
+    grid-template-columns: 38px 38px 38px !important;
+    justify-self: end !important;
+    justify-content: end !important;
+    width: 126px !important;
+    min-width: 126px !important;
+    max-width: 126px !important;
+    gap: 6px !important;
+  }
+
+  html body .motion-shell .jr-topbar .theme-toggle,
+  html body .motion-shell .jr-topbar .compare-button,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    flex-basis: 38px !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+    max-width: 38px !important;
+    max-height: 38px !important;
+    border-radius: 12px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-icon,
+  html body .motion-shell .jr-topbar .topbar-icon svg,
+  html body .motion-shell .jr-topbar .theme-toggle svg,
+  html body .motion-shell .jr-topbar .compare-button svg,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle svg {
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    min-height: 18px !important;
+    max-width: 18px !important;
+    max-height: 18px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  html body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) 110px !important;
+    padding-inline: 7px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    grid-template-columns: 34px 34px 34px !important;
+    width: 110px !important;
+    min-width: 110px !important;
+    max-width: 110px !important;
+    gap: 4px !important;
+  }
+
+  html body .motion-shell .jr-topbar .theme-toggle,
+  html body .motion-shell .jr-topbar .compare-button,
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    flex-basis: 34px !important;
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    max-width: 34px !important;
+    max-height: 34px !important;
+  }
+}
+
+/* Mobile topbar final override: pin actions to the right edge and keep mode text calm. */
+@media (max-width: 760px) {
+  html body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) !important;
+    padding-right: 154px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    position: absolute !important;
+    top: 50% !important;
+    right: 10px !important;
+    z-index: 140 !important;
+    display: flex !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    gap: 8px !important;
+    justify-self: auto !important;
+    justify-content: flex-end !important;
+    transform: translateY(-50%) !important;
+  }
+}
+
+@media (max-width: 520px) {
+  html body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) !important;
+    padding-right: 128px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    right: 8px !important;
+    display: flex !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    gap: 6px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  html body .motion-shell .jr-topbar {
+    grid-template-columns: minmax(0, 1fr) !important;
+    padding-right: 112px !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    right: 6px !important;
+    display: flex !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    gap: 4px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  html body .motion-shell.mode-idle .home-mode-switch span,
+  html body .motion-shell .home-mode-switch span {
+    font-weight: 500 !important;
+  }
+
+  html body .motion-shell.mode-idle .home-mode-switch small,
+  html body .motion-shell .home-mode-switch small {
+    font-weight: 400 !important;
+  }
+}
+
+/* Tablet header: keep the same nav style as desktop until the real mobile header starts. */
+@media (min-width: 761px) and (max-width: 1100px) {
+  html body .motion-shell .jr-topbar {
+    display: grid !important;
+    grid-template-columns: 240px minmax(260px, 1fr) 240px !important;
+    align-items: center !important;
+    min-height: 90px !important;
+    padding: 0 clamp(22px, 4vw, 44px) !important;
+    overflow: visible !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    align-self: center !important;
+    transform: none !important;
+  }
+
+  html body .motion-shell .jr-topbar .motion-mark > span {
+    font-weight: 400 !important;
+  }
+
+  html body .motion-shell .jr-topbar nav,
+  html body .motion-shell .jr-topbar nav.open {
+    position: static !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    justify-self: center !important;
+    align-self: center !important;
+    gap: 46px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  html body .motion-shell .jr-topbar nav a {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: auto !important;
+    min-height: 0 !important;
+    padding: 28px 0 !important;
+    color: #33405d !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+  }
+
+  html body .motion-shell .jr-topbar nav a.active,
+  html body .motion-shell .jr-topbar nav a:hover {
+    color: var(--accent) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  html body .motion-shell .jr-topbar nav a::before {
+    display: none !important;
+    content: none !important;
+  }
+
+  html body .motion-shell .jr-topbar nav a::after {
+    position: absolute !important;
+    right: 0 !important;
+    bottom: 13px !important;
+    left: 0 !important;
+    display: none !important;
+    width: auto !important;
+    height: 2px !important;
+    border-radius: 20px !important;
+    background: linear-gradient(90deg, var(--purple), var(--purple-3)) !important;
+    box-shadow: 0 0 16px rgba(139, 92, 246, .85) !important;
+    transform: none !important;
+    content: "" !important;
+  }
+
+  html body .motion-shell .jr-topbar nav a.active::after {
+    display: block !important;
+  }
+
+  html body .motion-shell .jr-topbar .topbar-actions {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    align-self: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 12px !important;
+    height: 90px !important;
+    min-width: max-content !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  html body .motion-shell .jr-topbar .mobile-nav-toggle {
+    display: none !important;
+  }
+}
+
+/* Final topbar text lock: no bold header text, keep active nav underline visible. */
+html body .motion-shell .jr-topbar .motion-mark,
+html body .motion-shell .jr-topbar .motion-mark > span,
+html body .motion-shell .jr-topbar nav,
+html body .motion-shell .jr-topbar nav a,
+html body .motion-shell .jr-topbar nav a.active,
+html body .motion-shell .jr-topbar .theme-toggle > span,
+html body .motion-shell .jr-topbar .compare-button > span,
+html body .motion-shell .jr-topbar .mobile-nav-toggle > span {
+  font-weight: 400 !important;
+}
+
+html body .motion-shell .jr-topbar nav a::before {
+  display: none !important;
+  content: none !important;
+}
+
+html body .motion-shell .jr-topbar nav a.active::after {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 13px !important;
+  left: 0 !important;
+  display: block !important;
+  width: auto !important;
+  height: 2px !important;
+  border-radius: 20px !important;
+  background: linear-gradient(90deg, var(--purple), var(--purple-3)) !important;
+  box-shadow: 0 0 16px rgba(139, 92, 246, .85) !important;
+  transform: none !important;
+  content: "" !important;
+}
+
+html body .motion-shell.theme-dark .jr-topbar nav a.active::after {
+  background: linear-gradient(90deg, var(--purple), var(--purple-3)) !important;
+  box-shadow: 0 0 16px rgba(139, 92, 246, .85) !important;
+}
+
+html body .motion-shell.theme-dark .jr-topbar .theme-toggle,
+html body .motion-shell.theme-dark .jr-topbar .compare-button,
+html body .motion-shell.theme-dark .jr-topbar .mobile-nav-toggle {
+  color: #a78bfa !important;
+  background: rgba(30, 20, 64, 0.82) !important;
+  border-color: rgba(139, 92, 246, 0.42) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18) !important;
+}
+
+html body .motion-shell.theme-dark .jr-topbar .theme-toggle:hover,
+html body .motion-shell.theme-dark .jr-topbar .theme-toggle:focus-visible,
+html body .motion-shell.theme-dark .jr-topbar .compare-button:hover,
+html body .motion-shell.theme-dark .jr-topbar .compare-button:focus-visible,
+html body .motion-shell.theme-dark .jr-topbar .mobile-nav-toggle:hover,
+html body .motion-shell.theme-dark .jr-topbar .mobile-nav-toggle:focus-visible {
+  color: #a78bfa !important;
+  background: rgba(30, 20, 64, 0.82) !important;
+  border-color: rgba(139, 92, 246, 0.42) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* Analytics active nav must match Home: purple line, never white. */
+html body .motion-shell.mode-analytics .jr-topbar nav a.active::before,
+html body .motion-shell .jr-topbar nav a[href="/analytics"].active::before {
+  display: none !important;
+  content: none !important;
+}
+
+html body .motion-shell.mode-analytics .jr-topbar nav a.active::after,
+html body .motion-shell .jr-topbar nav a[href="/analytics"].active::after {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 13px !important;
+  left: 0 !important;
+  display: block !important;
+  width: auto !important;
+  height: 2px !important;
+  border-radius: 20px !important;
+  background: linear-gradient(90deg, #7c3aed, #8b5cf6) !important;
+  box-shadow: 0 0 16px rgba(139, 92, 246, .85) !important;
+  opacity: 1 !important;
+  transform: none !important;
+  content: "" !important;
+}
