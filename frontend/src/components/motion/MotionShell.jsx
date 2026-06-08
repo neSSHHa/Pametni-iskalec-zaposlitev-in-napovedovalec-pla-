@@ -45,16 +45,6 @@ export default function MotionShell({ mode, score, theme, onThemeToggle, onHomeC
           <img className="logo-mark" src="/jobradar.svg" alt="" aria-hidden="true" />
           <span>Job Radar</span>
         </a>
-        <button
-          className="mobile-nav-toggle"
-          type="button"
-          aria-label={mobileNavOpen ? "Close navigation" : "Open navigation"}
-          aria-expanded={mobileNavOpen}
-          aria-controls="jobradar-navigation"
-          onClick={() => setMobileNavOpen((open) => !open)}
-        >
-          {mobileNavOpen ? <X size={22} strokeWidth={1.9} /> : <Menu size={22} strokeWidth={1.9} />}
-        </button>
         <nav id="jobradar-navigation" className={mobileNavOpen ? "open" : ""} aria-label="Motion pages">
           {navLinks.map(([label, href]) => (
             <a
@@ -90,7 +80,9 @@ export default function MotionShell({ mode, score, theme, onThemeToggle, onHomeC
         </nav>
         <div className="topbar-actions">
           <button className="theme-toggle" type="button" onClick={onThemeToggle} aria-label="Toggle dark or light mode">
-            <SunMoon size={18} strokeWidth={1.9} />
+            <em className="topbar-icon" aria-hidden="true">
+              <SunMoon size={18} strokeWidth={1.9} />
+            </em>
             <span>{theme === "light" ? "Light" : "Dark"}</span>
           </button>
           <button
@@ -99,9 +91,23 @@ export default function MotionShell({ mode, score, theme, onThemeToggle, onHomeC
             aria-label={`Compare jobs ${comparison.count} of ${comparison.maxJobs}`}
             onClick={openComparison}
           >
-            <Scale size={20} strokeWidth={1.8} />
+            <em className="topbar-icon" aria-hidden="true">
+              <Scale size={20} strokeWidth={1.8} />
+            </em>
             <span>Compare jobs ({comparison.count}/{comparison.maxJobs})</span>
             <b className="compare-count-badge" aria-hidden="true">{comparison.count}/{comparison.maxJobs}</b>
+          </button>
+          <button
+            className="mobile-nav-toggle"
+            type="button"
+            aria-label={mobileNavOpen ? "Close navigation" : "Open navigation"}
+            aria-expanded={mobileNavOpen}
+            aria-controls="jobradar-navigation"
+            onClick={() => setMobileNavOpen((open) => !open)}
+          >
+            <em className="topbar-icon" aria-hidden="true">
+              {mobileNavOpen ? <X size={22} strokeWidth={1.9} /> : <Menu size={22} strokeWidth={1.9} />}
+            </em>
           </button>
           <div className="rail-meter">
             <span>Avg match</span>
