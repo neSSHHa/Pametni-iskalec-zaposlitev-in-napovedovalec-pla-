@@ -143,7 +143,6 @@ function SalaryPredictionCard({ loading, prediction, resultCount }) {
   const min = formatEuro(prediction.predictedMinSalary, prediction.currency);
   const max = formatEuro(prediction.predictedMaxSalary, prediction.currency);
   const profileCompleteness = Number(prediction.profileCompleteness) || 0;
-  const modelMae = Number(prediction.modelMae);
   const zeroListingsNote = Number(resultCount) === 0
     ? " No active matching listings were found, so this estimate uses historical market data."
     : "";
@@ -165,7 +164,7 @@ function SalaryPredictionCard({ loading, prediction, resultCount }) {
       <aside>
         <em>{profileCompleteness}%</em>
         <span>Profile completeness</span>
-        {Number.isFinite(modelMae) ? <small>Model MAE: {formatEuro(modelMae, prediction.currency)}</small> : null}
+        <small>Salary estimate only. Actual offers may vary.</small>
       </aside>
     </article>
   );
@@ -220,7 +219,39 @@ function QuerySummaryCard({ mode, query, cvName, chips }) {
   );
 }
 
+function isPlaceholderValue(value) {
+  if (value === null || value === undefined) return true;
+
+  const normalized = String(value).trim().toLowerCase();
+  if (!normalized) return true;
+  if (normalized.startsWith("unknown")) return true;
+
+  return [
+    "not specified",
+    "no data",
+    "podjetje ni navedeno",
+    "source not available",
+  ].includes(normalized);
+}
+
+function hasDisplayValue(value) {
+  return !isPlaceholderValue(value);
+}
+
+function formatLocationParts(job) {
+  return [job.city, job.country].filter(hasDisplayValue).join(", ");
+}
+
 function JobCard({ job, index, accent, mode, onOpen, onToggleCompare, selectedForCompare }) {
+  const company = hasDisplayValue(job.company) ? job.company : "";
+  const location = formatLocationParts(job);
+  const metaItems = [
+    location ? <><MapPin size={13} /> {location}</> : null,
+    hasDisplayValue(job.mode) ? job.mode : null,
+    hasDisplayValue(job.level) ? job.level : null,
+    job.postedDate ? `Posted ${formatPostedDate(job.postedDate)}` : null,
+  ].filter(Boolean);
+
   return (
     <article
       className={`motion-job ${selectedForCompare ? "selected-for-compare" : ""}`}
@@ -232,16 +263,20 @@ function JobCard({ job, index, accent, mode, onOpen, onToggleCompare, selectedFo
       }}
       style={{ "--accent": accent, animationDelay: `${index * 80}ms` }}
     >
-      <div className="job-logo">{initials(job.company)}</div>
+      <div className="job-logo">{initials(company || job.title)}</div>
       <div className="job-main">
-        <span>{job.company}</span>
+        {company ? <span>{company}</span> : null}
         <h3>{job.title}</h3>
-        <p>
-          <MapPin size={13} /> {job.city}, {job.country}
-          {job.mode ? <> <i></i> {job.mode}</> : null}
-          {job.level ? <> <i></i> {job.level}</> : null}
-          {job.postedDate ? <> <i></i> Posted {formatPostedDate(job.postedDate)}</> : null}
-        </p>
+        {metaItems.length ? (
+          <p>
+            {metaItems.map((item, itemIndex) => (
+              <span key={itemIndex}>
+                {itemIndex ? <i></i> : null}
+                {item}
+              </span>
+            ))}
+          </p>
+        ) : null}
         <footer>
           {job.tags.map((tag) => <em key={tag}>{tag}</em>)}
         </footer>
@@ -358,6 +393,14 @@ function LoadMoreButton({ remainingJobs, hasMore, onClick }) {
 export function JobDetailsModal({ job, filterRequest, onClose, onToggleCompare, selectedForCompare = false }) {
   const userSkills = Array.isArray(filterRequest?.skills) ? filterRequest.skills : [];
   const jobSkills = Array.isArray(job.skills) && job.skills.length ? job.skills : job.tags;
+  const company = hasDisplayValue(job.company) ? job.company : "";
+  const location = formatLocationParts(job);
+  const detailsMeta = [
+    location,
+    hasDisplayValue(job.mode) ? job.mode : "",
+    hasDisplayValue(job.level) ? job.level : "",
+  ].filter(Boolean);
+  const showEducation = hasDisplayValue(job.educationLevel);
   const detailsRef = useRef(null);
   const descriptionRef = useRef(null);
   const [descriptionExpanded, setDescriptionExpanded] = useState(false);
@@ -387,15 +430,15 @@ export function JobDetailsModal({ job, filterRequest, onClose, onToggleCompare, 
           <X size={22} strokeWidth={1.8} />
         </button>
         <header>
-          <div className="job-logo large">{initials(job.company)}</div>
+          <div className="job-logo large">{initials(company || job.title)}</div>
           <div>
-            <span>{job.company}</span>
+            {company ? <span>{company}</span> : null}
             <h2>{job.title}</h2>
-            <div className="job-details-meta">
-              <b>{job.city}, {job.country}</b>
-              <b>{job.mode}</b>
-              <b>{job.level}</b>
-            </div>
+            {detailsMeta.length ? (
+              <div className="job-details-meta">
+                {detailsMeta.map((item) => <b key={item}>{item}</b>)}
+              </div>
+            ) : null}
             {job.sourceUrl ? (
               <div className="job-source-row">
                 <span>Source</span>
@@ -463,10 +506,12 @@ export function JobDetailsModal({ job, filterRequest, onClose, onToggleCompare, 
             <dt>Salary</dt>
             <dd>{job.salary}</dd>
           </div>
-          <div>
-            <dt>Education</dt>
-            <dd>{job.educationLevel}</dd>
-          </div>
+          {showEducation ? (
+            <div>
+              <dt>Education</dt>
+              <dd>{job.educationLevel}</dd>
+            </div>
+          ) : null}
         </dl>
       </article>
     </div>

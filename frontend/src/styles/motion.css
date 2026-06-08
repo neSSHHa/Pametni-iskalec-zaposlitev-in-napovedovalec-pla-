@@ -5423,7 +5423,7 @@ body {
 }
 
 .motion-shell.mode-idle .jr-topbar {
-  height: 76px;
+  height: 96px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -14363,4 +14363,11 @@ html body .motion-shell .jr-topbar nav a[href="/analytics"].active::after {
   opacity: 1 !important;
   transform: none !important;
   content: "" !important;
+}
+
+/* Final active navigation underline: Home, Statistics and Jobs use the same purple line. */
+html body .motion-shell .jr-topbar nav a.active::after {
+  background: linear-gradient(90deg, #7c3aed, #8b5cf6) !important;
+  box-shadow: 0 0 16px rgba(139, 92, 246, .85) !important;
+  opacity: 1 !important;
 }
