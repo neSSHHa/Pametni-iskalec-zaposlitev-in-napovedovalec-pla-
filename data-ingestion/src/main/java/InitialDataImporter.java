@@ -51,7 +51,6 @@ public class InitialDataImporter {
             importAll(conn);
 
             conn.commit();
-            refreshBackendCaches();
 
             System.out.println("=======================================");
             System.out.println("SLOVENIA + AUSTRIA IMPORT FINISHED SUCCESSFULLY");
