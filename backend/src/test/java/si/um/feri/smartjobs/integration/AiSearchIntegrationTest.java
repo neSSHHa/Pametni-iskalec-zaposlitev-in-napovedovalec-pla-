@@ -119,6 +119,35 @@ class AiSearchIntegrationTest extends AbstractIntegrationTestData {
     }
 
     @Test
+    void shouldFallbackToFastParserWhenAiFilterReturnsNoJobs() throws Exception {
+        when(aiServiceClient.extractJobFilter(eq("React jobs"), anyList(), anyList(), anyList(), anyList(), anyList()))
+                .thenReturn(new AiJobFilterExtractionResponse(
+                        null,
+                        new AiJobFilterExtractionResponse.LocationData(
+                                null,
+                                null,
+                                List.of(),
+                                null,
+                                List.of(),
+                                "Germany",
+                                List.of("Germany"),
+                                null,
+                                null
+                        ),
+                        List.of(),
+                        List.of("React"),
+                        List.of()
+                ));
+
+        mockMvc.perform(post("/api/ai/jobs/filter")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(new NaturalLanguageJobFilterRequest("React jobs", "thinking"))))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.filterRequest.skills[0]", is("React")))
+                .andExpect(jsonPath("$.jobs[0].title", is("React Developer")));
+    }
+
+    @Test
     void shouldUseFastModeWhenModeIsNotThinking() throws Exception {
         mockMvc.perform(post("/api/ai/jobs/filter")
                         .contentType(MediaType.APPLICATION_JSON)
