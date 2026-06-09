@@ -93,13 +93,17 @@ export async function completeKeycloakLogin(code) {
 export async function logoutFromKeycloak() {
   const auth = getStoredAuth();
   clearAuth();
-  if (auth?.refreshToken) {
-    postKeycloakLogoutInBackground(auth.refreshToken);
-    window.location.replace(`${window.location.origin}/motion`);
-    return;
+
+  const redirectUri = `${window.location.origin}/motion`;
+  const logoutUrl = new URL(`${config.url}/realms/${config.realm}/protocol/openid-connect/logout`);
+  logoutUrl.searchParams.set("client_id", config.clientId);
+  logoutUrl.searchParams.set("post_logout_redirect_uri", redirectUri);
+
+  if (auth?.idToken) {
+    logoutUrl.searchParams.set("id_token_hint", auth.idToken);
   }
 
-  window.location.replace(`${window.location.origin}/motion`);
+  window.location.replace(logoutUrl.toString());
 }
 
 export async function getCurrentUser() {
@@ -156,37 +160,4 @@ function base64Url(bytes) {
 function readTheme() {
   const theme = localStorage.getItem("smartjobs-theme");
   return theme === "dark" ? "dark" : "light";
-}
-
-function postKeycloakLogoutInBackground(refreshToken) {
-  const iframeName = "jobradar-keycloak-logout";
-  const iframe = document.createElement("iframe");
-  iframe.name = iframeName;
-  iframe.style.display = "none";
-  document.body.appendChild(iframe);
-
-  const form = document.createElement("form");
-  form.method = "POST";
-  form.action = `${config.url}/realms/${config.realm}/protocol/openid-connect/logout`;
-  form.target = iframeName;
-  form.style.display = "none";
-
-  const clientInput = document.createElement("input");
-  clientInput.type = "hidden";
-  clientInput.name = "client_id";
-  clientInput.value = config.clientId;
-
-  const refreshInput = document.createElement("input");
-  refreshInput.type = "hidden";
-  refreshInput.name = "refresh_token";
-  refreshInput.value = refreshToken;
-
-  form.append(clientInput, refreshInput);
-  document.body.appendChild(form);
-  form.submit();
-
-  window.setTimeout(() => {
-    form.remove();
-    iframe.remove();
-  }, 2000);
 }

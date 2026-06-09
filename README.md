@@ -26,6 +26,61 @@ The application includes:
 - CV analysis and job suggestions based on candidate profile;
 - salary range prediction based on role, location, experience and skills;
 
+## Application gallery
+
+Click any image to open it in full size.
+
+<table>
+  <tr>
+    <td align="center" valign="top" colspan="3">
+      <a href="docs/images/home-page.png">
+        <img src="docs/images/home-page.png" alt="Home page" width="720">
+      </a><br>
+      <strong>Home page</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" width="33%">
+      <a href="docs/images/search-results.png">
+        <img src="docs/images/gallery/search-results.png" alt="Job search results" width="240">
+      </a><br>
+      <strong>Job search results</strong>
+    </td>
+    <td align="center" valign="top" width="33%">
+      <a href="docs/images/statistics-overview.png">
+        <img src="docs/images/gallery/statistics-overview.png" alt="Labour market statistics" width="240">
+      </a><br>
+      <strong>Statistics overview</strong>
+    </td>
+    <td align="center" valign="top" width="33%">
+      <a href="docs/images/statistics-map.png">
+        <img src="docs/images/gallery/statistics-map.png" alt="Geographical job statistics" width="240">
+      </a><br>
+      <strong>Statistics map</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" width="33%">
+      <a href="docs/images/job-details.png">
+        <img src="docs/images/gallery/job-details.png" alt="Job details" width="240">
+      </a><br>
+      <strong>Job details</strong>
+    </td>
+    <td align="center" valign="top" width="33%">
+      <a href="docs/images/job-comparison.png">
+        <img src="docs/images/gallery/job-comparison.png" alt="Job comparison" width="240">
+      </a><br>
+      <strong>Job comparison</strong>
+    </td>
+    <td align="center" valign="top" width="33%">
+      <a href="docs/images/admin-panel.png">
+        <img src="docs/images/gallery/admin-panel.png" alt="Administration panel" width="240">
+      </a><br>
+      <strong>Administration panel</strong>
+    </td>
+  </tr>
+</table>
+
 ## Data sources
 
 Job listings are currently collected from:
@@ -45,40 +100,15 @@ The collected listings are normalized into a common data model so they can be se
 
 ## Architecture
 
-```text
-+-------------------+        +-------------------+
-|     Frontend      | -----> |    Backend API    |
-| search, CV,       |        | auth, jobs, CV,   |
-| analytics UI      |        | analytics logic   |
-+-------------------+        +----+----+----+----+
-                                  |    |    |
-                                  v    v    v
-                           +--------+ +----+----+ +----------+
-                           |Database| |AI       | |Salary    |
-                           |job and | |service  | |service   |
-                           |market  | |         | |          |
-                           |data    | +---------+ +----------+
-                           +---+----+
-                               ^
-                               |
-                      +--------+---------+
-                      | Data ingestion   |
-                      | initial import   |
-                      +------------------+
+![Smart Job Platform architecture](docs/images/architecture.png)
 
-                      Update jobs run separately
-                      after the initial dataset exists.
-```
+The platform consists of five main areas:
 
-The repository is organized into these main parts:
-
-- `frontend/` - user interface;
-- `backend/` - main REST API and business logic;
-- `ai-service/` - AI processing for job descriptions, CVs and search requests;
-- `salary-service/` - salary range prediction;
-- `data-ingestion/` - initial dataset import used to fill the database;
-- `weekly-job-updater/` - update tooling used after the initial dataset exists;
-- `docker/` - configuration for running the full application.
+- **User Interface** - a React application for job search, CV matching, analytics and administration.
+- **Authentication** - Keycloak manages registration, login and role-based access.
+- **Core Application** - the Spring Boot backend handles business logic and stores platform data in MySQL.
+- **Data & AI Services** - dedicated services process search prompts and CVs and predict salary ranges.
+- **Data Pipelines & External Sources** - job listings are imported and updated from ZRSZ, CareerJet and EURES, with OpenRouter used for AI-assisted normalization.
 
 ## Quick start
 
@@ -91,6 +121,8 @@ Make sure you have:
 - Git
 - Docker
 - Docker Compose
+
+Make sure Docker Desktop or the Docker daemon is running before continuing.
 
 ### 2. Clone and enter the project
 
@@ -123,6 +155,12 @@ OPENROUTER_API_KEY=your_api_key_here
 
 You can create an OpenRouter key at [https://openrouter.ai](https://openrouter.ai). AI features such as natural-language extraction, CV processing and job normalization require this key.
 
+`OPENROUTER_API_KEY` enables AI features in the application. 
+
+`OPENROUTER_API_KEYS` is used only by the optional 3-day job updater.
+
+Job normalization requires OpenRouter keys, which can be created at [openrouter.ai/settings/keys](https://openrouter.ai/settings/keys). With the free version and its request limits, a complete data update may take approximately three days.
+
 Do not commit real API keys or passwords.
 
 ### 4. Start the application
@@ -131,7 +169,19 @@ Do not commit real API keys or passwords.
 docker compose -f docker/docker-compose.yml up -d --build
 ```
 
-This starts the frontend, backend, database, AI service and salary service.
+This starts the frontend, backend, database, Keycloak, AI service and salary service. Keycloak provides login, registration and role-based access.
+
+The first build may take several minutes. Check that all containers are running:
+
+```bash
+docker compose -f docker/docker-compose.yml ps
+```
+
+If a service does not start, inspect the logs:
+
+```bash
+docker compose -f docker/docker-compose.yml logs -f
+```
 
 ### 5. Import the initial data and train the salary model
 
@@ -160,10 +210,14 @@ The Windows script performs the same three steps automatically. The process fill
 
 ### 6. Open the application
 
-```text
-http://localhost:3000
-```
+- Application: [http://localhost:3000](http://localhost:3000)
+- Backend API: [http://localhost:8080](http://localhost:8080)
+- Swagger UI: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+- Keycloak: [http://localhost:8081](http://localhost:8081)
 
+The recurring job updater is not started by the basic application command. See the [Job updater documentation](weekly-job-updater/README.md) when you want to refresh current listings.
+
+Production logging is available through Grafana, Loki and Grafana Alloy. It is optional and documented separately in [Production logging](docs/production-logging.md).
 
 ### 7. Stop the application
 
@@ -177,6 +231,8 @@ To also remove local database data and saved models:
 docker compose -f docker/docker-compose.yml down -v
 ```
 
+Warning: `down -v` permanently removes the imported database data and trained salary model.
+
 ## Further documentation
 
 The root README only covers the project overview and Docker setup. Development commands, service configuration and implementation details belong in the module documentation:
@@ -187,5 +243,6 @@ The root README only covers the project overview and Docker setup. Development c
 - [Salary service documentation](salary-service/README.md)
 - [Data ingestion documentation](data-ingestion/README.md)
 - [Job updater documentation](weekly-job-updater/README.md)
-- [ZRSZ importer documentation](zrsz-job-importer/README.md)
-- [Test documentation](docs/testna-dokumentacija.md)
+- [Test documentation](docs/test-documentation.md)
+- [Production logging with Grafana, Loki and Alloy](docs/production-logging.md)
+- [Database documentation](docs/database-documentation.md)

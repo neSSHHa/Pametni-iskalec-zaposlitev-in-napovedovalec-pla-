@@ -9,8 +9,25 @@ function navigate(href) {
   window.dispatchEvent(new Event("jobradar:navigate"));
 }
 
+function isPlaceholderValue(value) {
+  if (value === null || value === undefined) return true;
+
+  const normalized = String(value).trim().toLowerCase();
+  if (!normalized) return true;
+  if (normalized.startsWith("unknown")) return true;
+
+  return [
+    "unknown",
+    "not specified",
+    "salary n/a",
+    "no data",
+    "podjetje ni navedeno",
+    "source not available",
+  ].includes(normalized);
+}
+
 function displayValue(value) {
-  if (value === null || value === undefined || value === "" || value === "Not specified" || value === "Salary n/a") {
+  if (isPlaceholderValue(value)) {
     return "No data";
   }
 
@@ -35,6 +52,10 @@ function formatSalaryRange(job) {
   if (!hasMin && !hasMax) return "No data";
   if (hasMin && hasMax) return `${min.toLocaleString("sl-SI")} - ${max.toLocaleString("sl-SI")} EUR`;
   return `${(hasMin ? min : max).toLocaleString("sl-SI")} EUR`;
+}
+
+function formatLocationParts(job) {
+  return [job?.city, job?.country].filter(hasValue).join(", ");
 }
 
 function uniqueSkills(values = []) {
@@ -65,7 +86,7 @@ export default function CompareJobsPage() {
   const [leftJob, rightJob] = comparison.jobs;
   const resultsPath = leftJob?.compareSourcePath || rightJob?.compareSourcePath || "/motion-prompt";
   const groups = skillGroups(leftJob, rightJob);
-  const showSalary = comparison.jobs.some((job) => hasValue(formatSalaryRange(job)));
+  const showSkills = Boolean(groups.shared.length || groups.onlyLeft.length || groups.onlyRight.length);
 
   const toggleTheme = () => {
     setTheme((currentTheme) => {
@@ -126,14 +147,16 @@ export default function CompareJobsPage() {
                   <CompareRow label="Work type" left={leftJob.mode} right={rightJob.mode} />
                   <CompareRow label="Level" left={leftJob.level} right={rightJob.level} />
                   <CompareRow label="Education" left={leftJob.educationLevel} right={rightJob.educationLevel} />
-                  {showSalary ? <CompareRow label="Salary" left={formatSalaryRange(leftJob)} right={formatSalaryRange(rightJob)} /> : null}
+                  <CompareRow label="Salary" left={formatSalaryRange(leftJob)} right={formatSalaryRange(rightJob)} keepWhenEmpty />
                 </CompareSection>
 
-                <CompareSection title="Skills" icon={<Scale size={20} />}>
-                  <SkillCompareBlock title="Shared" skills={groups.shared} />
-                  <SkillCompareBlock title="Only job A" skills={groups.onlyLeft} />
-                  <SkillCompareBlock title="Only job B" skills={groups.onlyRight} />
-                </CompareSection>
+                {showSkills ? (
+                  <CompareSection title="Skills" icon={<Scale size={20} />}>
+                    <SkillCompareBlock title="Shared" skills={groups.shared} />
+                    <SkillCompareBlock title="Only job A" skills={groups.onlyLeft} />
+                    <SkillCompareBlock title="Only job B" skills={groups.onlyRight} />
+                  </CompareSection>
+                ) : null}
 
                 <CompareSection title="Details" icon={<BriefcaseBusiness size={20} />}>
                   <CompareRow label="Company" left={leftJob.company} right={rightJob.company} />
@@ -175,6 +198,14 @@ function EmptyCompareState() {
 function CompareJobCard({ job, slot, onOpenDetails, onRemove }) {
   if (!job) return null;
 
+  const company = hasValue(job.company) ? job.company : "";
+  const location = formatLocationParts(job);
+  const metaItems = [
+    location ? <><MapPin size={15} /> {location}</> : null,
+    hasValue(job.mode) ? job.mode : null,
+    hasValue(job.level) ? job.level : null,
+  ].filter(Boolean);
+
   return (
     <article className="compare-job-card">
       <header>
@@ -186,12 +217,12 @@ function CompareJobCard({ job, slot, onOpenDetails, onRemove }) {
       <button className="compare-job-title-button" type="button" onClick={onOpenDetails}>
         {job.title}
       </button>
-      <p>{job.company}</p>
-      <div>
-        <span><MapPin size={15} /> {displayValue(`${job.city}, ${job.country}`)}</span>
-        <span>{displayValue(job.mode)}</span>
-        <span>{displayValue(job.level)}</span>
-      </div>
+      {company ? <p>{company}</p> : null}
+      {metaItems.length ? (
+        <div>
+          {metaItems.map((item, index) => <span key={index}>{item}</span>)}
+        </div>
+      ) : null}
       <strong>{formatScore(job.match)}</strong>
       <small>Match</small>
     </article>
@@ -207,29 +238,32 @@ function CompareSection({ title, icon, children }) {
   );
 }
 
-function CompareRow({ label, left, right, long = false, highlight = false }) {
-  const same = displayValue(left).toLowerCase() === displayValue(right).toLowerCase();
+function CompareRow({ label, left, right, long = false, highlight = false, keepWhenEmpty = false }) {
+  const leftValue = displayValue(left);
+  const rightValue = displayValue(right);
+
+  if (!keepWhenEmpty && leftValue === "No data" && rightValue === "No data") return null;
+
+  const same = leftValue.toLowerCase() === rightValue.toLowerCase();
 
   return (
     <div className={`compare-row ${long ? "long" : ""} ${highlight ? "highlight" : ""} ${same ? "same" : "different"}`}>
       <span>{label}</span>
-      <p data-side="Job A">{displayValue(left)}</p>
-      <p data-side="Job B">{displayValue(right)}</p>
+      <p data-side="Job A">{leftValue}</p>
+      <p data-side="Job B">{rightValue}</p>
     </div>
   );
 }
 
 function SkillCompareBlock({ title, skills }) {
+  if (!skills.length) return null;
+
   return (
     <div className="skill-compare-block">
       <span>{title}</span>
-      {skills.length ? (
-        <div>
-          {skills.map((skill) => <em key={skill}>{skill}</em>)}
-        </div>
-      ) : (
-        <p>No data</p>
-      )}
+      <div>
+        {skills.map((skill) => <em key={skill}>{skill}</em>)}
+      </div>
     </div>
   );
 }

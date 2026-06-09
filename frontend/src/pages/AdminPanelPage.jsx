@@ -297,13 +297,20 @@ function LogList({ logs, empty, compact = false }) {
           <div>
             <time>{formatTime(log.timestamp)}</time>
             <span>{log.service}</span>
-            <b>{log.level}</b>
+            <b className={`admin-log-level ${logLevelClass(log.level)}`}>{log.level}</b>
           </div>
           <p>{log.message}</p>
         </article>
       ))}
     </div>
   );
+}
+
+function logLevelClass(level) {
+  const normalizedLevel = String(level || "").toLowerCase();
+  if (normalizedLevel === "error" || normalizedLevel === "fatal") return "error";
+  if (normalizedLevel === "warn" || normalizedLevel === "warning") return "warn";
+  return "info";
 }
 
 function AccessPanel({ title, text, action, actionText }) {

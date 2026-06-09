@@ -10,6 +10,9 @@ const countryAliases = {
   UK: ["GB", "UK"],
 };
 
+const SLOVENIA_CENTER = { latitude: 46.1512, longitude: 14.9955 };
+const SLOVENIA_ZOOM = 64;
+
 function countryMatches(cityCountry, countryCode) {
   if (!countryCode) return true;
   const aliases = countryAliases[countryCode] || [countryCode];
@@ -36,8 +39,8 @@ export default function EuropeJobsMap({ countries, cities }) {
         pinchZoom: true,
         minZoomLevel: 2.25,
         maxZoomLevel: 84,
-        homeZoomLevel: 32,
-        homeGeoPoint: { latitude: 46.1512, longitude: 14.9955 },
+        homeZoomLevel: SLOVENIA_ZOOM,
+        homeGeoPoint: SLOVENIA_CENTER,
       }),
     );
 
@@ -239,7 +242,7 @@ export default function EuropeJobsMap({ countries, cities }) {
     polygonSeries.events.on("datavalidated", () => {
       chart.goHome(0);
       window.setTimeout(() => {
-        chart.zoomToGeoPoint({ latitude: 46.1512, longitude: 14.9955 }, 32, true, 500);
+        chart.zoomToGeoPoint(SLOVENIA_CENTER, SLOVENIA_ZOOM, true, 500);
       }, 120);
     });
     chart.appear(800, 100);
@@ -247,7 +250,7 @@ export default function EuropeJobsMap({ countries, cities }) {
     apiRef.current = {
       reset: () => {
         showCountries();
-        chart.zoomToGeoPoint({ latitude: 46.1512, longitude: 14.9955 }, 32, true, 650);
+        chart.zoomToGeoPoint(SLOVENIA_CENTER, SLOVENIA_ZOOM, true, 650);
       },
       zoomIn: () => chart.zoomToGeoPoint(chart.geoPoint(), Math.min((chart.get("zoomLevel") ?? 2.75) * 2, 84), true, 260),
       zoomOut: () => chart.zoomToGeoPoint(chart.geoPoint(), Math.max((chart.get("zoomLevel") ?? 2.75) / 1.75, 2.25), true, 260),
