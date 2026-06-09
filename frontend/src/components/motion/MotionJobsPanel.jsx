@@ -142,7 +142,7 @@ function SalaryPredictionCard({ loading, prediction, resultCount }) {
 
   const min = formatEuro(prediction.predictedMinSalary, prediction.currency);
   const max = formatEuro(prediction.predictedMaxSalary, prediction.currency);
-  const profileCompleteness = Number(prediction.profileCompleteness) || 0;
+  const predictionConfidence = Number(prediction.profileCompleteness) || 0;
   const zeroListingsNote = Number(resultCount) === 0
     ? " No active matching listings were found, so this estimate uses historical market data."
     : "";
@@ -162,8 +162,8 @@ function SalaryPredictionCard({ loading, prediction, resultCount }) {
         </p>
       </div>
       <aside>
-        <em>{profileCompleteness}%</em>
-        <span>Profile completeness</span>
+        <em>{predictionConfidence}%</em>
+        <span>Prediction confidence</span>
         <small>Salary estimate only. Actual offers may vary.</small>
       </aside>
     </article>
