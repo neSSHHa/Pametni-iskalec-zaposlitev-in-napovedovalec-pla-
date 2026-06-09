@@ -26,6 +26,61 @@ The application includes:
 - CV analysis and job suggestions based on candidate profile;
 - salary range prediction based on role, location, experience and skills;
 
+## Application gallery
+
+Click any image to open it in full size.
+
+<table>
+  <tr>
+    <td align="center" valign="top" colspan="3">
+      <a href="docs/images/home-page.png">
+        <img src="docs/images/home-page.png" alt="Home page" width="720">
+      </a><br>
+      <strong>Home page</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" width="33%">
+      <a href="docs/images/search-results.png">
+        <img src="docs/images/gallery/search-results.png" alt="Job search results" width="240">
+      </a><br>
+      <strong>Job search results</strong>
+    </td>
+    <td align="center" valign="top" width="33%">
+      <a href="docs/images/statistics-overview.png">
+        <img src="docs/images/gallery/statistics-overview.png" alt="Labour market statistics" width="240">
+      </a><br>
+      <strong>Statistics overview</strong>
+    </td>
+    <td align="center" valign="top" width="33%">
+      <a href="docs/images/statistics-map.png">
+        <img src="docs/images/gallery/statistics-map.png" alt="Geographical job statistics" width="240">
+      </a><br>
+      <strong>Statistics map</strong>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" width="33%">
+      <a href="docs/images/job-details.png">
+        <img src="docs/images/gallery/job-details.png" alt="Job details" width="240">
+      </a><br>
+      <strong>Job details</strong>
+    </td>
+    <td align="center" valign="top" width="33%">
+      <a href="docs/images/job-comparison.png">
+        <img src="docs/images/gallery/job-comparison.png" alt="Job comparison" width="240">
+      </a><br>
+      <strong>Job comparison</strong>
+    </td>
+    <td align="center" valign="top" width="33%">
+      <a href="docs/images/admin-panel.png">
+        <img src="docs/images/gallery/admin-panel.png" alt="Administration panel" width="240">
+      </a><br>
+      <strong>Administration panel</strong>
+    </td>
+  </tr>
+</table>
+
 ## Data sources
 
 Job listings are currently collected from:
@@ -45,40 +100,15 @@ The collected listings are normalized into a common data model so they can be se
 
 ## Architecture
 
-```text
-+-------------------+        +-------------------+
-|     Frontend      | -----> |    Backend API    |
-| search, CV,       |        | auth, jobs, CV,   |
-| analytics UI      |        | analytics logic   |
-+-------------------+        +----+----+----+----+
-                                  |    |    |
-                                  v    v    v
-                           +--------+ +----+----+ +----------+
-                           |Database| |AI       | |Salary    |
-                           |job and | |service  | |service   |
-                           |market  | |         | |          |
-                           |data    | +---------+ +----------+
-                           +---+----+
-                               ^
-                               |
-                      +--------+---------+
-                      | Data ingestion   |
-                      | initial import   |
-                      +------------------+
+![Smart Job Platform architecture](docs/images/architecture.png)
 
-                      Update jobs run separately
-                      after the initial dataset exists.
-```
+The platform consists of five main areas:
 
-The repository is organized into these main parts:
-
-- `frontend/` - user interface;
-- `backend/` - main REST API and business logic;
-- `ai-service/` - AI processing for job descriptions, CVs and search requests;
-- `salary-service/` - salary range prediction;
-- `data-ingestion/` - initial dataset import used to fill the database;
-- `weekly-job-updater/` - update tooling used after the initial dataset exists;
-- `docker/` - configuration for running the full application.
+- **User Interface** - a React application for job search, CV matching, analytics and administration.
+- **Authentication** - Keycloak manages registration, login and role-based access.
+- **Core Application** - the Spring Boot backend handles business logic and stores platform data in MySQL.
+- **Data & AI Services** - dedicated services process search prompts and CVs and predict salary ranges.
+- **Data Pipelines & External Sources** - job listings are imported and updated from ZRSZ, CareerJet and EURES, with OpenRouter used for AI-assisted normalization.
 
 ## Quick start
 
