@@ -75,6 +75,22 @@ public class AiJobFilterController {
                 ? aiJobFilterService.extractFilter(request.text())
                 : fastPromptFilterService.buildFilter(request.text());
         JobSearchResponse response = jobService.filterResponse(filterRequest);
+        if ("thinking".equals(mode) && response.jobs().isEmpty()) {
+            JobFilterRequest fallbackFilter = fastPromptFilterService.buildFilter(request.text());
+            if (!fallbackFilter.equals(filterRequest)) {
+                JobSearchResponse fallbackResponse = jobService.filterResponse(fallbackFilter);
+                if (!fallbackResponse.jobs().isEmpty()) {
+                    LOGGER.warn(
+                            "event=job.prompt.search.fallback requestId={} interactionId={} reason=ai-filter-returned-no-jobs fallbackJobs={}",
+                            requestId,
+                            interactionId,
+                            fallbackResponse.jobs().size()
+                    );
+                    filterRequest = fallbackFilter;
+                    response = fallbackResponse;
+                }
+            }
+        }
 
         LOGGER.info(
                 "event=job.prompt.search.completed requestId={} interactionId={} mode={} skills={} workTypes={} location={} returnedJobs={} totalJobs={}",

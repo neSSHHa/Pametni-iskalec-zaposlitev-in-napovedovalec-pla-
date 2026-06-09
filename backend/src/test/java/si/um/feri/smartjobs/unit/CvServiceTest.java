@@ -63,6 +63,21 @@ class CvServiceTest {
     }
 
     @Test
+    void shouldRejectCvWithoutReadableText() {
+        CvTextExtractionService service = new CvTextExtractionService();
+        MockMultipartFile file = new MockMultipartFile(
+                "file",
+                "cv.txt",
+                "text/plain",
+                "   ".getBytes()
+        );
+
+        assertThatThrownBy(() -> service.extractText(file))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("CV file does not contain readable text.");
+    }
+
+    @Test
     void shouldWrapCvReadFailure() throws IOException {
         CvTextExtractionService service = new CvTextExtractionService();
         MultipartFile file = mock(MultipartFile.class);
@@ -197,7 +212,8 @@ class CvServiceTest {
         );
         MockMultipartFile file = cvFile();
         JobFilterRequest filter = emptyFilter();
-        JobSearchResponse rankedJobs = new JobSearchResponse(List.of(), 0, 0, 50, false, null, filter);
+        JobDto job = mock(JobDto.class);
+        JobSearchResponse rankedJobs = new JobSearchResponse(List.of(job), 1, 0, 50, false, 72, filter);
 
         when(textExtractionService.extractText(file)).thenReturn("Java backend developer");
         when(aiJobFilterService.extractCvFilter("Java backend developer")).thenReturn(filter);
@@ -207,6 +223,48 @@ class CvServiceTest {
 
         verify(aiJobFilterService).extractCvFilter("Java backend developer");
         verify(profileFilterService, never()).buildFilter("Java backend developer");
+    }
+
+    @Test
+    void shouldUseLocalProfileFilterWhenAiFilterReturnsNoJobs() {
+        CvTextExtractionService textExtractionService = mock(CvTextExtractionService.class);
+        CvProfileFilterService profileFilterService = mock(CvProfileFilterService.class);
+        AiJobFilterService aiJobFilterService = mock(AiJobFilterService.class);
+        JobService jobService = mock(JobService.class);
+        CvJobMatchingService service = new CvJobMatchingService(
+                textExtractionService,
+                profileFilterService,
+                aiJobFilterService,
+                jobService
+        );
+        MockMultipartFile file = cvFile();
+        JobFilterRequest aiFilter = emptyFilter();
+        JobFilterRequest fallbackFilter = new JobFilterRequest(null, null, List.of(), List.of("Java"));
+        JobDto fallbackJob = mock(JobDto.class);
+        JobSearchResponse emptyAiResult = new JobSearchResponse(List.of(), 0, 0, 50, false, null, aiFilter);
+        JobSearchResponse fallbackResult = new JobSearchResponse(
+                List.of(fallbackJob),
+                1,
+                0,
+                50,
+                false,
+                65,
+                fallbackFilter
+        );
+
+        when(textExtractionService.extractText(file)).thenReturn("Java backend developer");
+        when(aiJobFilterService.extractCvFilter("Java backend developer")).thenReturn(aiFilter);
+        when(profileFilterService.buildFilter("Java backend developer")).thenReturn(fallbackFilter);
+        when(jobService.filterResponse(aiFilter)).thenReturn(emptyAiResult);
+        when(jobService.filterResponse(fallbackFilter)).thenReturn(fallbackResult);
+
+        CvJobMatchResponse response = service.matchJobs(file, "thinking");
+
+        assertThat(response.filterRequest()).isSameAs(fallbackFilter);
+        assertThat(response.jobs()).containsExactly(fallbackJob);
+        assertThat(response.totalCount()).isEqualTo(1);
+        verify(jobService).filterResponse(aiFilter);
+        verify(jobService).filterResponse(fallbackFilter);
     }
 
     @Test

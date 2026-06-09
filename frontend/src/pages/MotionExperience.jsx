@@ -458,6 +458,11 @@ async function loadSalaryPrediction(filterRequest, interactionId) {
   }
 }
 
+function apiErrorMessage(error, fallbackMessage) {
+  const message = error?.response?.data?.message;
+  return typeof message === "string" && message.trim() ? message : fallbackMessage;
+}
+
 export default function MotionExperience({ initialMode = "idle", resultPage = false }) {
   const storedResult = resultPage ? readStoredResults(initialMode) : null;
   const [mode, setMode] = useState(storedResult?.mode || initialMode);
@@ -725,7 +730,10 @@ export default function MotionExperience({ initialMode = "idle", resultPage = fa
       requestSalaryPrediction(nextFilter, interactionId);
       window.history.pushState({}, "", "/motion-cv");
     } catch (err) {
-      setError("The CV API did not return a result. Check that the backend and AI service are running.");
+      setError(apiErrorMessage(
+        err,
+        "The CV API did not return a result. Check that the backend and AI service are running.",
+      ));
     } finally {
       setLoading(false);
       setStatus("");
