@@ -77,6 +77,12 @@ docker compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml --p
 docker compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml --profile import run --rm --no-deps salary-trainer
 ```
 
+After importing and training, run this command on Windows, macOS or Linux so the backend reloads the imported data correctly:
+
+```bash
+docker compose -f docker/docker-compose.yml restart backend
+```
+
 ## Expected result
 
 After a successful run:

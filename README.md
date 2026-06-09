@@ -206,6 +206,12 @@ docker compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml --p
 docker compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml --profile import run --rm --no-deps salary-trainer
 ```
 
+After importing and training, run this command on Windows, macOS or Linux so the backend reloads the imported data correctly:
+
+```bash
+docker compose -f docker/docker-compose.yml restart backend
+```
+
 The Windows script performs the same three steps automatically. The process fills the database with the initial dataset from `data-ingestion/` and trains the salary model used to predict salary ranges.
 
 ### 6. Open the application
