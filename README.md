@@ -215,3 +215,4 @@ The root README only covers the project overview and Docker setup. Development c
 - [Job updater documentation](weekly-job-updater/README.md)
 - [Test documentation](docs/test-documentation.md)
 - [Production logging with Grafana, Loki and Alloy](docs/production-logging.md)
+- [Database documentation](docs/database-documentation.md)
