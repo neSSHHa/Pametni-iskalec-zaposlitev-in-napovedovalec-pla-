@@ -77,6 +77,15 @@ class CvMatchingIntegrationTest extends AbstractIntegrationTestData {
     }
 
     @Test
+    void shouldRejectCvWithoutReadableText() throws Exception {
+        MockMultipartFile file = textFile("cv.txt", "   ");
+
+        mockMvc.perform(multipart("/api/cv/jobs/filter").file(file))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is("CV file does not contain readable text.")));
+    }
+
+    @Test
     void shouldUseThinkingCvModeWhenRequested() throws Exception {
         when(aiServiceClient.extractCvJobFilter(eq("Nurse with patient care experience."), anyList(), anyList(), anyList(), anyList(), anyList()))
                 .thenReturn(new AiJobFilterExtractionResponse(null, null, List.of("On-site"), List.of("Nursing"), List.of()));

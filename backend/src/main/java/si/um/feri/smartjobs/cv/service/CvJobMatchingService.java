@@ -46,7 +46,8 @@ public class CvJobMatchingService {
 
         String extractedText = cvTextExtractionService.extractText(file);
 
-        JobFilterRequest filterRequest = extractFilter(extractedText, normalizedMode);
+        FilterExtraction filterExtraction = extractFilter(extractedText, normalizedMode);
+        JobFilterRequest filterRequest = filterExtraction.filterRequest();
         LOGGER.info(
                 "event=cv.filter.extracted requestId={} interactionId={} mode={} skills={} workTypes={} location={}",
                 requestId,
@@ -58,6 +59,23 @@ public class CvJobMatchingService {
         );
 
         JobSearchResponse rankedJobs = jobService.filterResponse(filterRequest);
+        if ("thinking".equals(normalizedMode) && !filterExtraction.localFallback() && rankedJobs.jobs().isEmpty()) {
+            JobFilterRequest fallbackFilter = cvProfileFilterService.buildFilter(extractedText);
+            if (!fallbackFilter.equals(filterRequest)) {
+                JobSearchResponse fallbackJobs = jobService.filterResponse(fallbackFilter);
+                if (!fallbackJobs.jobs().isEmpty()) {
+                    LOGGER.warn(
+                            "event=cv.search.fallback requestId={} interactionId={} reason=ai-filter-returned-no-jobs fallbackJobs={}",
+                            requestId,
+                            interactionId,
+                            fallbackJobs.jobs().size()
+                    );
+                    filterRequest = fallbackFilter;
+                    rankedJobs = fallbackJobs;
+                }
+            }
+        }
+
         LOGGER.info(
                 "event=cv.search.completed requestId={} interactionId={} mode={} returnedJobs={} totalJobs={}",
                 requestId,
@@ -82,16 +100,16 @@ public class CvJobMatchingService {
         );
     }
 
-    private JobFilterRequest extractFilter(String extractedText, String normalizedMode) {
+    private FilterExtraction extractFilter(String extractedText, String normalizedMode) {
         if (!"thinking".equals(normalizedMode)) {
-            return cvProfileFilterService.buildFilter(extractedText);
+            return new FilterExtraction(cvProfileFilterService.buildFilter(extractedText), true);
         }
 
         try {
-            return aiJobFilterService.extractCvFilter(extractedText);
+            return new FilterExtraction(aiJobFilterService.extractCvFilter(extractedText), false);
         } catch (RuntimeException e) {
             LOGGER.warn("event=cv.ai.fallback reason={}", e.getMessage());
-            return cvProfileFilterService.buildFilter(extractedText);
+            return new FilterExtraction(cvProfileFilterService.buildFilter(extractedText), true);
         }
     }
 
@@ -107,5 +125,8 @@ public class CvJobMatchingService {
     // Testing helper for checking how the CV is rewritten into a search profile.
     public String rewriteCvToProfileText(String extractedText) {
         return aiJobFilterService.rewriteCvToProfileText(extractedText);
+    }
+
+    private record FilterExtraction(JobFilterRequest filterRequest, boolean localFallback) {
     }
 }

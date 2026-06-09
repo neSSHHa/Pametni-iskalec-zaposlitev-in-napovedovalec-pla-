@@ -18,7 +18,11 @@ public class CvTextExtractionService {
         }
 
         try {
-            return tika.parseToString(file.getInputStream()).trim();
+            String extractedText = tika.parseToString(file.getInputStream()).trim();
+            if (extractedText.isBlank()) {
+                throw new IllegalArgumentException("CV file does not contain readable text.");
+            }
+            return extractedText;
         } catch (IOException | TikaException e) {
             throw new IllegalStateException("Could not extract text from CV file.", e);
         }
