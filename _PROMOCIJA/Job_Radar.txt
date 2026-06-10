@@ -1,0 +1,20 @@
+Ime projekta: Job Radar
+
+Kratek opis: Spletna aplikacija za iskanje zaposlitev, analizo trga dela in napovedovanje placnih razponov.
+
+Leto izdelave: 2026
+
+Avtorji: Iva, Nenad, Kristina
+
+Domaca stran: https://www.jobsearchwith.me
+Vir podatkov: ZRSZ, CareerJet, EURES
+Koda: https://github.com/neSSHHa/Pametni-iskalec-zaposlitev-in-napovedovalec-pla-
+
+Kategorizacija: celovita informacijska resitev, spletna aplikacija, podatkovna platforma, AI podprta aplikacija
+
+Oznake: OdprtiPodatki, React, SpringBoot, Java, MySQL, Docker, Keycloak, Grafana, Loki, AI, OpenRouter, REST, Nginx, Jenkins
+
+Opis projekta:
+Smart Job Platform je spletna platforma, ki zdruzuje oglase za delo iz vec zunanjih virov in jih pretvori v enoten, primerljiv prikaz. Uporabnik lahko isce oglase, primerja delovna mesta, pregleda podrobnosti posameznega oglasa ter spremlja statistiko trga dela po lokacijah, poklicih, izkusnjah in spretnostih. Sistem vsebuje tudi analizo CV-ja, predloge relevantnih delovnih mest in napoved placnega razpona glede na naziv delovnega mesta, lokacijo, izkusnje in zahtevane spretnosti.
+
+Projekt resuje tezavo razdrobljenih zaposlitvenih podatkov, saj so oglasi pogosto objavljeni na razlicnih portalih, v razlicnih jezikih in z neenotnimi izrazi za iste kompetence. Platforma uporablja podatkovne uvoze, normalizacijo, AI podporo in administratorski nadzor, da so podatki bolj pregledni, sledljivi in uporabni za kandidate, analitike in prihodnje nadgradnje sistema.
