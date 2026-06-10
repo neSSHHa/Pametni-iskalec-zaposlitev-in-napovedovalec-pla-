@@ -99,6 +99,14 @@ public class ZrszDownloadJobs {
         if (knownArray != null) {
             return knownArray.length();
         }
+        knownArray = object.optJSONArray("ProstaDelovnaMesta");
+        if (knownArray != null) {
+            return knownArray.length();
+        }
+        knownArray = object.optJSONArray("prostaDelovnaMesta");
+        if (knownArray != null) {
+            return knownArray.length();
+        }
 
         return -1;
     }

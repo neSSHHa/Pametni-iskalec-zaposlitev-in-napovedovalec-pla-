@@ -457,6 +457,14 @@ public class WeeklyJobUpdatePreview {
         if (jobs != null) {
             return jobs;
         }
+        jobs = root.optJSONArray("ProstaDelovnaMesta");
+        if (jobs != null) {
+            return jobs;
+        }
+        jobs = root.optJSONArray("prostaDelovnaMesta");
+        if (jobs != null) {
+            return jobs;
+        }
         return new JSONArray();
     }
 
@@ -610,22 +618,30 @@ public class WeeklyJobUpdatePreview {
         job.put("title", firstNonBlank(
                 raw.optString("jobname"),
                 raw.optString("title"),
-                raw.optString("NazivDelovnegaMesta")
+                raw.optString("NazivDelovnegaMesta"),
+                raw.optString("NazivDelMesta")
         ));
         job.put("company", firstNonBlank(
                 raw.optString("companyname"),
                 raw.optString("company"),
-                raw.optString("NazivDelodajalca")
+                raw.optString("NazivDelodajalca"),
+                raw.optString("PoslovniSubjekt")
         ));
         job.put("locations", firstNonBlank(
                 raw.optString("locations"),
                 raw.optString("location"),
                 raw.optString("LocationId"),
-                raw.optString("KrajDela")
+                raw.optString("KrajDela"),
+                raw.optString("UEPDM")
         ));
         job.put("date", firstNonBlank(raw.optString("datePosted"), raw.optString("date"), raw.optString("DatumObjave")));
         job.put("url", firstNonBlank(raw.optString("sourceWebsite"), raw.optString("url")));
-        job.put("description", firstNonBlank(raw.optString("description"), raw.optString("OpisDel")));
+        job.put("description", firstNonBlank(
+                raw.optString("description"),
+                raw.optString("OpisDel"),
+                raw.optString("OpisDelInNalog"),
+                raw.optString("DrugiPogoji")
+        ));
         return job;
     }
 
