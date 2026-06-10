@@ -40,6 +40,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WeeklyJobUpdatePreview {
 
@@ -59,6 +61,8 @@ public class WeeklyJobUpdatePreview {
             parseIntEnv("SYNC_CYCLE_MAX_AGE_DAYS", 7);
     private static final int SCHEDULER_INTERVAL_HOURS =
             parseIntEnv("JOB_UPDATER_SCHEDULER_INTERVAL_HOURS", 72);
+    private static final int ZRSZ_LOOKBACK_DAYS =
+            parseIntEnv("ZRSZ_LOOKBACK_DAYS", -1);
     private static final double NORMALIZATION_MIN_SUCCESS_RATIO_SLOVENIA =
             parseDoubleEnv("NORMALIZATION_MIN_SUCCESS_RATIO_SLOVENIA", 0.85);
     private static final double NORMALIZATION_MIN_SUCCESS_RATIO_AUSTRIA =
@@ -417,9 +421,15 @@ public class WeeklyJobUpdatePreview {
         Set<String> seenZrszKeys = new HashSet<>();
         int added = 0;
         int duplicates = 0;
+        int skippedByDate = 0;
+        LocalDate zrszMinDate = zrszMinDate();
 
         for (int i = 0; i < jobs.length(); i++) {
             JSONObject job = normalizeZrszJob(jobs.getJSONObject(i));
+            if (zrszMinDate != null && !isOnOrAfterDate(job.optString("date"), zrszMinDate)) {
+                skippedByDate++;
+                continue;
+            }
             String sourceJobKey = buildSourceJobKey(job);
             job.put("sourceJobKey", sourceJobKey);
             job.put("sourceName", "ZRSZ");
@@ -440,7 +450,8 @@ public class WeeklyJobUpdatePreview {
         stats.zrszJobs = jobs.length();
         stats.totalUniqueSnapshotJobs = jobsByKey.size();
         System.out.println("ZRSZ done | raw: " + jobs.length() + " | added: " + added +
-                " | duplicates: " + duplicates + " | total unique snapshot: " + jobsByKey.size());
+                " | duplicates: " + duplicates + " | skipped by date: " + skippedByDate +
+                " | total unique snapshot: " + jobsByKey.size());
     }
 
     private static JSONArray extractZrszJobs(String rawJson) {
@@ -2761,6 +2772,57 @@ public class WeeklyJobUpdatePreview {
             }
         }
         return "";
+    }
+
+    private static LocalDate zrszMinDate() {
+        String configuredDate = getenv("ZRSZ_MIN_DATE", "");
+        if (!configuredDate.isBlank()) {
+            try {
+                return LocalDate.parse(configuredDate.trim());
+            } catch (DateTimeParseException e) {
+                System.out.println("Ignoring invalid ZRSZ_MIN_DATE: " + configuredDate);
+            }
+        }
+
+        if (ZRSZ_LOOKBACK_DAYS >= 0) {
+            return LocalDate.now().minusDays(ZRSZ_LOOKBACK_DAYS);
+        }
+
+        return null;
+    }
+
+    private static boolean isOnOrAfterDate(String rawDate, LocalDate minDate) {
+        LocalDate parsed = parseLooseDate(rawDate);
+        return parsed != null && !parsed.isBefore(minDate);
+    }
+
+    private static LocalDate parseLooseDate(String rawDate) {
+        if (rawDate == null || rawDate.isBlank()) {
+            return null;
+        }
+
+        String value = rawDate.trim();
+        try {
+            if (value.length() >= 10 && value.charAt(4) == '-' && value.charAt(7) == '-') {
+                return LocalDate.parse(value.substring(0, 10));
+            }
+        } catch (DateTimeParseException ignored) {
+            // Try localized formats below.
+        }
+
+        Matcher matcher = Pattern.compile("(\\d{1,2})\\.\\s*(\\d{1,2})\\.\\s*(\\d{4})").matcher(value);
+        if (matcher.find()) {
+            try {
+                int day = Integer.parseInt(matcher.group(1));
+                int month = Integer.parseInt(matcher.group(2));
+                int year = Integer.parseInt(matcher.group(3));
+                return LocalDate.of(year, month, day);
+            } catch (RuntimeException ignored) {
+                return null;
+            }
+        }
+
+        return null;
     }
 
     private static String stableId(String prefix, String seed) {
