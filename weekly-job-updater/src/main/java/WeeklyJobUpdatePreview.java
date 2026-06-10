@@ -886,7 +886,7 @@ public class WeeklyJobUpdatePreview {
                 : apiKeys.size();
         parallelism = Math.max(1, parallelism);
 
-        rebuildNormalizationPreviewFiles(normalizedDir, manifestBatches, progress, stats);
+        rebuildNormalizationPreviewFiles(normalizedDir, manifestBatches, progress, stats, referenceData);
 
         ExecutorService executor = Executors.newFixedThreadPool(parallelism);
         try {
@@ -965,14 +965,14 @@ public class WeeklyJobUpdatePreview {
                 }
 
                 writeNormalizationProgress(normalizedDir, progress);
-                rebuildNormalizationPreviewFiles(normalizedDir, manifestBatches, progress, stats);
+                rebuildNormalizationPreviewFiles(normalizedDir, manifestBatches, progress, stats, referenceData);
             }
         } finally {
             executor.shutdownNow();
         }
 
         writeNormalizationProgress(normalizedDir, progress);
-        rebuildNormalizationPreviewFiles(normalizedDir, manifestBatches, progress, stats);
+        rebuildNormalizationPreviewFiles(normalizedDir, manifestBatches, progress, stats, referenceData);
 
         return stats;
     }
@@ -989,10 +989,259 @@ public class WeeklyJobUpdatePreview {
         try {
             JSONObject response = callOpenRouter(client, apiKey, buildNormalizationPrompt(batch, referenceData));
             JSONObject normalized = parseModelJson(response);
+            sanitizeNormalizedBatch(normalized, referenceData);
             return NormalizationBatchResult.success(batchNumber, start, end, normalized);
         } catch (Exception e) {
             return NormalizationBatchResult.failure(batchNumber, start, end, e.getMessage());
         }
+    }
+
+    private static void sanitizeNormalizedBatch(JSONObject normalized, ReferenceData referenceData) {
+        JSONArray jobs = normalized.optJSONArray("jobs");
+        if (jobs == null) {
+            return;
+        }
+
+        Set<String> existingLocationIds = ids(referenceData.locations);
+        Map<String, String> locationIdsByCityCountry = locationIdsByCityCountry(referenceData.locations);
+        Set<String> existingSkillIds = ids(referenceData.skills);
+        Set<String> existingSkillRelationKeys = skillRelationKeys(referenceData.skillRelations);
+        String healthcareParentSkillId = findHealthcareParentSkillId(referenceData.skills);
+
+        for (int i = 0; i < jobs.length(); i++) {
+            JSONObject job = jobs.getJSONObject(i);
+            sanitizeJobLocation(job, existingLocationIds, locationIdsByCityCountry);
+            sanitizeJobSkillRelations(job, existingSkillIds, existingSkillRelationKeys, healthcareParentSkillId);
+        }
+    }
+
+    private static void sanitizeJobLocation(
+            JSONObject job,
+            Set<String> existingLocationIds,
+            Map<String, String> locationIdsByCityCountry
+    ) {
+        JSONObject newLocation = job.optJSONObject("newLocation");
+        if (newLocation != null) {
+            String newLocationId = newLocation.optString("id", "");
+            String existingLocationId = locationIdsByCityCountry.get(locationKey(
+                    newLocation.optString("city"),
+                    newLocation.optString("country")
+            ));
+
+            if (existingLocationIds.contains(newLocationId)) {
+                job.put("locationId", newLocationId);
+                job.remove("newLocation");
+                addWarning(job, "Removed duplicate newLocation because location id already exists: " + newLocationId);
+                return;
+            }
+
+            if (existingLocationId != null) {
+                job.put("locationId", existingLocationId);
+                job.remove("newLocation");
+                addWarning(job, "Reused existing location instead of creating duplicate location: " + existingLocationId);
+                return;
+            }
+        }
+
+        String locationId = job.optString("locationId", "");
+        if (!locationId.isBlank() && existingLocationIds.contains(locationId)) {
+            return;
+        }
+
+        String inferredLocationId = inferExistingLocationId(locationId, locationIdsByCityCountry);
+        if (inferredLocationId != null) {
+            job.put("locationId", inferredLocationId);
+            job.remove("newLocation");
+            addWarning(job, "Replaced non-existing location id with existing location id: " + inferredLocationId);
+        }
+    }
+
+    private static void sanitizeJobSkillRelations(
+            JSONObject job,
+            Set<String> existingSkillIds,
+            Set<String> existingSkillRelationKeys,
+            String healthcareParentSkillId
+    ) {
+        JSONArray newSkills = job.optJSONArray("newSkills");
+        if (newSkills == null || newSkills.length() == 0 || healthcareParentSkillId == null) {
+            return;
+        }
+
+        JSONArray relations = job.optJSONArray("newSkillRelations");
+        if (relations == null) {
+            relations = new JSONArray();
+            job.put("newSkillRelations", relations);
+        }
+
+        Set<String> relationKeys = new HashSet<>();
+        for (int i = 0; i < relations.length(); i++) {
+            JSONObject relation = relations.getJSONObject(i);
+            relationKeys.add(skillRelationKey(
+                    relation.optString("relationshipType"),
+                    relation.optString("sourceSkillId"),
+                    relation.optString("targetSkillId")
+            ));
+        }
+
+        for (int i = 0; i < newSkills.length(); i++) {
+            JSONObject skill = newSkills.getJSONObject(i);
+            String skillId = skill.optString("id");
+            if (skillId.isBlank() || existingSkillIds.contains(skillId) || hasRelationForSkill(skillId, relationKeys)) {
+                continue;
+            }
+
+            if (isHealthcareSkill(skill)) {
+                String relationshipType = "PART_OF";
+                String key = skillRelationKey(relationshipType, skillId, healthcareParentSkillId);
+                if (!existingSkillRelationKeys.contains(key) && relationKeys.add(key)) {
+                    relations.put(new JSONObject()
+                            .put("relationshipType", relationshipType)
+                            .put("sourceSkillId", skillId)
+                            .put("targetSkillId", healthcareParentSkillId));
+                    addWarning(job, "Added healthcare skill relation: " + skillId + " -> " + healthcareParentSkillId);
+                }
+            }
+        }
+    }
+
+    private static Set<String> ids(JSONArray rows) {
+        Set<String> ids = new HashSet<>();
+        for (int i = 0; i < rows.length(); i++) {
+            String id = rows.getJSONObject(i).optString("id");
+            if (!id.isBlank()) {
+                ids.add(id);
+            }
+        }
+        return ids;
+    }
+
+    private static Map<String, String> locationIdsByCityCountry(JSONArray locations) {
+        Map<String, String> locationsByKey = new LinkedHashMap<>();
+        for (int i = 0; i < locations.length(); i++) {
+            JSONObject location = locations.getJSONObject(i);
+            String id = location.optString("id");
+            String city = location.optString("city");
+            String country = location.optString("country");
+            if (!id.isBlank()) {
+                locationsByKey.putIfAbsent(locationKey(city, country), id);
+            }
+        }
+        return locationsByKey;
+    }
+
+    private static String locationKey(String city, String country) {
+        return normalize(city) + "|" + normalize(country);
+    }
+
+    private static String inferExistingLocationId(String locationId, Map<String, String> locationIdsByCityCountry) {
+        if (locationId == null || locationId.isBlank() || !locationId.startsWith("loc-")) {
+            return null;
+        }
+
+        String slug = locationId.substring(4);
+        String[] parts = slug.split("-");
+        if (parts.length < 2) {
+            return null;
+        }
+
+        String country = parts[parts.length - 1];
+        for (int cityParts = parts.length - 2; cityParts >= 1; cityParts--) {
+            StringBuilder city = new StringBuilder();
+            for (int i = 0; i < cityParts; i++) {
+                if (!city.isEmpty()) {
+                    city.append(' ');
+                }
+                city.append(parts[i]);
+            }
+
+            String existingId = locationIdsByCityCountry.get(locationKey(city.toString(), country));
+            if (existingId != null) {
+                return existingId;
+            }
+        }
+
+        return null;
+    }
+
+    private static Set<String> skillRelationKeys(JSONArray relations) {
+        Set<String> keys = new HashSet<>();
+        for (int i = 0; i < relations.length(); i++) {
+            JSONObject relation = relations.getJSONObject(i);
+            keys.add(skillRelationKey(
+                    relation.optString("relationshipType"),
+                    relation.optString("sourceSkillId"),
+                    relation.optString("targetSkillId")
+            ));
+        }
+        return keys;
+    }
+
+    private static String skillRelationKey(String relationshipType, String sourceSkillId, String targetSkillId) {
+        return relationshipType + "|" + sourceSkillId + "|" + targetSkillId;
+    }
+
+    private static boolean hasRelationForSkill(String skillId, Set<String> relationKeys) {
+        for (String key : relationKeys) {
+            if (key.contains("|" + skillId + "|") || key.endsWith("|" + skillId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static String findHealthcareParentSkillId(JSONArray skills) {
+        String[] preferred = {
+                "medicine",
+                "healthcare",
+                "patient care",
+                "patient-care",
+                "nursing",
+                "medical care",
+                "medical-care"
+        };
+
+        for (String wanted : preferred) {
+            for (int i = 0; i < skills.length(); i++) {
+                JSONObject skill = skills.getJSONObject(i);
+                String id = normalize(skill.optString("id"));
+                String name = normalize(skill.optString("name"));
+                if (id.equals("sk-" + wanted.replace(" ", "-")) || name.equals(wanted)) {
+                    return skill.optString("id");
+                }
+            }
+        }
+
+        for (int i = 0; i < skills.length(); i++) {
+            JSONObject skill = skills.getJSONObject(i);
+            String id = normalize(skill.optString("id"));
+            String name = normalize(skill.optString("name"));
+            if (id.contains("medicine") || id.contains("healthcare") || name.contains("medicine") ||
+                    name.contains("healthcare") || name.contains("patient care")) {
+                return skill.optString("id");
+            }
+        }
+
+        return null;
+    }
+
+    private static boolean isHealthcareSkill(JSONObject skill) {
+        String type = normalize(skill.optString("SkillTypeId"));
+        String name = normalize(skill.optString("name"));
+        String id = normalize(skill.optString("id"));
+        return type.contains("health") || id.contains("medical") || id.contains("medicine") ||
+                name.contains("medicine") || name.contains("medical") || name.contains("care") ||
+                name.contains("therapy") || name.contains("ology") || name.contains("allergy") ||
+                name.contains("chemotherapy") || name.contains("immunology") || name.contains("neonatology") ||
+                name.contains("pulmonology") || name.contains("rheumatology");
+    }
+
+    private static void addWarning(JSONObject job, String warning) {
+        JSONArray warnings = job.optJSONArray("warnings");
+        if (warnings == null) {
+            warnings = new JSONArray();
+            job.put("warnings", warnings);
+        }
+        warnings.put(warning);
     }
 
     private static void applyNormalizationBatchResult(
@@ -1202,7 +1451,8 @@ public class WeeklyJobUpdatePreview {
             Path normalizedDir,
             JSONArray manifestBatches,
             JSONObject progress,
-            NormalizationStats stats
+            NormalizationStats stats,
+            ReferenceData referenceData
     ) throws IOException {
         JSONArray normalizedJobs = new JSONArray();
         JSONArray errors = new JSONArray();
@@ -1239,6 +1489,7 @@ public class WeeklyJobUpdatePreview {
             Path rawPath = normalizedBatchRawPath(normalizedDir, batchNumber);
             if (Files.exists(rawPath)) {
                 JSONObject raw = new JSONObject(Files.readString(rawPath, StandardCharsets.UTF_8));
+                sanitizeNormalizedBatch(raw, referenceData);
                 JSONArray jobs = raw.optJSONArray("jobs");
                 if (jobs != null) {
                     for (int j = 0; j < jobs.length(); j++) {
@@ -1665,28 +1916,49 @@ public class WeeklyJobUpdatePreview {
                 .put("For every output job, sourceJobKey must equal the corresponding input job sourceJobKey exactly.")
                 .put("Every output job must include every field shown in requiredOutputSchema, even when the value is null or an empty array.")
                 .put("Prefer existing IDs from reference data whenever possible. Existing IDs are always better than creating new IDs.")
+                .put("Before creating any newLocation or newSkills item, perform an explicit existing-reference match first. Search referenceData by id, exact normalized name, case-insensitive name, singular/plural variants, language variants, and obvious synonyms.")
                 .put("locationId must be either an id from referenceData.existingLocations or the id of that same job's newLocation.")
                 .put("If the scraped location is broad, country-level, or unknown, use the closest broad existing location from referenceData.existingLocations when available instead of creating a new location.")
-                .put("Suggest a new location only when no existing location has the same city, region, and country. If city/region/country already exists in referenceData.existingLocations, use that existing id and set newLocation.id to null.")
+                .put("Suggest a new location only when no existing location has the same city and country after normalizing case, accents, Slovenian/German characters, region words, and whitespace. If city/country already exists in referenceData.existingLocations, use that existing id and set newLocation to null.")
                 .put("Never put an existing location id inside newLocation.id. newLocation is only for genuinely new database rows.")
+                .put("If locationId is an existing location id, newLocation must be null or have id null. Do not repeat existing locations inside newLocation.")
+                .put("Never create a second location id for the same real-world location. Case changes, translated city names, accent differences, region suffixes, country suffixes, and slug variants are not new locations.")
                 .put("skillIds must contain only ids from referenceData.existingSkills or ids listed in the same job's newSkills.")
                 .put("Never use IDs from referenceData.allowedSkillTypes as skillIds. Skill type IDs are categories for newSkills.SkillTypeId only, not job skills.")
-                .put("If a skill is broad or uncertain, choose the closest broad existing skill from referenceData.existingSkills when one fits.")
-                .put("Suggest a new skill only when no existing skill name or meaning is a good match. Do not create a new skill with an id or name already present in referenceData.existingSkills.")
+                .put("If a skill is broad, uncertain, or can be represented by an existing broader skill, choose the closest broad existing skill from referenceData.existingSkills instead of creating a new skill.")
+                .put("Suggest a new skill only when no existing skill id, skill name, normalized name, synonym, translation, or broader meaning is a good match. Do not create a new skill with an id, name, normalized name, or meaning already present in referenceData.existingSkills.")
+                .put("Treat wording variants as the same skill when they mean the same competency. Remove generic suffixes/prefixes such as language, proficiency, knowledge of, skills, experience with, specialist, worker, assistant, technician, developer, engineer, and operator before deciding whether a skill is new.")
+                .put("Treat role labels and skill phrases cautiously. If an existing broad skill already represents the required competency, reuse it instead of creating a job-title skill.")
+                .put("If a proposed new skill is a specialization of an existing skill, create it only when the specialization is important for search quality, and add a newSkillRelations item linking it to the existing broader skill using PART_OF. Otherwise reuse the broader existing skill.")
                 .put("Never put existing skills inside newSkills. newSkills is only for genuinely new database rows.")
-                .put("Use stable kebab-case ids for genuinely new skills and locations.")
+                .put("Use stable kebab-case ids for genuinely new skills and locations. IDs must never contain spaces, accented characters, uppercase letters, mojibake text, or punctuation other than hyphen.")
                 .put("New skill ids should use the sk- prefix and must not collide with referenceData.existingSkills ids.")
                 .put("New location ids should use the loc- prefix and must not collide with referenceData.existingLocations ids.")
                 .put("Use [] for empty arrays. Use null for newLocation.id when no new location is needed.")
                 .put("Do not invent salary if unavailable. Use null.")
                 .put("Do not invent company if unavailable. Use Unknown company.")
-                .put("Use only IDs from allowedWorkTypes for workTypeIds. If work type is unknown, use the allowed not-specified work type id.")
-                .put("Use only IDs from allowedEducationLevels for educationLevelId. If education is unknown or too specific, use the allowed not-specified education id.")
-                .put("Use only IDs from allowedExperienceLevels for experienceLevelId. If experience is unknown, use the allowed not-specified experience id.")
+                .put("Use only IDs from allowedWorkTypes for workTypeIds. workTypeIds must never be empty. If work type is unknown, use the allowed not-specified work type id; if there is no not-specified id, use the allowed on-site work type id.")
+                .put("Use only IDs from allowedEducationLevels for educationLevelId. educationLevelId must never be null. If education is unknown or too specific, use the allowed not-specified/general education id.")
+                .put("Use only IDs from allowedExperienceLevels for experienceLevelId. experienceLevelId must never be null. If experience is unknown, use the allowed not-specified/mid experience id.")
                 .put("Use only IDs from allowedSkillTypes for newSkills.SkillTypeId. SkillTypeId is required only for newSkills, never for skillIds.")
                 .put("Do not invent any work type, education level, experience level, skill type, skill, or location ID. Every ID must come from referenceData or from a valid newSkills/newLocation object in the same job.")
-                .put("Skill relations are optional. Suggest only clear, reusable relations.")
+                .put("Skill relations are optional for existing skills, but when newSkills is non-empty, create clear reusable newSkillRelations whenever a broader existing parent skill is available.")
+                .put("For healthcare new skills such as pulmonology, rheumatology, immunology, allergy, chemotherapy, neonatology, and specialized care, link the new skill to the closest existing broader skill such as medicine, healthcare, patient-care, or nursing using PART_OF or RELATED_TO.")
                 .put("Valid relationshipType values are PART_OF, RELATED_TO, USED_WITH.")
+                .put("Extract skills only from job-relevant sections such as title, responsibilities, tasks, requirements, profile, qualifications, technologies, and explicit skills sections.")
+                .put("Do not extract skills from benefits, employer offer, perks, company facilities, or employee advantage sections such as Wir bieten, Unser Angebot, Benefits, Das bieten wir, Mitarbeitervorteile, Betriebsrestaurant, Kantine, Parkplatz, Sportangebot, Firmenevents, Kinderbetreuung, Öffiticket, Essenszuschuss, Rabatte, or employer-provided Weiterbildung.")
+                .put("If a software job mentions a company restaurant, canteen, seasonal kitchen, catering benefit, or food discount, do not add cooking, restaurant-service, bar-service, food-preparation, kitchen-support, or hospitality unless the job itself is a food, restaurant, kitchen, hotel, or guest-service role.")
+                .put("If no safe skill is found from the description, use the job title as a controlled fallback and choose the closest existing skill from referenceData.existingSkills.")
+                .put("Avoid wrong mappings: Backend, Backoffice, and Backup must never become baking or bakery skills.")
+                .put("Avoid wrong mappings: Pflege must not always become nursing. Krankenpflege, Patient, DGKP, and hospital care can map to nursing or patient-care; Pferdepfleger maps to animal-care; Fußpfleger maps to foot-care or beauty; Datenpflege maps to data-maintenance or administration.")
+                .put("Avoid wrong mappings: API development is only for IT, software, integration, or developer jobs. Hospitality is only for real hotel, restaurant, reception, guest-service, tourism, or food-service jobs, not merely because the employer is in that sector.")
+                .put("Do not use generic skills unless no specific existing skill can represent the job. Every job should still have at least one meaningful skill.")
+                .put("skillIds must never be empty. If no safe skill is found, choose the closest existing broad skill from the job title or responsibilities. Only create a new fallback skill if no existing broad skill can represent the job at all.")
+                .put("newSkills should usually be empty. A large number of newSkills is a failure signal. Reuse existing skills aggressively.")
+                .put("Shift work is a scheduling condition, not a workplace type. Never create or use a shift-work work type. Use only allowed work type IDs from referenceData.allowedWorkTypes.")
+                .put("Salary-not-specified must remain unknown. Do not predict or estimate salary. Extract minSalary and maxSalary only when an explicit salary amount is present in the scraped job text.")
+                .put("If salary is hourly, yearly, or monthly, keep the explicit amount in minSalary/maxSalary and add a warning describing the detected period when it may not match the database's usual salary period.")
+                .put("Flag suspicious mappings in warnings, especially software jobs with cooking/restaurant/bar/hospitality skills, healthcare jobs with restaurant/bar/cooking skills, backend jobs with baking skills, non-IT jobs with API development, non-healthcare jobs with nursing, jobs with more than 10 skills, or jobs without any safe skill.")
                 .put("Keep descriptions factual and based on the scraped text.")
                 .put("Use the input job sourceCountry when present. ZRSZ and CareerJet jobs are Slovenia, EURES jobs are Austria."));
         payload.put("jsonIntegrityChecklist", new JSONArray()
@@ -1696,8 +1968,14 @@ public class WeeklyJobUpdatePreview {
                 .put("Verify there are no duplicate object keys.")
                 .put("Verify the jobs array count equals inputJobCount.")
                 .put("Verify no skillIds value comes from referenceData.allowedSkillTypes.")
-                .put("Verify no newSkills item duplicates an existing skill id or name.")
-                .put("Verify no newLocation item duplicates an existing location id, city, region, and country.")
+                .put("Verify skillIds is not empty for every job.")
+                .put("Verify workTypeIds is not empty for every job.")
+                .put("Verify educationLevelId and experienceLevelId are not null and exist in referenceData.")
+                .put("Verify no newSkills item duplicates an existing skill id, exact name, normalized name, synonym, translation, or broader meaning.")
+                .put("Verify every newSkills id is lowercase kebab-case with sk- prefix and no spaces.")
+                .put("Verify no newLocation item duplicates an existing location id, city, normalized city, region, country, or city-country pair.")
+                .put("Verify every newLocation id is lowercase kebab-case with loc- prefix and no accents, mojibake, or spaces.")
+                .put("Verify every new healthcare skill has a newSkillRelations entry to a broader existing healthcare/medical skill when such a skill exists.")
                 .put("Verify every educationLevelId, experienceLevelId, and workTypeIds value exists in the allowed reference data."));
         payload.put("requiredOutputSchema", outputSchema());
         payload.put("referenceData", context);
