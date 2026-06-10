@@ -362,7 +362,7 @@ function filterChips(filterRequest) {
 }
 
 function addChip(chips, value, type = "filter") {
-  if (value === null || value === undefined || value === "") return;
+  if (isPlaceholderValue(value)) return;
   chips.push({ label: String(value), type });
 }
 
