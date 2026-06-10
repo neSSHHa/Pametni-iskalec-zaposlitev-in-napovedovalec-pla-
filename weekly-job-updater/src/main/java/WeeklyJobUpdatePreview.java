@@ -213,7 +213,8 @@ public class WeeklyJobUpdatePreview {
                     }
                     NormalizationStats normalizationStats = normalizeNewJobs(runId);
                     boolean closeAfterThisRun = shouldCloseCycle(normalizationStats);
-                    ApplyStats applyStats = applyNormalizedChanges(runId, closeAfterThisRun);
+                    boolean applyDeletes = closeAfterThisRun && !compareStats.deleteBlocked;
+                    ApplyStats applyStats = applyNormalizedChanges(runId, applyDeletes);
                     closeCycleIfReady(runId, normalizationStats, applyStats);
                     writeRunLog(runId, mode, scrapeStats, compareStats, normalizationStats, applyStats);
                     if (scrapeStats != null) {
@@ -751,8 +752,9 @@ public class WeeklyJobUpdatePreview {
 
     private static CompareStats compareWithDatabase(String runId, JSONArray scrapedJobs, ScrapeStats scrapeStats)
             throws Exception {
-        Map<String, String> dbJobsBySourceKey = loadExistingJobsBySourceJobKey();
+        ExistingJobIndex dbJobs = loadExistingJobIndex();
         Set<String> scrapedKeys = new HashSet<>();
+        Set<String> matchedDbJobIds = new HashSet<>();
 
         JSONArray newJobs = new JSONArray();
         JSONArray unchangedJobs = new JSONArray();
@@ -762,32 +764,48 @@ public class WeeklyJobUpdatePreview {
             String sourceJobKey = job.optString("sourceJobKey", "").trim();
 
             if (sourceJobKey.isEmpty()) {
-                newJobs.put(job);
+                ExistingJobMatch fallbackMatch = findExistingJobMatch(job, dbJobs);
+                if (fallbackMatch == null) {
+                    newJobs.put(job);
+                } else {
+                    matchedDbJobIds.add(fallbackMatch.jobId);
+                    unchangedJobs.put(job.put("matchedExistingJobId", fallbackMatch.jobId)
+                            .put("matchedBy", fallbackMatch.matchedBy));
+                }
                 continue;
             }
 
             scrapedKeys.add(sourceJobKey);
 
-            if (dbJobsBySourceKey.containsKey(sourceJobKey)) {
-                unchangedJobs.put(job);
+            String exactJobId = dbJobs.bySourceKey.get(sourceJobKey);
+            if (exactJobId != null) {
+                matchedDbJobIds.add(exactJobId);
+                unchangedJobs.put(job.put("matchedExistingJobId", exactJobId).put("matchedBy", "sourceJobKey"));
             } else {
-                newJobs.put(job);
+                ExistingJobMatch fallbackMatch = findExistingJobMatch(job, dbJobs);
+                if (fallbackMatch == null) {
+                    newJobs.put(job);
+                } else {
+                    matchedDbJobIds.add(fallbackMatch.jobId);
+                    unchangedJobs.put(job.put("matchedExistingJobId", fallbackMatch.jobId)
+                            .put("matchedBy", fallbackMatch.matchedBy));
+                }
             }
         }
 
         JSONArray removedJobs = new JSONArray();
-        for (Map.Entry<String, String> dbJob : dbJobsBySourceKey.entrySet()) {
-            if (!scrapedKeys.contains(dbJob.getKey())) {
+        for (ExistingJob dbJob : dbJobs.jobsById.values()) {
+            if (!scrapedKeys.contains(dbJob.sourceJobKey) && !matchedDbJobIds.contains(dbJob.id)) {
                 JSONObject removed = new JSONObject();
-                removed.put("jobId", dbJob.getValue());
-                removed.put("sourceJobKey", dbJob.getKey());
+                removed.put("jobId", dbJob.id);
+                removed.put("sourceJobKey", dbJob.sourceJobKey);
                 removedJobs.put(removed);
             }
         }
 
         CompareStats stats = new CompareStats(runId);
         stats.scrapedUniqueSnapshotJobs = scrapedJobs.length();
-        stats.existingSourceJobKeysInDb = dbJobsBySourceKey.size();
+        stats.existingSourceJobKeysInDb = dbJobs.bySourceKey.size();
         stats.newJobsForDb = newJobs.length();
         stats.unchangedJobs = unchangedJobs.length();
         stats.removedJobsFromDb = removedJobs.length();
@@ -804,6 +822,34 @@ public class WeeklyJobUpdatePreview {
         writeCompareSummary(scrapeStats, stats);
 
         return stats;
+    }
+
+    private static ExistingJobMatch findExistingJobMatch(JSONObject scrapedJob, ExistingJobIndex dbJobs) {
+        String externalId = firstNonBlank(scrapedJob.optString("euresId"), scrapedJob.optString("externalId"));
+        if (!externalId.isBlank()) {
+            String jobId = dbJobs.byExternalId.get(externalId);
+            if (jobId != null) {
+                return new ExistingJobMatch(jobId, "externalId");
+            }
+        }
+
+        String identity = scrapedJobIdentity(scrapedJob);
+        if (!identity.isBlank()) {
+            String jobId = dbJobs.byIdentity.get(identity);
+            if (jobId != null) {
+                return new ExistingJobMatch(jobId, "companyTitleLocation");
+            }
+        }
+
+        String looseIdentity = scrapedJobLooseIdentity(scrapedJob);
+        if (!looseIdentity.isBlank()) {
+            String jobId = dbJobs.byLooseIdentity.get(looseIdentity);
+            if (jobId != null) {
+                return new ExistingJobMatch(jobId, "companyTitle");
+            }
+        }
+
+        return null;
     }
 
     private static NormalizationStats normalizeNewJobs(String runId) throws Exception {
@@ -1305,21 +1351,150 @@ public class WeeklyJobUpdatePreview {
         return ratio < MIN_SCRAPE_TO_DB_RATIO_FOR_DELETE;
     }
 
-    private static Map<String, String> loadExistingJobsBySourceJobKey() throws Exception {
-        Map<String, String> jobsBySourceKey = new LinkedHashMap<>();
+    private static ExistingJobIndex loadExistingJobIndex() throws Exception {
+        ExistingJobIndex index = new ExistingJobIndex();
 
         try (Connection conn = DriverManager.getConnection(MYSQL_URL, MYSQL_USER, MYSQL_PASSWORD);
              PreparedStatement ps = conn.prepareStatement(
-                     "SELECT id, sourceJobKey FROM Job WHERE sourceJobKey IS NOT NULL AND sourceJobKey <> ''"
+                     """
+                     SELECT
+                         j.id,
+                         j.sourceJobKey,
+                         j.jobname,
+                         j.companyname,
+                         j.LocationId,
+                         l.city,
+                         l.region,
+                         l.country
+                     FROM Job j
+                     LEFT JOIN Location l ON l.id = j.LocationId
+                     WHERE j.sourceJobKey IS NOT NULL AND j.sourceJobKey <> ''
+                     """
              );
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                jobsBySourceKey.put(rs.getString("sourceJobKey").trim(), rs.getString("id"));
+                ExistingJob job = new ExistingJob(
+                        rs.getString("id"),
+                        rs.getString("sourceJobKey") == null ? "" : rs.getString("sourceJobKey").trim(),
+                        rs.getString("jobname"),
+                        rs.getString("companyname"),
+                        rs.getString("LocationId"),
+                        rs.getString("city"),
+                        rs.getString("region"),
+                        rs.getString("country")
+                );
+
+                index.jobsById.put(job.id, job);
+                index.bySourceKey.put(job.sourceJobKey, job.id);
+
+                String externalId = sourceExternalId(job.sourceJobKey);
+                if (!externalId.isBlank()) {
+                    index.byExternalId.putIfAbsent(externalId, job.id);
+                }
+
+                String identity = dbJobIdentity(job);
+                if (!identity.isBlank()) {
+                    index.byIdentity.putIfAbsent(identity, job.id);
+                }
+
+                String looseIdentity = dbJobLooseIdentity(job);
+                if (!looseIdentity.isBlank()) {
+                    index.byLooseIdentity.putIfAbsent(looseIdentity, job.id);
+                }
             }
         }
 
-        return jobsBySourceKey;
+        return index;
+    }
+
+    private static String sourceExternalId(String sourceJobKey) {
+        if (sourceJobKey == null || sourceJobKey.isBlank()) {
+            return "";
+        }
+        int lastSeparator = sourceJobKey.lastIndexOf('|');
+        if (lastSeparator < 0 || lastSeparator == sourceJobKey.length() - 1) {
+            return "";
+        }
+        String candidate = sourceJobKey.substring(lastSeparator + 1).trim();
+        if (candidate.length() < 12 || candidate.contains(" ")) {
+            return "";
+        }
+        return candidate;
+    }
+
+    private static String scrapedJobIdentity(JSONObject job) {
+        return identityKey(
+                job.optString("company"),
+                job.optString("title"),
+                job.optString("locations")
+        );
+    }
+
+    private static String scrapedJobLooseIdentity(JSONObject job) {
+        return looseIdentityKey(job.optString("company"), job.optString("title"));
+    }
+
+    private static String dbJobIdentity(ExistingJob job) {
+        return identityKey(
+                job.companyname,
+                job.jobname,
+                firstNonBlank(job.city, job.region, job.locationId)
+        );
+    }
+
+    private static String dbJobLooseIdentity(ExistingJob job) {
+        return looseIdentityKey(job.companyname, job.jobname);
+    }
+
+    private static String identityKey(String company, String title, String location) {
+        String normalizedCompany = canonicalIdentityPart(company);
+        String normalizedTitle = canonicalIdentityPart(title);
+        String normalizedLocation = canonicalLocationPart(location);
+        if (normalizedCompany.isBlank() || normalizedTitle.isBlank()) {
+            return "";
+        }
+        return normalizedCompany + "|" + normalizedTitle + "|" + normalizedLocation;
+    }
+
+    private static String looseIdentityKey(String company, String title) {
+        String normalizedCompany = canonicalIdentityPart(company);
+        String normalizedTitle = canonicalIdentityPart(title);
+        if (normalizedCompany.isBlank() || normalizedTitle.isBlank()) {
+            return "";
+        }
+        return normalizedCompany + "|" + normalizedTitle;
+    }
+
+    private static String canonicalLocationPart(String value) {
+        String normalized = canonicalIdentityPart(value);
+        if (normalized.startsWith("loc-")) {
+            normalized = normalized.substring(4);
+        }
+        normalized = normalized
+                .replace(" austria", "")
+                .replace(" slovenia", "")
+                .replace(" oesterreich", "")
+                .replace(" österreich", "")
+                .replace(" slowenien", "");
+        return normalized.replaceAll("\\b(wien|vienna)\\b", "wien").trim();
+    }
+
+    private static String canonicalIdentityPart(String value) {
+        String normalized = normalize(value)
+                .replace('�', ' ')
+                .replace("ä", "a")
+                .replace("ö", "o")
+                .replace("ü", "u")
+                .replace("ß", "ss")
+                .replace("č", "c")
+                .replace("š", "s")
+                .replace("ž", "z")
+                .replaceAll("\\(m/w/d\\)|\\(m/w\\)|\\(m/ž\\)|\\(m/z\\)|m/w/d|m/ž|m/z|m/w|w/m/d", " ")
+                .replaceAll("[^a-z0-9]+", " ")
+                .replaceAll("\\s+", " ")
+                .trim();
+        return normalized;
     }
 
     private static JSONArray readFullSnapshot() throws IOException {
@@ -2467,6 +2642,29 @@ public class WeeklyJobUpdatePreview {
         private CompareStats(String runId) {
             this.runId = runId;
         }
+    }
+
+    private static class ExistingJobIndex {
+        private final Map<String, ExistingJob> jobsById = new LinkedHashMap<>();
+        private final Map<String, String> bySourceKey = new LinkedHashMap<>();
+        private final Map<String, String> byExternalId = new LinkedHashMap<>();
+        private final Map<String, String> byIdentity = new LinkedHashMap<>();
+        private final Map<String, String> byLooseIdentity = new LinkedHashMap<>();
+    }
+
+    private record ExistingJob(
+            String id,
+            String sourceJobKey,
+            String jobname,
+            String companyname,
+            String locationId,
+            String city,
+            String region,
+            String country
+    ) {
+    }
+
+    private record ExistingJobMatch(String jobId, String matchedBy) {
     }
 
     private static class NormalizationStats {
