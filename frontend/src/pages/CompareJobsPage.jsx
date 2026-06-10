@@ -59,16 +59,21 @@ function formatLocationParts(job) {
 }
 
 function uniqueSkills(values = []) {
-  return [...new Set(values.filter(Boolean).map((value) => String(value).trim()).filter(Boolean))];
+  return [...new Set(values.filter((value) => !isPlaceholderValue(value)).map((value) => String(value).trim()))];
 }
 
 function normalizeSkill(value) {
   return String(value || "").trim().toLowerCase();
 }
 
+function comparisonSkills(job) {
+  const skills = uniqueSkills(job?.skills || []);
+  return skills.length ? skills : uniqueSkills(job?.tags || []);
+}
+
 function skillGroups(leftJob, rightJob) {
-  const left = uniqueSkills(leftJob?.tags || []);
-  const right = uniqueSkills(rightJob?.tags || []);
+  const left = comparisonSkills(leftJob);
+  const right = comparisonSkills(rightJob);
   const rightSet = new Set(right.map(normalizeSkill));
   const leftSet = new Set(left.map(normalizeSkill));
 
