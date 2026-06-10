@@ -473,59 +473,83 @@ public class WeeklyJobUpdatePreview {
         System.out.println("Downloading EURES Austria jobs...");
         JSONArray allEuresJobs = new JSONArray();
         Set<String> seenEuresIds = new HashSet<>();
+        JSONArray locationCodes = euresAustriaLocationCodes();
 
-        int totalRecords = -1;
-        int totalPages = 1;
+        for (int locationIndex = 0; locationIndex < locationCodes.length(); locationIndex++) {
+            String locationCode = locationCodes.getString(locationIndex);
+            int totalRecords = -1;
+            int totalPages = 1;
+            int addedForRegion = 0;
+            int duplicatesForRegion = 0;
 
-        for (int page = 1; page <= totalPages; page++) {
-            JSONObject responseJson = requestEuresPageWithRetry(client, page, stats);
-            if (responseJson == null) {
-                Files.createDirectories(OUTPUT_DIR.resolve("sources"));
-                Files.writeString(
-                        OUTPUT_DIR.resolve("sources/eures_austria_partial.json"),
-                        allEuresJobs.toString(2),
-                        StandardCharsets.UTF_8
-                );
-                continue;
-            }
+            System.out.println("EURES Austria region: " + locationCode);
 
-            if (page == 1) {
-                totalRecords = responseJson.optInt("numberRecords", 0);
-                totalPages = (int) Math.ceil(totalRecords / (double) EURES_RESULTS_PER_PAGE);
-                System.out.println("EURES Austria records: " + totalRecords + " | pages: " + totalPages);
-            }
-
-            JSONArray jobs = responseJson.optJSONArray("jvs");
-            if (jobs == null || jobs.length() == 0) {
-                Thread.sleep(EURES_REQUEST_DELAY_MS);
-                continue;
-            }
-
-            for (int i = 0; i < jobs.length(); i++) {
-                JSONObject raw = jobs.getJSONObject(i);
-                String euresId = firstNonBlank(raw.optString("id"), buildEuresFallbackKey(raw));
-                if (!seenEuresIds.add(euresId)) {
-                    stats.duplicateSourceJobKeysSkipped++;
+            for (int page = 1; page <= totalPages; page++) {
+                JSONObject responseJson = requestEuresPageWithRetry(client, page, locationCode, stats);
+                if (responseJson == null) {
+                    Files.createDirectories(OUTPUT_DIR.resolve("sources"));
+                    Files.writeString(
+                            OUTPUT_DIR.resolve("sources/eures_austria_partial.json"),
+                            allEuresJobs.toString(2),
+                            StandardCharsets.UTF_8
+                    );
                     continue;
                 }
 
-                JSONObject job = normalizeEuresJob(raw);
-                String sourceJobKey = buildSourceJobKey(job);
-                job.put("sourceJobKey", sourceJobKey);
-                job.put("sourceName", "EURES");
-                job.put("sourceCountry", "Austria");
-                job.put("euresId", euresId);
-                job.put("rawEuresJob", raw);
-
-                if (!putPreferredJob(jobsByKey, sourceJobKey, job)) {
-                    stats.crossSourceDuplicatesSkipped++;
+                if (page == 1) {
+                    totalRecords = responseJson.optInt("numberRecords", 0);
+                    totalPages = (int) Math.ceil(totalRecords / (double) EURES_RESULTS_PER_PAGE);
+                    System.out.println("EURES Austria region " + locationCode +
+                            " records: " + totalRecords + " | pages: " + totalPages);
                 }
-                allEuresJobs.put(job);
+
+                JSONArray jobs = responseJson.optJSONArray("jvs");
+                if (jobs == null || jobs.length() == 0) {
+                    Thread.sleep(EURES_REQUEST_DELAY_MS);
+                    continue;
+                }
+
+                int addedOnPage = 0;
+                int duplicatesOnPage = 0;
+                for (int i = 0; i < jobs.length(); i++) {
+                    JSONObject raw = jobs.getJSONObject(i);
+                    String euresId = firstNonBlank(raw.optString("id"), buildEuresFallbackKey(raw));
+                    if (!seenEuresIds.add(euresId)) {
+                        stats.duplicateSourceJobKeysSkipped++;
+                        duplicatesForRegion++;
+                        duplicatesOnPage++;
+                        continue;
+                    }
+
+                    JSONObject job = normalizeEuresJob(raw);
+                    String sourceJobKey = buildSourceJobKey(job);
+                    job.put("sourceJobKey", sourceJobKey);
+                    job.put("sourceName", "EURES");
+                    job.put("sourceCountry", "Austria");
+                    job.put("euresId", euresId);
+                    job.put("rawEuresJob", raw);
+
+                    if (!putPreferredJob(jobsByKey, sourceJobKey, job)) {
+                        stats.crossSourceDuplicatesSkipped++;
+                    }
+                    allEuresJobs.put(job);
+                    addedForRegion++;
+                    addedOnPage++;
+                }
+
+                System.out.println("EURES region " + locationCode + " page " + page +
+                        " | jobs: " + jobs.length() + " | added: " + addedOnPage +
+                        " | duplicates: " + duplicatesOnPage +
+                        " | total unique snapshot: " + jobsByKey.size());
+
+                stats.totalUniqueSnapshotJobs = jobsByKey.size();
+                writeScrapeOutputs(new JSONArray(jobsByKey.values()), stats);
+                Thread.sleep(EURES_REQUEST_DELAY_MS);
             }
 
-            stats.totalUniqueSnapshotJobs = jobsByKey.size();
-            writeScrapeOutputs(new JSONArray(jobsByKey.values()), stats);
-            Thread.sleep(EURES_REQUEST_DELAY_MS);
+            System.out.println("EURES Austria region " + locationCode + " done | added: " + addedForRegion +
+                    " | duplicates: " + duplicatesForRegion +
+                    " | total unique snapshot: " + jobsByKey.size());
         }
 
         stats.euresAustriaJobs = allEuresJobs.length();
@@ -535,11 +559,11 @@ public class WeeklyJobUpdatePreview {
                 " | total unique snapshot: " + jobsByKey.size());
     }
 
-    private static JSONObject requestEuresPageWithRetry(HttpClient client, int page, ScrapeStats stats)
+    private static JSONObject requestEuresPageWithRetry(HttpClient client, int page, String locationCode, ScrapeStats stats)
             throws InterruptedException {
         for (int attempt = 1; attempt <= EURES_MAX_RETRIES; attempt++) {
             try {
-                JSONObject body = buildEuresRequestBody(page);
+                JSONObject body = buildEuresRequestBody(page, locationCode);
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(EURES_API_URL))
                         .header("Accept", "application/json")
@@ -554,11 +578,12 @@ public class WeeklyJobUpdatePreview {
                 }
 
                 stats.requestErrors++;
-                System.out.println("EURES HTTP ERROR page " + page + " attempt " + attempt +
+                System.out.println("EURES HTTP ERROR region " + locationCode + " page " + page + " attempt " + attempt +
                         " status: " + response.statusCode());
             } catch (Exception e) {
                 stats.requestErrors++;
-                System.out.println("EURES error page " + page + " attempt " + attempt + ": " + e.getMessage());
+                System.out.println("EURES error region " + locationCode + " page " + page +
+                        " attempt " + attempt + ": " + e.getMessage());
             }
 
             Thread.sleep(2000L * attempt);
@@ -567,14 +592,14 @@ public class WeeklyJobUpdatePreview {
         return null;
     }
 
-    private static JSONObject buildEuresRequestBody(int page) {
+    private static JSONObject buildEuresRequestBody(int page, String locationCode) {
         JSONObject body = new JSONObject();
         body.put("resultsPerPage", EURES_RESULTS_PER_PAGE);
         body.put("page", page);
         body.put("sortSearch", "BEST_MATCH");
         body.put("keywords", new JSONArray());
         body.put("publicationPeriod", JSONObject.NULL);
-        body.put("locationCodes", euresAustriaLocationCodes());
+        body.put("locationCodes", new JSONArray().put(locationCode));
         body.put("occupationUris", new JSONArray());
         body.put("skillUris", new JSONArray());
         body.put("requiredLanguages", new JSONArray());
